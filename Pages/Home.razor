@@ -9,24 +9,49 @@
 
     <input type="text" id="mobile-keyboard-input" class="mobile-keyboard-input" inputmode="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" />
 
-    <div class="letter-boxes" id="letter-boxes-container">
-        @for (int i = 0; i < 5; i++)
-        {
-            int index = i;
-            <div class="letter-box-container">
-                <div class="letter-box @GetLetterClass(index) @GetFocusClass(index)" @onclick="() => SetFocus(index)">
-                    @(letters[index] == ' ' ? "" : letters[index].ToString().ToUpper())
-                </div>
-                @if (letters[index] != ' ')
+    @* Display previous guesses *@
+    @for (int guessIndex = 0; guessIndex < previousGuesses.Count; guessIndex++)
+    {
+        var currentGuessIndex = guessIndex;
+        var (guessLetters, guessStates) = previousGuesses[guessIndex];
+        <div class="previous-guess-row">
+            <div class="letter-boxes previous-guess">
+                @for (int i = 0; i < 5; i++)
                 {
-                    <div class="button-group">
-                        <button class="state-button @GetStateButtonClass(index)"
-                                title="@GetStateButtonTooltip(index)"
-                                @onclick="() => CycleState(index)"></button>
+                    int index = i;
+                    <div class="letter-box-container">
+                        <div class="letter-box @GetLetterClassForState(guessStates[index])">
+                            @(guessLetters[index] == ' ' ? "" : guessLetters[index].ToString().ToUpper())
+                        </div>
                     </div>
                 }
             </div>
-        }
+            <button class="delete-guess-btn" @onclick="() => RemoveGuess(currentGuessIndex)" title="Remove this guess">×</button>
+        </div>
+    }
+
+    @* Current entry row *@
+    <div class="entry-row">
+        <div class="letter-boxes" id="letter-boxes-container">
+            @for (int i = 0; i < 5; i++)
+            {
+                int index = i;
+                <div class="letter-box-container">
+                    <div class="letter-box @GetLetterClass(index) @GetFocusClass(index)" @onclick="() => SetFocus(index)">
+                        @(letters[index] == ' ' ? "" : letters[index].ToString().ToUpper())
+                    </div>
+                    @if (letters[index] != ' ')
+                    {
+                        <div class="button-group">
+                            <button class="state-button @GetStateButtonClass(index)"
+                                    title="@GetStateButtonTooltip(index)"
+                                    @onclick="() => CycleState(index)"></button>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+        <button class="add-guess-btn" @onclick="AddGuess" title="add new guess">+</button>
     </div>
 
     <div class="instructions">
@@ -67,6 +92,7 @@
     private List<string> matchingWords = new List<string>();
     private DotNetObjectReference<Home>? dotNetRef;
     private WordFilter wordFilter = WordFilter.Both;
+    private List<(char[] letters, LetterState[] states)> previousGuesses = new List<(char[], LetterState[])>();
 
     private enum LetterState
     {
@@ -289,6 +315,22 @@
 
     private bool MatchesPattern(string word)
     {
+        // Check current entry
+        if (!MatchesGuess(word, letters, states))
+            return false;
+
+        // Check all previous guesses
+        foreach (var (guessLetters, guessStates) in previousGuesses)
+        {
+            if (!MatchesGuess(word, guessLetters, guessStates))
+                return false;
+        }
+
+        return true;
+    }
+
+    private bool MatchesGuess(string word, char[] letters, LetterState[] states)
+    {
         // Check white letters (exclusions - word must NOT contain these letters)
         for (int i = 0; i < 5; i++)
         {
@@ -335,6 +377,48 @@
             LetterState.Green => "green",
             _ => ""
         };
+    }
+
+    private string GetLetterClassForState(LetterState state)
+    {
+        return state switch
+        {
+            LetterState.White => "white",
+            LetterState.Yellow => "yellow",
+            LetterState.Green => "green",
+            _ => ""
+        };
+    }
+
+    private async void AddGuess()
+    {
+        // Only add if at least one letter is entered
+        if (letters.Any(l => l != ' '))
+        {
+            // Clone the current letters and states
+            var guessLetters = (char[])letters.Clone();
+            var guessStates = (LetterState[])states.Clone();
+            previousGuesses.Add((guessLetters, guessStates));
+
+            // Clear the entry boxes
+            letters = new char[5] { ' ', ' ', ' ', ' ', ' ' };
+            states = new LetterState[5];
+            focusedIndex = 0;
+
+            CheckAndFilterWords();
+            StateHasChanged();
+            await JSRuntime.InvokeVoidAsync("focusMobileInput");
+        }
+    }
+
+    private void RemoveGuess(int index)
+    {
+        if (index >= 0 && index < previousGuesses.Count)
+        {
+            previousGuesses.RemoveAt(index);
+            CheckAndFilterWords();
+            StateHasChanged();
+        }
     }
 
     private string GetFocusClass(int index)

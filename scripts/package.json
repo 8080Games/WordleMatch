@@ -1,0 +1,10 @@
+{
+  "name": "wordle-updater",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Script to update Wordle used words list",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "node-fetch": "^3.3.2"
+  }
+}

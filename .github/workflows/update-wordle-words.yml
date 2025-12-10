@@ -1,0 +1,35 @@
+name: Update Wordle Used Words
+
+on:
+  schedule:
+    # Run at 12:01 AM UTC every day
+    - cron: '1 0 * * *'
+  workflow_dispatch: # Allow manual trigger for testing
+
+jobs:
+  update-words:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: |
+        cd scripts
+        npm install cheerio node-fetch
+
+    - name: Run update script
+      run: node scripts/update-used-words.mjs
+
+    - name: Commit and push if changed
+      run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email "actions@github.com"
+        git add wwwroot/used-words.csv
+        git diff --staged --quiet || (git commit -m "Auto-update: Add latest Wordle word" && git push)

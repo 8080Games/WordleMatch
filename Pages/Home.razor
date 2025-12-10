@@ -37,10 +37,10 @@
             {
                 int index = i;
                 <div class="letter-box-container">
-                    <div class="letter-box @GetLetterClass(index) @GetFocusClass(index)" @onclick="() => SetFocus(index)">
+                    <div class="letter-box @GetLetterClass(index) @GetFocusClass(index) @(lockedPositions[index] ? "locked" : "")" @onclick="() => SetFocus(index)">
                         @(letters[index] == ' ' ? "" : letters[index].ToString().ToUpper())
                     </div>
-                    @if (letters[index] != ' ')
+                    @if (letters[index] != ' ' && !lockedPositions[index])
                     {
                         <div class="button-group">
                             <button class="state-button @GetStateButtonClass(index)"
@@ -86,6 +86,7 @@
 @code {
     private char[] letters = new char[5] { ' ', ' ', ' ', ' ', ' ' };
     private LetterState[] states = new LetterState[5];
+    private bool[] lockedPositions = new bool[5];
     private int focusedIndex = 0;
     private List<string> allWords = new List<string>();
     private Dictionary<string, (int gameNumber, string date)> usedWords = new Dictionary<string, (int, string)>();
@@ -164,6 +165,13 @@
     {
         if (focusedIndex < 0) return;
 
+        // Skip locked (inherited) positions
+        if (lockedPositions[focusedIndex])
+        {
+            MoveToNextEditablePosition();
+            return;
+        }
+
         char keyChar = key[0];
         letters[focusedIndex] = char.ToLower(keyChar);
 
@@ -180,37 +188,62 @@
             states[focusedIndex] = LetterState.None;
         }
 
-        // Move to next box if not at the end, or clear focus if at the end
-        if (focusedIndex < 4)
-        {
-            focusedIndex++;
-        }
-        else
-        {
-            focusedIndex = -1;
-        }
+        // Move to next editable box
+        MoveToNextEditablePosition();
 
         CheckAndFilterWords();
         StateHasChanged();
     }
 
+    private void MoveToNextEditablePosition()
+    {
+        // Move to next non-locked box if not at the end, or clear focus if at the end
+        int nextIndex = focusedIndex + 1;
+        while (nextIndex < 5 && lockedPositions[nextIndex])
+        {
+            nextIndex++;
+        }
+
+        if (nextIndex < 5)
+        {
+            focusedIndex = nextIndex;
+        }
+        else
+        {
+            focusedIndex = -1;
+        }
+    }
+
     [JSInvokable]
     public void HandleBackspace()
     {
-        // If no box is focused, focus the last box
+        // If no box is focused, focus the last non-locked box
         if (focusedIndex < 0)
         {
             focusedIndex = 4;
+            while (focusedIndex >= 0 && lockedPositions[focusedIndex])
+            {
+                focusedIndex--;
+            }
+            if (focusedIndex < 0) return; // All boxes are locked
         }
 
-        // Clear the current box
-        letters[focusedIndex] = ' ';
-        states[focusedIndex] = LetterState.None;
+        // Don't clear locked boxes
+        if (!lockedPositions[focusedIndex])
+        {
+            letters[focusedIndex] = ' ';
+            states[focusedIndex] = LetterState.None;
+        }
 
-        // Move to previous box unless at the first position
+        // Move to previous non-locked box unless at the first position
         if (focusedIndex > 0)
         {
             focusedIndex--;
+            while (focusedIndex >= 0 && lockedPositions[focusedIndex])
+            {
+                focusedIndex--;
+            }
+            if (focusedIndex < 0) focusedIndex = 0;
         }
 
         CheckAndFilterWords();
@@ -220,14 +253,22 @@
     [JSInvokable]
     public void HandleArrowLeft()
     {
-        // If no box is focused, focus the last box
+        // If no box is focused, focus the last non-locked box
         if (focusedIndex < 0)
         {
             focusedIndex = 4;
+            while (focusedIndex >= 0 && lockedPositions[focusedIndex])
+            {
+                focusedIndex--;
+            }
         }
         else if (focusedIndex > 0)
         {
             focusedIndex--;
+            while (focusedIndex >= 0 && lockedPositions[focusedIndex])
+            {
+                focusedIndex--;
+            }
         }
         StateHasChanged();
     }
@@ -235,20 +276,34 @@
     [JSInvokable]
     public void HandleArrowRight()
     {
-        // If no box is focused, focus the first box
+        // If no box is focused, focus the first non-locked box
         if (focusedIndex < 0)
         {
             focusedIndex = 0;
+            while (focusedIndex < 5 && lockedPositions[focusedIndex])
+            {
+                focusedIndex++;
+            }
         }
         else if (focusedIndex < 4)
         {
             focusedIndex++;
+            while (focusedIndex < 5 && lockedPositions[focusedIndex])
+            {
+                focusedIndex++;
+            }
         }
         StateHasChanged();
     }
 
     private async void SetFocus(int index)
     {
+        // Don't allow focusing on locked (inherited) boxes
+        if (lockedPositions[index])
+        {
+            return;
+        }
+
         focusedIndex = index;
         StateHasChanged();
         await JSRuntime.InvokeVoidAsync("focusMobileInput");
@@ -256,7 +311,7 @@
 
     private void CycleState(int index)
     {
-        if (letters[index] != ' ')
+        if (letters[index] != ' ' && !lockedPositions[index])
         {
             states[index] = states[index] switch
             {
@@ -400,10 +455,32 @@
             var guessStates = (LetterState[])states.Clone();
             previousGuesses.Add((guessLetters, guessStates));
 
-            // Clear the entry boxes
-            letters = new char[5] { ' ', ' ', ' ', ' ', ' ' };
-            states = new LetterState[5];
+            // Clear the entry boxes, but preserve green letters and mark them as locked
+            for (int i = 0; i < 5; i++)
+            {
+                if (states[i] == LetterState.Green)
+                {
+                    // Keep green letter and mark as locked (inherited)
+                    lockedPositions[i] = true;
+                }
+                else
+                {
+                    letters[i] = ' ';
+                    states[i] = LetterState.None;
+                    lockedPositions[i] = false;
+                }
+            }
+
+            // Find first non-locked position to focus
             focusedIndex = 0;
+            for (int i = 0; i < 5; i++)
+            {
+                if (!lockedPositions[i])
+                {
+                    focusedIndex = i;
+                    break;
+                }
+            }
 
             CheckAndFilterWords();
             StateHasChanged();

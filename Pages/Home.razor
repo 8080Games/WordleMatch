@@ -399,18 +399,30 @@
 
     private bool MatchesGuess(string word, char[] letters, LetterState[] states)
     {
-        // Check white letters (exclusions - word must NOT contain these letters)
+        // Count green/yellow instances of each letter
+        var greenYellowCount = new Dictionary<char, int>();
+        var whiteLetters = new HashSet<char>();
+
         for (int i = 0; i < 5; i++)
         {
-            if (states[i] == LetterState.White)
+            if (letters[i] == ' ' || states[i] == LetterState.None)
+                continue;
+
+            char letter = char.ToLower(letters[i]);
+
+            if (states[i] == LetterState.Green || states[i] == LetterState.Yellow)
             {
-                char excludedLetter = char.ToLower(letters[i]);
-                if (word.Contains(excludedLetter))
-                    return false;
+                if (!greenYellowCount.ContainsKey(letter))
+                    greenYellowCount[letter] = 0;
+                greenYellowCount[letter]++;
+            }
+            else if (states[i] == LetterState.White)
+            {
+                whiteLetters.Add(letter);
             }
         }
 
-        // Check green letters (must be in exact position)
+        // Check position constraints
         for (int i = 0; i < 5; i++)
         {
             if (states[i] == LetterState.Green)
@@ -418,17 +430,31 @@
                 if (word[i] != char.ToLower(letters[i]))
                     return false;
             }
+            else if (states[i] == LetterState.Yellow)
+            {
+                char letter = char.ToLower(letters[i]);
+                if (!word.Contains(letter))
+                    return false;
+                if (word[i] == letter)
+                    return false;
+            }
         }
 
-        // Check yellow letters (must be in word but not in this position)
-        for (int i = 0; i < 5; i++)
+        // Check frequency constraints for white letters
+        foreach (char letter in whiteLetters)
         {
-            if (states[i] == LetterState.Yellow)
+            int actualCount = word.Count(c => c == letter);
+
+            if (greenYellowCount.ContainsKey(letter))
             {
-                char targetLetter = char.ToLower(letters[i]);
-                if (!word.Contains(targetLetter))
+                // There are green/yellow instances, so word should have exactly that many
+                if (actualCount != greenYellowCount[letter])
                     return false;
-                if (word[i] == targetLetter)
+            }
+            else
+            {
+                // No green/yellow instances, so word should not contain this letter at all
+                if (actualCount > 0)
                     return false;
             }
         }

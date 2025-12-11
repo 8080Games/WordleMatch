@@ -2,8 +2,8 @@ name: Update Wordle Used Words
 
 on:
   schedule:
-    # Run at 12:01 AM UTC every day
-    - cron: '1 0 * * *'
+    # Run at 2:01 AM EST (7:01 AM UTC) every day
+    - cron: '1 7 * * *'
   workflow_dispatch: # Allow manual trigger for testing
 
 permissions:

@@ -1,6 +1,9 @@
 ﻿@page "/"
 @inject HttpClient Http
 @inject IJSRuntime JSRuntime
+@inject WordleHelper.Services.WordleFilterService FilterService
+@using WordleHelper.Services
+@using LetterState = WordleHelper.Services.WordleFilterService.LetterState
 
 <PageTitle>Wordle Match</PageTitle>
 
@@ -94,14 +97,6 @@
     private DotNetObjectReference<Home>? dotNetRef;
     private WordFilter wordFilter = WordFilter.Both;
     private List<(char[] letters, LetterState[] states)> previousGuesses = new List<(char[], LetterState[])>();
-
-    private enum LetterState
-    {
-        None,
-        White,
-        Yellow,
-        Green
-    }
 
     private enum WordFilter
     {
@@ -365,12 +360,9 @@
 
     private void FilterWords()
     {
-        matchingWords = allWords.Where(word => MatchesPattern(word)).OrderBy(w => w).ToList();
-    }
+        var guesses = new List<WordleFilterService.Guess>();
 
-    private bool MatchesPattern(string word)
-    {
-        // Check current entry only if it has non-locked letters
+        // Add current entry if it has non-locked letters
         bool hasNonLockedLetters = false;
         for (int i = 0; i < 5; i++)
         {
@@ -383,95 +375,16 @@
 
         if (hasNonLockedLetters)
         {
-            if (!MatchesGuess(word, letters, states))
-                return false;
+            guesses.Add(new WordleFilterService.Guess(letters, states));
         }
 
-        // Check all previous guesses
+        // Add all previous guesses
         foreach (var (guessLetters, guessStates) in previousGuesses)
         {
-            if (!MatchesGuess(word, guessLetters, guessStates))
-                return false;
+            guesses.Add(new WordleFilterService.Guess(guessLetters, guessStates));
         }
 
-        return true;
-    }
-
-    private bool MatchesGuess(string word, char[] letters, LetterState[] states)
-    {
-        // Count green/yellow instances of each letter
-        var greenYellowCount = new Dictionary<char, int>();
-        var whiteLetters = new HashSet<char>();
-
-        for (int i = 0; i < 5; i++)
-        {
-            if (letters[i] == ' ' || states[i] == LetterState.None)
-                continue;
-
-            char letter = char.ToLower(letters[i]);
-
-            if (states[i] == LetterState.Green || states[i] == LetterState.Yellow)
-            {
-                if (!greenYellowCount.ContainsKey(letter))
-                    greenYellowCount[letter] = 0;
-                greenYellowCount[letter]++;
-            }
-            else if (states[i] == LetterState.White)
-            {
-                whiteLetters.Add(letter);
-            }
-        }
-
-        // Check position constraints
-        for (int i = 0; i < 5; i++)
-        {
-            if (states[i] == LetterState.Green)
-            {
-                if (word[i] != char.ToLower(letters[i]))
-                    return false;
-            }
-            else if (states[i] == LetterState.Yellow)
-            {
-                char letter = char.ToLower(letters[i]);
-                if (!word.Contains(letter))
-                    return false;
-                if (word[i] == letter)
-                    return false;
-            }
-        }
-
-        // Check frequency constraints for white letters
-        foreach (char letter in whiteLetters)
-        {
-            int actualCount = word.Count(c => c == letter);
-
-            if (greenYellowCount.ContainsKey(letter))
-            {
-                // There are green/yellow instances, so word should have exactly that many
-                if (actualCount != greenYellowCount[letter])
-                    return false;
-            }
-            else
-            {
-                // No green/yellow instances, so word should not contain this letter at all
-                if (actualCount > 0)
-                    return false;
-            }
-        }
-
-        // Check minimum frequency for green/yellow letters without white instances
-        foreach (var (letter, minCount) in greenYellowCount)
-        {
-            if (!whiteLetters.Contains(letter))
-            {
-                // No white instance means word should have AT LEAST this many
-                int actualCount = word.Count(c => c == letter);
-                if (actualCount < minCount)
-                    return false;
-            }
-        }
-
-        return true;
+        matchingWords = FilterService.FilterWords(allWords, guesses).ToList();
     }
 
     private string GetLetterClass(int index)

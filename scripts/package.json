@@ -3,8 +3,15 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Script to update Wordle used words list",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
     "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.8"
   }
 }

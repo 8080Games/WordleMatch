@@ -185,24 +185,44 @@ async function updateUsedWordsCsv(newWord) {
 async function main() {
     try {
         console.log('Starting Wordle used words update...');
+        console.log('');
 
         const latestAnswer = await fetchLatestWordleAnswer();
 
         if (!latestAnswer) {
-            console.error('Failed to fetch latest answer');
+            console.log('');
+            console.log('❌ RESULT: FAILED - Could not find Wordle answer on website');
+            console.log('');
             process.exit(1);
         }
 
+        console.log('');
         const updated = await updateUsedWordsCsv(latestAnswer);
 
+        console.log('');
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
         if (updated) {
-            console.log('Successfully updated used-words.csv');
+            console.log('✅ RESULT: NEW WORD ADDED');
+            console.log(`   Word:   ${latestAnswer.word.toUpperCase()}`);
+            console.log(`   Number: #${latestAnswer.gameNumber}`);
+            console.log(`   Date:   ${latestAnswer.date}`);
         } else {
-            console.log('No update needed');
+            console.log('ℹ️  RESULT: NO UPDATE NEEDED');
+            console.log(`   Word:   ${latestAnswer.word.toUpperCase()}`);
+            console.log(`   Number: #${latestAnswer.gameNumber}`);
+            console.log(`   Date:   ${latestAnswer.date}`);
+            console.log(`   Reason: Word already exists in database`);
         }
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.log('');
 
     } catch (error) {
-        console.error('Failed to update used words:', error);
+        console.log('');
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.log('❌ RESULT: ERROR');
+        console.log(`   Error: ${error.message}`);
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.log('');
         process.exit(1);
     }
 }

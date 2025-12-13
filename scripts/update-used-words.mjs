@@ -76,7 +76,11 @@ export function parseWordleAnswerFromHtml(html, targetDate, cheerioLoad = null) 
     }
 
     // Strategy 3: Try to find list items with format: <li><strong>Day Month (#XXXX):</strong> <a>WORD</a></li>
+    // Find the item with the HIGHEST game number (most recent)
     const listItems = $('li');
+    let highestGameNumber = 0;
+    let highestWord = null;
+
     for (let i = 0; i < listItems.length; i++) {
         const li = $(listItems[i]);
         const strongText = li.find('strong').first().text();
@@ -87,17 +91,22 @@ export function parseWordleAnswerFromHtml(html, targetDate, cheerioLoad = null) 
         const match = strongText.match(listPattern);
 
         if (match && linkText && linkText.length === 5) {
-            latestGameNumber = match[1];
-            latestWord = linkText.toLowerCase();
-
-            console.log(`Found from list: Word="${latestWord}", Game#${latestGameNumber}, Date=${latestDate}`);
-
-            return {
-                word: latestWord,
-                gameNumber: parseInt(latestGameNumber),
-                date: latestDate
-            };
+            const gameNum = parseInt(match[1]);
+            if (gameNum > highestGameNumber) {
+                highestGameNumber = gameNum;
+                highestWord = linkText.toLowerCase();
+            }
         }
+    }
+
+    if (highestWord) {
+        console.log(`Found from list: Word="${highestWord}", Game#${highestGameNumber}, Date=${latestDate}`);
+
+        return {
+            word: highestWord,
+            gameNumber: highestGameNumber,
+            date: latestDate
+        };
     }
 
     return null;

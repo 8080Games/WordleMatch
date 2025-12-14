@@ -9,5 +9,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddSingleton<WordleFilterService>();
+builder.Services.AddSingleton<WordleStrategyService>();
 
 await builder.Build().RunAsync();

@@ -1,0 +1,36 @@
+{
+  "normal": [
+    {
+      "word": "salet",
+      "score": 5.699,
+      "isPossibleAnswer": false
+    },
+    {
+      "word": "raile",
+      "score": 5.696,
+      "isPossibleAnswer": false
+    },
+    {
+      "word": "saner",
+      "score": 5.658,
+      "isPossibleAnswer": true
+    }
+  ],
+  "hard": [
+    {
+      "word": "salet",
+      "score": 5.699,
+      "isPossibleAnswer": false
+    },
+    {
+      "word": "raile",
+      "score": 5.696,
+      "isPossibleAnswer": false
+    },
+    {
+      "word": "saner",
+      "score": 5.658,
+      "isPossibleAnswer": true
+    }
+  ]
+}

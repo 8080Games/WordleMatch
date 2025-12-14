@@ -2,6 +2,7 @@
 @inject HttpClient Http
 @inject IJSRuntime JSRuntime
 @inject WordleHelper.Services.WordleFilterService FilterService
+@inject WordleHelper.Services.WordleStrategyService StrategyService
 @using WordleHelper.Services
 @using LetterState = WordleHelper.Services.WordleFilterService.LetterState
 
@@ -61,11 +62,36 @@
         Type letters from your Wordle guesses. Lowercase = excluded letter (white), Uppercase = letter in word but wrong position (yellow). Click the button to cycle through states. Press Space to leave a box empty (wildcard).
     </div>
 
-    <div class="filter-buttons">
-            <button class="filter-btn unused-btn @(wordFilter == WordFilter.Unused ? "active" : "")" @onclick="() => SetFilter(WordFilter.Unused)">unused</button>
-            <button class="filter-btn both-btn @(wordFilter == WordFilter.Both ? "active" : "")" @onclick="() => SetFilter(WordFilter.Both)">both</button>
-            <button class="filter-btn used-btn @(wordFilter == WordFilter.Used ? "active" : "")" @onclick="() => SetFilter(WordFilter.Used)">used</button>
+    <div class="recommendations-section">
+        <div class="recommendations-header">
+            <span class="recommendations-label">Recommendations:</span>
+            <div class="mode-toggle">
+                <button class="mode-btn @(strategyMode == StrategyMode.Off ? "active" : "")" @onclick="() => SetStrategyMode(StrategyMode.Off)">Off</button>
+                <button class="mode-btn @(strategyMode == StrategyMode.Normal ? "active" : "")" @onclick="() => SetStrategyMode(StrategyMode.Normal)">Normal</button>
+                <button class="mode-btn @(strategyMode == StrategyMode.Hard ? "active" : "")" @onclick="() => SetStrategyMode(StrategyMode.Hard)">Hard</button>
+            </div>
+            @if (isLoadingRecommendations)
+            {
+                <span class="loading-indicator">Calculating...</span>
+            }
+            else if (strategyMode != StrategyMode.Off && recommendations != null && recommendations.Any())
+            {
+                <div class="recommendations-list">
+                    @foreach (var rec in recommendations.Take(3))
+                    {
+                        <span class="recommendation-item @(rec.IsPossibleAnswer ? "possible-answer" : "guess-only")"
+                              title="Score: @rec.Score.ToString("F2") bits">@rec.Word.ToUpper()</span>
+                    }
+                </div>
+            }
         </div>
+    </div>
+
+    <div class="filter-buttons">
+        <button class="filter-btn unused-btn @(wordFilter == WordFilter.Unused ? "active" : "")" @onclick="() => SetFilter(WordFilter.Unused)">unused</button>
+        <button class="filter-btn both-btn @(wordFilter == WordFilter.Both ? "active" : "")" @onclick="() => SetFilter(WordFilter.Both)">both</button>
+        <button class="filter-btn used-btn @(wordFilter == WordFilter.Used ? "active" : "")" @onclick="() => SetFilter(WordFilter.Used)">used</button>
+    </div>
 
         <div class="results">
             <h2>Matching Words (@GetFilteredWords().Count())</h2>
@@ -97,12 +123,22 @@
     private DotNetObjectReference<Home>? dotNetRef;
     private WordFilter wordFilter = WordFilter.Both;
     private List<(char[] letters, LetterState[] states)> previousGuesses = new List<(char[], LetterState[])>();
+    private List<WordleStrategyService.Recommendation>? recommendations = null;
+    private StrategyMode strategyMode = StrategyMode.Off;
+    private bool isLoadingRecommendations = false;
 
     private enum WordFilter
     {
         Unused,
         Both,
         Used
+    }
+
+    private enum StrategyMode
+    {
+        Off,
+        Normal,
+        Hard
     }
 
     protected override async Task OnInitializedAsync()
@@ -125,12 +161,18 @@
     {
         try
         {
+            // Load answer words first and display immediately
             var wordsText = await Http.GetStringAsync("words.txt");
             allWords = wordsText.Split('\n', StringSplitOptions.RemoveEmptyEntries)
                 .Select(w => w.Trim().ToLower())
                 .Where(w => w.Length == 5)
                 .ToList();
 
+            // Initialize with answer words and refresh display
+            matchingWords = allWords.OrderBy(w => w).ToList();
+            StateHasChanged();
+
+            // Now load the rest of the data
             var usedCsv = await Http.GetStringAsync("used-words.csv");
             foreach (var line in usedCsv.Split('\n', StringSplitOptions.RemoveEmptyEntries))
             {
@@ -146,8 +188,19 @@
                 }
             }
 
-            // Initialize with all words
-            matchingWords = allWords.OrderBy(w => w).ToList();
+            // Load guess-only words for strategy service
+            var guessOnlyWords = await Http.GetStringAsync("guess-only-words.txt");
+            StrategyService.Initialize(wordsText, guessOnlyWords);
+
+            // Pass used words to strategy service
+            StrategyService.LoadUsedWords(usedWords);
+
+            // Load pre-calculated starting words
+            var startingWordsJson = await Http.GetStringAsync("starting-words.json");
+            StrategyService.LoadStartingWords(startingWordsJson);
+
+            // Final refresh after all data is loaded
+            StateHasChanged();
         }
         catch (Exception ex)
         {
@@ -156,7 +209,7 @@
     }
 
     [JSInvokable]
-    public void HandleKeyPress(string key)
+    public async void HandleKeyPress(string key)
     {
         if (focusedIndex < 0) return;
 
@@ -188,6 +241,12 @@
 
         CheckAndFilterWords();
         StateHasChanged();
+
+        // Auto-recalculate recommendations if all 5 letters are filled
+        if (strategyMode != StrategyMode.Off && letters.All(l => l != ' '))
+        {
+            await CalculateRecommendations();
+        }
     }
 
     private void MoveToNextEditablePosition()
@@ -452,13 +511,19 @@
         }
     }
 
-    private void RemoveGuess(int index)
+    private async void RemoveGuess(int index)
     {
         if (index >= 0 && index < previousGuesses.Count)
         {
             previousGuesses.RemoveAt(index);
             CheckAndFilterWords();
             StateHasChanged();
+
+            // Auto-recalculate recommendations after removing a guess
+            if (strategyMode != StrategyMode.Off)
+            {
+                await CalculateRecommendations();
+            }
         }
     }
 
@@ -481,6 +546,71 @@
             WordFilter.Used => matchingWords.Where(w => usedWords.ContainsKey(w)),
             _ => matchingWords
         };
+    }
+
+    private async Task SetStrategyMode(StrategyMode mode)
+    {
+        strategyMode = mode;
+
+        if (mode == StrategyMode.Off)
+        {
+            recommendations = null;
+            StateHasChanged();
+            return;
+        }
+
+        // Auto-calculate when switching to Normal or Hard
+        await CalculateRecommendations();
+    }
+
+    private async Task CalculateRecommendations()
+    {
+        if (strategyMode == StrategyMode.Off) return;
+
+        // Check if strategy service is initialized
+        if (!StrategyService.IsInitialized)
+        {
+            Console.WriteLine("Strategy service not initialized yet");
+            return;
+        }
+
+        isLoadingRecommendations = true;
+        StateHasChanged();
+
+        await Task.Delay(1); // Allow UI to update
+
+        try
+        {
+            var guesses = new List<WordleFilterService.Guess>();
+
+            // Add all previous guesses
+            foreach (var (guessLetters, guessStates) in previousGuesses)
+            {
+                guesses.Add(new WordleFilterService.Guess(guessLetters, guessStates));
+            }
+
+            // Add current entry if it has letters
+            bool hasCurrentLetters = letters.Any(l => l != ' ');
+            if (hasCurrentLetters)
+            {
+                guesses.Add(new WordleFilterService.Guess(letters, states));
+            }
+
+            bool isHardMode = strategyMode == StrategyMode.Hard;
+            recommendations = StrategyService.GetRecommendations(guesses, isHardMode, topN: 5);
+
+            Console.WriteLine($"Generated {recommendations?.Count ?? 0} recommendations");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error getting recommendations: {ex.Message}");
+            recommendations = null;
+        }
+        finally
+        {
+            isLoadingRecommendations = false;
+            StateHasChanged();
+        }
     }
 
     public void Dispose()

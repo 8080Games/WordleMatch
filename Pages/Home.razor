@@ -243,8 +243,8 @@
         CheckAndFilterWords();
         StateHasChanged();
 
-        // Auto-recalculate recommendations if all 5 letters are filled
-        if (strategyMode != StrategyMode.Off && letters.All(l => l != ' '))
+        // Auto-recalculate recommendations for HARD mode on each letter change
+        if (strategyMode == StrategyMode.Hard)
         {
             await CalculateRecommendations();
         }
@@ -270,7 +270,7 @@
     }
 
     [JSInvokable]
-    public void HandleBackspace()
+    public async void HandleBackspace()
     {
         // If no box is focused, focus the last non-locked box
         if (focusedIndex < 0)
@@ -283,6 +283,28 @@
             if (focusedIndex < 0) return; // All boxes are locked
         }
 
+        // Find the last non-locked (editable) box
+        int lastEditableIndex = 4;
+        while (lastEditableIndex >= 0 && lockedPositions[lastEditableIndex])
+        {
+            lastEditableIndex--;
+        }
+
+        // Check if there are any editable boxes before the current one
+        bool hasEditableBoxBefore = false;
+        for (int i = focusedIndex - 1; i >= 0; i--)
+        {
+            if (!lockedPositions[i])
+            {
+                hasEditableBoxBefore = true;
+                break;
+            }
+        }
+
+        // Check if we're on the last editable box and it has content
+        bool isLastEditableBox = focusedIndex == lastEditableIndex;
+        bool hadContent = letters[focusedIndex] != ' ';
+
         // Don't clear locked boxes
         if (!lockedPositions[focusedIndex])
         {
@@ -290,8 +312,11 @@
             states[focusedIndex] = LetterState.None;
         }
 
-        // Move to previous non-locked box unless at the first position
-        if (focusedIndex > 0)
+        // Move to previous non-locked box unless:
+        // 1. At the first position, OR
+        // 2. No editable boxes before this one (it's the first editable box), OR
+        // 3. On last editable box and it had content (stay on last box after deleting)
+        if (focusedIndex > 0 && hasEditableBoxBefore && !(isLastEditableBox && hadContent))
         {
             focusedIndex--;
             while (focusedIndex >= 0 && lockedPositions[focusedIndex])
@@ -303,6 +328,12 @@
 
         CheckAndFilterWords();
         StateHasChanged();
+
+        // Auto-recalculate recommendations for HARD mode on letter delete
+        if (strategyMode == StrategyMode.Hard)
+        {
+            await CalculateRecommendations();
+        }
     }
 
     [JSInvokable]
@@ -364,7 +395,7 @@
         await JSRuntime.InvokeVoidAsync("focusMobileInput");
     }
 
-    private void CycleState(int index)
+    private async void CycleState(int index)
     {
         if (letters[index] != ' ' && !lockedPositions[index])
         {
@@ -377,6 +408,12 @@
             };
             CheckAndFilterWords();
             StateHasChanged();
+
+            // Auto-recalculate recommendations for HARD mode on letter state change
+            if (strategyMode == StrategyMode.Hard)
+            {
+                await CalculateRecommendations();
+            }
         }
     }
 
@@ -573,6 +610,19 @@
         {
             Console.WriteLine("Strategy service not initialized yet");
             return;
+        }
+
+        // For HARD mode: show cached starting words if first guess and <5 letterboxes filled
+        if (strategyMode == StrategyMode.Hard && previousGuesses.Count == 0)
+        {
+            int filledCount = letters.Count(l => l != ' ');
+            if (filledCount < 5)
+            {
+                // Use cached starting words - pass empty guesses list
+                recommendations = StrategyService.GetRecommendations(new List<WordleFilterService.Guess>(), hardMode: true, topN: 5);
+                StateHasChanged();
+                return;
+            }
         }
 
         isLoadingRecommendations = true;

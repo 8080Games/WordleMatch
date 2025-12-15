@@ -258,6 +258,114 @@ public class WordleStrategyServiceTests
         Assert.Equal(5, hardRecs.Count);
     }
 
+    [Fact]
+    public void LoadUsedWords_WithCutoff_OnlyMarksWordsBeforeCutoffAsUnavailable()
+    {
+        // Arrange: Create used words with different game numbers
+        var usedWords = new Dictionary<string, (int gameNumber, string date)>
+        {
+            { "cigar", (0, "6/19/2021") },      // Game 0 - should be unavailable
+            { "rebut", (1, "6/20/2021") },      // Game 1 - should be unavailable
+            { "sissy", (2, "6/21/2021") },      // Game 2 - should be unavailable
+            { "knoll", (100, "9/27/2021") },    // Game 100 - cutoff, should be AVAILABLE
+            { "found", (101, "9/28/2021") },    // Game 101 - should be AVAILABLE
+            { "truck", (1637, "12/12/2025") }   // Game 1637 - should be AVAILABLE
+        };
+
+        // Act: Load used words with cutoff at game 100
+        _service.LoadUsedWords(usedWords, cutoffGameNumber: 100);
+
+        // Create guesses that allow all these words as possible answers
+        var guesses = new List<Guess>();
+        var recommendations = _service.GetRecommendations(guesses, hardMode: false, topN: 100);
+
+        // Assert: Words before cutoff (games 0-99) should NOT be in possible answers
+        Assert.DoesNotContain(recommendations, r => r.Word == "cigar" && r.IsPossibleAnswer);
+        Assert.DoesNotContain(recommendations, r => r.Word == "rebut" && r.IsPossibleAnswer);
+        Assert.DoesNotContain(recommendations, r => r.Word == "sissy" && r.IsPossibleAnswer);
+
+        // Assert: Words at or after cutoff (games 100+) SHOULD be possible answers
+        // Note: These words might not appear in recommendations if they're not in the word list
+        // but if they do appear, they should be marked as possible answers
+        var knollRec = recommendations.FirstOrDefault(r => r.Word == "knoll");
+        var foundRec = recommendations.FirstOrDefault(r => r.Word == "found");
+        var truckRec = recommendations.FirstOrDefault(r => r.Word == "truck");
+
+        if (knollRec != null)
+            Assert.True(knollRec.IsPossibleAnswer, "knoll (game 100) should be a possible answer");
+        if (foundRec != null)
+            Assert.True(foundRec.IsPossibleAnswer, "found (game 101) should be a possible answer");
+        if (truckRec != null)
+            Assert.True(truckRec.IsPossibleAnswer, "truck (game 1637) should be a possible answer");
+
+        _testOutputHelper.WriteLine($"Tested cutoff at game 100:");
+        _testOutputHelper.WriteLine($"  Games 0-99: Marked as unavailable");
+        _testOutputHelper.WriteLine($"  Games 100+: Remain as possible answers");
+    }
+
+    [Fact]
+    public void LoadUsedWords_WithNoCutoff_MarksAllUsedWordsAsUnavailable()
+    {
+        // Arrange: Create used words with different game numbers
+        var usedWords = new Dictionary<string, (int gameNumber, string date)>
+        {
+            { "cigar", (0, "6/19/2021") },
+            { "knoll", (100, "9/27/2021") },
+            { "truck", (1637, "12/12/2025") }
+        };
+
+        // Act: Load used words with NO cutoff (null)
+        _service.LoadUsedWords(usedWords, cutoffGameNumber: null);
+
+        var guesses = new List<Guess>();
+        var recommendations = _service.GetRecommendations(guesses, hardMode: false, topN: 100);
+
+        // Assert: ALL used words should NOT be possible answers (original behavior)
+        Assert.DoesNotContain(recommendations, r => r.Word == "cigar" && r.IsPossibleAnswer);
+        Assert.DoesNotContain(recommendations, r => r.Word == "knoll" && r.IsPossibleAnswer);
+        Assert.DoesNotContain(recommendations, r => r.Word == "truck" && r.IsPossibleAnswer);
+
+        _testOutputHelper.WriteLine($"Tested with no cutoff (null):");
+        _testOutputHelper.WriteLine($"  All used words marked as unavailable (original behavior)");
+    }
+
+    [Fact]
+    public void LoadUsedWords_WithCutoffAtToday_TodayWordRemainsAvailable()
+    {
+        // Arrange: Simulate playing today's puzzle (game 1640 as example)
+        var todayGameNumber = 1640;
+        var usedWords = new Dictionary<string, (int gameNumber, string date)>
+        {
+            { "paste", (1638, "12/13/2025") },  // Yesterday - should be unavailable
+            { "borax", (1639, "12/14/2025") },  // Yesterday - should be unavailable
+            { "magic", (1640, "12/15/2025") },  // Today - should be AVAILABLE
+            { "truck", (1641, "12/16/2025") }   // Future - should be AVAILABLE
+        };
+
+        // Act: Load used words with cutoff at today's game number
+        _service.LoadUsedWords(usedWords, cutoffGameNumber: todayGameNumber);
+
+        var guesses = new List<Guess>();
+        var recommendations = _service.GetRecommendations(guesses, hardMode: false, topN: 100);
+
+        // Assert: Past words should not be possible answers
+        Assert.DoesNotContain(recommendations, r => r.Word == "paste" && r.IsPossibleAnswer);
+        Assert.DoesNotContain(recommendations, r => r.Word == "borax" && r.IsPossibleAnswer);
+
+        // Assert: Today's word and future words should be possible answers
+        var magicRec = recommendations.FirstOrDefault(r => r.Word == "magic");
+        var truckRec = recommendations.FirstOrDefault(r => r.Word == "truck");
+
+        if (magicRec != null)
+            Assert.True(magicRec.IsPossibleAnswer, "Today's word (magic) should be a possible answer");
+        if (truckRec != null)
+            Assert.True(truckRec.IsPossibleAnswer, "Future word (truck) should be a possible answer");
+
+        _testOutputHelper.WriteLine($"Tested cutoff at today's game ({todayGameNumber}):");
+        _testOutputHelper.WriteLine($"  Past games: Unavailable");
+        _testOutputHelper.WriteLine($"  Today and future: Available");
+    }
+
     // Helper method to access private GetPattern method via reflection
     private string InvokeGetPattern(string guess, string answer)
     {

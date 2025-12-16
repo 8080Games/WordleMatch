@@ -206,11 +206,22 @@ async function fetchLatestWordleAnswer() {
         console.log('  Waiting for login form to load...');
         await page.waitForTimeout(5000);
 
-        // Check if there are any iframes
+        // Wait a bit more for iframes to load
+        await page.waitForTimeout(3000);
+
+        // Get all frames
         const frames = page.frames();
         console.log(`  Found ${frames.length} frames on page`);
 
-        // Try to find email input in main page first, then in iframes
+        // Log frame details for debugging
+        for (let i = 0; i < frames.length; i++) {
+            const frame = frames[i];
+            const frameUrl = frame.url();
+            const frameName = frame.name() || '(unnamed)';
+            console.log(`    Frame ${i}: ${frameName} - ${frameUrl}`);
+        }
+
+        // Try to find email input in all frames
         const emailSelectors = [
             '#email',
             'input[type="email"]',
@@ -221,41 +232,26 @@ async function fetchLatestWordleAnswer() {
         let emailInput = null;
         let targetFrame = page;
 
-        // First try main page
-        for (const selector of emailSelectors) {
-            try {
-                emailInput = await page.waitForSelector(selector, {
-                    timeout: 3000,
-                    state: 'visible'
-                });
-                if (emailInput) {
-                    console.log(`  Found email input in main page with selector: ${selector}`);
-                    break;
-                }
-            } catch (e) {
-                // Try next selector
-            }
-        }
+        // Try each frame
+        for (let i = 0; i < frames.length; i++) {
+            if (emailInput) break;
 
-        // If not found in main page, try iframes
-        if (!emailInput && frames.length > 1) {
-            console.log('  Email not found in main page, checking iframes...');
-            for (const frame of frames) {
-                if (emailInput) break;
-                for (const selector of emailSelectors) {
-                    try {
-                        emailInput = await frame.waitForSelector(selector, {
-                            timeout: 1000,
-                            state: 'visible'
-                        });
-                        if (emailInput) {
-                            targetFrame = frame;
-                            console.log(`  Found email input in iframe with selector: ${selector}`);
-                            break;
-                        }
-                    } catch (e) {
-                        // Try next selector
+            const frame = frames[i];
+            console.log(`  Checking frame ${i} for email input...`);
+
+            for (const selector of emailSelectors) {
+                try {
+                    emailInput = await frame.waitForSelector(selector, {
+                        timeout: 2000,
+                        state: 'visible'
+                    });
+                    if (emailInput) {
+                        targetFrame = frame;
+                        console.log(`  ✓ Found email input in frame ${i} with selector: ${selector}`);
+                        break;
                     }
+                } catch (e) {
+                    // Try next selector
                 }
             }
         }

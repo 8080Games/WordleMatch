@@ -198,27 +198,115 @@ async function fetchLatestWordleAnswer() {
         // Login to NYT
         console.log('  Logging in to NYT...');
         await page.goto('https://myaccount.nytimes.com/auth/login', {
-            waitUntil: 'domcontentloaded',
+            waitUntil: 'networkidle',
             timeout: 30000
         });
 
-        // Wait for login form to load
-        await page.waitForSelector('input[type="email"]', { timeout: 10000 });
+        // Wait a bit for the page to fully load
+        await page.waitForTimeout(3000);
+
+        // Try multiple selectors for email input
+        const emailSelectors = [
+            'input[type="email"]',
+            'input[name="email"]',
+            'input[id="email"]',
+            '#email',
+            'input[autocomplete="username"]',
+            'input[data-testid="email-input"]'
+        ];
+
+        let emailInput = null;
+        for (const selector of emailSelectors) {
+            try {
+                emailInput = await page.waitForSelector(selector, { timeout: 2000 });
+                if (emailInput) {
+                    console.log(`  Found email input with selector: ${selector}`);
+                    break;
+                }
+            } catch (e) {
+                // Try next selector
+            }
+        }
+
+        if (!emailInput) {
+            // Take screenshot for debugging
+            await page.screenshot({ path: 'login-page-debug.png' });
+            throw new Error('Could not find email input field. Screenshot saved to login-page-debug.png');
+        }
 
         // Fill in email
-        await page.fill('input[type="email"]', nytEmail);
-        await page.click('button[type="submit"]');
+        await page.fill(emailInput, nytEmail);
+
+        // Find and click submit button
+        const submitSelectors = [
+            'button[type="submit"]',
+            'button:has-text("Continue")',
+            'button:has-text("Log in")',
+            'button:has-text("Next")'
+        ];
+
+        for (const selector of submitSelectors) {
+            try {
+                const button = await page.$(selector);
+                if (button) {
+                    await button.click();
+                    console.log(`  Clicked submit with selector: ${selector}`);
+                    break;
+                }
+            } catch (e) {
+                // Try next selector
+            }
+        }
 
         // Wait for password field
-        await page.waitForSelector('input[type="password"]', { timeout: 10000 });
+        await page.waitForTimeout(2000);
+
+        const passwordSelectors = [
+            'input[type="password"]',
+            'input[name="password"]',
+            'input[id="password"]',
+            '#password',
+            'input[autocomplete="current-password"]'
+        ];
+
+        let passwordInput = null;
+        for (const selector of passwordSelectors) {
+            try {
+                passwordInput = await page.waitForSelector(selector, { timeout: 2000 });
+                if (passwordInput) {
+                    console.log(`  Found password input with selector: ${selector}`);
+                    break;
+                }
+            } catch (e) {
+                // Try next selector
+            }
+        }
+
+        if (!passwordInput) {
+            await page.screenshot({ path: 'password-page-debug.png' });
+            throw new Error('Could not find password input field. Screenshot saved to password-page-debug.png');
+        }
 
         // Fill in password
-        await page.fill('input[type="password"]', nytPassword);
-        await page.click('button[type="submit"]');
+        await page.fill(passwordInput, nytPassword);
 
-        // Wait for login to complete (check for redirect or successful login indicator)
+        // Click login button
+        for (const selector of submitSelectors) {
+            try {
+                const button = await page.$(selector);
+                if (button) {
+                    await button.click();
+                    console.log(`  Clicked login with selector: ${selector}`);
+                    break;
+                }
+            } catch (e) {
+                // Try next selector
+            }
+        }
+
+        // Wait for login to complete
         await page.waitForTimeout(5000);
-        console.log('  Login successful!');
+        console.log('  Login completed!');
 
         // Now navigate to the Wordle review page
         console.log('  Navigating to Wordle review page...');

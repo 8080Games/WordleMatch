@@ -14,7 +14,7 @@
 
 .wordle-container h1 {
     margin-bottom: 10px;
-    color: #333;
+    color: var(--color-text-primary);
 }
 
 .puzzle-info {
@@ -23,7 +23,7 @@
     align-items: center;
     gap: 8px;
     margin-bottom: 30px;
-    color: #666;
+    color: var(--color-text-secondary);
     font-size: 15px;
 }
 
@@ -32,13 +32,13 @@
 }
 
 .puzzle-separator {
-    color: #999;
+    color: var(--color-text-tertiary);
     font-weight: 300;
 }
 
 .puzzle-number {
     font-weight: 500;
-    color: #2563eb;
+    color: var(--color-accent-primary);
 }
 
 .entry-row {
@@ -76,38 +76,39 @@
 .letter-box {
     width: 60px;
     height: 60px;
-    border: 2px solid #ccc;
+    border: 2px solid var(--color-border);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 32px;
     font-weight: bold;
     text-transform: uppercase;
-    background-color: white;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
     transition: all 0.2s;
     cursor: pointer;
 }
 
 .letter-box.focused {
-    border-color: #2563eb;
+    border-color: var(--color-border-focus);
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
 }
 
 .letter-box.white {
-    background-color: #e8e8e8;
-    border-color: #999;
-    color: #333;
+    background-color: var(--color-game-white);
+    border-color: var(--color-game-white-border);
+    color: var(--color-game-white-text);
 }
 
 .letter-box.yellow {
-    background-color: #c9b458;
-    border-color: #c9b458;
+    background-color: var(--color-game-yellow);
+    border-color: var(--color-game-yellow);
     color: white;
 }
 
 .letter-box.green {
-    background-color: #6aaa64;
-    border-color: #6aaa64;
+    background-color: var(--color-game-green);
+    border-color: var(--color-game-green);
     color: white;
 }
 
@@ -127,7 +128,7 @@
     text-align: center;
     margin-top: 20px;
     margin-bottom: 10px;
-    color: #666;
+    color: var(--color-text-secondary);
     font-size: 14px;
     max-width: 500px;
     margin-left: auto;
@@ -137,7 +138,7 @@
 .state-button {
     width: 27px;
     height: 27px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-border);
     border-radius: 3px;
     cursor: pointer;
     font-size: 12px;
@@ -146,39 +147,39 @@
 }
 
 .state-button.yellow-btn {
-    background-color: #c9b458;
+    background-color: var(--color-game-yellow);
     color: white;
 }
 
 .state-button.yellow-btn:hover {
-    background-color: #b8a347;
+    background-color: var(--color-game-yellow-hover);
 }
 
 .state-button.green-btn {
-    background-color: #6aaa64;
+    background-color: var(--color-game-green);
     color: white;
 }
 
 .state-button.green-btn:hover {
-    background-color: #5a9a54;
+    background-color: var(--color-game-green-hover);
 }
 
 .state-button.white-btn {
-    background-color: #e8e8e8;
-    border-color: #999;
-    color: #333;
+    background-color: var(--color-game-white);
+    border-color: var(--color-game-white-border);
+    color: var(--color-game-white-text);
 }
 
 .state-button.white-btn:hover {
-    background-color: #d8d8d8;
+    background-color: var(--color-bg-tertiary);
 }
 
 .add-guess-btn {
     width: 30px;
     height: 30px;
-    border: 2px solid #2563eb;
+    border: 2px solid var(--color-accent-primary);
     border-radius: 4px;
-    background-color: #2563eb;
+    background-color: var(--color-accent-primary);
     color: white;
     font-size: 20px;
     font-weight: bold;
@@ -193,17 +194,17 @@
 }
 
 .add-guess-btn:hover {
-    background-color: #1d4ed8;
-    border-color: #1d4ed8;
+    background-color: var(--color-accent-primary-hover);
+    border-color: var(--color-accent-primary-hover);
 }
 
 .delete-guess-btn {
     width: 30px;
     height: 30px;
-    border: 1px solid #999;
+    border: 1px solid var(--color-text-tertiary);
     border-radius: 4px;
-    background-color: #f0f0f0;
-    color: #666;
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
@@ -217,8 +218,8 @@
 }
 
 .delete-guess-btn:hover {
-    background-color: #e74c3c;
-    border-color: #e74c3c;
+    background-color: var(--color-error);
+    border-color: var(--color-error);
     color: white;
 }
 
@@ -232,35 +233,35 @@
 
 .filter-btn {
     padding: 8px 20px;
-    border: 2px solid #ccc;
+    border: 2px solid var(--color-border);
     border-radius: 4px;
-    background-color: #e0e0e0;
-    color: #333;
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
     font-size: 14px;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .filter-btn.unused-btn {
-    background-color: #f0f0f0;
+    background-color: var(--color-bg-secondary);
 }
 
 .filter-btn.both-btn {
-    background-color: #c0c0c0;
+    background-color: var(--color-bg-tertiary);
 }
 
 .filter-btn.used-btn {
-    background-color: #e0e0e0;
+    background-color: var(--color-bg-tertiary);
     font-style: italic;
 }
 
 .filter-btn.active {
-    border-color: #333;
+    border-color: var(--color-text-primary);
     font-weight: bold;
 }
 
 .filter-btn:hover {
-    border-color: #666;
+    border-color: var(--color-text-secondary);
 }
 
 .results {
@@ -270,7 +271,7 @@
 .results h2 {
     font-size: 20px;
     margin-bottom: 15px;
-    color: #333;
+    color: var(--color-text-primary);
 }
 
 .word-list {
@@ -282,15 +283,16 @@
 
 .word, .used-word {
     padding: 8px 12px;
-    background-color: #f0f0f0;
+    background-color: var(--color-bg-secondary);
     border-radius: 4px;
     font-size: 16px;
+    color: var(--color-text-primary);
 }
 
 .used-word {
     font-style: italic;
-    background-color: #e0e0e0;
-    color: #666;
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-text-secondary);
 }
 
 /* Mobile responsive styles */
@@ -360,12 +362,12 @@
 .recommendations-section {
     margin: 15px 0;
     padding: 6px 10px;
-    background-color: #dbeafe;
+    background-color: var(--color-recommendations-bg);
     border-radius: 6px;
 }
 
 .hints-section {
-    background-color: #fef9c3;
+    background-color: var(--color-hints-bg);
 }
 
 .recommendations-header {
@@ -379,19 +381,19 @@
 .recommendations-label {
     font-size: 14px;
     font-weight: 600;
-    color: #64748b;
+    color: var(--color-recommendations-text);
 }
 
 .loading-indicator {
     font-size: 12px;
-    color: #64748b;
+    color: var(--color-recommendations-text);
     font-style: italic;
 }
 
 .mode-toggle {
     display: flex;
     gap: 3px;
-    background-color: #fff;
+    background-color: var(--color-bg-primary);
     border-radius: 4px;
     padding: 2px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.08);
@@ -401,7 +403,7 @@
     padding: 4px 10px;
     border: none;
     background-color: transparent;
-    color: #666;
+    color: var(--color-text-secondary);
     cursor: pointer;
     font-size: 13px;
     font-weight: 500;
@@ -410,11 +412,11 @@
 }
 
 .mode-btn:hover {
-    background-color: #f0f0f0;
+    background-color: var(--color-bg-secondary);
 }
 
 .mode-btn.active {
-    background-color: #2563eb;
+    background-color: var(--color-accent-primary);
     color: white;
 }
 
@@ -428,11 +430,11 @@
 .recommendation-item {
     display: inline-block;
     padding: 4px 10px;
-    background-color: white;
+    background-color: var(--color-bg-primary);
     border-radius: 3px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     font-size: 13px;
-    color: #1e293b;
+    color: var(--color-recommendations-text-dark);
     cursor: help;
     transition: all 0.15s;
 }
@@ -443,22 +445,22 @@
 }
 
 .recommendation-item.possible-answer {
-    border-color: #86efac;
-    background-color: #f0fdf4;
+    border-color: var(--color-possible-answer-highlight);
+    background-color: var(--color-possible-answer-bg);
 }
 
 .recommendation-item.guess-only {
-    border-color: #fde68a;
-    background-color: #fefce8;
+    border-color: var(--color-guess-only-highlight);
+    background-color: var(--color-guess-only-bg);
 }
 
 .hint-display {
     margin-top: 10px;
     padding: 10px 15px;
-    background-color: white;
+    background-color: var(--color-bg-primary);
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    color: #1e293b;
+    color: var(--color-recommendations-text-dark);
     font-size: 14px;
     line-height: 1.6;
 }
@@ -490,5 +492,53 @@
     .recommendation-item {
         font-size: 13px;
         padding: 4px 10px;
+    }
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.theme-btn {
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--color-border);
+    border-radius: 50%;
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    font-size: 22px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+}
+
+.theme-btn:hover {
+    background-color: var(--color-bg-tertiary);
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.theme-btn:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 480px) {
+    .theme-toggle {
+        top: 15px;
+        right: 15px;
+    }
+
+    .theme-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
     }
 }

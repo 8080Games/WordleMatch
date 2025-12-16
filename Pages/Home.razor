@@ -9,6 +9,12 @@
 <PageTitle>Wordle Match</PageTitle>
 
 <div class="wordle-container">
+    <div class="theme-toggle">
+        <button class="theme-btn" @onclick="ToggleTheme" title="Toggle dark mode" aria-label="Toggle dark mode">
+            @(isDarkMode ? "☀️" : "🌙")
+        </button>
+    </div>
+
     <h1>Wordle Match</h1>
     @* <div class="puzzle-info">
         <span class="puzzle-date">@userLocalDate.ToString("MMMM d, yyyy")</span>
@@ -174,6 +180,7 @@
     private List<WordleStrategyService.Recommendation>? recommendations = null;
     private StrategyMode strategyMode = StrategyMode.Off;
     private bool isLoadingRecommendations = false;
+    private bool isDarkMode = false;
 
     // Wordle game info based on user's local date
     private DateTime userLocalDate = DateTime.Today; // Uses browser's local timezone
@@ -222,6 +229,9 @@
             await JSRuntime.InvokeVoidAsync("setupKeyboardListener", dotNetRef);
             await Task.Delay(100);
             await JSRuntime.InvokeVoidAsync("focusMobileInput");
+
+            // Initialize theme based on localStorage or system preference
+            await InitializeTheme();
         }
     }
 
@@ -839,6 +849,59 @@
         {
             isLoadingRecommendations = false;
             StateHasChanged();
+        }
+    }
+
+    private async Task InitializeTheme()
+    {
+        try
+        {
+            // Check if there's a saved theme preference in localStorage
+            var savedTheme = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "theme");
+
+            if (!string.IsNullOrEmpty(savedTheme))
+            {
+                // Use saved preference
+                isDarkMode = savedTheme == "dark";
+            }
+            else
+            {
+                // Check system preference
+                var systemTheme = await JSRuntime.InvokeAsync<string>("getSystemThemePreference");
+                isDarkMode = systemTheme == "dark";
+            }
+
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error initializing theme: {ex.Message}");
+        }
+    }
+
+    private async Task ToggleTheme()
+    {
+        isDarkMode = !isDarkMode;
+        await ApplyTheme();
+    }
+
+    private async Task ApplyTheme()
+    {
+        try
+        {
+            var theme = isDarkMode ? "dark" : "light";
+
+            // Save preference to localStorage
+            await JSRuntime.InvokeVoidAsync("localStorage.setItem", "theme", theme);
+
+            // Apply theme to DOM
+            await JSRuntime.InvokeVoidAsync("setTheme", theme);
+
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error applying theme: {ex.Message}");
         }
     }
 

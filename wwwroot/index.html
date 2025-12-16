@@ -54,6 +54,44 @@
         "browserRequirements": "Requires JavaScript"
     }
     </script>
+
+    <!-- Theme Management - Must run before body renders to prevent flash -->
+    <script>
+        (function() {
+            // Get system theme preference
+            function getSystemThemePreference() {
+                return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+
+            // Set theme on html element
+            function setTheme(theme) {
+                if (theme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                }
+            }
+
+            // Apply saved theme or system preference immediately
+            const savedTheme = localStorage.getItem('theme');
+            const themeToApply = savedTheme || getSystemThemePreference();
+            setTheme(themeToApply);
+
+            // Listen for system theme changes
+            if (window.matchMedia) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                    // Only auto-switch if user hasn't set a preference
+                    if (!localStorage.getItem('theme')) {
+                        setTheme(e.matches ? 'dark' : 'light');
+                    }
+                });
+            }
+
+            // Make setTheme available globally for C# interop
+            window.setTheme = setTheme;
+            window.getSystemThemePreference = getSystemThemePreference;
+        })();
+    </script>
 </head>
 
 <body>

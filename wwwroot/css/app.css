@@ -7,22 +7,121 @@ html {
     scrollbar-gutter: stable; /* Modern - reserves space for scrollbar to prevent layout shift */
 }
 
+/* === Theme Variables === */
+:root {
+    /* Light Theme Colors */
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f0f0f0;
+    --color-bg-tertiary: #e0e0e0;
+    --color-text-primary: #333333;
+    --color-text-secondary: #666666;
+    --color-text-tertiary: #999999;
+    --color-border: #cccccc;
+    --color-border-light: #e8e8e8;
+    --color-border-focus: #2563eb;
+    --color-accent-primary: #2563eb;
+    --color-accent-primary-hover: #1d4ed8;
+    --color-accent-secondary: #0071c1;
+    --color-link: #0071c1;
+    --color-error: #e74c3c;
+    --color-success: #26b050;
+    --color-code: #c02d76;
+
+    /* Recommendations & Hints */
+    --color-recommendations-bg: #dbeafe;
+    --color-recommendations-text: #64748b;
+    --color-recommendations-text-dark: #1e293b;
+    --color-hints-bg: #fef9c3;
+    --color-possible-answer-bg: #f0fdf4;
+    --color-possible-answer-highlight: #86efac;
+    --color-guess-only-bg: #fefce8;
+    --color-guess-only-highlight: #fde68a;
+
+    /* Game State Colors */
+    --color-game-white: #e8e8e8;
+    --color-game-white-border: #999999;
+    --color-game-white-text: #333333;
+    --color-game-yellow: #c9b458;
+    --color-game-yellow-hover: #b8a347;
+    --color-game-green: #6aaa64;
+    --color-game-green-hover: #5a9a54;
+}
+
+[data-theme="dark"] {
+    /* Dark Theme Colors */
+    --color-bg-primary: #1a1a1a;
+    --color-bg-secondary: #2d2d2d;
+    --color-bg-tertiary: #3d3d3d;
+    --color-text-primary: #e5e5e5;
+    --color-text-secondary: #b0b0b0;
+    --color-text-tertiary: #808080;
+    --color-border: #4d4d4d;
+    --color-border-light: #4d4d4d;
+    --color-border-focus: #3b82f6;
+    --color-accent-primary: #3b82f6;
+    --color-accent-primary-hover: #2563eb;
+    --color-accent-secondary: #60a5fa;
+    --color-link: #60a5fa;
+    --color-error: #f87171;
+    --color-success: #4ade80;
+    --color-code: #f472b6;
+
+    /* Recommendations & Hints */
+    --color-recommendations-bg: #1e3a5f;
+    --color-recommendations-text: #94a3b8;
+    --color-recommendations-text-dark: #cbd5e1;
+    --color-hints-bg: #3d3a1f;
+    --color-possible-answer-bg: #1a2e1a;
+    --color-possible-answer-highlight: #4ade80;
+    --color-guess-only-bg: #2d2a1a;
+    --color-guess-only-highlight: #fbbf24;
+
+    /* Game State Colors - slightly brighter for contrast */
+    --color-game-white: #4d4d4d;
+    --color-game-white-border: #666666;
+    --color-game-white-text: #b0b0b0;
+    --color-game-yellow: #d4b65a;
+    --color-game-yellow-hover: #c9b458;
+    --color-game-green: #70b76a;
+    --color-game-green-hover: #6aaa64;
+}
+
+/* Smooth transitions for theme switching */
+html,
+html * {
+    transition: background-color 0.3s ease,
+                color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+/* Apply background color to html and body */
+html {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+}
+
+body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+}
+
 h1:focus {
     outline: none;
 }
 
 a, .btn-link {
-    color: #0071c1;
+    color: var(--color-link);
 }
 
 .btn-primary {
     color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    background-color: var(--color-accent-secondary);
+    border-color: var(--color-accent-primary-hover);
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+  box-shadow: 0 0 0 0.1rem var(--color-bg-primary), 0 0 0 0.25rem var(--color-border-focus);
 }
 
 .content {
@@ -30,15 +129,15 @@ a, .btn-link {
 }
 
 .valid.modified:not([type=checkbox]) {
-    outline: 1px solid #26b050;
+    outline: 1px solid var(--color-success);
 }
 
 .invalid {
-    outline: 1px solid red;
+    outline: 1px solid var(--color-error);
 }
 
 .validation-message {
-    color: red;
+    color: var(--color-error);
 }
 
 #blazor-error-ui {
@@ -63,7 +162,7 @@ a, .btn-link {
     }
 
 .blazor-error-boundary {
-    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNDkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIG92ZXJmbG93PSJoaWRkZW4iPjxkZWZzPjxjbGlwUGF0aCBpZD0iY2xpcDAiPjxyZWN0IHg9IjIzNSIgeT0iNTEiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0OSIvPjwvY2xpcFBhdGg+PC9kZWZzPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMCkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yMzUgLTUxKSI+PHBhdGggZD0iTTI2My41MDYgNTFDMjY0LjcxNyA1MSAyNjUuODEzIDUxLjQ4MzcgMjY2LjYwNiA1Mi4yNjU4TDI2Ny4wNTIgNTIuNzk4NyAyNjcuNTM5IDUzLjYyODMgMjkwLjE4NSA5Mi4xODMxIDI5MC41NDUgOTIuNzk1IDI5MC42NTYgOTIuOTk2QzI5MC44NzcgOTMuNTEzIDI5MSA5NC4wODE1IDI5MSA5NC42NzgyIDI5MSA5Ny4wNjUxIDI4OS4wMzggOTkgMjg2LjYxNyA5OUwyNDAuMzgzIDk5QzIzNy45NjMgOTkgMjM2IDk3LjA2NTEgMjM2IDk0LjY3ODIgMjM2IDk0LjM3OTkgMjM2LjAzMSA5NC4wODg2IDIzNi4wODkgOTMuODA3MkwyMzYuMzM4IDkzLjAxNjIgMjM2Ljg1OCA5Mi4xMzE0IDI1OS40NzMgNTMuNjI5NCAyNTkuOTYxIDUyLjc5ODUgMjYwLjQwNyA1Mi4yNjU4QzI2MS4yIDUxLjQ4MzcgMjYyLjI5NiA1MSAyNjMuNTA2IDUxWk0yNjMuNTg2IDY2LjAxODNDMjYwLjczNyA2Ni4wMTgzIDI1OS4zMTMgNjcuMTI0NSAyNTkuMzEzIDY5LjMzNyAyNTkuMzEzIDY5LjYxMDIgMjU5LjMzMiA2OS44NjA4IDI1OS4zNzEgNzAuMDg4N0wyNjEuNzk1IDg0LjAxNjEgMjY1LjM4IDg0LjAxNjEgMjY3LjgyMSA2OS43NDc1QzI2Ny44NiA2OS43MzA5IDI2Ny44NzkgNjkuNTg3NyAyNjcuODc5IDY5LjMxNzkgMjY3Ljg3OSA2Ny4xMTgyIDI2Ni40NDggNjYuMDE4MyAyNjMuNTg2IDY2LjAxODNaTTI2My41NzYgODYuMDU0N0MyNjEuMDQ5IDg2LjA1NDcgMjU5Ljc4NiA4Ny4zMDA1IDI1OS43ODYgODkuNzkyMSAyNTkuNzg2IDkyLjI4MzcgMjYxLjA0OSA5My41Mjk1IDI2My41NzYgOTMuNTI5NSAyNjYuMTE2IDkzLjUyOTUgMjY3LjM4NyA5Mi4yODM3IDI2Ny4zODcgODkuNzkyMSAyNjcuMzg3IDg3LjMwMDUgMjY2LjExNiA4Ni4wNTQ3IDI2My41NzYgODYuMDU0N1oiIGZpbGw9IiNGRkU1MDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvZz48L3N2Zz4=) no-repeat 1rem/1.8rem, #b32121;
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNDkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIG92ZXJmbG93PSJoaWRkZW4iPjxkZWZzPjxjbGlwUGF0aCBpZD0iY2xpcDAiPjxyZWN0IHg9IjIzNSIgeT0iNTEiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0OSIvPjwvY2xpcFBhdGg+PC9kZWZzPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMCkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yMzUgLTUxKSI+PHBhdGggZD0iTTI2My41MDYgNTFDMjY0LjcxNyA1MSAyNjUuODEzIDUxLjQ4MzcgMjY2LjYwNiA1Mi4yNjU4TDI2Ny4wNTIgNTIuNzk4NyAyNjcuNTM5IDUzLjYyODMgMjkwLjE4NSA5Mi4xODMxIDI5MC41NDUgOTIuNzk1IDI5MC42NTYgOTIuOTk2QzI5MC44NzcgOTMuNTEzIDI5MSA5NC4wODE1IDI5MSA5NC42NzgyIDI5MSA5Ny4wNjUxIDI4OS4wMzggOTkgMjg2LjYxNyA5OUwyNDAuMzgzIDk5QzIzNy45NjMgOTkgMjM2IDk3LjA2NTEgMjM2IDk0LjY3ODIgMjM2IDk0LjM3OTkgMjM2LjAzMSA5NC4wODg2IDIzNi4wODkgOTMuODA3MkwyMzYuMzM4IDkzLjAxNjIgMjM2Ljg1OCA5Mi4xMzE0IDI1OS40NzMgNTMuNjI5NCAyNTkuOTYxIDUyLjc5ODUgMjYwLjQwNyA1Mi4yNjU4QzI2MS4yIDUxLjQ4MzcgMjYyLjI5NiA1MSAyNjMuNTA2IDUxWk0yNjMuNTg2IDY2LjAxODNDMjYwLjczNyA2Ni4wMTgzIDI1OS4zMTMgNjcuMTI0NSAyNTkuMzEzIDY5LjMzNyAyNTkuMzEzIDY5LjYxMDIgMjU5LjMzMiA2OS44NjA4IDI1OS4zNzEgNzAuMDg4N0wyNjEuNzk1IDg0LjAxNjEgMjY1LjM4IDg0LjAxNjEgMjY3LjgyMSA2OS43NDc1QzI2Ny44NiA2OS43MzA5IDI2Ny44NzkgNjkuNTg3NyAyNjcuODc5IDY5LjMxNzkgMjY3Ljg3OSA2Ny4xMTgyIDI2Ni40NDggNjYuMDE4MyAyNjMuNTg2IDY2LjAxODNaTTI2My41NzYgODYuMDU0N0MyNjEuMDQ5IDg2LjA1NDcgMjU5Ljc4NiA4Ny4zMDA1IDI1OS43ODYgODkuNzkyMSAyNTkuNzg2IDkyLjI4MzcgMjYxLjA0OSA5My41Mjk1IDI2My41NzYgOTMuNTI5NSAyNjYuMTE2IDkzLjUyOTUgMjY3LjM4NyA5Mi4yODM3IDI2Ny4zODcgODkuNzkyMSAyNjcuMzg3IDg3LjMwMDUgMjY2LjExNiA4Ni4wNTQ3IDI2My41NzYgODYuMDU0N1oiIGZpbGw9IiNGRkU1MDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvZz48L3N2Zz4=) no-repeat 1rem/1.8rem, var(--color-error);
     padding: 1rem 1rem 1rem 3.7rem;
     color: white;
 }
@@ -82,14 +181,14 @@ a, .btn-link {
 
     .loading-progress circle {
         fill: none;
-        stroke: #e0e0e0;
+        stroke: var(--color-bg-tertiary);
         stroke-width: 0.6rem;
         transform-origin: 50% 50%;
         transform: rotate(-90deg);
     }
 
         .loading-progress circle:last-child {
-            stroke: #1b6ec2;
+            stroke: var(--color-accent-secondary);
             stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
             transition: stroke-dasharray 0.05s ease-in-out;
         }
@@ -108,7 +207,7 @@ a, .btn-link {
     }
 
 code {
-    color: #c02d76;
+    color: var(--color-code);
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {

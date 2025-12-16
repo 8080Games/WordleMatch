@@ -58,6 +58,50 @@
 
 <body>
     <div id="app">
+        <!-- Static shell - visible immediately while WASM loads -->
+        <div class="wordle-container">
+            <h1>Wordle Match</h1>
+
+            <input type="text" id="mobile-keyboard-input" class="mobile-keyboard-input" inputmode="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" />
+
+            <!-- Current entry row with 5 letter boxes -->
+            <div class="entry-row">
+                <div class="letter-boxes" id="letter-boxes-container">
+                    <div class="letter-box-container">
+                        <div class="letter-box"></div>
+                    </div>
+                    <div class="letter-box-container">
+                        <div class="letter-box"></div>
+                    </div>
+                    <div class="letter-box-container">
+                        <div class="letter-box"></div>
+                    </div>
+                    <div class="letter-box-container">
+                        <div class="letter-box"></div>
+                    </div>
+                    <div class="letter-box-container">
+                        <div class="letter-box"></div>
+                    </div>
+                </div>
+                <button class="add-guess-btn" title="add new guess">+</button>
+            </div>
+
+            <div class="instructions">
+                Type letters from your Wordle guesses. Lowercase = excluded letter (white), Uppercase = letter in word but wrong position (yellow). Click the button to cycle through states. Press Space to leave a box empty (wildcard).
+            </div>
+
+            <div class="recommendations-section">
+                <div class="recommendations-header">
+                    <span class="recommendations-label">Recommendations:</span>
+                    <div class="mode-toggle">
+                        <button class="mode-btn active">Off</button>
+                        <button class="mode-btn">Hard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading indicator - appears below static content -->
         <svg class="loading-progress">
             <circle r="40%" cx="50%" cy="50%" />
             <circle r="40%" cx="50%" cy="50%" />

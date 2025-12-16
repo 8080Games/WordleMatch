@@ -63,7 +63,7 @@
                 </div>
             }
         </div>
-        <button class="add-guess-btn" tabindex="6" @onclick="AddGuess" title="add new guess">+</button>
+        <button class="add-guess-btn" id="add-guess-btn" tabindex="6" @onclick="AddGuess" title="add new guess">+</button>
     </div>
 
     <div class="instructions">
@@ -403,9 +403,9 @@
         }
     }
 
-    private void MoveToNextEditablePosition()
+    private async void MoveToNextEditablePosition()
     {
-        // Move to next non-locked box if not at the end, or clear focus if at the end
+        // Move to next non-locked box if not at the end, or focus + button if at the end
         int nextIndex = focusedIndex + 1;
         while (nextIndex < 5 && lockedPositions[nextIndex])
         {
@@ -419,6 +419,8 @@
         else
         {
             focusedIndex = -1;
+            // Focus the + button after filling all boxes
+            await JSRuntime.InvokeVoidAsync("focusAddGuessButton");
         }
     }
 

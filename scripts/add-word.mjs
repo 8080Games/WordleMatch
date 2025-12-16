@@ -227,26 +227,39 @@ async function addWord(word, dateStr = null) {
 
     console.log(`✓ Added "${word}" to used-words.csv`);
 
-    // Prompt for hints
-    console.log(`\n📝 Add hints for "${word}":`);
-    console.log(`   (Press Enter to skip any hint)\n`);
-
-    const synonym = await promptUser(`Synonym (one word): `);
+    // Auto-load hints from source file
+    let hintsAdded = false;
+    let synonym = '';
     let haiku = '';
 
-    if (synonym) {
-        haiku = await promptUser(`Haiku (three lines, separate with " / "): `);
-    }
+    try {
+        const hintsSourcePath = join(__dirname, '../wwwroot/55ee0527d71c36d8-wordle-hints.csv');
+        const hintsSourceContent = readFileSync(hintsSourcePath, 'utf-8');
+        const lines = hintsSourceContent.split('\n');
 
-    // Add hints if provided
-    let hintsAdded = false;
-    if (synonym && haiku) {
-        await addWordHints(word, synonym, haiku);
-        hintsAdded = true;
-    } else if (synonym || haiku) {
-        console.log(`⚠️  Skipping hints (both synonym and haiku are required)`);
-    } else {
-        console.log(`  Skipped hints`);
+        for (const line of lines) {
+            if (line.startsWith('word,')) continue; // Skip header
+
+            const parts = line.split(',', 3);
+            if (parts.length >= 3) {
+                const hintWord = parts[0].trim().toLowerCase();
+                if (hintWord === word.toLowerCase()) {
+                    synonym = parts[1].trim();
+                    haiku = parts[2].trim().replace(/^"|"$/g, ''); // Remove surrounding quotes
+
+                    console.log(`\n📝 Found hints for "${word}" in source file`);
+                    await addWordHints(word, synonym, haiku);
+                    hintsAdded = true;
+                    break;
+                }
+            }
+        }
+
+        if (!hintsAdded) {
+            console.log(`\n⚠️  No hints found for "${word}" in source file`);
+        }
+    } catch (error) {
+        console.log(`\n⚠️  Could not load hints source file: ${error.message}`);
     }
 
     // Show summary

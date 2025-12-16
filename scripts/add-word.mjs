@@ -57,30 +57,7 @@ async function addWord(word, dateStr = null, autoCommit = false) {
         throw new Error(`Word must contain only letters. Got: ${word}`);
     }
 
-    // Determine date
-    let targetDate;
-    if (dateStr) {
-        targetDate = parseDate(dateStr);
-    } else {
-        // Default to tomorrow
-        targetDate = new Date();
-        targetDate.setDate(targetDate.getDate() + 1);
-    }
-
-    // Calculate game number
-    const gameNumber = calculateGameNumber(targetDate);
-    const dateFormatted = targetDate.toLocaleDateString('en-US', {
-        month: 'numeric',
-        day: 'numeric',
-        year: 'numeric'
-    });
-
-    console.log(`\nAdding word to used-words.csv:`);
-    console.log(`  Word: ${word}`);
-    console.log(`  Date: ${dateFormatted}`);
-    console.log(`  Game: #${gameNumber}\n`);
-
-    // Read existing CSV
+    // Read existing CSV first to determine default date
     const csvPath = join(__dirname, '../wwwroot/used-words.csv');
     const csvContent = readFileSync(csvPath, 'utf-8');
     const lines = csvContent.trim().split('\n');
@@ -96,6 +73,43 @@ async function addWord(word, dateStr = null, autoCommit = false) {
             entries.push({ word: existingWord, gameNumber: existingGameNumber, date: existingDate });
         }
     }
+
+    // Determine date and game number
+    let targetDate;
+    let gameNumber;
+
+    if (dateStr) {
+        // User specified a date
+        targetDate = parseDate(dateStr);
+        gameNumber = calculateGameNumber(targetDate);
+    } else {
+        // Default to next game number after the last entry
+        if (entries.length > 0) {
+            const maxGameNumber = Math.max(...entries.map(e => e.gameNumber));
+            gameNumber = maxGameNumber + 1;
+            // Calculate date from game number
+            targetDate = new Date(WORDLE_START_DATE);
+            targetDate.setDate(targetDate.getDate() + gameNumber);
+            console.log(`  Defaulting to next game after #${maxGameNumber}`);
+        } else {
+            // No entries yet, default to tomorrow
+            targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + 1);
+            gameNumber = calculateGameNumber(targetDate);
+            console.log(`  No entries found, defaulting to tomorrow`);
+        }
+    }
+
+    const dateFormatted = targetDate.toLocaleDateString('en-US', {
+        month: 'numeric',
+        day: 'numeric',
+        year: 'numeric'
+    });
+
+    console.log(`\nAdding word to used-words.csv:`);
+    console.log(`  Word: ${word}`);
+    console.log(`  Date: ${dateFormatted}`);
+    console.log(`  Game: #${gameNumber}\n`);
 
     // Check for duplicates - be strict
     const duplicateByWord = entries.find(e => e.word === word);

@@ -37,15 +37,17 @@ Where `<command>` is one of:
 
 - **word** (required): 5-letter word to add (case insensitive)
 - **date** (optional): Date in `YYYY-MM-DD` or `MM/DD/YYYY` format
-  - If omitted, uses tomorrow's date
+  - If omitted, uses the **next sequential game** (last game number + 1)
+  - Falls back to tomorrow if file is empty
 - **--commit** (optional): Automatically commit and push changes
 
 ## Examples
 
-### Add tomorrow's word
+### Add next word (auto-detects next game number)
 ```bash
 npm run add TRUCK
 # or: add-word TRUCK
+# Automatically adds for the next game after the last entry in the file
 ```
 
 ### Add word for specific date

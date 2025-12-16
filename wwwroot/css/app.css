@@ -2,6 +2,11 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+html {
+    overflow-y: scroll; /* Fallback - always shows scrollbar for older browsers */
+    scrollbar-gutter: stable; /* Modern - reserves space for scrollbar to prevent layout shift */
+}
+
 h1:focus {
     outline: none;
 }

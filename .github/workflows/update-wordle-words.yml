@@ -42,9 +42,9 @@ jobs:
       with:
         name: debug-files
         path: |
-          scripts/login-page-debug.png
-          scripts/login-page-debug.html
-          scripts/password-page-debug.png
+          login-page-debug.png
+          login-page-debug.html
+          password-page-debug.png
         if-no-files-found: ignore
 
     - name: Commit and push if changed

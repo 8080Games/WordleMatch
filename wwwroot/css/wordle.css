@@ -494,7 +494,7 @@
 
 .hint-display .reveal-confirm-btn {
     padding: 8px 16px;
-    background-color: #ff9800;
+    background-color: var(--color-accent-primary);
     color: white;
     border: none;
     border-radius: 4px;
@@ -505,7 +505,7 @@
 }
 
 .hint-display .reveal-confirm-btn:hover {
-    background-color: #f57c00;
+    background-color: var(--color-accent-primary-hover);
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }

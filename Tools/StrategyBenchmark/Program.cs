@@ -1,4 +1,5 @@
 using WordleHelper.Services;
+using WordleHelper.Services.Strategies;
 using static WordleHelper.Services.WordleFilterService;
 
 namespace StrategyBenchmark;
@@ -9,9 +10,15 @@ class Program
     {
         if (args.Length < 2)
         {
-            Console.WriteLine("Usage: StrategyBenchmark <start_game_number> <end_game_number> [hard_mode]");
+            Console.WriteLine("Usage: StrategyBenchmark <start_game_number> <end_game_number> [hard_mode] [--strategy <name>]");
             Console.WriteLine("Example: StrategyBenchmark 1 100");
             Console.WriteLine("Example: StrategyBenchmark 1 100 hard");
+            Console.WriteLine("Example: StrategyBenchmark 1 100 hard --strategy minimax");
+            Console.WriteLine();
+            Console.WriteLine("Available strategies:");
+            Console.WriteLine("  entropy    - Shannon Entropy (default)");
+            Console.WriteLine("  minimax    - Minimax (minimize worst case)");
+            Console.WriteLine("  lookahead  - Two-step lookahead");
             return;
         }
 
@@ -19,14 +26,47 @@ class Program
         int endGame = int.Parse(args[1]);
         bool hardMode = args.Length > 2 && args[2].ToLower() == "hard";
 
-        Console.WriteLine($"Benchmarking recommendation engine:");
-        Console.WriteLine($"  Games: {startGame} to {endGame}");
-        Console.WriteLine($"  Mode: {(hardMode ? "HARD" : "NORMAL")}");
-        Console.WriteLine();
+        // Parse strategy argument
+        string strategyName = "entropy"; // Default
+        string wordsFile = "used-words.csv"; // Default
+        for (int i = 0; i < args.Length - 1; i++)
+        {
+            if (args[i] == "--strategy" && i + 1 < args.Length)
+            {
+                strategyName = args[i + 1].ToLower();
+            }
+            if (args[i] == "--words-file" && i + 1 < args.Length)
+            {
+                wordsFile = args[i + 1];
+            }
+        }
 
         // Initialize services
         var filterService = new WordleFilterService();
-        var strategyService = new WordleStrategyService(filterService);
+        var strategyService = new BenchmarkStrategyService(filterService);
+
+        // Set strategy based on command-line argument
+        IWordleStrategy strategy;
+        switch (strategyName)
+        {
+            case "minimax":
+                strategy = new MinimaxStrategy();
+                break;
+            case "lookahead":
+                strategy = new LookaheadStrategy(filterService);
+                break;
+            case "entropy":
+            default:
+                strategy = new EntropyStrategy();
+                break;
+        }
+        strategyService.SetStrategy(strategy);
+
+        Console.WriteLine($"Benchmarking recommendation engine:");
+        Console.WriteLine($"  Games: {startGame} to {endGame}");
+        Console.WriteLine($"  Mode: {(hardMode ? "HARD" : "NORMAL")}");
+        Console.WriteLine($"  Strategy: {strategy.GetStrategyName()}");
+        Console.WriteLine();
 
         // Load word lists from wwwroot (search upward from current directory)
         var wwwrootPath = FindWwwrootPath();
@@ -61,7 +101,7 @@ class Program
         }
 
         // Load used words to get game number -> answer mapping
-        var usedWordsPath = Path.Combine(wwwrootPath, "used-words.csv");
+        var usedWordsPath = Path.Combine(wwwrootPath, wordsFile);
         var usedWords = LoadUsedWords(usedWordsPath);
 
         Console.WriteLine($"✓ Loaded {usedWords.Count} used words");
@@ -145,13 +185,13 @@ class Program
         }
 
         // Save detailed results to CSV
-        var resultsPath = $"benchmark_results_{startGame}_{endGame}_{(hardMode ? "hard" : "normal")}.csv";
+        var resultsPath = $"benchmark_results_{startGame}_{endGame}_{(hardMode ? "hard" : "normal")}_{strategyName}.csv";
         SaveResults(results, resultsPath);
         Console.WriteLine($"Detailed results saved to: {resultsPath}");
     }
 
     static GameResult PlayGame(
-        WordleStrategyService strategyService,
+        BenchmarkStrategyService strategyService,
         WordleFilterService filterService,
         string answer,
         bool hardMode,

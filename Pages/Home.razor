@@ -16,11 +16,6 @@
     </div>
 
     <h1>Wordle Match</h1>
-    @* <div class="puzzle-info">
-        <span class="puzzle-date">@userLocalDate.ToString("MMMM d, yyyy")</span>
-        <span class="puzzle-separator">•</span>
-        <span class="puzzle-number">Puzzle #@currentWordleGameNumber</span>
-    </div> *@
 
     <input type="text" id="mobile-keyboard-input" class="mobile-keyboard-input" inputmode="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" />
 
@@ -76,6 +71,15 @@
         Type letters from your Wordle guesses. Lowercase = excluded letter (white), Uppercase = letter in word but wrong position (yellow). Click the button to cycle through states. Press Space to leave a box empty (wildcard).
     </div>
 
+    @if (!string.IsNullOrEmpty(currentWordleWord))
+    {
+        <div class="puzzle-info">
+            <span class="puzzle-date">@userLocalDate.ToString("MMMM d, yyyy")</span>
+            <span class="puzzle-separator">•</span>
+            <span class="puzzle-number">Puzzle #@currentWordleGameNumber</span>
+        </div>
+    }
+
     <div class="recommendations-section">
         <div class="recommendations-header">
             <span class="recommendations-label">Recommendations:</span>
@@ -109,7 +113,7 @@
     {
         <div class="recommendations-section hints-section">
             <div class="recommendations-header">
-                <span class="recommendations-label">Hints for @userLocalDate.ToString("MMMM d, yyyy") (#@currentWordleGameNumber):</span>
+                <span class="recommendations-label">Hints:</span>
                 <div class="mode-toggle">
                     <button class="mode-btn @(selectedHint == HintType.Vowels ? "active" : "")" @onclick="() => SetHint(HintType.Vowels)">Vowels</button>
                     <button class="mode-btn @(selectedHint == HintType.Synonym ? "active" : "")" @onclick="() => SetHint(HintType.Synonym)">Synonym</button>

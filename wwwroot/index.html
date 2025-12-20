@@ -175,6 +175,11 @@
     <script>
         window.setupKeyboardListener = function(dotNetHelper) {
             document.addEventListener('keydown', function(event) {
+                // Ignore events from the mobile keyboard input
+                if (event.target && event.target.id === 'mobile-keyboard-input') {
+                    return;
+                }
+
                 const key = event.key;
                 // Only accept single character keys (a-z, A-Z, or space)
                 if (key.length === 1 && ((key >= 'a' && key <= 'z') || (key >= 'A' && key <= 'Z') || key === ' ')) {

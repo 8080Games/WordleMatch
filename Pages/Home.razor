@@ -99,7 +99,7 @@
             else if (strategyMode != StrategyMode.Off && recommendations != null && recommendations.Any())
             {
                 <div class="recommendations-list">
-                    @foreach (var rec in recommendations.Take(3))
+                    @foreach (var rec in GetDisplayRecommendations())
                     {
                         <span class="recommendation-item @(rec.IsPossibleAnswer ? "possible-answer" : "guess-only")"
                               title="Score: @rec.Score.ToString("F2") bits">@rec.Word.ToUpper()</span>
@@ -236,6 +236,30 @@
         Off,
         Normal,
         Hard
+    }
+
+    private IEnumerable<WordleStrategyService.Recommendation> GetDisplayRecommendations()
+    {
+        if (recommendations == null || !recommendations.Any())
+            return Enumerable.Empty<WordleStrategyService.Recommendation>();
+
+        var top3 = recommendations.Take(3).ToList();
+
+        // Check if any of the top 3 are solution words
+        if (top3.Any(r => r.IsPossibleAnswer))
+            return top3;
+
+        // If none of the top 3 are solution words, find the first solution word in positions 4-5
+        var solutionWord = recommendations.Skip(3).Take(2).FirstOrDefault(r => r.IsPossibleAnswer);
+
+        if (solutionWord != null)
+        {
+            // Replace the 3rd recommendation with the solution word
+            return new[] { top3[0], top3[1], solutionWord };
+        }
+
+        // No solution words in top 5, return top 3 as-is
+        return top3;
     }
 
     protected override async Task OnInitializedAsync()

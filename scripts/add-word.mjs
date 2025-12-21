@@ -175,11 +175,11 @@ async function addWord(word, dateStr = null) {
         }
     }
 
-    const dateFormatted = targetDate.toLocaleDateString('en-US', {
-        month: 'numeric',
-        day: 'numeric',
-        year: 'numeric'
-    });
+    // Format date consistently without timezone issues
+    const month = targetDate.getMonth() + 1;
+    const day = targetDate.getDate();
+    const year = targetDate.getFullYear();
+    const dateFormatted = `${month}/${day}/${year}`;
 
     console.log(`\nAdding word to used-words.csv:`);
     console.log(`  Word: ${word}`);

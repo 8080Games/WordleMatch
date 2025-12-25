@@ -35,7 +35,9 @@ public class WordleFilterService
         foreach (var guess in guesses)
         {
             if (!MatchesGuess(word, guess))
+            {
                 return false;
+            }
         }
         return true;
     }
@@ -71,15 +73,21 @@ public class WordleFilterService
             if (guess.States[i] == LetterState.Green)
             {
                 if (word[i] != char.ToLower(guess.Letters[i]))
+                {
                     return false;
+                }
             }
             else if (guess.States[i] == LetterState.Yellow)
             {
                 char letter = char.ToLower(guess.Letters[i]);
                 if (!word.Contains(letter))
+                {
                     return false;
+                }
                 if (word[i] == letter)
+                {
                     return false;
+                }
             }
         }
 
@@ -92,13 +100,17 @@ public class WordleFilterService
             {
                 // There are green/yellow instances, so word should have exactly that many
                 if (actualCount != greenYellowCount[letter])
+                {
                     return false;
+                }
             }
             else
             {
                 // No green/yellow instances, so word should not contain this letter at all
                 if (actualCount > 0)
+                {
                     return false;
+                }
             }
         }
 
@@ -110,7 +122,9 @@ public class WordleFilterService
                 // No white instance means word should have AT LEAST this many
                 int actualCount = word.Count(c => c == letter);
                 if (actualCount < minCount)
+                {
                     return false;
+                }
             }
         }
 

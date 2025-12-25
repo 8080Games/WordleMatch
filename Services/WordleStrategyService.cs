@@ -216,9 +216,19 @@ public class WordleStrategyService
     {
         _usedWords = usedWords;
 
-        // Reclassify any used words that were marked as possible answers
-        // If cutoffGameNumber is provided, only words used BEFORE that game number are treated as used
-        // This allows treating future words (or words from the cutoff date onwards) as still available
+        // First, reset all words in the usedWords dictionary back to their original state (possible answers)
+        // This allows re-loading with a different cutoff (e.g., when switching between historical puzzles)
+        foreach (var wordEntry in _allWords)
+        {
+            if (_usedWords.ContainsKey(wordEntry.Word))
+            {
+                // Reset to original state: words from answer-words.txt should be possible answers
+                // We can identify these as words that are in _usedWords (which only contains answer words)
+                wordEntry.IsPossibleAnswer = true;
+            }
+        }
+
+        // Now apply the filtering logic based on cutoff
         foreach (var wordEntry in _allWords)
         {
             if (wordEntry.IsPossibleAnswer && _usedWords.ContainsKey(wordEntry.Word))

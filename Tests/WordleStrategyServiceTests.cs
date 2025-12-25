@@ -569,6 +569,62 @@ public class WordleStrategyServiceTests
         public bool IsPossibleAnswer { get; set; }
     }
 
+    [Fact]
+    public void HistoricalPuzzle_Puzzle0_ShowsAllMatchingWords()
+    {
+        // Arrange: Load used words and set cutoff to puzzle 0
+        var usedWords = new Dictionary<string, (int gameNumber, string date)>
+        {
+            { "cigar", (0, "6/19/2021") },
+            { "flair", (303, "4/18/2022") },
+            { "chair", (1545, "9/11/2025") }
+            // vicar is not in used-words.csv, so it's an unused word
+        };
+
+        _service.LoadUsedWords(usedWords, cutoffGameNumber: 0);
+
+        // Create guesses matching the user's scenario
+        // SANER: yellow A (pos 1), green R (pos 4)
+        var guess1 = new Guess(
+            new[] { 's', 'a', 'n', 'e', 'r' },
+            new[] { LetterState.White, LetterState.Yellow, LetterState.White,
+                   LetterState.White, LetterState.Green }
+        );
+
+        // ARMOR: yellow A (pos 0), green R (pos 4)
+        var guess2 = new Guess(
+            new[] { 'a', 'r', 'm', 'o', 'r' },
+            new[] { LetterState.Yellow, LetterState.White, LetterState.White,
+                   LetterState.White, LetterState.Green }
+        );
+
+        var guesses = new List<Guess> { guess1, guess2 };
+
+        // Act: Get recommendations in hard mode
+        var recommendations = _service.GetRecommendationsQuick(guesses, hardMode: true, topN: 5);
+
+        // Assert: All 4 words should be returned as possible answers
+        _testOutputHelper.WriteLine($"Recommendations count: {recommendations.Count}");
+        foreach (var rec in recommendations)
+        {
+            _testOutputHelper.WriteLine($"  {rec.Word}: IsPossibleAnswer={rec.IsPossibleAnswer}, Score={rec.Score:F2}");
+        }
+
+        // All 4 words should be marked as possible answers (even if not all in top 5)
+        var words = recommendations.Select(r => r.Word).ToList();
+
+        // These 3 should definitely be in the top 5
+        Assert.Contains("chair", words);
+        Assert.Contains("cigar", words);
+        Assert.Contains("vicar", words);
+
+        // Verify they're all marked as possible answers
+        Assert.All(recommendations.Where(r => new[] { "chair", "cigar", "vicar" }.Contains(r.Word)),
+            r => Assert.True(r.IsPossibleAnswer, $"{r.Word} should be a possible answer"));
+
+        Assert.True(recommendations.Count >= 3, $"Expected at least 3 recommendations, got {recommendations.Count}");
+    }
+
     // Helper method to access private GetPattern method via reflection
     private string InvokeGetPattern(string guess, string answer)
     {

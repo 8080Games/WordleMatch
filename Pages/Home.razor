@@ -259,16 +259,28 @@
         if (recommendations == null || !recommendations.Any())
             return Enumerable.Empty<WordleStrategyService.Recommendation>();
 
-        // If there are 3 or fewer possible answers, show all of them
+        // If there are 3 or fewer possible answers, ensure all of them are shown
         var possibleAnswers = recommendations.Where(r => r.IsPossibleAnswer).ToList();
         if (possibleAnswers.Count <= 3 && possibleAnswers.Count > 0)
-            return possibleAnswers;
+        {
+            // Get top 3 by score (might include strategic guess-only words)
+            var top3 = recommendations.Take(3).ToList();
 
-        var top3 = recommendations.Take(3).ToList();
+            // Combine top 3 with all possible answers, remove duplicates, maintain score order
+            var combined = top3.Concat(possibleAnswers)
+                .GroupBy(r => r.Word)
+                .Select(g => g.First())
+                .OrderByDescending(r => r.Score)
+                .ToList();
+
+            return combined;
+        }
+
+        var top3Default = recommendations.Take(3).ToList();
 
         // Check if any of the top 3 are solution words
-        if (top3.Any(r => r.IsPossibleAnswer))
-            return top3;
+        if (top3Default.Any(r => r.IsPossibleAnswer))
+            return top3Default;
 
         // If none of the top 3 are solution words, find the first solution word in positions 4-5
         var solutionWord = recommendations.Skip(3).Take(2).FirstOrDefault(r => r.IsPossibleAnswer);
@@ -276,11 +288,11 @@
         if (solutionWord != null)
         {
             // Replace the 3rd recommendation with the solution word
-            return new[] { top3[0], top3[1], solutionWord };
+            return new[] { top3Default[0], top3Default[1], solutionWord };
         }
 
         // No solution words in top 5, return top 3 as-is
-        return top3;
+        return top3Default;
     }
 
     protected override async Task OnInitializedAsync()
@@ -471,6 +483,10 @@
 
         // Reset the game with the new date
         CalculateCurrentWordleGame();
+
+        // Reload used words with the new game number to update available answer words
+        StrategyService.LoadUsedWords(usedWords, currentWordleGameNumber);
+
         LookupCurrentWordHints();
         FilterWords();
         StateHasChanged();

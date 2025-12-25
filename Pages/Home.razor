@@ -110,8 +110,9 @@
                 <div class="recommendations-list">
                     @foreach (var rec in GetDisplayRecommendations())
                     {
+                        var wordType = rec.IsPossibleAnswer ? "Potential answer" : "Guess only word";
                         <span class="recommendation-item @(rec.IsPossibleAnswer ? "possible-answer" : "guess-only")"
-                              title="Score: @rec.Score.ToString("F2") bits">@rec.Word.ToUpper()</span>
+                              title="Score: @rec.Score.ToString("F2") bits&#10;@wordType">@rec.Word.ToUpper()</span>
                     }
                 </div>
             }

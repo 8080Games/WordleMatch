@@ -1,48 +1,59 @@
 @if (IsOpen)
 {
     <div class="calendar-modal-backdrop" @onclick="HandleBackdropClick">
-        <div class="calendar-modal" @onclick:stopPropagation="true">
+        <div class="calendar-modal puzzle-selector" @onclick:stopPropagation="true">
             <div class="calendar-header">
-                <button class="calendar-nav-button" @onclick="PreviousMonth" title="Previous month">
-                    <span class="material-icons">chevron_left</span>
-                </button>
-                <h3>@displayMonth.ToString("MMMM yyyy")</h3>
-                <button class="calendar-nav-button" @onclick="NextMonth" title="Next month">
-                    <span class="material-icons">chevron_right</span>
-                </button>
+                <h3>Select a Puzzle</h3>
             </div>
 
-            <div class="calendar-grid">
-                <!-- Day headers -->
-                @foreach (var day in new[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" })
-                {
-                    <div class="calendar-day-header">@day</div>
-                }
+            <div class="puzzle-selector-content">
+                <div class="puzzle-input-group">
+                    <label for="puzzle-number">Puzzle #:</label>
+                    <input type="number"
+                           id="puzzle-number"
+                           class="puzzle-number-input"
+                           min="0"
+                           max="@maxGameNumber"
+                           @bind="selectedGameNumber"
+                           @bind:event="oninput"
+                           @onchange="UpdateFromInput" />
+                </div>
 
-                <!-- Calendar days -->
-                @foreach (var day in GetCalendarDays())
-                {
-                    @if (day.HasValue)
+                <div class="puzzle-slider-group">
+                    <input type="range"
+                           class="puzzle-slider"
+                           min="0"
+                           max="@maxGameNumber"
+                           @bind="selectedGameNumber"
+                           @bind:event="oninput"
+                           @onchange="UpdateFromSlider" />
+                    <div class="slider-labels">
+                        <span>0</span>
+                        <span>@maxGameNumber</span>
+                    </div>
+                </div>
+
+                <div class="puzzle-info">
+                    @if (selectedGameNumber >= 0 && selectedGameNumber <= maxGameNumber)
                     {
-                        var date = new DateTime(displayMonth.Year, displayMonth.Month, day.Value);
-                        var isSelected = date.Date == SelectedDate.Date;
-                        var hasPuzzle = HasPuzzleForDate(date);
-                        var isDisabled = !hasPuzzle || date > DateTime.Today || date < WordleStartDate;
-                        var cssClass = $"calendar-day {(isSelected ? "selected" : "")} {(hasPuzzle ? "has-puzzle" : "")} {(isDisabled ? "disabled" : "")}";
+                        var date = GetDateForGameNumber(selectedGameNumber);
 
-                        <div class="@cssClass" @onclick="() => SelectDate(date)" title="@GetDateTitle(date)">
-                            @day.Value
+                        <div class="puzzle-date-display">
+                            <strong>Date:</strong> @date.ToString("MMMM d, yyyy")
                         </div>
                     }
-                    else
-                    {
-                        <div class="calendar-day empty"></div>
-                    }
-                }
+                </div>
+
+                <div class="quick-actions">
+                    <button class="quick-action-btn" @onclick="JumpToFirst">First</button>
+                    <button class="quick-action-btn" @onclick="JumpToRandom">Random</button>
+                    <button class="quick-action-btn" @onclick="JumpToToday">Today</button>
+                </div>
             </div>
 
             <div class="calendar-footer">
-                <button class="calendar-close-button" @onclick="CloseModal">Close</button>
+                <button class="calendar-close-button secondary" @onclick="CloseModal">Cancel</button>
+                <button class="calendar-close-button primary" @onclick="SelectPuzzle">Play Puzzle</button>
             </div>
         </div>
     </div>
@@ -64,73 +75,67 @@
     [Parameter]
     public Dictionary<string, (int gameNumber, string date)> UsedWords { get; set; } = new();
 
-    private DateTime displayMonth;
     private static readonly DateTime WordleStartDate = new DateTime(2021, 6, 19);
+    private int selectedGameNumber = 0;
+    private int maxGameNumber = 0;
 
     protected override void OnParametersSet()
     {
-        displayMonth = new DateTime(SelectedDate.Year, SelectedDate.Month, 1);
+        // Calculate current max game number (today's puzzle)
+        maxGameNumber = (DateTime.Today - WordleStartDate).Days;
+
+        // Set selected game number based on SelectedDate
+        selectedGameNumber = (SelectedDate.Date - WordleStartDate).Days;
+
+        // Ensure it's within bounds
+        if (selectedGameNumber < 0) selectedGameNumber = 0;
+        if (selectedGameNumber > maxGameNumber) selectedGameNumber = maxGameNumber;
     }
 
-    private void PreviousMonth()
+    private DateTime GetDateForGameNumber(int gameNumber)
     {
-        displayMonth = displayMonth.AddMonths(-1);
+        return WordleStartDate.AddDays(gameNumber);
     }
 
-    private void NextMonth()
+    private string GetWordForGameNumber(int gameNumber)
     {
-        displayMonth = displayMonth.AddMonths(1);
-    }
-
-    private List<int?> GetCalendarDays()
-    {
-        var days = new List<int?>();
-        var firstDayOfMonth = new DateTime(displayMonth.Year, displayMonth.Month, 1);
-        var dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
-
-        // Add empty cells for days before the month starts
-        for (int i = 0; i < dayOfWeek; i++)
-        {
-            days.Add(null);
-        }
-
-        // Add all days in the month
-        var daysInMonth = DateTime.DaysInMonth(displayMonth.Year, displayMonth.Month);
-        for (int day = 1; day <= daysInMonth; day++)
-        {
-            days.Add(day);
-        }
-
-        return days;
-    }
-
-    private bool HasPuzzleForDate(DateTime date)
-    {
-        var gameNumber = (date.Date - WordleStartDate).Days;
-        return UsedWords.Values.Any(w => w.gameNumber == gameNumber);
-    }
-
-    private string GetDateTitle(DateTime date)
-    {
-        var gameNumber = (date.Date - WordleStartDate).Days;
         var puzzle = UsedWords.FirstOrDefault(w => w.Value.gameNumber == gameNumber);
-
-        if (puzzle.Key != null)
-        {
-            return $"Puzzle #{gameNumber} - {puzzle.Key}";
-        }
-
-        return date.ToShortDateString();
+        return puzzle.Key ?? string.Empty;
     }
 
-    private async Task SelectDate(DateTime date)
+    private void UpdateFromInput()
     {
-        if (date > DateTime.Today || date < WordleStartDate || !HasPuzzleForDate(date))
-        {
-            return; // Don't select disabled dates
-        }
+        // Ensure the value is within bounds
+        if (selectedGameNumber < 0) selectedGameNumber = 0;
+        if (selectedGameNumber > maxGameNumber) selectedGameNumber = maxGameNumber;
+    }
 
-        await OnDateSelected.InvokeAsync(date);
+    private void UpdateFromSlider()
+    {
+        // Slider already handles bounds, just trigger UI update
+        StateHasChanged();
+    }
+
+    private void JumpToFirst()
+    {
+        selectedGameNumber = 0;
+    }
+
+    private void JumpToRandom()
+    {
+        var random = new Random();
+        selectedGameNumber = random.Next(0, maxGameNumber + 1);
+    }
+
+    private void JumpToToday()
+    {
+        selectedGameNumber = maxGameNumber;
+    }
+
+    private async Task SelectPuzzle()
+    {
+        var selectedDate = GetDateForGameNumber(selectedGameNumber);
+        await OnDateSelected.InvokeAsync(selectedDate);
     }
 
     private async Task CloseModal()

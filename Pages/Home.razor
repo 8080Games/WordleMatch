@@ -84,7 +84,7 @@
             }
             else
             {
-                <span class="puzzle-number">Today's word not loaded</span>
+                <span class="puzzle-number">Puzzle ####</span>
             }
         </div>
     </div>
@@ -406,8 +406,8 @@
         try
         {
             Console.WriteLine("Loading historic word hints...");
-            // Load historic word hints (large file with all historical puzzle hints)
-            var hintsCsv = await Http.GetStringAsync("55ee0527d71c36d8-wordle-hints.csv");
+            // Load historic word hints (file with all historical Wordle puzzle hints)
+            var hintsCsv = await Http.GetStringAsync("word_hints_historical.csv");
             foreach (var line in hintsCsv.Split('\n', StringSplitOptions.RemoveEmptyEntries))
             {
                 var parts = line.Split(',', 3); // Split into max 3 parts to handle commas in haiku

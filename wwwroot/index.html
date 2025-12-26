@@ -176,8 +176,12 @@
     <script>
         window.setupKeyboardListener = function(dotNetHelper) {
             document.addEventListener('keydown', function(event) {
-                // Ignore events from the mobile keyboard input
-                if (event.target && event.target.id === 'mobile-keyboard-input') {
+                // Ignore events from input fields, textareas, or mobile keyboard input
+                if (event.target && (
+                    event.target.tagName === 'INPUT' ||
+                    event.target.tagName === 'TEXTAREA' ||
+                    event.target.id === 'mobile-keyboard-input'
+                )) {
                     return;
                 }
 

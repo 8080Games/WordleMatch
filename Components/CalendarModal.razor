@@ -9,11 +9,11 @@
             <div class="puzzle-selector-content">
                 <div class="puzzle-input-group">
                     <label for="puzzle-number">Puzzle #:</label>
-                    <input type="text"
+                    <input type="number"
                            id="puzzle-number"
                            class="puzzle-number-input"
-                           inputmode="numeric"
-                           pattern="[0-9]*"
+                           min="0"
+                           max="@maxGameNumber"
                            @bind="selectedGameNumber"
                            @bind:event="oninput"
                            @onchange="UpdateFromInput" />

@@ -323,6 +323,27 @@
     background-color: var(--button-hover-bg);
 }
 
+.calendar-close-button.primary {
+    background-color: var(--color-accent-primary);
+    color: white;
+    border-color: var(--color-accent-primary);
+}
+
+.calendar-close-button.primary:hover {
+    background-color: var(--color-accent-secondary);
+    border-color: var(--color-accent-secondary);
+}
+
+.calendar-close-button.secondary {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    border-color: var(--color-border);
+}
+
+.calendar-close-button.secondary:hover {
+    background-color: var(--color-bg-tertiary);
+}
+
 .entry-row {
     display: flex;
     justify-content: center;

@@ -102,10 +102,13 @@
             <span class="recommendations-label">Recommendations:</span>
             <div class="mode-toggle">
                 <button class="mode-btn @(strategyMode == StrategyMode.Off ? "active" : "")" @onclick="() => SetStrategyMode(StrategyMode.Off)">Off</button>
-                @* <button class="mode-btn @(strategyMode == StrategyMode.Normal ? "active" : "")" @onclick="() => SetStrategyMode(StrategyMode.Normal)">Normal</button> *@
-                <button class="mode-btn @(strategyMode == StrategyMode.Hard ? "active" : "")" @onclick="() => SetStrategyMode(StrategyMode.Hard)">Hard</button>
+                <button class="mode-btn @(strategyMode == StrategyMode.On ? "active" : "")" @onclick="() => SetStrategyMode(StrategyMode.On)">On</button>
             </div>
-            @if (isLoadingRecommendations)
+            @if (strategyMode == StrategyMode.On && gameplayMode == GameplayMode.Normal)
+            {
+                <span class="normal-mode-message">Not yet available for Normal mode</span>
+            }
+            else if (isLoadingRecommendations)
             {
                 <span class="loading-indicator">Calculating...</span>
             }
@@ -259,8 +262,7 @@
     private enum StrategyMode
     {
         Off,
-        Normal,
-        Hard
+        On
     }
 
     private enum GameplayMode
@@ -326,6 +328,9 @@
 
             // Initialize theme based on localStorage or system preference
             await InitializeTheme();
+
+            // Initialize game settings from localStorage
+            await InitializeSettings();
         }
     }
 
@@ -1032,6 +1037,16 @@
     {
         strategyMode = mode;
 
+        // Save to localStorage
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("localStorage.setItem", "strategyMode", mode.ToString());
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving strategy mode: {ex.Message}");
+        }
+
         if (mode == StrategyMode.Off)
         {
             recommendations = null;
@@ -1039,23 +1054,47 @@
             return;
         }
 
-        // Auto-calculate when switching to Normal or Hard
+        // Auto-calculate when switching to On
         await CalculateRecommendations();
     }
 
-    private void SetGameplayMode(GameplayMode mode)
+    private async void SetGameplayMode(GameplayMode mode)
     {
         gameplayMode = mode;
+
+        // Save to localStorage
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("localStorage.setItem", "gameplayMode", mode.ToString());
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving gameplay mode: {ex.Message}");
+        }
 
         // Recalculate locked positions based on the new mode
         RecalculateLockedPositions();
 
         StateHasChanged();
+
+        // Recalculate recommendations if they're enabled
+        if (strategyMode != StrategyMode.Off)
+        {
+            await CalculateRecommendations();
+        }
     }
 
     private async Task CalculateRecommendations()
     {
         if (strategyMode == StrategyMode.Off) return;
+
+        // Normal mode recommendations not yet available
+        if (gameplayMode == GameplayMode.Normal)
+        {
+            recommendations = null;
+            StateHasChanged();
+            return;
+        }
 
         // Check if strategy service is initialized
         if (!StrategyService.IsInitialized)
@@ -1072,7 +1111,7 @@
             if (filledCount < 5)
             {
                 // Use cached starting words - pass empty guesses list
-                bool isHardMode = strategyMode == StrategyMode.Hard;
+                bool isHardMode = gameplayMode == GameplayMode.Hard;
                 recommendations = StrategyService.GetRecommendations(new List<WordleFilterService.Guess>(), hardMode: isHardMode, topN: 5);
                 StateHasChanged();
                 return;
@@ -1102,7 +1141,7 @@
                 guesses.Add(new WordleFilterService.Guess(letters, states));
             }
 
-            bool isHardMode = strategyMode == StrategyMode.Hard;
+            bool isHardMode = gameplayMode == GameplayMode.Hard;
 
             // Phase 1: Quick evaluation for instant feedback
             recommendations = StrategyService.GetRecommendationsQuick(guesses, isHardMode, topN: 5);
@@ -1172,6 +1211,32 @@
         }
 
         return false;
+    }
+
+    private async Task InitializeSettings()
+    {
+        try
+        {
+            // Load gameplay mode
+            var savedGameplayMode = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "gameplayMode");
+            if (!string.IsNullOrEmpty(savedGameplayMode) && Enum.TryParse<GameplayMode>(savedGameplayMode, out var parsedGameplayMode))
+            {
+                gameplayMode = parsedGameplayMode;
+            }
+
+            // Load strategy mode (recommendations on/off)
+            var savedStrategyMode = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "strategyMode");
+            if (!string.IsNullOrEmpty(savedStrategyMode) && Enum.TryParse<StrategyMode>(savedStrategyMode, out var parsedStrategyMode))
+            {
+                strategyMode = parsedStrategyMode;
+            }
+
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading settings: {ex.Message}");
+        }
     }
 
     private async Task InitializeTheme()

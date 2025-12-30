@@ -69,3 +69,6 @@ wwwroot/service-worker-assets.js
 # Environment variables (contains secrets)
 .env
 scripts/.env
+
+# NYT authentication (contains session tokens)
+scripts/.nyt-auth.json

@@ -52,7 +52,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     justify-content: center;
 }
 
@@ -195,13 +195,13 @@
 
 .puzzle-info {
     text-align: center;
-    padding: 8px 12px;
+    padding: 6px 12px;
     background-color: var(--color-bg-secondary);
     border-radius: 6px;
     width: 100%;
     max-width: 330px;
-    margin-top: 24px;
-    margin-bottom: 8px;
+    margin-top: 8px;
+    margin-bottom: 4px;
 }
 
 .puzzle-date-display {
@@ -664,7 +664,7 @@
 
 /* Gameplay Mode Section */
 .gameplay-mode-section {
-    margin: 6px 0 4px 0;
+    margin: 3px 0 2px 0;
     display: flex;
     align-items: center;
     justify-content: center;

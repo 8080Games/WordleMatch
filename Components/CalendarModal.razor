@@ -46,7 +46,7 @@
 
                 <div class="quick-actions">
                     <button class="quick-action-btn" @onclick="JumpToFirst">First</button>
-                    <button class="quick-action-btn" @onclick="JumpToRandom">Random</button>
+                    <button class="quick-action-btn" @onclick="JumpToYesterday">Yesterday</button>
                     <button class="quick-action-btn" @onclick="JumpToToday">Today</button>
                 </div>
             </div>
@@ -121,10 +121,9 @@
         selectedGameNumber = 0;
     }
 
-    private void JumpToRandom()
+    private void JumpToYesterday()
     {
-        var random = new Random();
-        selectedGameNumber = random.Next(0, maxGameNumber + 1);
+        selectedGameNumber = maxGameNumber - 1;
     }
 
     private void JumpToToday()

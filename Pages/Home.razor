@@ -991,9 +991,20 @@
         return focusedIndex == index ? "focused" : "";
     }
 
-    private void SetFilter(WordFilter filter)
+    private async void SetFilter(WordFilter filter)
     {
         wordFilter = filter;
+
+        // Save to localStorage
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("localStorage.setItem", "wordFilter", filter.ToString());
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving word filter: {ex.Message}");
+        }
+
         StateHasChanged();
     }
 
@@ -1226,6 +1237,13 @@
             if (!string.IsNullOrEmpty(savedStrategyMode) && Enum.TryParse<StrategyMode>(savedStrategyMode, out var parsedStrategyMode))
             {
                 strategyMode = parsedStrategyMode;
+            }
+
+            // Load word filter (unused/both/used)
+            var savedWordFilter = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "wordFilter");
+            if (!string.IsNullOrEmpty(savedWordFilter) && Enum.TryParse<WordFilter>(savedWordFilter, out var parsedWordFilter))
+            {
+                wordFilter = parsedWordFilter;
             }
 
             StateHasChanged();

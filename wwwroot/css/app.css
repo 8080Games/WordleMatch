@@ -71,9 +71,9 @@ html {
     --color-recommendations-text: #94a3b8;
     --color-recommendations-text-dark: #cbd5e1;
     --color-hints-bg: #3d3a1f;
-    --color-possible-answer-bg: #1a2e1a;
+    --color-possible-answer-bg: #2a4a2a;
     --color-possible-answer-highlight: #4ade80;
-    --color-guess-only-bg: #2d2a1a;
+    --color-guess-only-bg: #4a4a2a;
     --color-guess-only-highlight: #fbbf24;
 
     /* Game State Colors - slightly brighter for contrast */

@@ -104,11 +104,7 @@
                 <button class="mode-btn @(strategyMode == StrategyMode.Off ? "active" : "")" @onclick="() => SetStrategyMode(StrategyMode.Off)">Off</button>
                 <button class="mode-btn @(strategyMode == StrategyMode.On ? "active" : "")" @onclick="() => SetStrategyMode(StrategyMode.On)">On</button>
             </div>
-            @if (strategyMode == StrategyMode.On && gameplayMode == GameplayMode.Normal)
-            {
-                <span class="normal-mode-message">Not yet available for Normal mode</span>
-            }
-            else if (isLoadingRecommendations)
+            @if (isLoadingRecommendations)
             {
                 <span class="loading-indicator">Calculating...</span>
             }
@@ -1096,13 +1092,8 @@
     {
         if (strategyMode == StrategyMode.Off) return;
 
-        // Normal mode recommendations not yet available
-        if (gameplayMode == GameplayMode.Normal)
-        {
-            recommendations = null;
-            StateHasChanged();
-            return;
-        }
+        // Normal mode now uses fast minimax algorithm instead of slow entropy
+        bool isNormalMode = gameplayMode == GameplayMode.Normal;
 
         // Check if strategy service is initialized
         if (!StrategyService.IsInitialized)
@@ -1151,31 +1142,44 @@
 
             bool isHardMode = gameplayMode == GameplayMode.Hard;
 
-            // Phase 1: Quick evaluation for instant feedback
-            recommendations = StrategyService.GetRecommendationsQuick(guesses, isHardMode, topN: 5);
-            isLoadingRecommendations = false;
-            isRefiningRecommendations = true;  // Show refining indicator
-            StateHasChanged();
-
-            Console.WriteLine($"Quick: Generated {recommendations?.Count ?? 0} recommendations");
-
-            // Phase 2: Full evaluation in background (only if not already cached)
-            // Skip refinement if we got cached results (which are already optimal)
-            bool isCachedResult = (guesses.Count == 0) ||
-                                  (guesses.Count == 1 && !isHardMode);
-
-            if (!isCachedResult)
+            if (isNormalMode)
             {
-                await Task.Delay(1); // Allow UI to update with quick results
+                // Normal mode: Use fast minimax algorithm (single phase - fast enough for direct results)
+                recommendations = StrategyService.GetRecommendationsNormalModeMinimax(guesses, topN: 5);
+                isLoadingRecommendations = false;
+                isRefiningRecommendations = false;
+                StateHasChanged();
+                Console.WriteLine($"Normal mode minimax: Generated {recommendations?.Count ?? 0} recommendations");
+            }
+            else
+            {
+                // Hard mode: Use existing two-phase approach (quick then full)
+                // Phase 1: Quick evaluation for instant feedback
+                recommendations = StrategyService.GetRecommendationsQuick(guesses, isHardMode, topN: 5);
+                isLoadingRecommendations = false;
+                isRefiningRecommendations = true;  // Show refining indicator
+                StateHasChanged();
 
-                var fullRecommendations = StrategyService.GetRecommendationsFull(guesses, isHardMode, topN: 5);
+                Console.WriteLine($"Quick: Generated {recommendations?.Count ?? 0} recommendations");
 
-                // Update only if full recommendations are different/better
-                if (AreBetterRecommendations(fullRecommendations, recommendations))
+                // Phase 2: Full evaluation in background (only if not already cached)
+                // Skip refinement if we got cached results (which are already optimal)
+                bool isCachedResult = (guesses.Count == 0) ||
+                                      (guesses.Count == 1 && !isHardMode);
+
+                if (!isCachedResult)
                 {
-                    recommendations = fullRecommendations;
-                    StateHasChanged();
-                    Console.WriteLine($"Full: Updated with {recommendations?.Count ?? 0} refined recommendations");
+                    await Task.Delay(1); // Allow UI to update with quick results
+
+                    var fullRecommendations = StrategyService.GetRecommendationsFull(guesses, isHardMode, topN: 5);
+
+                    // Update only if full recommendations are different/better
+                    if (AreBetterRecommendations(fullRecommendations, recommendations))
+                    {
+                        recommendations = fullRecommendations;
+                        StateHasChanged();
+                        Console.WriteLine($"Full: Updated with {recommendations?.Count ?? 0} refined recommendations");
+                    }
                 }
             }
         }

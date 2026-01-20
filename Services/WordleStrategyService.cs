@@ -289,7 +289,7 @@ public class WordleStrategyService
     /// <param name="hardMode">If true, apply hard mode constraints</param>
     /// <param name="topN">Number of recommendations to return</param>
     /// <returns>List of recommended words with their scores</returns>
-    public List<Recommendation> GetRecommendations(List<Guess> guesses, bool hardMode, int topN = 5)
+    public List<Recommendation> GetRecommendations(List<Guess> guesses, bool hardMode, int topN = 5, bool useMinimax = false)
     {
         // Use cached starting words if no guesses have been made
         // These are pre-calculated optimal words and should not be filtered
@@ -359,7 +359,9 @@ public class WordleStrategyService
             .Select(guess => new
             {
                 Word = guess,
-                Score = CalculateExpectedInformation(guess, possibleAnswers),
+                Score = useMinimax
+                    ? CalculateMinimaxScore(guess, possibleAnswers)
+                    : CalculateExpectedInformation(guess, possibleAnswers),
                 IsPossibleAnswer = _allWords.First(w => w.Word == guess).IsPossibleAnswer
             })
             .OrderByDescending(r => r.Score)
@@ -454,6 +456,16 @@ public class WordleStrategyService
     {
         // Just delegate to the main GetRecommendations method for full evaluation
         return GetRecommendations(guesses, hardMode, topN);
+    }
+
+    /// <summary>
+    /// Gets recommendations for Normal mode using fast minimax algorithm instead of entropy.
+    /// This should be much faster than the entropy-based approach while still providing good results.
+    /// Uses worst-case minimization: picks the word that minimizes the largest remaining group.
+    /// </summary>
+    public List<Recommendation> GetRecommendationsNormalModeMinimax(List<Guess> guesses, int topN = 5)
+    {
+        return GetRecommendations(guesses, hardMode: false, topN, useMinimax: true);
     }
 
     /// <summary>
@@ -577,6 +589,30 @@ public class WordleStrategyService
         }
 
         return entropy;
+    }
+
+    /// <summary>
+    /// Calculates the minimax score for a guess: minimizes the worst-case scenario.
+    /// Higher score = better guess (smaller worst-case group size)
+    /// This is much faster than entropy calculation and often gives comparable results.
+    /// </summary>
+    private double CalculateMinimaxScore(string guess, List<string> possibleAnswers, bool useSampling = true)
+    {
+        // Sample if too many answers for better performance
+        var answersToEvaluate = (useSampling && possibleAnswers.Count > 500)
+            ? SampleRandomly(possibleAnswers, 500)
+            : possibleAnswers;
+
+        // Group possible answers by the pattern they would produce
+        var patternGroups = answersToEvaluate
+            .GroupBy(answer => GetPattern(guess, answer))
+            .ToList();
+
+        // Find the worst case (largest group)
+        var maxGroupSize = patternGroups.Max(g => g.Count());
+
+        // Return score where higher = better (smaller worst-case = higher score)
+        return answersToEvaluate.Count - maxGroupSize;
     }
 
     /// <summary>

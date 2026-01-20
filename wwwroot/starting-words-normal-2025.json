@@ -1,0 +1,62 @@
+[
+  {
+    "Word": "RAISE",
+    "Score": 614.0,
+    "PossibleAnswersRemaining": 662,
+    "IsPossibleAnswer": false
+  },
+  {
+    "Word": "ARISE",
+    "Score": 614.0,
+    "PossibleAnswersRemaining": 662,
+    "IsPossibleAnswer": false
+  },
+  {
+    "Word": "AROSE",
+    "Score": 602.0,
+    "PossibleAnswersRemaining": 662,
+    "IsPossibleAnswer": true
+  },
+  {
+    "Word": "AISLE",
+    "Score": 600.0,
+    "PossibleAnswersRemaining": 662,
+    "IsPossibleAnswer": false
+  },
+  {
+    "Word": "ASIDE",
+    "Score": 600.0,
+    "PossibleAnswersRemaining": 662,
+    "IsPossibleAnswer": false
+  },
+  {
+    "Word": "ALONE",
+    "Score": 595.0,
+    "PossibleAnswersRemaining": 662,
+    "IsPossibleAnswer": false
+  },
+  {
+    "Word": "IRATE",
+    "Score": 594.0,
+    "PossibleAnswersRemaining": 662,
+    "IsPossibleAnswer": false
+  },
+  {
+    "Word": "SALET",
+    "Score": 590.0,
+    "PossibleAnswersRemaining": 662,
+    "IsPossibleAnswer": false
+  },
+  {
+    "Word": "SLATE",
+    "Score": 590.0,
+    "PossibleAnswersRemaining": 662,
+    "IsPossibleAnswer": false
+  },
+  {
+    "Word": "LEAST",
+    "Score": 590.0,
+    "PossibleAnswersRemaining": 662,
+    "IsPossibleAnswer": false
+  }
+]

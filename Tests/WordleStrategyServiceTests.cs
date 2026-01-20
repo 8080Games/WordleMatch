@@ -191,6 +191,228 @@ public class WordleStrategyServiceTests
     }
 
     [Fact]
+    public void CompareMinimax_vs_Entropy_Performance()
+    {
+        // Test case: After first guess CRANE → WWYGW (realistic scenario)
+        var guesses = new List<WordleFilterService.Guess>
+        {
+            new WordleFilterService.Guess(
+                new char[] { 'c', 'r', 'a', 'n', 'e' },
+                new WordleFilterService.LetterState[] {
+                    WordleFilterService.LetterState.White,    // C not in word
+                    WordleFilterService.LetterState.White,    // R not in word
+                    WordleFilterService.LetterState.Yellow,   // A in word, wrong position
+                    WordleFilterService.LetterState.Green,    // N correct position
+                    WordleFilterService.LetterState.White     // E not in word
+                })
+        };
+
+        // Debug: Check how many possible answers exist
+        var possibleAnswers = _service.GetType()
+            .GetMethod("GetPossibleAnswers", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            ?.Invoke(_service, new object[] { guesses });
+
+        if (possibleAnswers is List<string> answers)
+        {
+            Console.WriteLine($"Possible answers count: {answers.Count}");
+        }
+
+        // Test Normal mode with entropy
+        var stopwatchEntropy = System.Diagnostics.Stopwatch.StartNew();
+        var entropyRecommendations = _service.GetRecommendations(guesses, hardMode: false, topN: 5, useMinimax: false);
+        stopwatchEntropy.Stop();
+
+        // Test Normal mode with minimax
+        var stopwatchMinimax = System.Diagnostics.Stopwatch.StartNew();
+        var minimaxRecommendations = _service.GetRecommendationsNormalModeMinimax(guesses, topN: 5);
+        stopwatchMinimax.Stop();
+
+        // Output results for comparison
+        Console.WriteLine($"Entropy time: {stopwatchEntropy.ElapsedMilliseconds}ms");
+        Console.WriteLine($"Minimax time: {stopwatchMinimax.ElapsedMilliseconds}ms");
+        Console.WriteLine($"Speedup: {(double)stopwatchEntropy.ElapsedMilliseconds / stopwatchMinimax.ElapsedMilliseconds:F1}x");
+
+        Console.WriteLine("\nEntropy top 3:");
+        foreach (var rec in entropyRecommendations.Take(3))
+            Console.WriteLine($"  {rec.Word}: {rec.Score:F2}");
+
+        Console.WriteLine("\nMinimax top 3:");
+        foreach (var rec in minimaxRecommendations.Take(3))
+            Console.WriteLine($"  {rec.Word}: {rec.Score:F2}");
+
+        // Both should return valid recommendations
+        Assert.True(entropyRecommendations.Any(), "Entropy should return recommendations");
+        Assert.True(minimaxRecommendations.Any(), "Minimax should return recommendations");
+
+        // Minimax should be significantly faster
+        Assert.True(stopwatchMinimax.ElapsedMilliseconds < stopwatchEntropy.ElapsedMilliseconds,
+            "Minimax should be faster than entropy");
+    }
+
+    [Fact]
+    public void CalculateBestFirstWordForUnusedWords()
+    {
+        // Load used words to exclude them from consideration
+        var usedWords = new Dictionary<string, (int gameNumber, string date)>();
+        var usedCsvPath = Path.Combine("..", "..", "..", "..", "wwwroot", "used-words.csv");
+
+        if (File.Exists(usedCsvPath))
+        {
+            var lines = File.ReadAllLines(usedCsvPath);
+            foreach (var line in lines)
+            {
+                var parts = line.Split(',');
+                if (parts.Length >= 3 && parts[0] != "word") // Skip header
+                {
+                    var word = parts[0].Trim().ToLower();
+                    if (word.Length == 5 && int.TryParse(parts[1].Trim(), out int gameNumber))
+                    {
+                        var date = parts[2].Trim();
+                        usedWords[word] = (gameNumber, date);
+                    }
+                }
+            }
+        }
+
+        Console.WriteLine($"Loaded {usedWords.Count} used words");
+
+        // Get current game number (approximate)
+        var currentGameNumber = (DateTime.Today - new DateTime(2021, 6, 19)).Days;
+        Console.WriteLine($"Current estimated game number: {currentGameNumber}");
+
+        // Get all possible guesses (both answer and guess-only words)
+        var allWordsField = typeof(WordleStrategyService)
+            .GetField("_allWords", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+        var allWords = allWordsField?.GetValue(_service) as System.Collections.IList;
+
+        if (allWords == null)
+        {
+            Console.WriteLine("Could not access _allWords field");
+            return;
+        }
+
+        // Get unused answer words (target set to optimize against)
+        var unusedAnswerWords = new List<string>();
+        var allGuessWords = new List<string>();
+
+        foreach (var item in allWords)
+        {
+            // Use reflection to get properties
+            var wordProp = item.GetType().GetProperty("Word");
+            var isPossibleAnswerProp = item.GetType().GetProperty("IsPossibleAnswer");
+
+            if (wordProp != null && isPossibleAnswerProp != null)
+            {
+                var word = (string)wordProp.GetValue(item);
+                var isPossibleAnswer = (bool)isPossibleAnswerProp.GetValue(item);
+
+                allGuessWords.Add(word);
+
+                if (isPossibleAnswer)
+                {
+                    // Check if word is unused (not in used words or is a future word)
+                    if (!usedWords.ContainsKey(word) || usedWords[word].gameNumber >= currentGameNumber)
+                    {
+                        unusedAnswerWords.Add(word);
+                    }
+                }
+            }
+        }
+
+        Console.WriteLine($"Unused answer words: {unusedAnswerWords.Count}");
+
+        Console.WriteLine($"Total possible guesses: {allGuessWords.Count}");
+
+        // Calculate minimax score for each possible first guess
+        var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+        var results = new List<(string word, double score, int worstCaseRemaining)>();
+
+        // Test known good starting words plus a broader sample
+        var knownGoodStarters = new[]
+        {
+            "irate", "crane", "salet", "raise", "atone", "arose", "stare", "slate",
+            "trace", "heart", "snare", "roast", "least", "caulk", "audio", "adieu"
+        };
+
+        // Combine known good starters with first 500 words for comprehensive analysis
+        var testGuesses = knownGoodStarters
+            .Concat(allGuessWords.Take(500))
+            .Distinct()
+            .ToList();
+
+        Console.WriteLine($"Testing {testGuesses.Count} candidate first words (including known good starters)...");
+
+        foreach (var guess in testGuesses)
+        {
+            var score = CalculateMinimaxScoreForWord(guess, unusedAnswerWords);
+            var worstCase = unusedAnswerWords.Count - (int)score;
+            results.Add((guess, score, worstCase));
+
+            if (results.Count % 10 == 0)
+            {
+                Console.WriteLine($"Processed {results.Count}/{testGuesses.Count} words...");
+            }
+        }
+
+        stopwatch.Stop();
+
+        // Sort by score (higher = better elimination)
+        var topWords = results
+            .OrderByDescending(r => r.score)
+            .Take(20)
+            .ToList();
+
+        Console.WriteLine($"\nCalculation completed in {stopwatch.ElapsedMilliseconds}ms");
+        Console.WriteLine($"Tested {results.Count} words against {unusedAnswerWords.Count} unused answers");
+        Console.WriteLine("\nTop 20 first words for eliminating unused words:");
+        Console.WriteLine("Word\tScore\tWorst Case Remaining");
+        Console.WriteLine("----\t-----\t-------------------");
+
+        foreach (var (word, score, worstCase) in topWords)
+        {
+            Console.WriteLine($"{word.ToUpper()}\t{score:F1}\t{worstCase}");
+        }
+
+        // Generate JSON for use in the application
+        var jsonOutput = System.Text.Json.JsonSerializer.Serialize(
+            topWords.Take(10).Select(r => new {
+                Word = r.word.ToUpper(),
+                Score = r.score,
+                PossibleAnswersRemaining = unusedAnswerWords.Count,
+                IsPossibleAnswer = unusedAnswerWords.Contains(r.word)
+            }).ToArray(),
+            new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+
+        Console.WriteLine("\nJSON for application (top 10):");
+        Console.WriteLine(jsonOutput);
+
+        // Verify we found some good words
+        Assert.True(results.Any(), "Should find some candidate words");
+        Assert.True(topWords.First().score > 0, "Best word should have positive elimination score");
+    }
+
+    private double CalculateMinimaxScoreForWord(string guess, List<string> targetAnswers)
+    {
+        // Use reflection to call the private GetPattern method
+        var getPatternMethod = typeof(WordleStrategyService)
+            .GetMethod("GetPattern", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+        if (getPatternMethod == null)
+            return 0;
+
+        // Group answers by the pattern they would produce with this guess
+        var patternGroups = targetAnswers
+            .GroupBy(answer => (string)getPatternMethod.Invoke(_service, new object[] { guess, answer }))
+            .ToList();
+
+        // Find worst case (largest group)
+        var maxGroupSize = patternGroups.Max(g => g.Count());
+
+        // Return elimination score (higher = better)
+        return targetAnswers.Count - maxGroupSize;
+    }
+
+    [Fact]
     public void GenerateStartingWordsExcludingUsed()
     {
         // Load used words

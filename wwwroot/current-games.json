@@ -1,0 +1,27 @@
+{
+  "games": [
+    {
+      "gameNumber": 1691,
+      "word": "REUSE",
+      "date": "2/4/2026",
+      "hints": {
+        "synonym": "Recycle",
+        "haiku": "Using once again / Waste reduced through repetition / Second life given"
+      }
+    },
+    {
+      "gameNumber": 1692,
+      "word": "ZONES",
+      "date": "2/5/2026",
+      "hints": {
+        "synonym": "",
+        "haiku": ""
+      }
+    }
+  ],
+  "recentUsedWords": [
+    "MAGIC",
+    "REUSE",
+    "ZONES"
+  ]
+}

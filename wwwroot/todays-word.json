@@ -1,12 +1,13 @@
 {
-  "gameNumber": 1690,
-  "word": "MAGIC",
-  "date": "2/3/2026",
+  "gameNumber": 1691,
+  "word": "REUSE",
+  "date": "2/4/2026",
   "hints": {
-    "synonym": "Wonder",
-    "haiku": "Impossible made real / Rules of nature bent aside / Enchantment takes hold"
+    "synonym": "Recycle",
+    "haiku": "Using once again / Waste reduced through repetition / Second life given"
   },
   "recentUsedWords": [
-    "MAGIC"
+    "MAGIC",
+    "REUSE"
   ]
 }

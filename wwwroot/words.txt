@@ -1,4 +1,4 @@
-aback
+\naback
 abase
 abate
 abbey
@@ -2338,4 +2338,4 @@ young
 youth
 zebra
 zesty
-zonal\ntests\n
+zonal\nmagic\ntests\n

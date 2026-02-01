@@ -1,124 +1,85 @@
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
-import * as readline from 'readline';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const WORDLE_START_DATE = new Date('2021-06-19'); // Game #1 started on June 19, 2021
+const WORD_REUSE_START_GAME = 1691; // Game number when word reuse became allowed
 
 function calculateGameNumber(date) {
     const daysDiff = Math.floor((date - WORDLE_START_DATE) / (1000 * 60 * 60 * 24));
     return daysDiff;
 }
 
-function promptUser(question) {
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
+function parseDate(dateStr) {
+    // Support multiple formats: YYYY-MM-DD or MM/DD/YYYY
+    dateStr = dateStr.trim();
 
-    return new Promise((resolve) => {
-        rl.question(question, (answer) => {
-            rl.close();
-            resolve(answer.trim());
-        });
-    });
+    // YYYY-MM-DD format
+    if (/^\d{4}-\d{1,2}-\d{1,2}$/.test(dateStr)) {
+        const [year, month, day] = dateStr.split('-').map(Number);
+        return new Date(year, month - 1, day);
+    }
+
+    // MM/DD/YYYY format
+    if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateStr)) {
+        const [month, day, year] = dateStr.split('/').map(Number);
+        return new Date(year, month - 1, day);
+    }
+
+    throw new Error(`Invalid date format: "${dateStr}". Use YYYY-MM-DD or MM/DD/YYYY`);
 }
 
-async function addWordHints(word, synonym, haiku) {
-    const hintsPath = join(__dirname, '../wwwroot/word-hints.csv');
+function loadExistingTodaysWord() {
+    const todaysWordPath = join(__dirname, '../wwwroot/todays-word.json');
 
-    // Read existing hints
-    let entries = [];
-    let hasHeader = false;
+    if (!existsSync(todaysWordPath)) {
+        return null;
+    }
+
+    try {
+        const content = readFileSync(todaysWordPath, 'utf-8');
+        return JSON.parse(content);
+    } catch (error) {
+        console.log(`Warning: Could not parse existing todays-word.json: ${error.message}`);
+        return null;
+    }
+}
+
+function findWordHints(word) {
+    const hintsPath = join(__dirname, '../wwwroot/unified-hints.csv');
+
+    if (!existsSync(hintsPath)) {
+        console.log('Warning: unified-hints.csv not found');
+        return { synonym: '', haiku: '' };
+    }
 
     try {
         const content = readFileSync(hintsPath, 'utf-8');
-        const lines = content.trim().split('\n');
+        const lines = content.split('\n');
 
         for (const line of lines) {
-            if (line.startsWith('word,')) {
-                hasHeader = true;
-                continue; // Skip header
-            }
+            if (line.startsWith('word,')) continue; // Skip header
+
             const parts = line.split(',', 3);
             if (parts.length >= 3) {
-                entries.push({
-                    word: parts[0].trim(),
-                    synonym: parts[1].trim(),
-                    haiku: parts[2].trim().replace(/^"|"$/g, '') // Remove surrounding quotes
-                });
+                const hintWord = parts[0].trim().toLowerCase();
+                if (hintWord === word.toLowerCase()) {
+                    return {
+                        synonym: parts[1].trim(),
+                        haiku: parts[2].trim().replace(/^"|"$/g, '') // Remove surrounding quotes
+                    };
+                }
             }
         }
-    } catch (e) {
-        // File doesn't exist yet, will create it
-        console.log('  Creating new word-hints.csv file');
+    } catch (error) {
+        console.log(`Warning: Could not read hints file: ${error.message}`);
     }
 
-    // Check if hint already exists
-    const existingIndex = entries.findIndex(e => e.word.toLowerCase() === word.toLowerCase());
-    if (existingIndex >= 0) {
-        console.log(`  Updating existing hint for ${word}`);
-        entries[existingIndex] = { word, synonym, haiku };
-    } else {
-        entries.push({ word, synonym, haiku });
-    }
-
-    // Sort by word
-    entries.sort((a, b) => a.word.localeCompare(b.word));
-
-    // Write back to file
-    const lines = [];
-    if (!hasHeader) {
-        lines.push('word,synonym,haiku');
-    } else {
-        lines.push('word,synonym,haiku');
-    }
-
-    for (const entry of entries) {
-        // Escape haiku properly (it contains commas and slashes)
-        const escapedHaiku = `"${entry.haiku.replace(/"/g, '""')}"`;
-        lines.push(`${entry.word},${entry.synonym},${escapedHaiku}`);
-    }
-
-    writeFileSync(hintsPath, lines.join('\n') + '\n', 'utf-8');
-    console.log(`✓ Added hints for "${word}" to word-hints.csv`);
-}
-
-function parseDate(dateStr) {
-    // Validate format first
-    const formats = [
-        /^\d{4}-\d{2}-\d{2}$/,  // YYYY-MM-DD
-        /^\d{1,2}\/\d{1,2}\/\d{4}$/  // M/D/YYYY or MM/DD/YYYY
-    ];
-
-    const matchesFormat = formats.some(format => format.test(dateStr));
-    if (!matchesFormat) {
-        throw new Error(`Invalid date format: "${dateStr}". Use YYYY-MM-DD or MM/DD/YYYY`);
-    }
-
-    // Try parsing
-    let date = new Date(dateStr);
-    if (isNaN(date.getTime())) {
-        throw new Error(`Invalid date: "${dateStr}". Date does not exist.`);
-    }
-
-    // Check if date is reasonable for Wordle (after June 19, 2021)
-    if (date < WORDLE_START_DATE) {
-        throw new Error(`Date ${dateStr} is before Wordle started (June 19, 2021)`);
-    }
-
-    // Warn if date is too far in the future (more than 1 year)
-    const oneYearFromNow = new Date();
-    oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
-    if (date > oneYearFromNow) {
-        console.log(`⚠️  WARNING: Date ${dateStr} is more than 1 year in the future`);
-    }
-
-    return date;
+    return { synonym: '', haiku: '' };
 }
 
 async function addWord(word, dateStr = null) {
@@ -132,22 +93,8 @@ async function addWord(word, dateStr = null) {
         throw new Error(`Word must contain only letters. Got: ${word}`);
     }
 
-    // Read existing CSV first to determine default date
-    const csvPath = join(__dirname, '../wwwroot/used-words.csv');
-    const csvContent = readFileSync(csvPath, 'utf-8');
-    const lines = csvContent.trim().split('\n');
-
-    // Parse existing entries
-    const entries = [];
-    for (const line of lines) {
-        const parts = line.split(',');
-        if (parts.length >= 3) {
-            const existingWord = parts[0].trim();
-            const existingGameNumber = parseInt(parts[1].trim());
-            const existingDate = parts[2].trim();
-            entries.push({ word: existingWord, gameNumber: existingGameNumber, date: existingDate });
-        }
-    }
+    // Load existing today's word data
+    const existingData = loadExistingTodaysWord();
 
     // Determine date and game number
     let targetDate;
@@ -158,81 +105,94 @@ async function addWord(word, dateStr = null) {
         targetDate = parseDate(dateStr);
         gameNumber = calculateGameNumber(targetDate);
     } else {
-        // Default to next game number after the last entry
-        if (entries.length > 0) {
-            const maxGameNumber = Math.max(...entries.map(e => e.gameNumber));
-            gameNumber = maxGameNumber + 1;
-            // Calculate date from game number
-            targetDate = new Date(WORDLE_START_DATE);
-            targetDate.setDate(targetDate.getDate() + gameNumber);
-            console.log(`  Defaulting to next game after #${maxGameNumber}`);
+        // Default to next game number after existing data or today
+        if (existingData) {
+            gameNumber = existingData.gameNumber + 1;
+            console.log(`Defaulting to next game after #${existingData.gameNumber}`);
         } else {
-            // No entries yet, default to tomorrow
+            // No existing data, default to today
             targetDate = new Date();
-            targetDate.setDate(targetDate.getDate() + 1);
             gameNumber = calculateGameNumber(targetDate);
-            console.log(`  No entries found, defaulting to tomorrow`);
+            console.log(`No existing data, defaulting to today`);
         }
+
+        // Calculate date from game number
+        targetDate = new Date(WORDLE_START_DATE);
+        targetDate.setDate(targetDate.getDate() + gameNumber);
     }
 
-    // Format date consistently without timezone issues
+    // Format date consistently
     const month = targetDate.getMonth() + 1;
     const day = targetDate.getDate();
     const year = targetDate.getFullYear();
     const dateFormatted = `${month}/${day}/${year}`;
 
-    console.log(`\nAdding word to used-words.csv:`);
+    console.log(`\\nGenerating todays-word.json:`);
     console.log(`  Word: ${word}`);
     console.log(`  Date: ${dateFormatted}`);
-    console.log(`  Game: #${gameNumber}\n`);
+    console.log(`  Game: #${gameNumber}\\n`);
 
-    // Check for duplicates - be strict
-    const duplicateByWord = entries.find(e => e.word === word);
-    const duplicateByGame = entries.find(e => e.gameNumber === gameNumber);
-
-    // Exact duplicate - already exists
-    if (duplicateByWord && duplicateByGame && duplicateByWord.gameNumber === gameNumber) {
+    // Check if this is the same word for the same game (skip if so)
+    if (existingData && existingData.gameNumber === gameNumber && existingData.word === word.toUpperCase()) {
         console.log(`✓ Word "${word}" already exists for game #${gameNumber}`);
         console.log(`  No changes made.`);
         return false;
     }
 
-    // Date/game conflict - different word for same game
-    if (duplicateByGame && duplicateByGame.word !== word) {
-        throw new Error(
-            `Game #${gameNumber} (${dateFormatted}) already has word "${duplicateByGame.word}".\n` +
-            `  Cannot add "${word}" for the same date.\n` +
-            `  Each date/game can only have one word.`
-        );
+    // Find word hints
+    const hints = findWordHints(word);
+
+    if (hints.synonym && hints.haiku) {
+        console.log(`📝 Found hints for "${word}":`);
+        console.log(`   Synonym: ${hints.synonym}`);
+        console.log(`   Haiku:   ${hints.haiku}`);
+    } else {
+        console.log(`⚠️  No hints found for "${word}"`);
     }
 
-    // Word already used for different date
-    if (duplicateByWord && duplicateByWord.gameNumber !== gameNumber) {
-        throw new Error(
-            `Word "${word}" was already used in game #${duplicateByWord.gameNumber} (${duplicateByWord.date}).\n` +
-            `  Cannot reuse the same word for game #${gameNumber} (${dateFormatted}).\n` +
-            `  Each word can only be used once.`
-        );
+    // Determine recent used words list
+    let recentUsedWords;
+
+    if (gameNumber >= WORD_REUSE_START_GAME) {
+        // For games 1691+: Build recentUsedWords list allowing reuse
+        if (existingData && existingData.recentUsedWords) {
+            recentUsedWords = [...existingData.recentUsedWords];
+            // Add current word if not already in the list
+            if (!recentUsedWords.includes(word)) {
+                recentUsedWords.push(word);
+            }
+        } else {
+            // First word of the reuse era
+            recentUsedWords = [word];
+        }
+    } else {
+        // For historical games (≤1690): Single word tracking
+        recentUsedWords = [word];
     }
 
-    // Add new entry
-    entries.push({ word, gameNumber, date: dateFormatted });
+    // Create today's word JSON object
+    const todaysWordData = {
+        gameNumber: gameNumber,
+        word: word,
+        date: dateFormatted,
+        hints: {
+            synonym: hints.synonym,
+            haiku: hints.haiku
+        },
+        recentUsedWords: recentUsedWords
+    };
 
-    // Sort by game number
-    entries.sort((a, b) => a.gameNumber - b.gameNumber);
-
-    // Write back to file
-    const newContent = entries.map(e => `${e.word},${e.gameNumber},${e.date}`).join('\n') + '\n';
-    writeFileSync(csvPath, newContent, 'utf-8');
-
-    console.log(`✓ Added "${word}" to used-words.csv`);
+    // Write todays-word.json
+    const todaysWordPath = join(__dirname, '../wwwroot/todays-word.json');
+    writeFileSync(todaysWordPath, JSON.stringify(todaysWordData, null, 2), 'utf-8');
+    console.log(`✓ Generated todays-word.json`);
 
     // Add word to words.txt if not already there
     let addedToWordsTxt = false;
     try {
         const wordsTxtPath = join(__dirname, '../wwwroot/words.txt');
         const wordsTxtContent = readFileSync(wordsTxtPath, 'utf-8');
-        const wordsArray = wordsTxtContent.trim().split('\n').map(w => w.trim().toLowerCase());
+        const wordsArray = wordsTxtContent.trim().split('\\n').map(w => w.trim().toLowerCase());
 
         // Check if word already exists
         if (!wordsArray.includes(word.toLowerCase())) {
@@ -241,7 +201,7 @@ async function addWord(word, dateStr = null) {
             wordsArray.sort();
 
             // Write back to file
-            writeFileSync(wordsTxtPath, wordsArray.join('\n') + '\n', 'utf-8');
+            writeFileSync(wordsTxtPath, wordsArray.join('\\n') + '\\n', 'utf-8');
             console.log(`✓ Added "${word}" to words.txt (was missing)`);
             addedToWordsTxt = true;
         } else {
@@ -251,74 +211,46 @@ async function addWord(word, dateStr = null) {
         console.log(`⚠️  Could not update words.txt: ${error.message}`);
     }
 
-    // Auto-load hints from source file
-    let hintsAdded = false;
-    let synonym = '';
-    let haiku = '';
-
-    try {
-        const hintsSourcePath = join(__dirname, '../wwwroot/55ee0527d71c36d8-wordle-hints.csv');
-        const hintsSourceContent = readFileSync(hintsSourcePath, 'utf-8');
-        const lines = hintsSourceContent.split('\n');
-
-        for (const line of lines) {
-            if (line.startsWith('word,')) continue; // Skip header
-
-            const parts = line.split(',', 3);
-            if (parts.length >= 3) {
-                const hintWord = parts[0].trim().toLowerCase();
-                if (hintWord === word.toLowerCase()) {
-                    synonym = parts[1].trim();
-                    haiku = parts[2].trim().replace(/^"|"$/g, ''); // Remove surrounding quotes
-
-                    console.log(`\n📝 Found hints for "${word}" in source file:`);
-                    console.log(`   Synonym: ${synonym}`);
-                    console.log(`   Haiku:   ${haiku}`);
-                    await addWordHints(word, synonym, haiku);
-                    hintsAdded = true;
-                    break;
-                }
-            }
-        }
-
-        if (!hintsAdded) {
-            console.log(`\n⚠️  No hints found for "${word}" in source file`);
-        }
-    } catch (error) {
-        console.log(`\n⚠️  Could not load hints source file: ${error.message}`);
-    }
-
     // Show summary
-    console.log(`\n${'='.repeat(60)}`);
+    console.log(`\\n${'='.repeat(60)}`);
     console.log(`📋 SUMMARY`);
     console.log(`${'='.repeat(60)}`);
     console.log(`Word:        ${word}`);
     console.log(`Date:        ${dateFormatted}`);
     console.log(`Game:        #${gameNumber}`);
-    console.log(`Added to:    used-words.csv${addedToWordsTxt ? ', words.txt' : ''}`);
-    if (hintsAdded) {
-        console.log(`Synonym:     ${synonym}`);
-        console.log(`Haiku:       ${haiku}`);
+    console.log(`Word Reuse:  ${gameNumber >= WORD_REUSE_START_GAME ? 'ENABLED' : 'DISABLED'}`);
+    console.log(`Generated:   todays-word.json${addedToWordsTxt ? ', updated words.txt' : ''}`);
+    if (hints.synonym && hints.haiku) {
+        console.log(`Synonym:     ${hints.synonym}`);
+        console.log(`Haiku:       ${hints.haiku}`);
     } else {
-        console.log(`Hints:       (none)`);
+        console.log(`Hints:       (not found in unified-hints.csv)`);
     }
-    console.log(`${'='.repeat(60)}\n`);
+    console.log(`Recent Used: [${recentUsedWords.join(', ')}]`);
+    console.log(`${'='.repeat(60)}\\n`);
 
     // Always commit
     try {
         console.log(`Committing changes...`);
-        execSync('git add wwwroot/used-words.csv wwwroot/word-hints.csv wwwroot/words.txt', { cwd: join(__dirname, '..'), stdio: 'inherit' });
+
+        // Stage the files we've modified
+        const filesToCommit = ['wwwroot/todays-word.json'];
+        if (addedToWordsTxt) {
+            filesToCommit.push('wwwroot/words.txt');
+        }
+
+        execSync(`git add ${filesToCommit.join(' ')}`, { cwd: join(__dirname, '..'), stdio: 'inherit' });
 
         const commitMessage = `Add Wordle word: ${word} (game #${gameNumber}, ${dateFormatted})`;
         execSync(`git commit -m "${commitMessage}"`, { cwd: join(__dirname, '..'), stdio: 'inherit' });
 
-        console.log(`\nPushing to remote...`);
+        console.log(`\\nPushing to remote...`);
         execSync('git push', { cwd: join(__dirname, '..'), stdio: 'inherit' });
 
-        console.log(`\n✅ SUCCESS! Changes committed and pushed\n`);
+        console.log(`\\n✅ SUCCESS! Changes committed and pushed\\n`);
     } catch (error) {
-        console.error(`\n❌ Error during git operations:`, error.message);
-        console.log(`   Changes saved to files but not committed\n`);
+        console.error(`\\n❌ Error during git operations:`, error.message);
+        console.log(`   Changes saved to files but not committed\\n`);
         return true;
     }
 
@@ -331,7 +263,7 @@ async function main() {
 
     if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
         console.log(`
-Wordle Word Adder - Manually add words to used-words.csv
+Wordle Word Adder - Generate todays-word.json for the new word reuse system
 
 Usage:
   node add-word.mjs <word> [date]
@@ -343,13 +275,19 @@ Arguments:
 
 Examples:
   node add-word.mjs TRUCK
-    Adds TRUCK for next game number (auto-detects from file)
+    Generates todays-word.json for next game number
 
-  node add-word.mjs TRUCK 2025-12-16
-    Adds TRUCK for December 16, 2025
+  node add-word.mjs TRUCK 2026-02-03
+    Generates todays-word.json for February 3, 2026
 
   npm run add TRUCK
     Same as above, but easier to remember
+
+Important Changes (Feb 2, 2026):
+  - Words can now be reused starting with game #${WORD_REUSE_START_GAME}
+  - Generates todays-word.json instead of updating used-words.csv
+  - Tracks recentUsedWords array for the new era
+  - Maintains hint lookup from unified-hints.csv
 
 Note: Changes are automatically committed and pushed to git.
 `);
@@ -368,7 +306,7 @@ Note: Changes are automatically committed and pushed to git.
         await addWord(word, date);
         process.exit(0);
     } catch (error) {
-        console.error(`\n❌ Error: ${error.message}\n`);
+        console.error(`\\n❌ Error: ${error.message}\\n`);
         process.exit(1);
     }
 }

@@ -358,43 +358,33 @@
             matchingWords = allWords.OrderBy(w => w).ToList();
             StateHasChanged();
 
-            // Now load the rest of the data
-            var usedCsv = await Http.GetStringAsync("used-words.csv");
-            foreach (var line in usedCsv.Split('\n', StringSplitOptions.RemoveEmptyEntries))
-            {
-                var parts = line.Split(',');
-                if (parts.Length >= 3)
-                {
-                    var word = parts[0].Trim().ToLower();
-                    if (word.Length == 5 && int.TryParse(parts[1].Trim(), out int gameNumber))
-                    {
-                        var date = parts[2].Trim();
-                        usedWords[word] = (gameNumber, date);
-                    }
-                }
-            }
-
-            // Now that usedWords is loaded, calculate today's word
+            // Calculate current game number first
             CalculateCurrentWordleGame();
 
             // Load guess-only words for strategy service
             var guessOnlyWords = await Http.GetStringAsync("guess-only-words.txt");
             StrategyService.Initialize(wordsText, guessOnlyWords);
 
-            // Pass used words to strategy service
-            // Use current game number as cutoff so today's word (and future words) remain as possible answers
-            StrategyService.LoadUsedWords(usedWords, currentWordleGameNumber);
+            // Load word data based on game number (historical vs current)
+            if (currentWordleGameNumber <= 1690)
+            {
+                // Historical games (1-1690): Use historical-words.csv
+                await LoadHistoricalGameData();
+            }
+            else
+            {
+                // Current games (1691+): Use todays-word.json
+                await LoadCurrentGameData();
+            }
 
-            // Load pre-calculated starting words
+            // Load pre-calculated performance data
             var startingWordsJson = await Http.GetStringAsync("starting-words.json");
             StrategyService.LoadStartingWords(startingWordsJson);
 
-            // Load high-quality words for Normal mode optimization
             var highQualityWordsJson = await Http.GetStringAsync("high-quality-words.json");
             StrategyService.LoadHighQualityWords(highQualityWordsJson);
 
-            // Load second-word cache for instant second-guess recommendations (Phase 2B)
-            // This file is optional - if not found, live calculation will be used
+            // Load second-word cache (optional)
             try
             {
                 var secondWordCacheJson = await Http.GetStringAsync("second-word-cache.json");
@@ -402,12 +392,11 @@
             }
             catch
             {
-                // Cache file not found - will use live calculation
                 Console.WriteLine("Second-word cache not found, using live calculation");
             }
 
-            // Load word hints (synonym and haiku)
-            await LoadWordHints();
+            // Load unified word hints
+            await LoadUnifiedWordHints();
 
             // Look up hints for today's word now that hints are loaded
             LookupCurrentWordHints();
@@ -421,12 +410,72 @@
         }
     }
 
-    private async Task LoadWordHints()
+    private async Task LoadHistoricalGameData()
     {
         try
         {
-            // Load recent word hints (small file with latest puzzle hints)
-            var hintsCsv = await Http.GetStringAsync("word-hints.csv");
+            // Load historical word data for games 1-1690
+            var historicalCsv = await Http.GetStringAsync("historical-words.csv");
+            var historicalWords = new Dictionary<string, (int gameNumber, string date)>();
+
+            foreach (var line in historicalCsv.Split('\n', StringSplitOptions.RemoveEmptyEntries))
+            {
+                var parts = line.Split(',');
+                if (parts.Length >= 3)
+                {
+                    var word = parts[0].Trim().ToLower();
+                    if (word.Length == 5 && int.TryParse(parts[1].Trim(), out int gameNumber))
+                    {
+                        var date = parts[2].Trim();
+                        historicalWords[word] = (gameNumber, date);
+                        usedWords[word] = (gameNumber, date); // For UI compatibility
+                    }
+                }
+            }
+
+            // Pass historical words to strategy service
+            StrategyService.LoadHistoricalWords(historicalWords);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading historical game data: {ex.Message}");
+        }
+    }
+
+    private async Task LoadCurrentGameData()
+    {
+        try
+        {
+            // Load today's word data for games 1691+
+            var todaysWordJson = await Http.GetStringAsync("todays-word.json");
+            var todaysWordDocument = System.Text.Json.JsonDocument.Parse(todaysWordJson);
+
+            // Parse today's word data
+            var gameNumber = todaysWordDocument.RootElement.GetProperty("gameNumber").GetInt32();
+            var word = todaysWordDocument.RootElement.GetProperty("word").GetString()?.ToLower() ?? "";
+            var date = todaysWordDocument.RootElement.GetProperty("date").GetString() ?? "";
+
+            // Update current game tracking for UI
+            if (gameNumber == currentWordleGameNumber)
+            {
+                usedWords[word] = (gameNumber, date);
+            }
+
+            // Pass today's word data to strategy service
+            StrategyService.LoadTodaysWord(todaysWordDocument.RootElement);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading current game data: {ex.Message}");
+        }
+    }
+
+    private async Task LoadUnifiedWordHints()
+    {
+        try
+        {
+            // Load unified word hints (comprehensive file with all word hints)
+            var hintsCsv = await Http.GetStringAsync("unified-hints.csv");
             foreach (var line in hintsCsv.Split('\n', StringSplitOptions.RemoveEmptyEntries))
             {
                 var parts = line.Split(',', 3); // Split into max 3 parts to handle commas in haiku
@@ -441,7 +490,7 @@
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error loading word hints: {ex.Message}");
+            Console.WriteLine($"Error loading unified word hints: {ex.Message}");
         }
     }
 
@@ -510,8 +559,8 @@
         // Reset the game with the new date
         CalculateCurrentWordleGame();
 
-        // Reload used words with the new game number to update available answer words
-        StrategyService.LoadUsedWords(usedWords, currentWordleGameNumber);
+        // Word loading is now handled by LoadHistoricalGameData or LoadCurrentGameData
+        // No need to reload used words separately
 
         LookupCurrentWordHints();
         FilterWords();
@@ -1197,7 +1246,7 @@
             {
                 // Hard mode: Use existing two-phase approach (quick then full)
                 // Phase 1: Quick evaluation for instant feedback
-                recommendations = StrategyService.GetRecommendationsQuick(guesses, isHardMode, topN: 5);
+                recommendations = StrategyService.GetRecommendations(guesses, isHardMode, topN: 5);
                 isLoadingRecommendations = false;
                 isRefiningRecommendations = true;  // Show refining indicator
                 StateHasChanged();
@@ -1213,7 +1262,7 @@
                 {
                     await Task.Delay(1); // Allow UI to update with quick results
 
-                    var fullRecommendations = StrategyService.GetRecommendationsFull(guesses, isHardMode, topN: 5);
+                    var fullRecommendations = StrategyService.GetRecommendations(guesses, isHardMode, topN: 5, useMinimax: true);
 
                     // Update only if full recommendations are different/better
                     if (AreBetterRecommendations(fullRecommendations, recommendations))

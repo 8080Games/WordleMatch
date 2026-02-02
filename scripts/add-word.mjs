@@ -50,10 +50,10 @@ function loadExistingCurrentGames() {
 }
 
 function findWordHints(word) {
-    const hintsPath = join(__dirname, '../wwwroot/unified-hints.csv');
+    const hintsPath = join(__dirname, '../wwwroot/55ee0527d71c36d8-wordle-hints.csv');
 
     if (!existsSync(hintsPath)) {
-        console.log('Warning: unified-hints.csv not found');
+        console.log('Warning: 55ee0527d71c36d8-wordle-hints.csv not found');
         return { synonym: '', haiku: '' };
     }
 
@@ -215,6 +215,9 @@ async function addWord(word, dateStr = null) {
             }
 
             console.log(`✓ Added to used-words.csv: ${oldestGame.word} (marked as recently used)`);
+
+            // Note: Hints remain available in master file (55ee0527d71c36d8-wordle-hints.csv)
+            // No need to duplicate them elsewhere - lazy loaded when needed
 
             // Remove from current games array
             games = games.slice(1);

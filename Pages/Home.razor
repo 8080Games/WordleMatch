@@ -90,11 +90,9 @@
 
     <div class="puzzle-info-container">
         <div class="puzzle-info">
-            @* Temporarily hidden during word reuse transition
             <button class="history-button" @onclick="OpenHistoryCalendar" title="Play past puzzles">
                 <span class="material-icons">history</span>
             </button>
-            *@
             <span class="puzzle-date">@userLocalDate.ToString("MMMM d, yyyy")</span>
             <span class="puzzle-separator">•</span>
             <span class="puzzle-number">Puzzle #@currentWordleGameNumber</span>
@@ -395,8 +393,8 @@
                 Console.WriteLine("Second-word cache not found, using live calculation");
             }
 
-            // Load unified word hints
-            await LoadUnifiedWordHints();
+            // Load master word hints
+            await LoadMasterWordHints();
 
             // Look up hints for today's word now that hints are loaded
             LookupCurrentWordHints();
@@ -439,6 +437,181 @@
         catch (Exception ex)
         {
             Console.WriteLine($"Error loading historical game data: {ex.Message}");
+        }
+    }
+
+    private async Task LoadHistoricalGameUsedWords(int targetGameNumber)
+    {
+        try
+        {
+            // Clear existing used words
+            usedWords.Clear();
+
+            if (targetGameNumber <= 1688)
+            {
+                // Historical era (≤1688): Used words = all games from 1 to (targetGame - 1)
+                Console.WriteLine($"Loading historical used words for game {targetGameNumber}: games 1-{targetGameNumber - 1}");
+
+                var historicalCsv = await Http.GetStringAsync("historical-words.csv");
+                var historicalWords = new Dictionary<string, (int gameNumber, string date)>();
+
+                foreach (var line in historicalCsv.Split('\n', StringSplitOptions.RemoveEmptyEntries))
+                {
+                    var parts = line.Split(',');
+                    if (parts.Length >= 3)
+                    {
+                        var word = parts[0].Trim().ToLower();
+                        if (word.Length == 5 && int.TryParse(parts[1].Trim(), out int gameNumber))
+                        {
+                            var date = parts[2].Trim();
+                            historicalWords[word] = (gameNumber, date);
+
+                            // Only include games before the target game (used words)
+                            if (gameNumber < targetGameNumber)
+                            {
+                                usedWords[word] = (gameNumber, date);
+                            }
+                        }
+                    }
+                }
+
+                // Pass all historical words to strategy service (not just used ones)
+                StrategyService.LoadHistoricalWords(historicalWords);
+            }
+            else
+            {
+                // Word reuse era (≥1689): Used words = all games from 1689 to (targetGame - 1)
+                Console.WriteLine($"Loading word reuse era used words for game {targetGameNumber}: games 1689-{targetGameNumber - 1}");
+
+                // Load from used-words.csv (words that moved from current to historical)
+                try
+                {
+                    var usedWordsCsv = await Http.GetStringAsync("used-words.csv");
+                    foreach (var line in usedWordsCsv.Split('\n', StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        var parts = line.Split(',');
+                        if (parts.Length >= 3)
+                        {
+                            var word = parts[0].Trim().ToLower();
+                            if (word.Length == 5 && int.TryParse(parts[1].Trim(), out int gameNumber))
+                            {
+                                var date = parts[2].Trim();
+
+                                // Only include games from 1689 to before target game
+                                if (gameNumber >= 1689 && gameNumber < targetGameNumber)
+                                {
+                                    usedWords[word] = (gameNumber, date);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("No used-words.csv file found (expected for early word reuse era)");
+                }
+
+                // Load from current-games.json for games that haven't moved to historical yet
+                try
+                {
+                    var currentGamesJson = await Http.GetStringAsync("current-games.json");
+                    var currentGamesDocument = System.Text.Json.JsonDocument.Parse(currentGamesJson);
+                    var gamesArray = currentGamesDocument.RootElement.GetProperty("games");
+
+                    foreach (var gameElement in gamesArray.EnumerateArray())
+                    {
+                        var gameNumber = gameElement.GetProperty("gameNumber").GetInt32();
+                        var word = gameElement.GetProperty("word").GetString()?.ToLower() ?? "";
+                        var date = gameElement.GetProperty("date").GetString() ?? "";
+
+                        // Only include games from 1689 to before target game
+                        if (gameNumber >= 1689 && gameNumber < targetGameNumber)
+                        {
+                            usedWords[word] = (gameNumber, date);
+                        }
+
+                        // Load hints for current games into wordHints dictionary
+                        if (gameElement.TryGetProperty("hints", out var hintsElement))
+                        {
+                            var synonym = hintsElement.TryGetProperty("synonym", out var synElement) ? synElement.GetString() ?? "" : "";
+                            var haiku = hintsElement.TryGetProperty("haiku", out var haikuElement) ? haikuElement.GetString() ?? "" : "";
+                            wordHints[word] = (synonym, haiku);
+                        }
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("No current-games.json file found");
+                }
+
+                // For word reuse era, pass empty historical words to strategy service
+                StrategyService.LoadHistoricalWords(new Dictionary<string, (int, string)>());
+            }
+
+            Console.WriteLine($"Loaded {usedWords.Count} used words for game {targetGameNumber}");
+
+            // Also find and set the current word for this historical game
+            await SetHistoricalCurrentWord(targetGameNumber);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading historical game used words: {ex.Message}");
+        }
+    }
+
+    private async Task SetHistoricalCurrentWord(int targetGameNumber)
+    {
+        try
+        {
+            // Look up the word for the target game number
+            if (targetGameNumber <= 1687)
+            {
+                // Search historical-words.csv for the target game
+                var historicalCsv = await Http.GetStringAsync("historical-words.csv");
+                foreach (var line in historicalCsv.Split('\n', StringSplitOptions.RemoveEmptyEntries))
+                {
+                    var parts = line.Split(',');
+                    if (parts.Length >= 3 && int.TryParse(parts[1].Trim(), out int gameNumber))
+                    {
+                        if (gameNumber == targetGameNumber)
+                        {
+                            currentWordleWord = parts[0].Trim().ToLower();
+                            currentWordVowelCount = CountVowels(currentWordleWord);
+                            Console.WriteLine($"Set current word for game {targetGameNumber}: {currentWordleWord}");
+                            return;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // Search current-games.json for the target game
+                var currentGamesJson = await Http.GetStringAsync("current-games.json");
+                var currentGamesDocument = System.Text.Json.JsonDocument.Parse(currentGamesJson);
+                var gamesArray = currentGamesDocument.RootElement.GetProperty("games");
+
+                foreach (var gameElement in gamesArray.EnumerateArray())
+                {
+                    var gameNumber = gameElement.GetProperty("gameNumber").GetInt32();
+                    if (gameNumber == targetGameNumber)
+                    {
+                        currentWordleWord = gameElement.GetProperty("word").GetString()?.ToLower() ?? "";
+                        currentWordVowelCount = CountVowels(currentWordleWord);
+                        Console.WriteLine($"Set current word for game {targetGameNumber}: {currentWordleWord}");
+                        return;
+                    }
+                }
+            }
+
+            Console.WriteLine($"Warning: Could not find word for game {targetGameNumber}");
+            currentWordleWord = string.Empty;
+            currentWordVowelCount = 0;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error setting historical current word: {ex.Message}");
+            currentWordleWord = string.Empty;
+            currentWordVowelCount = 0;
         }
     }
 
@@ -502,12 +675,12 @@
         }
     }
 
-    private async Task LoadUnifiedWordHints()
+    private async Task LoadMasterWordHints()
     {
         try
         {
-            // Load unified word hints (comprehensive file with all word hints)
-            var hintsCsv = await Http.GetStringAsync("unified-hints.csv");
+            // Load master word hints (comprehensive source file)
+            var hintsCsv = await Http.GetStringAsync("55ee0527d71c36d8-wordle-hints.csv");
             foreach (var line in hintsCsv.Split('\n', StringSplitOptions.RemoveEmptyEntries))
             {
                 var parts = line.Split(',', 3); // Split into max 3 parts to handle commas in haiku
@@ -522,7 +695,7 @@
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error loading unified word hints: {ex.Message}");
+            Console.WriteLine($"Error loading master word hints: {ex.Message}");
         }
     }
 
@@ -585,14 +758,40 @@
         userLocalDate = selectedDate;
         showCalendarModal = false;
 
-        // Load historic hints if not already loaded
-        await LoadHistoricWordHints();
-
-        // Reset the game with the new date
+        // Calculate which game this date represents
         CalculateCurrentWordleGame();
 
-        // Word loading is now handled by LoadHistoricalGameData or LoadCurrentGameData
-        // No need to reload used words separately
+        // Special case: If user selected "today", load current game normally
+        if (selectedDate.Date == DateTime.Today.Date)
+        {
+            Console.WriteLine("Selected today - loading current game normally");
+
+            // Load current game data using normal path
+            if (currentWordleGameNumber <= 1687)
+            {
+                await LoadHistoricalGameData();
+            }
+            else
+            {
+                await LoadNewEraGameData();
+            }
+
+            // Re-calculate current word now that word data is loaded
+            CalculateCurrentWordleGame();
+
+            // Load master hints for current game
+            await LoadMasterWordHints();
+        }
+        else
+        {
+            Console.WriteLine($"Selected historical date {selectedDate:yyyy-MM-dd} (game {currentWordleGameNumber}) - loading historical view");
+
+            // Load master hints (lazy loading for historical games)
+            await LoadMasterWordHints();
+
+            // Load used words based on the historical game era
+            await LoadHistoricalGameUsedWords(currentWordleGameNumber);
+        }
 
         LookupCurrentWordHints();
         FilterWords();

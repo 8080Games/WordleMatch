@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Poppins:wght@300;500;700;900&display=swap');
+
+        .og-image {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 400% 400%;
+            display: flex;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            border: 2px solid #ddd;
+            box-sizing: border-box;
+            padding: 0 80px;
+            overflow: hidden;
+        }
+
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background-image:
+                radial-gradient(circle at 25% 25%, white 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, white 2px, transparent 2px);
+            background-size: 60px 60px;
+        }
+
+        .left-content {
+            flex: 1;
+            padding-right: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .right-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .title-wrapper {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 84px;
+            font-weight: 400;
+            background: linear-gradient(45deg, #ffffff, #f8f9fa, #ffffff, #ecf0f1);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 0.85;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+            position: relative;
+            display: inline-block;
+        }
+
+        .title::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.2), transparent);
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        .title-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            font-family: 'Fredoka One', cursive;
+            font-size: 84px;
+            line-height: 0.85;
+            color: rgba(255,255,255,0.3);
+            filter: blur(3px);
+            z-index: -1;
+        }
+
+        .subtitle {
+            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 35px;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            font-size: 24px;
+            color: #ffffff;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .tagline span {
+            display: block;
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 40px;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 8px 8px 40px;
+            border-radius: 25px;
+            margin-bottom: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .tagline span::before {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            filter: drop-shadow(0 0 4px rgba(255,255,255,0.8));
+        }
+
+        .tagline span:nth-child(1)::before { content: "⚡"; }
+        .tagline span:nth-child(2)::before { content: "🎭"; }
+        .tagline span:nth-child(3)::before { content: "📚"; }
+
+        .word-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .letter-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .letter-box {
+            width: 60px;
+            height: 60px;
+            border: 3px solid #878a8c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease;
+        }
+
+        .letter-box:hover {
+            transform: scale(1.05);
+        }
+
+        .correct {
+            background-color: #6aaa64;
+            border-color: #6aaa64;
+            box-shadow: 0 4px 8px rgba(106, 170, 100, 0.4);
+        }
+        .partial {
+            background-color: #c9b458;
+            border-color: #c9b458;
+            box-shadow: 0 4px 8px rgba(201, 180, 88, 0.4);
+        }
+        .absent {
+            background-color: #878a8c;
+            border-color: #878a8c;
+        }
+
+        .word-label {
+            font-size: 16px;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        .url {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 26px;
+            color: #ffffff;
+            font-weight: 900;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            padding: 15px 35px;
+            border-radius: 30px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            text-decoration: none;
+            letter-spacing: 1px;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .sparkle {
+            position: absolute;
+            color: rgba(255,255,255,0.8);
+            font-size: 20px;
+            animation: twinkle 2s infinite;
+        }
+
+        .sparkle:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 20%; right: 20%; animation-delay: 0.7s; }
+        .sparkle:nth-child(3) { bottom: 30%; left: 10%; animation-delay: 1.4s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <div class="og-image">
+        <div class="bg-pattern"></div>
+        <div class="sparkle">✨</div>
+        <div class="sparkle">⭐</div>
+        <div class="sparkle">💫</div>
+
+        <div class="left-content">
+            <div class="title-wrapper">
+                <div class="title-glow">Wordle<br>Match</div>
+                <div class="title">Wordle<br>Match</div>
+            </div>
+            <div class="subtitle">Smart Solver & Helper</div>
+
+            <div class="tagline">
+                <span>Realtime Recommendations</span>
+                <span>Hints & Haikus</span>
+                <span>Historic Games</span>
+            </div>
+        </div>
+
+        <div class="right-content">
+            <div class="word-stack">
+                <div>
+                    <div class="letter-row">
+                        <div class="letter-box absent">W</div>
+                        <div class="letter-box absent">I</div>
+                        <div class="letter-box correct">S</div>
+                        <div class="letter-box absent">H</div>
+                        <div class="letter-box absent">Y</div>
+                    </div>
+                    <div class="word-label">Guess #1</div>
+                </div>
+
+                <div>
+                    <div class="letter-row">
+                        <div class="letter-box correct">S</div>
+                        <div class="letter-box partial">T</div>
+                        <div class="letter-box partial">R</div>
+                        <div class="letter-box partial">A</div>
+                        <div class="letter-box absent">Y</div>
+                    </div>
+                    <div class="word-label">Guess #2</div>
+                </div>
+
+                <div>
+                    <div class="letter-row">
+                        <div class="letter-box correct">S</div>
+                        <div class="letter-box correct">M</div>
+                        <div class="letter-box correct">A</div>
+                        <div class="letter-box correct">R</div>
+                        <div class="letter-box correct">T</div>
+                    </div>
+                    <div class="word-label">Solution! ✨</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="url">wordlematch.com</div>
+    </div>
+</body>
+</html>

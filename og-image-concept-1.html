@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .og-image {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #6aaa64 0%, #ffffff 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+            border: 2px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        .title {
+            font-size: 72px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 32px;
+            color: #34495e;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .letter-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+
+        .letter-box {
+            width: 80px;
+            height: 80px;
+            border: 3px solid #878a8c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .correct { background-color: #6aaa64; border-color: #6aaa64; }
+        .partial { background-color: #c9b458; border-color: #c9b458; }
+        .absent { background-color: #878a8c; border-color: #878a8c; }
+
+        .tagline {
+            font-size: 28px;
+            color: #2c3e50;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .url {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            font-size: 24px;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="og-image">
+        <div class="title">Wordle Match</div>
+        <div class="subtitle">The Smartest Wordle Solver</div>
+
+        <div class="letter-row">
+            <div class="letter-box correct">S</div>
+            <div class="letter-box partial">M</div>
+            <div class="letter-box correct">A</div>
+            <div class="letter-box absent">R</div>
+            <div class="letter-box correct">T</div>
+        </div>
+
+        <div class="tagline">
+            Realtime Recommendations • Hints & Haikus • Historic Games
+        </div>
+
+        <div class="url">wordlematch.8080games.com</div>
+    </div>
+</body>
+</html>

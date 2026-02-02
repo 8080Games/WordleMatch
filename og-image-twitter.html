@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 1200px;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .og-image {
+            width: 1200px;
+            height: 600px;
+            background: linear-gradient(45deg, #ffffff 0%, #f8f9fa 50%, #6aaa64 100%);
+            display: flex;
+            align-items: flex-start;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+            box-sizing: border-box;
+            padding: 80px 120px;
+        }
+
+        .left-content {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .right-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .title {
+            font-size: 74px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            line-height: 0.9;
+        }
+
+        .subtitle {
+            font-size: 30px;
+            color: #34495e;
+            margin-bottom: 12px;
+            font-weight: 300;
+        }
+
+        .tagline {
+            font-size: 24px;
+            color: #2c3e50;
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        .tagline span {
+            display: block;
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .tagline span::before {
+            content: "⚡";
+            position: absolute;
+            left: 0;
+            color: #6aaa64;
+            font-size: 22px;
+        }
+
+        .tagline span:nth-child(2)::before { content: "🎭"; }
+        .tagline span:nth-child(3)::before { content: "📚"; }
+
+        .word-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .letter-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .letter-box {
+            width: 68px;
+            height: 68px;
+            border: 4px solid #878a8c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 38px;
+            font-weight: bold;
+            color: white;
+            border-radius: 6px;
+        }
+
+        .correct { background-color: #6aaa64; border-color: #6aaa64; }
+        .partial { background-color: #c9b458; border-color: #c9b458; }
+        .absent { background-color: #878a8c; border-color: #878a8c; }
+
+        .word-label {
+            font-size: 13px;
+            color: #7f8c8d;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .url {
+            position: absolute;
+            bottom: 85px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 22px;
+            color: #ffffff;
+            font-weight: bold;
+            background: #6aaa64;
+            padding: 10px 28px;
+            border-radius: 25px;
+            box-shadow: 0 4px 12px rgba(106, 170, 100, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="og-image">
+        <div class="left-content">
+            <div class="title">Wordle<br>Match</div>
+            <div class="subtitle">Smart Solver & Helper</div>
+
+            <div class="tagline">
+                <span>Realtime Recommendations</span>
+                <span>Hints & Haikus</span>
+                <span>Historic Games</span>
+            </div>
+        </div>
+
+        <div class="right-content">
+            <div class="word-stack">
+                <div>
+                    <div class="letter-row">
+                        <div class="letter-box absent">W</div>
+                        <div class="letter-box absent">I</div>
+                        <div class="letter-box correct">S</div>
+                        <div class="letter-box absent">H</div>
+                        <div class="letter-box absent">Y</div>
+                    </div>
+                    <div class="word-label">Guess #1</div>
+                </div>
+
+                <div>
+                    <div class="letter-row">
+                        <div class="letter-box correct">S</div>
+                        <div class="letter-box partial">T</div>
+                        <div class="letter-box partial">R</div>
+                        <div class="letter-box partial">A</div>
+                        <div class="letter-box absent">Y</div>
+                    </div>
+                    <div class="word-label">Guess #2</div>
+                </div>
+
+                <div>
+                    <div class="letter-row">
+                        <div class="letter-box correct">S</div>
+                        <div class="letter-box correct">M</div>
+                        <div class="letter-box correct">A</div>
+                        <div class="letter-box correct">R</div>
+                        <div class="letter-box correct">T</div>
+                    </div>
+                    <div class="word-label">Solution! ✨</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="url">wordlematch.8080Games.com</div>
+    </div>
+</body>
+</html>

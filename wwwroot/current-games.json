@@ -1,27 +1,23 @@
 {
   "games": [
     {
-      "gameNumber": 1691,
-      "word": "REUSE",
-      "date": "2/4/2026",
+      "gameNumber": 1688,
+      "word": "SPINY",
+      "date": "2/1/2026",
       "hints": {
-        "synonym": "Recycle",
-        "haiku": "Using once again / Waste reduced through repetition / Second life given"
+        "synonym": "Thorny",
+        "haiku": "Sharp points protect / Nature's armor guards within / Prickly but defended"
       }
     },
     {
-      "gameNumber": 1692,
-      "word": "ZONES",
-      "date": "2/5/2026",
+      "gameNumber": 1689,
+      "word": "RESET",
+      "date": "2/2/2026",
       "hints": {
-        "synonym": "",
-        "haiku": ""
+        "synonym": "Restart",
+        "haiku": "Begin once again / Clear the slate and start anew / Fresh start awaits"
       }
     }
   ],
-  "recentUsedWords": [
-    "MAGIC",
-    "REUSE",
-    "ZONES"
-  ]
+  "recentUsedWords": []
 }

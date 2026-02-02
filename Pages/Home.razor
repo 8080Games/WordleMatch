@@ -13,7 +13,7 @@
     <div class="update-banner">
         <div class="update-banner-content">
             <div class="banner-text">
-                <strong>Notice:</strong> Wordle Match will update to the new NY Times Wordle refreshed word list at 00:00 UTC February 2, 2026
+                <strong>Updated:</strong> Wordle Match has reset the used words list in accordance with the NY Times announcement for February 2, 2026
             </div>
         </div>
     </div>
@@ -90,19 +90,14 @@
 
     <div class="puzzle-info-container">
         <div class="puzzle-info">
+            @* Temporarily hidden during word reuse transition
             <button class="history-button" @onclick="OpenHistoryCalendar" title="Play past puzzles">
                 <span class="material-icons">history</span>
             </button>
+            *@
             <span class="puzzle-date">@userLocalDate.ToString("MMMM d, yyyy")</span>
             <span class="puzzle-separator">•</span>
-            @if (!string.IsNullOrEmpty(currentWordleWord))
-            {
-                <span class="puzzle-number">Puzzle #@currentWordleGameNumber</span>
-            }
-            else
-            {
-                <span class="puzzle-number">Puzzle ####</span>
-            }
+            <span class="puzzle-number">Puzzle #@currentWordleGameNumber</span>
         </div>
     </div>
 
@@ -365,17 +360,22 @@
             var guessOnlyWords = await Http.GetStringAsync("guess-only-words.txt");
             StrategyService.Initialize(wordsText, guessOnlyWords);
 
-            // Load word data based on game number (historical vs current)
-            if (currentWordleGameNumber <= 1690)
+            // Load word data based on sliding window architecture
+            // Historical data: games 0-1687 (in historical-words.csv)
+            // Current data: games 1688+ (in current-games.json with sliding 2-day window)
+            if (currentWordleGameNumber <= 1687) // Historical games before word reuse era
             {
-                // Historical games (1-1690): Use historical-words.csv
+                // Historical games (0-1687): Use historical-words.csv
                 await LoadHistoricalGameData();
             }
             else
             {
-                // Current games (1691+): Use todays-word.json
-                await LoadCurrentGameData();
+                // Current era games (1688+): Use current-games.json sliding window
+                await LoadNewEraGameData();
             }
+
+            // Re-calculate current word now that word data is loaded
+            CalculateCurrentWordleGame();
 
             // Load pre-calculated performance data
             var startingWordsJson = await Http.GetStringAsync("starting-words.json");
@@ -442,31 +442,63 @@
         }
     }
 
-    private async Task LoadCurrentGameData()
+    private async Task LoadNewEraGameData()
     {
         try
         {
-            // Load today's word data for games 1691+
-            var todaysWordJson = await Http.GetStringAsync("todays-word.json");
-            var todaysWordDocument = System.Text.Json.JsonDocument.Parse(todaysWordJson);
+            // New era after NY Times reset: No used words, all words available
+            // Clear any used words tracking for the new word reuse era
+            usedWords.Clear();
 
-            // Parse today's word data
-            var gameNumber = todaysWordDocument.RootElement.GetProperty("gameNumber").GetInt32();
-            var word = todaysWordDocument.RootElement.GetProperty("word").GetString()?.ToLower() ?? "";
-            var date = todaysWordDocument.RootElement.GetProperty("date").GetString() ?? "";
-
-            // Update current game tracking for UI
-            if (gameNumber == currentWordleGameNumber)
+            // Load current-games.json with two possible words for timezone handling
+            try
             {
-                usedWords[word] = (gameNumber, date);
-            }
+                var currentGamesJson = await Http.GetStringAsync("current-games.json");
+                var currentGamesDocument = System.Text.Json.JsonDocument.Parse(currentGamesJson);
 
-            // Pass today's word data to strategy service
-            StrategyService.LoadTodaysWord(todaysWordDocument.RootElement);
+                // Parse games array to find today's word
+                var gamesArray = currentGamesDocument.RootElement.GetProperty("games");
+                foreach (var gameElement in gamesArray.EnumerateArray())
+                {
+                    var gameNumber = gameElement.GetProperty("gameNumber").GetInt32();
+                    var word = gameElement.GetProperty("word").GetString()?.ToLower() ?? "";
+                    var date = gameElement.GetProperty("date").GetString() ?? "";
+
+                    // Track words from the current games file
+                    usedWords[word] = (gameNumber, date);
+
+                    // Load hints for current games into wordHints dictionary
+                    if (gameElement.TryGetProperty("hints", out var hintsElement))
+                    {
+                        var synonym = hintsElement.TryGetProperty("synonym", out var synElement) ? synElement.GetString() ?? "" : "";
+                        var haiku = hintsElement.TryGetProperty("haiku", out var haikuElement) ? haikuElement.GetString() ?? "" : "";
+                        wordHints[word] = (synonym, haiku);
+                    }
+
+                    // Pass the current game data to strategy service if it matches
+                    if (gameNumber == currentWordleGameNumber)
+                    {
+                        StrategyService.LoadTodaysWord(gameElement);
+                    }
+                }
+
+                // Also pass the recent used words array to strategy service
+                if (currentGamesDocument.RootElement.TryGetProperty("recentUsedWords", out var recentUsedElement))
+                {
+                    // Create a synthetic document for the strategy service
+                    var syntheticData = System.Text.Json.JsonDocument.Parse($"{{\"recentUsedWords\": {recentUsedElement.GetRawText()}}}");
+                    // Note: Strategy service will handle the recent used words from the individual game elements
+                }
+            }
+            catch
+            {
+                // No current-games.json yet - that's fine, all words are available
+                Console.WriteLine("No current games file found - all words available for new era");
+            }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error loading current game data: {ex.Message}");
+            Console.WriteLine($"Error loading new era game data: {ex.Message}");
         }
     }
 

@@ -33,19 +33,19 @@ function parseDate(dateStr) {
     throw new Error(`Invalid date format: "${dateStr}". Use YYYY-MM-DD or MM/DD/YYYY`);
 }
 
-function loadExistingTodaysWord() {
-    const todaysWordPath = join(__dirname, '../wwwroot/todays-word.json');
+function loadExistingCurrentGames() {
+    const currentGamesPath = join(__dirname, '../wwwroot/current-games.json');
 
-    if (!existsSync(todaysWordPath)) {
-        return null;
+    if (!existsSync(currentGamesPath)) {
+        return { games: [], recentUsedWords: [] };
     }
 
     try {
-        const content = readFileSync(todaysWordPath, 'utf-8');
+        const content = readFileSync(currentGamesPath, 'utf-8');
         return JSON.parse(content);
     } catch (error) {
-        console.log(`Warning: Could not parse existing todays-word.json: ${error.message}`);
-        return null;
+        console.log(`Warning: Could not parse existing current-games.json: ${error.message}`);
+        return { games: [], recentUsedWords: [] };
     }
 }
 
@@ -93,8 +93,8 @@ async function addWord(word, dateStr = null) {
         throw new Error(`Word must contain only letters. Got: ${word}`);
     }
 
-    // Load existing today's word data
-    const existingData = loadExistingTodaysWord();
+    // Load existing current games data
+    const existingData = loadExistingCurrentGames();
 
     // Determine date and game number
     let targetDate;
@@ -106,9 +106,10 @@ async function addWord(word, dateStr = null) {
         gameNumber = calculateGameNumber(targetDate);
     } else {
         // Default to next game number after existing data or today
-        if (existingData) {
-            gameNumber = existingData.gameNumber + 1;
-            console.log(`Defaulting to next game after #${existingData.gameNumber}`);
+        if (existingData.games && existingData.games.length > 0) {
+            const lastGame = existingData.games[existingData.games.length - 1];
+            gameNumber = lastGame.gameNumber + 1;
+            console.log(`Defaulting to next game after #${lastGame.gameNumber}`);
         } else {
             // No existing data, default to today
             targetDate = new Date();
@@ -127,13 +128,14 @@ async function addWord(word, dateStr = null) {
     const year = targetDate.getFullYear();
     const dateFormatted = `${month}/${day}/${year}`;
 
-    console.log(`\\nGenerating todays-word.json:`);
+    console.log(`\\nGenerating current-games.json:`);
     console.log(`  Word: ${word}`);
     console.log(`  Date: ${dateFormatted}`);
     console.log(`  Game: #${gameNumber}\\n`);
 
-    // Check if this is the same word for the same game (skip if so)
-    if (existingData && existingData.gameNumber === gameNumber && existingData.word === word.toUpperCase()) {
+    // Check if this word already exists for this game number
+    const existingGame = existingData.games?.find(game => game.gameNumber === gameNumber);
+    if (existingGame && existingGame.word === word.toUpperCase()) {
         console.log(`✓ Word "${word}" already exists for game #${gameNumber}`);
         console.log(`  No changes made.`);
         return false;
@@ -150,42 +152,90 @@ async function addWord(word, dateStr = null) {
         console.log(`⚠️  No hints found for "${word}"`);
     }
 
-    // Determine recent used words list
-    let recentUsedWords;
-
+    // Build recent used words list
+    let recentUsedWords = existingData.recentUsedWords || [];
     if (gameNumber >= WORD_REUSE_START_GAME) {
-        // For games 1691+: Build recentUsedWords list allowing reuse
-        if (existingData && existingData.recentUsedWords) {
-            recentUsedWords = [...existingData.recentUsedWords];
-            // Add current word if not already in the list
-            if (!recentUsedWords.includes(word)) {
-                recentUsedWords.push(word);
-            }
-        } else {
-            // First word of the reuse era
-            recentUsedWords = [word];
+        // For games 1691+: Add current word if not already in the list
+        if (!recentUsedWords.includes(word)) {
+            recentUsedWords.push(word);
         }
-    } else {
-        // For historical games (≤1690): Single word tracking
-        recentUsedWords = [word];
     }
 
-    // Create today's word JSON object
-    const todaysWordData = {
+    // Create new game entry
+    const newGame = {
         gameNumber: gameNumber,
         word: word,
         date: dateFormatted,
         hints: {
             synonym: hints.synonym,
             haiku: hints.haiku
-        },
+        }
+    };
+
+    // Update games array - implement sliding window with historical archiving
+    let games = existingData.games || [];
+
+    // Remove any existing entry for this game number
+    games = games.filter(game => game.gameNumber !== gameNumber);
+
+    // Add the new game
+    games.push(newGame);
+
+    // Sort by game number
+    games.sort((a, b) => a.gameNumber - b.gameNumber);
+
+    // Handle sliding window: move oldest game to historical-words.csv if we have more than 2 games
+    if (games.length > 2) {
+        const oldestGame = games[0];
+        console.log(`📚 Moving game #${oldestGame.gameNumber} (${oldestGame.word}) to historical archive`);
+
+        try {
+            // Add to historical-words.csv
+            const historicalPath = join(__dirname, '../wwwroot/historical-words.csv');
+            const historicalEntry = `${oldestGame.word.toUpperCase()},${oldestGame.gameNumber},${oldestGame.date}\n`;
+
+            if (existsSync(historicalPath)) {
+                const existingHistorical = readFileSync(historicalPath, 'utf-8');
+                writeFileSync(historicalPath, existingHistorical + historicalEntry, 'utf-8');
+            } else {
+                writeFileSync(historicalPath, historicalEntry, 'utf-8');
+            }
+
+            console.log(`✓ Added to historical-words.csv: ${oldestGame.word} (game #${oldestGame.gameNumber})`);
+
+            // Add to used-words.csv (track recently used words in new era)
+            const usedWordsPath = join(__dirname, '../wwwroot/used-words.csv');
+            const usedWordEntry = `${oldestGame.word.toUpperCase()},${oldestGame.gameNumber},${oldestGame.date}\n`;
+
+            if (existsSync(usedWordsPath)) {
+                const existingUsed = readFileSync(usedWordsPath, 'utf-8');
+                writeFileSync(usedWordsPath, existingUsed + usedWordEntry, 'utf-8');
+            } else {
+                writeFileSync(usedWordsPath, usedWordEntry, 'utf-8');
+            }
+
+            console.log(`✓ Added to used-words.csv: ${oldestGame.word} (marked as recently used)`);
+
+            // Remove from current games array
+            games = games.slice(1);
+        } catch (error) {
+            console.log(`⚠️  Could not update word archives: ${error.message}`);
+        }
+    }
+
+    // Keep only the two most recent games for timezone coverage
+    games = games.slice(-2);
+
+    // Create current games JSON object
+    const currentGamesData = {
+        games: games,
         recentUsedWords: recentUsedWords
     };
 
-    // Write todays-word.json
-    const todaysWordPath = join(__dirname, '../wwwroot/todays-word.json');
-    writeFileSync(todaysWordPath, JSON.stringify(todaysWordData, null, 2), 'utf-8');
-    console.log(`✓ Generated todays-word.json`);
+    // Write current-games.json
+    const currentGamesPath = join(__dirname, '../wwwroot/current-games.json');
+    writeFileSync(currentGamesPath, JSON.stringify(currentGamesData, null, 2), 'utf-8');
+    console.log(`✓ Generated current-games.json`);
 
     // Add word to words.txt if not already there
     let addedToWordsTxt = false;
@@ -219,7 +269,7 @@ async function addWord(word, dateStr = null) {
     console.log(`Date:        ${dateFormatted}`);
     console.log(`Game:        #${gameNumber}`);
     console.log(`Word Reuse:  ${gameNumber >= WORD_REUSE_START_GAME ? 'ENABLED' : 'DISABLED'}`);
-    console.log(`Generated:   todays-word.json${addedToWordsTxt ? ', updated words.txt' : ''}`);
+    console.log(`Generated:   current-games.json${addedToWordsTxt ? ', updated words.txt' : ''}`);
     if (hints.synonym && hints.haiku) {
         console.log(`Synonym:     ${hints.synonym}`);
         console.log(`Haiku:       ${hints.haiku}`);
@@ -227,6 +277,7 @@ async function addWord(word, dateStr = null) {
         console.log(`Hints:       (not found in unified-hints.csv)`);
     }
     console.log(`Recent Used: [${recentUsedWords.join(', ')}]`);
+    console.log(`Games File:  ${games.length} games (timezone coverage)`);
     console.log(`${'='.repeat(60)}\\n`);
 
     // Always commit
@@ -234,7 +285,7 @@ async function addWord(word, dateStr = null) {
         console.log(`Committing changes...`);
 
         // Stage the files we've modified
-        const filesToCommit = ['wwwroot/todays-word.json'];
+        const filesToCommit = ['wwwroot/current-games.json'];
         if (addedToWordsTxt) {
             filesToCommit.push('wwwroot/words.txt');
         }
@@ -263,7 +314,7 @@ async function main() {
 
     if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
         console.log(`
-Wordle Word Adder - Generate todays-word.json for the new word reuse system
+Wordle Word Adder - Generate current-games.json for the new word reuse system
 
 Usage:
   node add-word.mjs <word> [date]
@@ -275,17 +326,17 @@ Arguments:
 
 Examples:
   node add-word.mjs TRUCK
-    Generates todays-word.json for next game number
+    Updates current-games.json with next game number
 
   node add-word.mjs TRUCK 2026-02-03
-    Generates todays-word.json for February 3, 2026
+    Updates current-games.json for February 3, 2026
 
   npm run add TRUCK
     Same as above, but easier to remember
 
 Important Changes (Feb 2, 2026):
   - Words can now be reused starting with game #${WORD_REUSE_START_GAME}
-  - Generates todays-word.json instead of updating used-words.csv
+  - Generates current-games.json with two words for timezone coverage
   - Tracks recentUsedWords array for the new era
   - Maintains hint lookup from unified-hints.csv
 

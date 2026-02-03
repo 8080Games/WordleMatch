@@ -329,8 +329,12 @@ public class WordleStrategyService
             return new List<Recommendation>();
         }
 
-        // Performance optimization: limit candidate evaluation based on game state
-        var candidates = GetCandidateWords(possibleAnswers.Count, hardMode, guesses);
+        // Get valid guess words (apply hard mode constraints if needed)
+        var validGuesses = hardMode
+            ? GetHardModeValidGuesses(guesses)
+            : GetCandidateWords(possibleAnswers.Count);
+
+        var candidates = validGuesses;
 
         // Calculate recommendations
         if (useMinimax)
@@ -343,7 +347,7 @@ public class WordleStrategyService
         }
     }
 
-    private List<string> GetCandidateWords(int possibleAnswersCount, bool hardMode, List<Guess> guesses)
+    private List<string> GetCandidateWords(int possibleAnswersCount)
     {
         var candidates = new List<string>();
 
@@ -366,17 +370,19 @@ public class WordleStrategyService
             candidates.AddRange(_allWords.Select(w => w.Word));
         }
 
-        var distinctCandidates = candidates.Distinct().ToList();
+        return candidates.Distinct().ToList();
+    }
 
-        // Apply Hard mode constraints if enabled
-        if (hardMode && guesses.Any())
-        {
-            distinctCandidates = distinctCandidates
-                .Where(word => _filterService.MatchesPattern(word, guesses))
-                .ToList();
-        }
-
-        return distinctCandidates;
+    /// <summary>
+    /// Gets words that satisfy hard mode constraints
+    /// Hard mode requires: GREEN letters stay in position, YELLOW letters must be used
+    /// </summary>
+    private List<string> GetHardModeValidGuesses(List<Guess> guesses)
+    {
+        return _allWords
+            .Select(w => w.Word)
+            .Where(w => _filterService.MatchesPattern(w, guesses))
+            .ToList();
     }
 
     private string GeneratePatternString(Guess guess)
@@ -422,7 +428,7 @@ public class WordleStrategyService
     private List<Recommendation> GetRecommendationsNormalModeMinimax(List<Guess> guesses, bool hardMode, int topN,
         List<string>? candidates = null, List<string>? possibleAnswers = null)
     {
-        candidates ??= GetCandidateWords(possibleAnswers?.Count ?? _allWords.Count(w => w.IsPossibleAnswer), hardMode, guesses);
+        candidates ??= GetCandidateWords(possibleAnswers?.Count ?? _allWords.Count(w => w.IsPossibleAnswer));
         possibleAnswers ??= _filterService.FilterWords(
             _allWords.Where(w => w.IsPossibleAnswer).Select(w => w.Word), guesses).ToList();
 

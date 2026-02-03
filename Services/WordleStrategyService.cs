@@ -460,10 +460,51 @@ public class WordleStrategyService
         return possibleAnswers.Count - maxGroupSize;
     }
 
+    /// <summary>
+    /// Simulates guessing 'guess' when the answer is 'answer'
+    /// Returns a pattern string representing the feedback (e.g., "GYWWG")
+    /// </summary>
     private string GetPattern(string guess, string answer)
     {
-        // Simple pattern generation - would need full implementation
-        // This is a placeholder for the pattern matching logic
-        return guess + answer; // Simplified
+        var pattern = new char[5];
+        var answerChars = answer.ToCharArray();
+        var guessChars = guess.ToCharArray();
+        var used = new bool[5];
+
+        // First pass: mark greens
+        for (int i = 0; i < 5; i++)
+        {
+            if (guessChars[i] == answerChars[i])
+            {
+                pattern[i] = 'G'; // Green
+                used[i] = true;
+            }
+        }
+
+        // Second pass: mark yellows and whites
+        for (int i = 0; i < 5; i++)
+        {
+            if (pattern[i] == 'G')
+                continue;
+
+            bool found = false;
+            for (int j = 0; j < 5; j++)
+            {
+                if (!used[j] && guessChars[i] == answerChars[j])
+                {
+                    pattern[i] = 'Y'; // Yellow
+                    used[j] = true;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                pattern[i] = 'W'; // White
+            }
+        }
+
+        return new string(pattern);
     }
 }

@@ -130,14 +130,9 @@ public class WordleStrategyService
 
         // For current games (1691+), words can be reused
         // Only remove today's specific word if it's the current game
-        foreach (var wordEntry in _allWords.Where(w => w.IsPossibleAnswer))
-        {
-            // Remove today's word as a possible answer (it's already been used today)
-            if (wordEntry.Word == word)
-            {
-                wordEntry.IsPossibleAnswer = false;
-            }
-        }
+        // Note: Today's word should remain IsPossibleAnswer = true
+        // Only words from previous dates should be marked as false
+        // The UI will handle showing today's word as green vs previous words as yellow
     }
 
     /// <summary>

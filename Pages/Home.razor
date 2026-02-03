@@ -638,7 +638,16 @@
                     var date = gameElement.GetProperty("date").GetString() ?? "";
 
                     // Track words from the current games file
-                    usedWords[word] = (gameNumber, date);
+                    // Only mark as "used" if from a previous date (gameNumber < current)
+                    if (gameNumber < currentWordleGameNumber)
+                    {
+                        usedWords[word] = (gameNumber, date);
+                    }
+                    else
+                    {
+                        // Today's word or future words - store for hints but don't mark as used
+                        // This allows today's word to show as green (possible answer) instead of yellow
+                    }
 
                     // Load hints for current games into wordHints dictionary
                     if (gameElement.TryGetProperty("hints", out var hintsElement))

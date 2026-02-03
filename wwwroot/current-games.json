@@ -1,15 +1,6 @@
 {
   "games": [
     {
-      "gameNumber": 1689,
-      "word": "CIGAR",
-      "date": "2/2/2026",
-      "hints": {
-        "synonym": "Stogie",
-        "haiku": "Smoke curls in the night / Ember glows between fingers / Ashes drift like snow"
-      }
-    },
-    {
       "gameNumber": 1690,
       "word": "WEIGH",
       "date": "2/3/2026",
@@ -17,7 +8,18 @@
         "synonym": "measure",
         "haiku": "How heavy is this / The scale tells what hands cannot / Mass made into numbers"
       }
+    },
+    {
+      "gameNumber": 1691,
+      "word": "CHIDE",
+      "date": "2/4/2026",
+      "hints": {
+        "synonym": "scold",
+        "haiku": "Sharp words meant to teach / The sting fades but lessons stay / Love can sound like this"
+      }
     }
   ],
-  "recentUsedWords": []
+  "recentUsedWords": [
+    "CHIDE"
+  ]
 }

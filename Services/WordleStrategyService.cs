@@ -330,7 +330,7 @@ public class WordleStrategyService
         }
 
         // Performance optimization: limit candidate evaluation based on game state
-        var candidates = GetCandidateWords(possibleAnswers.Count);
+        var candidates = GetCandidateWords(possibleAnswers.Count, hardMode, guesses);
 
         // Calculate recommendations
         if (useMinimax)
@@ -343,7 +343,7 @@ public class WordleStrategyService
         }
     }
 
-    private List<string> GetCandidateWords(int possibleAnswersCount)
+    private List<string> GetCandidateWords(int possibleAnswersCount, bool hardMode, List<Guess> guesses)
     {
         var candidates = new List<string>();
 
@@ -366,7 +366,17 @@ public class WordleStrategyService
             candidates.AddRange(_allWords.Select(w => w.Word));
         }
 
-        return candidates.Distinct().ToList();
+        var distinctCandidates = candidates.Distinct().ToList();
+
+        // Apply Hard mode constraints if enabled
+        if (hardMode && guesses.Any())
+        {
+            distinctCandidates = distinctCandidates
+                .Where(word => _filterService.MatchesPattern(word, guesses))
+                .ToList();
+        }
+
+        return distinctCandidates;
     }
 
     private string GeneratePatternString(Guess guess)
@@ -412,7 +422,7 @@ public class WordleStrategyService
     private List<Recommendation> GetRecommendationsNormalModeMinimax(List<Guess> guesses, bool hardMode, int topN,
         List<string>? candidates = null, List<string>? possibleAnswers = null)
     {
-        candidates ??= GetCandidateWords(possibleAnswers?.Count ?? _allWords.Count(w => w.IsPossibleAnswer));
+        candidates ??= GetCandidateWords(possibleAnswers?.Count ?? _allWords.Count(w => w.IsPossibleAnswer), hardMode, guesses);
         possibleAnswers ??= _filterService.FilterWords(
             _allWords.Where(w => w.IsPossibleAnswer).Select(w => w.Word), guesses).ToList();
 

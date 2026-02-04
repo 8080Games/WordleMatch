@@ -382,7 +382,7 @@
     justify-content: center;
     align-items: flex-start;
     margin-bottom: 15px;
-    position: relative;
+    gap: 0;
 }
 
 .entry-row {
@@ -390,9 +390,7 @@
 }
 
 .elimination-count-container {
-    position: absolute;
-    left: 0;
-    top: 0;
+    margin-right: 15px;
     width: 60px;
     display: flex;
     justify-content: center;
@@ -406,9 +404,7 @@
 }
 
 .delete-button-container {
-    position: absolute;
-    right: -45px;
-    top: 0;
+    margin-left: 15px;
     width: 40px;
     display: flex;
     justify-content: center;
@@ -680,11 +676,12 @@
 
     .elimination-count-container {
         width: 45px;
+        margin-right: 8px;
     }
 
     .delete-button-container {
         width: 35px;
-        right: -35px;
+        margin-left: 8px;
     }
 
     .letter-boxes {

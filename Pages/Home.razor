@@ -58,29 +58,36 @@
 
     @* Current entry row *@
     <div class="entry-row">
-        <div class="letter-boxes" id="letter-boxes-container">
-            @for (int i = 0; i < 5; i++)
-            {
-                int index = i;
-                <div class="letter-box-container">
-                    <div class="letter-box @GetLetterClass(index) @GetFocusClass(index) @(lockedPositions[index] ? "locked" : "")"
-                         tabindex="@(index + 1)"
-                         @onclick="() => SetFocus(index)">
-                        @(letters[index] == ' ' ? "" : letters[index].ToString().ToUpper())
-                    </div>
-                    @if (letters[index] != ' ' && !lockedPositions[index])
-                    {
-                        <div class="button-group">
-                            <button class="state-button @GetStateButtonClass(index)"
-                                    tabindex="@(7 + index)"
-                                    title="@GetStateButtonTooltip(index)"
-                                    @onclick="() => CycleState(index)"></button>
-                        </div>
-                    }
-                </div>
-            }
+        <div class="elimination-count-container">
+            <!-- Empty space to match previous-guess alignment -->
         </div>
-        <button class="add-guess-btn" id="add-guess-btn" tabindex="6" @onclick="AddGuess" title="add new guess">+</button>
+        <div class="guess-content-container">
+            <div class="letter-boxes" id="letter-boxes-container">
+                @for (int i = 0; i < 5; i++)
+                {
+                    int index = i;
+                    <div class="letter-box-container">
+                        <div class="letter-box @GetLetterClass(index) @GetFocusClass(index) @(lockedPositions[index] ? "locked" : "")"
+                             tabindex="@(index + 1)"
+                             @onclick="() => SetFocus(index)">
+                            @(letters[index] == ' ' ? "" : letters[index].ToString().ToUpper())
+                        </div>
+                        @if (letters[index] != ' ' && !lockedPositions[index])
+                        {
+                            <div class="button-group">
+                                <button class="state-button @GetStateButtonClass(index)"
+                                        tabindex="@(7 + index)"
+                                        title="@GetStateButtonTooltip(index)"
+                                        @onclick="() => CycleState(index)"></button>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="delete-button-container">
+            <button class="add-guess-btn" id="add-guess-btn" tabindex="6" @onclick="AddGuess" title="add new guess">+</button>
+        </div>
     </div>
 
     <div class="gameplay-mode-section">

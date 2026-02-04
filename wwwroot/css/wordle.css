@@ -376,20 +376,17 @@
     background-color: var(--color-bg-tertiary);
 }
 
-.entry-row {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
+.entry-row,
 .previous-guess-row {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     margin-bottom: 15px;
     position: relative;
+}
+
+.entry-row {
+    margin-bottom: 30px;
 }
 
 .elimination-count-container {
@@ -679,9 +676,7 @@
         padding: 6px 12px;
     }
 
-    .entry-row {
-        gap: 8px;
-    }
+    /* Entry row and previous guess rows now use the same container structure */
 
     .elimination-count-container,
     .delete-button-container {

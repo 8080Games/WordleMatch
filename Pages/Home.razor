@@ -45,6 +45,7 @@
                     </div>
                 }
             </div>
+            <div class="elimination-count">-@GetEliminationCount(currentGuessIndex)</div>
             <button class="delete-guess-btn" @onclick="() => RemoveGuess(currentGuessIndex)" title="Remove this guess">×</button>
         </div>
     }
@@ -1191,6 +1192,36 @@
             LetterState.Green => "green",
             _ => ""
         };
+    }
+
+    private int GetEliminationCount(int guessIndex)
+    {
+        try
+        {
+            // Calculate words before this guess (up to but not including this guess)
+            var guessesBefore = new List<WordleFilterService.Guess>();
+            for (int i = 0; i < guessIndex; i++)
+            {
+                var (guessLetters, guessStates) = previousGuesses[i];
+                guessesBefore.Add(new WordleFilterService.Guess(guessLetters, guessStates));
+            }
+            var wordsBefore = FilterService.FilterWords(allWords, guessesBefore).Count();
+
+            // Calculate words after this guess (including this guess)
+            var guessesAfter = new List<WordleFilterService.Guess>();
+            for (int i = 0; i <= guessIndex; i++)
+            {
+                var (guessLetters, guessStates) = previousGuesses[i];
+                guessesAfter.Add(new WordleFilterService.Guess(guessLetters, guessStates));
+            }
+            var wordsAfter = FilterService.FilterWords(allWords, guessesAfter).Count();
+
+            return Math.Max(0, wordsBefore - wordsAfter);
+        }
+        catch
+        {
+            return 0;
+        }
     }
 
     private async void AddGuess()

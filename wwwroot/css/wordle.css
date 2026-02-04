@@ -558,6 +558,15 @@
     color: white;
 }
 
+.elimination-count {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    margin-top: 20px;
+    min-width: 30px;
+    text-align: center;
+    font-family: monospace;
+}
+
 .filter-buttons {
     display: flex;
     justify-content: center;
@@ -666,6 +675,12 @@
         height: 28px;
         font-size: 18px;
         margin-top: 11px;
+    }
+
+    .elimination-count {
+        font-size: 10px;
+        margin-top: 16px;
+        min-width: 25px;
     }
 
     .state-button {

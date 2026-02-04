@@ -623,6 +623,35 @@
             // Clear any used words tracking for the new word reuse era
             usedWords.Clear();
 
+            // Load words from NY Times reset point (game 1689+)
+            // First load any transition period words (1689+) that aren't in current-games.json
+            try
+            {
+                var usedWordsText = await Http.GetStringAsync("used-words.csv");
+                var lines = usedWordsText.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (var line in lines.Skip(0)) // No header in used-words.csv
+                {
+                    var parts = line.Split(',');
+                    if (parts.Length >= 3)
+                    {
+                        var word = parts[0].Trim().ToLower();
+                        var gameNumber = int.Parse(parts[1].Trim());
+                        var date = parts[2].Trim();
+
+                        // Only include games from reset point (1689+) and before current game
+                        if (gameNumber >= 1689 && gameNumber < currentWordleGameNumber)
+                        {
+                            usedWords[word] = (gameNumber, date);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Note: Could not load used-words.csv transition data: {ex.Message}");
+            }
+
             // Load current-games.json with two possible words for timezone handling
             try
             {

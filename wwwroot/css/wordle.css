@@ -390,8 +390,8 @@
 }
 
 .elimination-count-container {
-    margin-right: 15px;
-    width: 60px;
+    margin-right: 8px;
+    width: 45px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -400,12 +400,11 @@
 .guess-content-container {
     display: flex;
     justify-content: center;
-    flex: 1;
 }
 
 .delete-button-container {
-    margin-left: 15px;
-    width: 40px;
+    margin-left: 8px;
+    width: 35px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -675,13 +674,13 @@
     /* Entry row and previous guess rows now use the same container structure */
 
     .elimination-count-container {
-        width: 45px;
-        margin-right: 8px;
+        width: 35px;
+        margin-right: 5px;
     }
 
     .delete-button-container {
-        width: 35px;
-        margin-left: 8px;
+        width: 28px;
+        margin-left: 5px;
     }
 
     .letter-boxes {

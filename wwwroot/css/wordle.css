@@ -407,9 +407,9 @@
 
 .delete-button-container {
     position: absolute;
-    right: 0;
+    right: -45px;
     top: 0;
-    width: 60px;
+    width: 40px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -678,9 +678,13 @@
 
     /* Entry row and previous guess rows now use the same container structure */
 
-    .elimination-count-container,
-    .delete-button-container {
+    .elimination-count-container {
         width: 45px;
+    }
+
+    .delete-button-container {
+        width: 35px;
+        right: -35px;
     }
 
     .letter-boxes {

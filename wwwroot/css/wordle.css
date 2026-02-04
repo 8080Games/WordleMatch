@@ -388,8 +388,34 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 15px;
     margin-bottom: 15px;
+    position: relative;
+}
+
+.elimination-count-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.guess-content-container {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+}
+
+.delete-button-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .letter-boxes {
@@ -562,9 +588,9 @@
     font-size: 12px;
     color: var(--color-text-tertiary);
     margin-top: 20px;
-    min-width: 30px;
     text-align: center;
     font-family: monospace;
+    white-space: nowrap;
 }
 
 .filter-buttons {
@@ -653,9 +679,13 @@
         padding: 6px 12px;
     }
 
-    .entry-row,
-    .previous-guess-row {
+    .entry-row {
         gap: 8px;
+    }
+
+    .elimination-count-container,
+    .delete-button-container {
+        width: 45px;
     }
 
     .letter-boxes {

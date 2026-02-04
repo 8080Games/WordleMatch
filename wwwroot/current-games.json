@@ -1,15 +1,6 @@
 {
   "games": [
     {
-      "gameNumber": 1690,
-      "word": "WEIGH",
-      "date": "2/3/2026",
-      "hints": {
-        "synonym": "measure",
-        "haiku": "How heavy is this / The scale tells what hands cannot / Mass made into numbers"
-      }
-    },
-    {
       "gameNumber": 1691,
       "word": "CHIDE",
       "date": "2/4/2026",
@@ -17,9 +8,19 @@
         "synonym": "scold",
         "haiku": "Sharp words meant to teach / The sting fades but lessons stay / Love can sound like this"
       }
+    },
+    {
+      "gameNumber": 1692,
+      "word": "SWOOP",
+      "date": "2/5/2026",
+      "hints": {
+        "synonym": "dive",
+        "haiku": "Down from height she comes / The target never saw it coming / Attack from above"
+      }
     }
   ],
   "recentUsedWords": [
-    "CHIDE"
+    "CHIDE",
+    "SWOOP"
   ]
 }

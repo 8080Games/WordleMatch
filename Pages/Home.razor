@@ -354,8 +354,18 @@
     {
         try
         {
-            // Load answer words first and display immediately
-            var wordsText = await Http.GetStringAsync("words.txt");
+            // Load critical files in parallel for fast startup
+            var wordsTask = Http.GetStringAsync("words.txt");
+            var guessOnlyWordsTask = Http.GetStringAsync("guess-only-words.txt");
+            var startingWordsTask = Http.GetStringAsync("starting-words.json");
+
+            await Task.WhenAll(wordsTask, guessOnlyWordsTask, startingWordsTask);
+
+            var wordsText = wordsTask.Result;
+            var guessOnlyWords = guessOnlyWordsTask.Result;
+            var startingWordsJson = startingWordsTask.Result;
+
+            // Parse answer words and display immediately
             allWords = wordsText.Split('\n', StringSplitOptions.RemoveEmptyEntries)
                 .Select(w => w.Trim().ToLower())
                 .Where(w => w.Length == 5)
@@ -368,9 +378,9 @@
             // Calculate current game number first
             CalculateCurrentWordleGame();
 
-            // Load guess-only words for strategy service
-            var guessOnlyWords = await Http.GetStringAsync("guess-only-words.txt");
+            // Initialize strategy service with all critical data
             StrategyService.Initialize(wordsText, guessOnlyWords);
+            StrategyService.LoadStartingWords(startingWordsJson);
 
             // Load word data based on sliding window architecture
             // Historical data: games 0-1687 (in historical-words.csv)
@@ -389,10 +399,7 @@
             // Re-calculate current word now that word data is loaded
             CalculateCurrentWordleGame();
 
-            // Load pre-calculated performance data
-            var startingWordsJson = await Http.GetStringAsync("starting-words.json");
-            StrategyService.LoadStartingWords(startingWordsJson);
-
+            // Load remaining performance cache files
             var highQualityWordsJson = await Http.GetStringAsync("high-quality-words.json");
             StrategyService.LoadHighQualityWords(highQualityWordsJson);
 

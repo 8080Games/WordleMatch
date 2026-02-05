@@ -250,6 +250,7 @@
     private int currentWordleGameNumber = 0;
     private string currentWordleWord = string.Empty;
     private static readonly DateTime WordleStartDate = new DateTime(2021, 6, 19); // Wordle game 0
+    private List<(int gameNumber, string word, string date)> currentGamesData = new List<(int, string, string)>();
 
     // Hints for today's word
     private Dictionary<string, (string synonym, string haiku)> wordHints = new Dictionary<string, (string, string)>();
@@ -679,6 +680,9 @@
                 var currentGamesJson = await Http.GetStringAsync("current-games.json");
                 var currentGamesDocument = System.Text.Json.JsonDocument.Parse(currentGamesJson);
 
+                // Clear and populate current games data
+                currentGamesData.Clear();
+
                 // Parse games array to find today's word
                 var gamesArray = currentGamesDocument.RootElement.GetProperty("games");
                 foreach (var gameElement in gamesArray.EnumerateArray())
@@ -686,6 +690,9 @@
                     var gameNumber = gameElement.GetProperty("gameNumber").GetInt32();
                     var word = gameElement.GetProperty("word").GetString()?.ToLower() ?? "";
                     var date = gameElement.GetProperty("date").GetString() ?? "";
+
+                    // Store current games data for lookup
+                    currentGamesData.Add((gameNumber, word, date));
 
                     // Track words from the current games file
                     // Only mark as "used" if from a previous date (gameNumber < current)
@@ -793,7 +800,16 @@
         // Calculate days since Wordle started (game 0 was June 19, 2021)
         currentWordleGameNumber = (userLocalDate - WordleStartDate).Days;
 
-        // Look up today's word from the used words database
+        // First check current games data for today's word (current/future games)
+        var currentGameWord = currentGamesData.FirstOrDefault(g => g.gameNumber == currentWordleGameNumber);
+        if (!string.IsNullOrEmpty(currentGameWord.word))
+        {
+            currentWordleWord = currentGameWord.word;
+            currentWordVowelCount = CountVowels(currentWordleWord);
+            return;
+        }
+
+        // Fall back to used words database for historical games
         var todayWordEntry = usedWords.FirstOrDefault(w => w.Value.gameNumber == currentWordleGameNumber);
         if (!todayWordEntry.Equals(default(KeyValuePair<string, (int, string)>)))
         {

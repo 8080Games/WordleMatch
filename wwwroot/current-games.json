@@ -1,15 +1,6 @@
 {
   "games": [
     {
-      "gameNumber": 1691,
-      "word": "CHIDE",
-      "date": "2/4/2026",
-      "hints": {
-        "synonym": "scold",
-        "haiku": "Sharp words meant to teach / The sting fades but lessons stay / Love can sound like this"
-      }
-    },
-    {
       "gameNumber": 1692,
       "word": "SWOOP",
       "date": "2/5/2026",
@@ -17,10 +8,20 @@
         "synonym": "dive",
         "haiku": "Down from height she comes / The target never saw it coming / Attack from above"
       }
+    },
+    {
+      "gameNumber": 1693,
+      "word": "GAVEL",
+      "date": "2/6/2026",
+      "hints": {
+        "synonym": "mallet",
+        "haiku": "Wood strikes wood with force / Order called from chaos loud / The judge decides now"
+      }
     }
   ],
   "recentUsedWords": [
     "CHIDE",
-    "SWOOP"
+    "SWOOP",
+    "GAVEL"
   ]
 }

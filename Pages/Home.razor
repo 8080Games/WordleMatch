@@ -35,7 +35,14 @@
         var (guessLetters, guessStates) = previousGuesses[guessIndex];
         <div class="previous-guess-row">
             <div class="elimination-count-container">
-                <div class="elimination-count">-@GetEliminationCount(currentGuessIndex)</div>
+                @{
+                    var (before, after) = GetWordCounts(currentGuessIndex);
+                }
+                <div class="elimination-count">
+                    <div class="count-before">@before</div>
+                    <div class="count-arrow">↓</div>
+                    <div class="count-after">@after</div>
+                </div>
             </div>
             <div class="guess-content-container">
                 <div class="letter-boxes previous-guess">
@@ -1230,7 +1237,7 @@
         };
     }
 
-    private int GetEliminationCount(int guessIndex)
+    private (int before, int after) GetWordCounts(int guessIndex)
     {
         try
         {
@@ -1252,11 +1259,11 @@
             }
             var wordsAfter = FilterService.FilterWords(allWords, guessesAfter).Count();
 
-            return Math.Max(0, wordsBefore - wordsAfter);
+            return (wordsBefore, wordsAfter);
         }
         catch
         {
-            return 0;
+            return (0, 0);
         }
     }
 

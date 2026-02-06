@@ -1,15 +1,6 @@
 {
   "games": [
     {
-      "gameNumber": 1692,
-      "word": "SWOOP",
-      "date": "2/5/2026",
-      "hints": {
-        "synonym": "dive",
-        "haiku": "Down from height she comes / The target never saw it coming / Attack from above"
-      }
-    },
-    {
       "gameNumber": 1693,
       "word": "GAVEL",
       "date": "2/6/2026",
@@ -17,11 +8,21 @@
         "synonym": "mallet",
         "haiku": "Wood strikes wood with force / Order called from chaos loud / The judge decides now"
       }
+    },
+    {
+      "gameNumber": 1694,
+      "word": "BLEAT",
+      "date": "2/7/2026",
+      "hints": {
+        "synonym": "cry",
+        "haiku": "Lamb calls for mother / Across the field the sound floats / She answers in kind"
+      }
     }
   ],
   "recentUsedWords": [
     "CHIDE",
     "SWOOP",
-    "GAVEL"
+    "GAVEL",
+    "BLEAT"
   ]
 }

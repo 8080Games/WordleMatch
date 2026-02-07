@@ -1,15 +1,6 @@
 {
   "games": [
     {
-      "gameNumber": 1693,
-      "word": "GAVEL",
-      "date": "2/6/2026",
-      "hints": {
-        "synonym": "mallet",
-        "haiku": "Wood strikes wood with force / Order called from chaos loud / The judge decides now"
-      }
-    },
-    {
       "gameNumber": 1694,
       "word": "BLEAT",
       "date": "2/7/2026",
@@ -17,12 +8,22 @@
         "synonym": "cry",
         "haiku": "Lamb calls for mother / Across the field the sound floats / She answers in kind"
       }
+    },
+    {
+      "gameNumber": 1695,
+      "word": "EMBED",
+      "date": "2/8/2026",
+      "hints": {
+        "synonym": "implant",
+        "haiku": "Deep into the stone / The jewel will not be removed / Fixed in its new home"
+      }
     }
   ],
   "recentUsedWords": [
     "CHIDE",
     "SWOOP",
     "GAVEL",
-    "BLEAT"
+    "BLEAT",
+    "EMBED"
   ]
 }

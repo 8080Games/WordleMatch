@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1694,
-      "word": "BLEAT",
-      "date": "2/7/2026",
-      "hints": {
-        "synonym": "cry",
-        "haiku": "Lamb calls for mother / Across the field the sound floats / She answers in kind"
-      }
-    },
-    {
       "gameNumber": 1695,
       "word": "EMBED",
       "date": "2/8/2026",
       "hints": {
         "synonym": "implant",
         "haiku": "Deep into the stone / The jewel will not be removed / Fixed in its new home"
+      }
+    },
+    {
+      "gameNumber": 1696,
+      "word": "CELLO",
+      "date": "2/9/2026",
+      "hints": {
+        "synonym": "instrument",
+        "haiku": "Deep voice made of wood / The bow draws tears from the strings / Music mourns and soars"
       }
     }
   ],
@@ -24,6 +24,7 @@
     "SWOOP",
     "GAVEL",
     "BLEAT",
-    "EMBED"
+    "EMBED",
+    "CELLO"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1695,
-      "word": "EMBED",
-      "date": "2/8/2026",
-      "hints": {
-        "synonym": "implant",
-        "haiku": "Deep into the stone / The jewel will not be removed / Fixed in its new home"
-      }
-    },
-    {
       "gameNumber": 1696,
       "word": "CELLO",
       "date": "2/9/2026",
       "hints": {
         "synonym": "instrument",
         "haiku": "Deep voice made of wood / The bow draws tears from the strings / Music mourns and soars"
+      }
+    },
+    {
+      "gameNumber": 1697,
+      "word": "SCENE",
+      "date": "2/10/2026",
+      "hints": {
+        "synonym": "setting",
+        "haiku": "The stage is now set / All eyes turn to watch what unfolds / Drama needs its space"
       }
     }
   ],
@@ -25,6 +25,7 @@
     "GAVEL",
     "BLEAT",
     "EMBED",
-    "CELLO"
+    "CELLO",
+    "SCENE"
   ]
 }

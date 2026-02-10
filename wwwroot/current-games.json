@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1696,
-      "word": "CELLO",
-      "date": "2/9/2026",
-      "hints": {
-        "synonym": "instrument",
-        "haiku": "Deep voice made of wood / The bow draws tears from the strings / Music mourns and soars"
-      }
-    },
-    {
       "gameNumber": 1697,
       "word": "SCENE",
       "date": "2/10/2026",
       "hints": {
         "synonym": "setting",
         "haiku": "The stage is now set / All eyes turn to watch what unfolds / Drama needs its space"
+      }
+    },
+    {
+      "gameNumber": 1698,
+      "word": "VEGAN",
+      "date": "2/11/2026",
+      "hints": {
+        "synonym": "herbivore",
+        "haiku": "No animal touched / The plate holds only plants now / Ethics in the meal"
       }
     }
   ],
@@ -26,6 +26,7 @@
     "BLEAT",
     "EMBED",
     "CELLO",
-    "SCENE"
+    "SCENE",
+    "VEGAN"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1697,
-      "word": "SCENE",
-      "date": "2/10/2026",
-      "hints": {
-        "synonym": "setting",
-        "haiku": "The stage is now set / All eyes turn to watch what unfolds / Drama needs its space"
-      }
-    },
-    {
       "gameNumber": 1698,
       "word": "VEGAN",
       "date": "2/11/2026",
       "hints": {
         "synonym": "herbivore",
         "haiku": "No animal touched / The plate holds only plants now / Ethics in the meal"
+      }
+    },
+    {
+      "gameNumber": 1699,
+      "word": "SURGE",
+      "date": "2/12/2026",
+      "hints": {
+        "synonym": "rush",
+        "haiku": "The wave rises fast / Power building in the swell / The peak approaches"
       }
     }
   ],
@@ -27,6 +27,7 @@
     "EMBED",
     "CELLO",
     "SCENE",
-    "VEGAN"
+    "VEGAN",
+    "SURGE"
   ]
 }

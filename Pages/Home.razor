@@ -9,15 +9,6 @@
 <PageTitle>Wordle Match</PageTitle>
 
 <div class="wordle-container">
-    @* NY Times Word List Update Notice *@
-    <div class="update-banner">
-        <div class="update-banner-content">
-            <div class="banner-text">
-                <strong>Updated:</strong> Wordle Match has reset the used words list in accordance with the NY Times announcement for February 2, 2026
-            </div>
-        </div>
-    </div>
-
     <div class="theme-toggle">
         <button class="theme-btn" @onclick="ToggleTheme" title="@(isDarkMode ? "Switch to light mode" : "Switch to dark mode")" aria-label="@(isDarkMode ? "Switch to light mode" : "Switch to dark mode")">
             @(isDarkMode ? "☀️" : "🌙")

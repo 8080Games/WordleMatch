@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1699,
-      "word": "SURGE",
-      "date": "2/12/2026",
-      "hints": {
-        "synonym": "rush",
-        "haiku": "The wave rises fast / Power building in the swell / The peak approaches"
-      }
-    },
-    {
       "gameNumber": 1700,
       "word": "MOOCH",
       "date": "2/13/2026",
       "hints": {
         "synonym": "Freeloader",
         "haiku": "Taking without ask / Living off another's work / Give nothing in turn"
+      }
+    },
+    {
+      "gameNumber": 1701,
+      "word": "BLOOM",
+      "date": "2/14/2026",
+      "hints": {
+        "synonym": "flower",
+        "haiku": "Petals unfurl slow / Color breaks through winter's gray / The garden exhales"
       }
     }
   ],
@@ -29,6 +29,7 @@
     "SCENE",
     "VEGAN",
     "SURGE",
-    "MOOCH"
+    "MOOCH",
+    "BLOOM"
   ]
 }

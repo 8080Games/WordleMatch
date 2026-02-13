@@ -82,6 +82,92 @@ function findWordHints(word) {
     return { synonym: '', haiku: '' };
 }
 
+function ensureWordInAnswers(word) {
+    const wordLower = word.toLowerCase();
+    let addedToWords = false;
+    let removedFromGuessOnly = false;
+
+    // Check words.txt (potential answers)
+    try {
+        const wordsTxtPath = join(__dirname, '../wwwroot/words.txt');
+        const wordsTxtContent = readFileSync(wordsTxtPath, 'utf-8');
+        const wordsArray = wordsTxtContent.trim().split('\n').map(w => w.trim().toLowerCase());
+
+        if (!wordsArray.includes(wordLower)) {
+            wordsArray.push(wordLower);
+            wordsArray.sort();
+            writeFileSync(wordsTxtPath, wordsArray.join('\n') + '\n', 'utf-8');
+            console.log(`✓ Added "${word}" to words.txt (potential answers)`);
+            addedToWords = true;
+        } else {
+            console.log(`  "${word}" already in words.txt`);
+        }
+    } catch (error) {
+        console.log(`⚠️  Could not update words.txt: ${error.message}`);
+    }
+
+    // Check guess-only-words.txt and remove if present
+    try {
+        const guessOnlyPath = join(__dirname, '../wwwroot/guess-only-words.txt');
+        if (existsSync(guessOnlyPath)) {
+            const guessContent = readFileSync(guessOnlyPath, 'utf-8');
+            const guessArray = guessContent.trim().split('\n').map(w => w.trim().toLowerCase());
+
+            if (guessArray.includes(wordLower)) {
+                const filtered = guessArray.filter(w => w !== wordLower);
+                writeFileSync(guessOnlyPath, filtered.join('\n') + '\n', 'utf-8');
+                console.log(`✓ Removed "${word}" from guess-only-words.txt`);
+                removedFromGuessOnly = true;
+            }
+        }
+    } catch (error) {
+        console.log(`⚠️  Could not update guess-only-words.txt: ${error.message}`);
+    }
+
+    return { addedToWords, removedFromGuessOnly };
+}
+
+function ensureWordInHints(word, hints) {
+    let addedToUnifiedHints = false;
+    const hintsAreMissing = !hints.synonym && !hints.haiku;
+
+    if (hintsAreMissing) {
+        console.log(`\n⚠️  ============================================`);
+        console.log(`⚠️  ALERT: No hints found for "${word}"`);
+        console.log(`⚠️  You must manually add a synonym and haiku to:`);
+        console.log(`⚠️    - wwwroot/55ee0527d71c36d8-wordle-hints.csv`);
+        console.log(`⚠️    - wwwroot/unified-hints.csv`);
+        console.log(`⚠️  ============================================\n`);
+        return { addedToUnifiedHints, hintsAreMissing };
+    }
+
+    // Hints found — ensure they're in unified-hints.csv
+    try {
+        const unifiedPath = join(__dirname, '../wwwroot/unified-hints.csv');
+        if (existsSync(unifiedPath)) {
+            const content = readFileSync(unifiedPath, 'utf-8');
+            const wordUpper = word.toUpperCase();
+
+            // Check if word already exists in unified-hints.csv
+            const lines = content.split('\n');
+            const alreadyExists = lines.some(line => line.startsWith(wordUpper + ','));
+
+            if (!alreadyExists) {
+                const entry = `${wordUpper},${hints.synonym},"${hints.haiku}"\n`;
+                writeFileSync(unifiedPath, content.trimEnd() + '\n' + entry, 'utf-8');
+                console.log(`✓ Added "${word}" hints to unified-hints.csv`);
+                addedToUnifiedHints = true;
+            } else {
+                console.log(`  "${word}" hints already in unified-hints.csv`);
+            }
+        }
+    } catch (error) {
+        console.log(`⚠️  Could not update unified-hints.csv: ${error.message}`);
+    }
+
+    return { addedToUnifiedHints, hintsAreMissing };
+}
+
 async function addWord(word, dateStr = null) {
     // Validate word
     word = word.trim().toUpperCase();
@@ -141,6 +227,9 @@ async function addWord(word, dateStr = null) {
         return false;
     }
 
+    // Ensure word is in potential answers list and not in guess-only list
+    const wordListResult = ensureWordInAnswers(word);
+
     // Find word hints
     const hints = findWordHints(word);
 
@@ -151,6 +240,9 @@ async function addWord(word, dateStr = null) {
     } else {
         console.log(`⚠️  No hints found for "${word}"`);
     }
+
+    // Ensure hints are in unified-hints.csv (or alert if missing)
+    const hintsResult = ensureWordInHints(word, hints);
 
     // Build recent used words list
     let recentUsedWords = existingData.recentUsedWords || [];
@@ -240,30 +332,6 @@ async function addWord(word, dateStr = null) {
     writeFileSync(currentGamesPath, JSON.stringify(currentGamesData, null, 2), 'utf-8');
     console.log(`✓ Generated current-games.json`);
 
-    // Add word to words.txt if not already there
-    let addedToWordsTxt = false;
-    try {
-        const wordsTxtPath = join(__dirname, '../wwwroot/words.txt');
-        const wordsTxtContent = readFileSync(wordsTxtPath, 'utf-8');
-        const wordsArray = wordsTxtContent.trim().split('\\n').map(w => w.trim().toLowerCase());
-
-        // Check if word already exists
-        if (!wordsArray.includes(word.toLowerCase())) {
-            // Add and sort alphabetically
-            wordsArray.push(word.toLowerCase());
-            wordsArray.sort();
-
-            // Write back to file
-            writeFileSync(wordsTxtPath, wordsArray.join('\\n') + '\\n', 'utf-8');
-            console.log(`✓ Added "${word}" to words.txt (was missing)`);
-            addedToWordsTxt = true;
-        } else {
-            console.log(`  "${word}" already in words.txt`);
-        }
-    } catch (error) {
-        console.log(`⚠️  Could not update words.txt: ${error.message}`);
-    }
-
     // Show summary
     console.log(`\\n${'='.repeat(60)}`);
     console.log(`📋 SUMMARY`);
@@ -272,7 +340,11 @@ async function addWord(word, dateStr = null) {
     console.log(`Date:        ${dateFormatted}`);
     console.log(`Game:        #${gameNumber}`);
     console.log(`Word Reuse:  ${gameNumber >= WORD_REUSE_START_GAME ? 'ENABLED' : 'DISABLED'}`);
-    console.log(`Generated:   current-games.json${addedToWordsTxt ? ', updated words.txt' : ''}`);
+    const updatedFiles = ['current-games.json'];
+    if (wordListResult.addedToWords) updatedFiles.push('words.txt');
+    if (wordListResult.removedFromGuessOnly) updatedFiles.push('guess-only-words.txt');
+    if (hintsResult.addedToUnifiedHints) updatedFiles.push('unified-hints.csv');
+    console.log(`Updated:     ${updatedFiles.join(', ')}`);
     if (hints.synonym && hints.haiku) {
         console.log(`Synonym:     ${hints.synonym}`);
         console.log(`Haiku:       ${hints.haiku}`);
@@ -289,8 +361,14 @@ async function addWord(word, dateStr = null) {
 
         // Stage the files we've modified
         const filesToCommit = ['wwwroot/current-games.json'];
-        if (addedToWordsTxt) {
+        if (wordListResult.addedToWords) {
             filesToCommit.push('wwwroot/words.txt');
+        }
+        if (wordListResult.removedFromGuessOnly) {
+            filesToCommit.push('wwwroot/guess-only-words.txt');
+        }
+        if (hintsResult.addedToUnifiedHints) {
+            filesToCommit.push('wwwroot/unified-hints.csv');
         }
 
         execSync(`git add ${filesToCommit.join(' ')}`, { cwd: join(__dirname, '..'), stdio: 'inherit' });

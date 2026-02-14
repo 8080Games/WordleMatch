@@ -277,6 +277,7 @@ async function addWord(word, dateStr = null) {
     games.sort((a, b) => a.gameNumber - b.gameNumber);
 
     // Handle sliding window: move oldest game to historical-words.csv if we have more than 2 games
+    let archivedWord = false;
     if (games.length > 2) {
         const oldestGame = games[0];
         console.log(`📚 Moving game #${oldestGame.gameNumber} (${oldestGame.word}) to historical archive`);
@@ -311,6 +312,8 @@ async function addWord(word, dateStr = null) {
             // Note: Hints remain available in master file (3158_wordle_hints.csv)
             // No need to duplicate them elsewhere - lazy loaded when needed
 
+            archivedWord = true;
+
             // Remove from current games array
             games = games.slice(1);
         } catch (error) {
@@ -344,6 +347,7 @@ async function addWord(word, dateStr = null) {
     if (wordListResult.addedToWords) updatedFiles.push('words.txt');
     if (wordListResult.removedFromGuessOnly) updatedFiles.push('guess-only-words.txt');
     if (hintsResult.addedToUnifiedHints) updatedFiles.push('historical_hints.csv');
+    if (archivedWord) { updatedFiles.push('historical-words.csv'); updatedFiles.push('used-words.csv'); }
     console.log(`Updated:     ${updatedFiles.join(', ')}`);
     if (hints.synonym && hints.haiku) {
         console.log(`Synonym:     ${hints.synonym}`);
@@ -369,6 +373,10 @@ async function addWord(word, dateStr = null) {
         }
         if (hintsResult.addedToUnifiedHints) {
             filesToCommit.push('wwwroot/historical_hints.csv');
+        }
+        if (archivedWord) {
+            filesToCommit.push('wwwroot/historical-words.csv');
+            filesToCommit.push('wwwroot/used-words.csv');
         }
 
         execSync(`git add ${filesToCommit.join(' ')}`, { cwd: join(__dirname, '..'), stdio: 'inherit' });

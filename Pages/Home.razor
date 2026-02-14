@@ -744,7 +744,7 @@
         try
         {
             // Load master word hints (comprehensive source file)
-            var hintsCsv = await Http.GetStringAsync("55ee0527d71c36d8-wordle-hints.csv");
+            var hintsCsv = await Http.GetStringAsync("new_words_synonyms_haikus.csv");
             foreach (var line in hintsCsv.Split('\n', StringSplitOptions.RemoveEmptyEntries))
             {
                 var parts = line.Split(',', 3); // Split into max 3 parts to handle commas in haiku

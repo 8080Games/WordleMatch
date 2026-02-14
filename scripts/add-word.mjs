@@ -50,10 +50,10 @@ function loadExistingCurrentGames() {
 }
 
 function findWordHints(word) {
-    const hintsPath = join(__dirname, '../wwwroot/55ee0527d71c36d8-wordle-hints.csv');
+    const hintsPath = join(__dirname, '../wwwroot/3158_wordle_hints.csv');
 
     if (!existsSync(hintsPath)) {
-        console.log('Warning: 55ee0527d71c36d8-wordle-hints.csv not found');
+        console.log('Warning: 3158_wordle_hints.csv not found');
         return { synonym: '', haiku: '' };
     }
 
@@ -135,34 +135,34 @@ function ensureWordInHints(word, hints) {
         console.log(`\n⚠️  ============================================`);
         console.log(`⚠️  ALERT: No hints found for "${word}"`);
         console.log(`⚠️  You must manually add a synonym and haiku to:`);
-        console.log(`⚠️    - wwwroot/55ee0527d71c36d8-wordle-hints.csv`);
-        console.log(`⚠️    - wwwroot/unified-hints.csv`);
+        console.log(`⚠️    - wwwroot/3158_wordle_hints.csv`);
+        console.log(`⚠️    - wwwroot/historical_hints.csv`);
         console.log(`⚠️  ============================================\n`);
         return { addedToUnifiedHints, hintsAreMissing };
     }
 
-    // Hints found — ensure they're in unified-hints.csv
+    // Hints found — ensure they're in historical_hints.csv
     try {
-        const unifiedPath = join(__dirname, '../wwwroot/unified-hints.csv');
+        const unifiedPath = join(__dirname, '../wwwroot/historical_hints.csv');
         if (existsSync(unifiedPath)) {
             const content = readFileSync(unifiedPath, 'utf-8');
             const wordUpper = word.toUpperCase();
 
-            // Check if word already exists in unified-hints.csv
+            // Check if word already exists in historical_hints.csv
             const lines = content.split('\n');
             const alreadyExists = lines.some(line => line.startsWith(wordUpper + ','));
 
             if (!alreadyExists) {
                 const entry = `${wordUpper},${hints.synonym},"${hints.haiku}"\n`;
                 writeFileSync(unifiedPath, content.trimEnd() + '\n' + entry, 'utf-8');
-                console.log(`✓ Added "${word}" hints to unified-hints.csv`);
+                console.log(`✓ Added "${word}" hints to historical_hints.csv`);
                 addedToUnifiedHints = true;
             } else {
-                console.log(`  "${word}" hints already in unified-hints.csv`);
+                console.log(`  "${word}" hints already in historical_hints.csv`);
             }
         }
     } catch (error) {
-        console.log(`⚠️  Could not update unified-hints.csv: ${error.message}`);
+        console.log(`⚠️  Could not update historical_hints.csv: ${error.message}`);
     }
 
     return { addedToUnifiedHints, hintsAreMissing };
@@ -241,7 +241,7 @@ async function addWord(word, dateStr = null) {
         console.log(`⚠️  No hints found for "${word}"`);
     }
 
-    // Ensure hints are in unified-hints.csv (or alert if missing)
+    // Ensure hints are in historical_hints.csv (or alert if missing)
     const hintsResult = ensureWordInHints(word, hints);
 
     // Build recent used words list
@@ -308,7 +308,7 @@ async function addWord(word, dateStr = null) {
 
             console.log(`✓ Added to used-words.csv: ${oldestGame.word} (marked as recently used)`);
 
-            // Note: Hints remain available in master file (55ee0527d71c36d8-wordle-hints.csv)
+            // Note: Hints remain available in master file (3158_wordle_hints.csv)
             // No need to duplicate them elsewhere - lazy loaded when needed
 
             // Remove from current games array
@@ -343,13 +343,13 @@ async function addWord(word, dateStr = null) {
     const updatedFiles = ['current-games.json'];
     if (wordListResult.addedToWords) updatedFiles.push('words.txt');
     if (wordListResult.removedFromGuessOnly) updatedFiles.push('guess-only-words.txt');
-    if (hintsResult.addedToUnifiedHints) updatedFiles.push('unified-hints.csv');
+    if (hintsResult.addedToUnifiedHints) updatedFiles.push('historical_hints.csv');
     console.log(`Updated:     ${updatedFiles.join(', ')}`);
     if (hints.synonym && hints.haiku) {
         console.log(`Synonym:     ${hints.synonym}`);
         console.log(`Haiku:       ${hints.haiku}`);
     } else {
-        console.log(`Hints:       (not found in unified-hints.csv)`);
+        console.log(`Hints:       (not found in historical_hints.csv)`);
     }
     console.log(`Recent Used: [${recentUsedWords.join(', ')}]`);
     console.log(`Games File:  ${games.length} games (timezone coverage)`);
@@ -368,7 +368,7 @@ async function addWord(word, dateStr = null) {
             filesToCommit.push('wwwroot/guess-only-words.txt');
         }
         if (hintsResult.addedToUnifiedHints) {
-            filesToCommit.push('wwwroot/unified-hints.csv');
+            filesToCommit.push('wwwroot/historical_hints.csv');
         }
 
         execSync(`git add ${filesToCommit.join(' ')}`, { cwd: join(__dirname, '..'), stdio: 'inherit' });
@@ -419,7 +419,7 @@ Important Changes (Feb 2, 2026):
   - Words can now be reused starting with game #${WORD_REUSE_START_GAME}
   - Generates current-games.json with two words for timezone coverage
   - Tracks recentUsedWords array for the new era
-  - Maintains hint lookup from unified-hints.csv
+  - Maintains hint lookup from historical_hints.csv
 
 Note: Changes are automatically committed and pushed to git.
 `);

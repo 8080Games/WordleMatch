@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1700,
-      "word": "MOOCH",
-      "date": "2/13/2026",
-      "hints": {
-        "synonym": "Freeloader",
-        "haiku": "Taking without ask / Living off another's work / Give nothing in turn"
-      }
-    },
-    {
       "gameNumber": 1701,
       "word": "BLOOM",
       "date": "2/14/2026",
       "hints": {
         "synonym": "flower",
         "haiku": "Petals unfurl slow / Color breaks through winter's gray / The garden exhales"
+      }
+    },
+    {
+      "gameNumber": 1702,
+      "word": "SKULL",
+      "date": "2/15/2026",
+      "hints": {
+        "synonym": "cranium",
+        "haiku": "Bone bowl holds the mind / The case around what matters most / Hard shell for soft thought"
       }
     }
   ],
@@ -30,6 +30,7 @@
     "VEGAN",
     "SURGE",
     "MOOCH",
-    "BLOOM"
+    "BLOOM",
+    "SKULL"
   ]
 }

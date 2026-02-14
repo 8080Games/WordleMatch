@@ -131,7 +131,6 @@ agoge
 agone
 agons
 agood
-agora
 agria
 agrin
 agros
@@ -445,7 +444,6 @@ ataxy
 atigi
 atilt
 atimy
-atlas
 atman
 atmas
 atmos
@@ -456,7 +454,6 @@ atoms
 atomy
 atony
 atopy
-atria
 atrip
 attap
 attar
@@ -588,7 +585,6 @@ balls
 bally
 balms
 baloo
-balsa
 balti
 balun
 balus
@@ -687,7 +683,6 @@ beath
 beats
 beaty
 beaus
-beaut
 beaux
 becap
 becke
@@ -1613,7 +1608,6 @@ colds
 coled
 coles
 coley
-colic
 colin
 colls
 colly
@@ -3242,7 +3236,6 @@ gites
 giust
 gived
 gives
-gizmo
 glace
 glads
 glady
@@ -3322,7 +3315,6 @@ goers
 goest
 goeth
 goety
-gofer
 goffs
 gogga
 gogos
@@ -3420,7 +3412,6 @@ grice
 gride
 grids
 griff
-grift
 grigs
 grike
 grins
@@ -3460,7 +3451,6 @@ grype
 grypt
 guaco
 guana
-guano
 guans
 guars
 gucks
@@ -3976,7 +3966,6 @@ incus
 incut
 indew
 india
-indie
 indol
 indow
 indri
@@ -4276,7 +4265,6 @@ kawed
 kayle
 kayos
 kazis
-kazoo
 kbars
 kebar
 kebob
@@ -4420,7 +4408,6 @@ knars
 knaur
 knawe
 knees
-knell
 knits
 knive
 knobs
@@ -4605,7 +4592,6 @@ larns
 larnt
 larum
 lased
-laser
 lases
 lassi
 lassu
@@ -5108,7 +5094,6 @@ mates
 maths
 matin
 matlo
-matte
 matts
 matza
 mauby
@@ -5351,7 +5336,6 @@ molto
 molts
 molys
 momes
-mommy
 momus
 monad
 monal
@@ -5447,7 +5431,6 @@ muffs
 mufti
 mugga
 muggs
-muggy
 muhly
 muids
 muils
@@ -5638,7 +5621,6 @@ nerks
 nerol
 nerts
 nertz
-nervy
 nests
 netes
 netop
@@ -5906,7 +5888,6 @@ onned
 ontic
 oobit
 oohed
-oomph
 oonts
 ooped
 oorie
@@ -6300,7 +6281,6 @@ pinta
 pints
 pions
 piony
-pious
 pioye
 pioys
 pipal
@@ -6526,7 +6506,6 @@ pries
 prigs
 prill
 primi
-primp
 prims
 primy
 prink
@@ -7649,7 +7628,6 @@ sisal
 sises
 sista
 sists
-sitar
 sites
 sithe
 sitka
@@ -7814,7 +7792,6 @@ smugs
 smurs
 smuts
 snabs
-snafu
 snags
 snaps
 snars
@@ -7991,7 +7968,6 @@ spans
 spard
 spars
 spart
-spate
 spats
 spaul
 spawl
@@ -8068,7 +8044,6 @@ spyal
 spyre
 squaw
 squeg
-squid
 squit
 squiz
 stabs
@@ -8194,7 +8169,6 @@ sucky
 sucre
 sudds
 sudor
-suede
 suent
 suers
 suete
@@ -8428,7 +8402,6 @@ tatus
 taube
 tauld
 tauon
-taupe
 tauts
 tavah
 tavas
@@ -8629,7 +8602,6 @@ tinds
 tinea
 tined
 tines
-tinge
 tings
 tinks
 tints
@@ -8648,7 +8620,6 @@ titup
 tiyin
 tiyns
 tizes
-tizzy
 toads
 toaze
 tocks
@@ -9075,7 +9046,6 @@ usure
 uteri
 uveal
 uveas
-uvula
 vacua
 vaded
 vades

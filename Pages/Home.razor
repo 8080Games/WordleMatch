@@ -70,7 +70,7 @@
                              @onclick="() => SetFocus(index)">
                             @(letters[index] == ' ' ? "" : letters[index].ToString().ToUpper())
                         </div>
-                        @if (letters[index] != ' ' && !lockedPositions[index])
+                        @if (letters[index] != ' ' && !lockedPositions[index] && !CanAutoColor)
                         {
                             <div class="button-group">
                                 <button class="state-button @GetStateButtonClass(index)"
@@ -94,10 +94,26 @@
             <button class="mode-btn @(gameplayMode == GameplayMode.Normal ? "active" : "")" @onclick="() => SetGameplayMode(GameplayMode.Normal)">Normal</button>
             <button class="mode-btn @(gameplayMode == GameplayMode.Hard ? "active" : "")" @onclick="() => SetGameplayMode(GameplayMode.Hard)">Hard</button>
         </div>
+        @if (!string.IsNullOrEmpty(currentWordleWord))
+        {
+            <span class="mode-separator">|</span>
+            <span class="mode-label">Auto-color:</span>
+            <div class="mode-toggle">
+                <button class="mode-btn @(!autoColorEnabled ? "active" : "")" @onclick="() => SetAutoColor(false)">Off</button>
+                <button class="mode-btn @(autoColorEnabled ? "active" : "")" @onclick="() => SetAutoColor(true)">On</button>
+            </div>
+        }
     </div>
 
     <div class="instructions">
-        Type letters from your Wordle guesses. Lowercase = excluded letter (white), Uppercase = letter in word but wrong position (yellow). Click the button to cycle through states. Press Space to leave a box empty (wildcard).
+        @if (CanAutoColor)
+        {
+            <text>Type your Wordle guesses — letters are colored automatically. Press Space to leave a box empty (wildcard).</text>
+        }
+        else
+        {
+            <text>Type letters from your Wordle guesses. Lowercase = excluded letter (white), Uppercase = letter in word but wrong position (yellow). Click the button to cycle through states. Press Space to leave a box empty (wildcard).</text>
+        }
     </div>
 
     <div class="puzzle-info-container">
@@ -238,6 +254,8 @@
     private List<WordleStrategyService.Recommendation>? recommendations = null;
     private StrategyMode strategyMode = StrategyMode.Off;
     private GameplayMode gameplayMode = GameplayMode.Normal;
+    private bool autoColorEnabled = false;
+    private bool CanAutoColor => autoColorEnabled && !string.IsNullOrEmpty(currentWordleWord);
     private bool isLoadingRecommendations = false;
     private bool isRefiningRecommendations = false;
     private bool isDarkMode = false;
@@ -819,6 +837,12 @@
             currentWordleWord = string.Empty;
             currentWordVowelCount = 0;
         }
+
+        // Apply auto-color if enabled and any letters are entered
+        if (CanAutoColor && letters.Any(l => l != ' '))
+        {
+            ApplyAutoColor();
+        }
     }
 
     private void OpenHistoryCalendar()
@@ -919,17 +943,25 @@
         char keyChar = key[0];
         letters[focusedIndex] = char.ToLower(keyChar);
 
-        if (char.IsLower(keyChar))
-        {
-            states[focusedIndex] = LetterState.White;
-        }
-        else if (char.IsUpper(keyChar))
-        {
-            states[focusedIndex] = LetterState.Yellow;
-        }
-        else if (keyChar == ' ')
+        if (keyChar == ' ')
         {
             states[focusedIndex] = LetterState.None;
+        }
+
+        if (CanAutoColor)
+        {
+            ApplyAutoColor();
+        }
+        else if (keyChar != ' ')
+        {
+            if (char.IsLower(keyChar))
+            {
+                states[focusedIndex] = LetterState.White;
+            }
+            else if (char.IsUpper(keyChar))
+            {
+                states[focusedIndex] = LetterState.Yellow;
+            }
         }
 
         // Move to next editable box
@@ -1038,6 +1070,11 @@
             }
         }
 
+        if (CanAutoColor)
+        {
+            ApplyAutoColor();
+        }
+
         CheckAndFilterWords();
         StateHasChanged();
 
@@ -1114,6 +1151,8 @@
 
     private async void CycleState(int index)
     {
+        if (CanAutoColor) return;
+
         if (letters[index] != ' ' && !lockedPositions[index])
         {
             states[index] = states[index] switch
@@ -1504,6 +1543,77 @@
         }
     }
 
+    private void ApplyAutoColor()
+    {
+        if (!CanAutoColor) return;
+
+        var solution = currentWordleWord.ToLower();
+        var solutionUsed = new bool[5];
+
+        // Pass 0: Pre-mark solution positions consumed by locked greens (Hard mode)
+        for (int i = 0; i < 5; i++)
+        {
+            if (lockedPositions[i] && states[i] == LetterState.Green)
+            {
+                solutionUsed[i] = true;
+            }
+        }
+
+        // Pass 1: Mark exact position matches as Green
+        for (int i = 0; i < 5; i++)
+        {
+            if (letters[i] == ' ' || lockedPositions[i]) continue;
+
+            if (letters[i] == solution[i])
+            {
+                states[i] = LetterState.Green;
+                solutionUsed[i] = true;
+            }
+        }
+
+        // Pass 2: For remaining filled letters, find unmatched solution letter → Yellow, otherwise → White
+        for (int i = 0; i < 5; i++)
+        {
+            if (letters[i] == ' ' || lockedPositions[i]) continue;
+            if (states[i] == LetterState.Green) continue; // Already matched in Pass 1
+
+            bool found = false;
+            for (int j = 0; j < 5; j++)
+            {
+                if (!solutionUsed[j] && letters[i] == solution[j])
+                {
+                    solutionUsed[j] = true;
+                    found = true;
+                    break;
+                }
+            }
+
+            states[i] = found ? LetterState.Yellow : LetterState.White;
+        }
+    }
+
+    private async void SetAutoColor(bool enabled)
+    {
+        autoColorEnabled = enabled;
+
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("localStorage.setItem", "autoColor", enabled.ToString());
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving auto-color setting: {ex.Message}");
+        }
+
+        if (enabled && CanAutoColor)
+        {
+            ApplyAutoColor();
+            CheckAndFilterWords();
+        }
+
+        StateHasChanged();
+    }
+
     private async Task CalculateRecommendations()
     {
         if (strategyMode == StrategyMode.Off) return;
@@ -1666,6 +1776,13 @@
             if (!string.IsNullOrEmpty(savedStrategyMode) && Enum.TryParse<StrategyMode>(savedStrategyMode, out var parsedStrategyMode))
             {
                 strategyMode = parsedStrategyMode;
+            }
+
+            // Load auto-color setting
+            var savedAutoColor = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "autoColor");
+            if (!string.IsNullOrEmpty(savedAutoColor) && bool.TryParse(savedAutoColor, out var parsedAutoColor))
+            {
+                autoColorEnabled = parsedAutoColor;
             }
 
             // Load word filter (unused/both/used)

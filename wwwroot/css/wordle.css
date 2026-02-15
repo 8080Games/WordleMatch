@@ -771,6 +771,12 @@
     color: var(--color-text-primary);
 }
 
+.mode-separator {
+    color: var(--color-text-tertiary);
+    font-size: 18px;
+    margin: 0 2px;
+}
+
 /* Recommendations Section */
 .recommendations-section {
     margin: 15px 0;
@@ -941,6 +947,13 @@
 
 .hint-display .reveal-confirm-btn:active {
     transform: translateY(0);
+}
+
+/* Mobile responsiveness for gameplay mode section */
+@media (max-width: 600px) {
+    .gameplay-mode-section {
+        flex-wrap: wrap;
+    }
 }
 
 /* Mobile responsiveness for recommendations */

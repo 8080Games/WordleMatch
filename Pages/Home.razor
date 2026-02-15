@@ -57,7 +57,25 @@
     @* Current entry row *@
     <div class="entry-row">
         <div class="elimination-count-container">
-            <!-- Empty space to match previous-guess alignment -->
+            @{
+                bool hasActiveLetters = false;
+                for (int i = 0; i < 5; i++)
+                {
+                    if (letters[i] != ' ' && !lockedPositions[i]) { hasActiveLetters = true; break; }
+                }
+            }
+            @if (hasActiveLetters)
+            {
+                var (before, after) = GetActiveRowWordCounts();
+                @if (before != after)
+                {
+                    <div class="elimination-count">
+                        <div class="count-before">@before</div>
+                        <div class="count-arrow">↓</div>
+                        <div class="count-after">@after</div>
+                    </div>
+                }
+            }
         </div>
         <div class="guess-content-container">
             <div class="letter-boxes" id="letter-boxes-container">
@@ -1265,6 +1283,27 @@
             LetterState.Green => "green",
             _ => ""
         };
+    }
+
+    private (int before, int after) GetActiveRowWordCounts()
+    {
+        try
+        {
+            // "Before" = words matching only previous guesses (no current entry)
+            var guessesBefore = new List<WordleFilterService.Guess>();
+            foreach (var (guessLetters, guessStates) in previousGuesses)
+            {
+                guessesBefore.Add(new WordleFilterService.Guess(guessLetters, guessStates));
+            }
+            var wordsBefore = FilterService.FilterWords(allWords, guessesBefore).Count();
+
+            // "After" = matchingWords already includes current entry
+            return (wordsBefore, matchingWords.Count);
+        }
+        catch
+        {
+            return (0, 0);
+        }
     }
 
     private (int before, int after) GetWordCounts(int guessIndex)

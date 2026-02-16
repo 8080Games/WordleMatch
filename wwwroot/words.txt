@@ -2264,6 +2264,7 @@ rouge
 rough
 round
 rouse
+roust
 route
 roved
 rover

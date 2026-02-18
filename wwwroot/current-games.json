@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1704,
-      "word": "SQUAD",
-      "date": "2/17/2026",
-      "hints": {
-        "synonym": "Team",
-        "haiku": "Group united tight / Working toward the common goal / Strength in numbers found"
-      }
-    },
-    {
       "gameNumber": 1705,
       "word": "MOGUL",
       "date": "2/18/2026",
       "hints": {
         "synonym": "tycoon",
         "haiku": "He owns what you rent / Power built from clever deals / Money makes more money"
+      }
+    },
+    {
+      "gameNumber": 1706,
+      "word": "HOIST",
+      "date": "2/19/2026",
+      "hints": {
+        "synonym": "lift",
+        "haiku": "Muscles strain and pull / Heavy things must still be moved / Up and over now"
       }
     }
   ],
@@ -34,6 +34,7 @@
     "SKULL",
     "ROOST",
     "SQUAD",
-    "MOGUL"
+    "MOGUL",
+    "HOIST"
   ]
 }

@@ -67,7 +67,6 @@ ailed
 aimed
 aioli
 aired
-airer
 aisle
 alarm
 album
@@ -118,6 +117,7 @@ anger
 angle
 angry
 angst
+anima
 anime
 anise
 ankle
@@ -126,6 +126,7 @@ annex
 annoy
 annul
 anode
+anole
 antic
 antsy
 anvil
@@ -192,9 +193,11 @@ awash
 awful
 awoke
 axial
+axing
 axiom
 axion
 azure
+babel
 babka
 bacon
 badge
@@ -216,6 +219,7 @@ bared
 barer
 barge
 baron
+barre
 basal
 based
 basic
@@ -250,6 +254,7 @@ begot
 begun
 beige
 being
+belay
 belch
 belie
 belle
@@ -257,9 +262,11 @@ belly
 below
 bench
 bendy
+bento
 beret
 berry
 berth
+beryl
 beset
 besot
 betel
@@ -274,7 +281,6 @@ bigot
 biked
 biker
 bilge
-bilgy
 billy
 binge
 bingo
@@ -314,6 +320,7 @@ bloke
 blond
 blood
 bloom
+bloop
 blown
 bluer
 bluff
@@ -348,6 +355,7 @@ booze
 boozy
 borax
 bored
+boric
 borne
 boron
 bosom
@@ -376,6 +384,7 @@ brawl
 brawn
 bread
 break
+bream
 breed
 briar
 bribe
@@ -397,6 +406,7 @@ brook
 broom
 broth
 brown
+bruin
 brunt
 brush
 brusk
@@ -457,13 +467,16 @@ canoe
 canon
 caped
 caper
+capon
 capri
 caput
 carat
 cared
+carer
 caret
 cargo
 carny
+carob
 carol
 carom
 carry
@@ -484,7 +497,6 @@ cedar
 ceded
 celeb
 cello
-chaat
 chafe
 chaff
 chain
@@ -513,6 +525,7 @@ chick
 chide
 chief
 child
+chile
 chili
 chill
 chime
@@ -528,13 +541,16 @@ chomp
 chord
 chore
 chose
+choux
 chuck
 chump
 chunk
+churl
 churn
 chute
 cider
 cigar
+cilia
 cinch
 circa
 cited
@@ -550,6 +566,7 @@ clank
 clash
 clasp
 class
+clave
 clean
 clear
 cleat
@@ -578,6 +595,7 @@ clung
 clunk
 coach
 coast
+coati
 cobra
 cocky
 cocoa
@@ -665,6 +683,7 @@ crowd
 crown
 crude
 cruel
+cruet
 crumb
 crump
 crush
@@ -679,6 +698,7 @@ cumin
 cupid
 cured
 curer
+curia
 curio
 curly
 curry
@@ -757,6 +777,7 @@ dippy
 dirge
 dirty
 disco
+dishy
 ditch
 ditsy
 ditto
@@ -770,14 +791,12 @@ divvy
 dizzy
 dodge
 dodgy
-doggo
 doggy
 dogma
 doily
 doing
 doled
 dolly
-dolma
 domed
 donor
 donut
@@ -798,7 +817,6 @@ dowel
 downy
 dowry
 dowse
-doxed
 dozed
 dozen
 dozer
@@ -812,6 +830,7 @@ drawl
 drawn
 dread
 dream
+dreck
 dress
 dried
 drier
@@ -924,6 +943,7 @@ ethyl
 etude
 evade
 event
+evert
 every
 evict
 evoke
@@ -1057,7 +1077,6 @@ focal
 focus
 fogey
 foggy
-fogie
 foist
 folic
 folio
@@ -1077,6 +1096,7 @@ foyer
 frack
 frail
 frame
+franc
 frank
 fraud
 freak
@@ -1101,9 +1121,9 @@ froze
 fruit
 frump
 fryer
-fubar
 fudge
 fudgy
+fugal
 fugue
 fully
 fumed
@@ -1148,6 +1168,7 @@ geese
 genie
 genre
 geode
+germy
 getup
 ghost
 ghoul
@@ -1160,6 +1181,7 @@ girth
 given
 giver
 gizmo
+glace
 glade
 glamp
 gland
@@ -1181,6 +1203,7 @@ gloss
 glove
 glowy
 glued
+gluey
 glute
 glyph
 gnarl
@@ -1276,6 +1299,7 @@ haiku
 hairy
 halal
 halve
+hammy
 handy
 hanky
 happy
@@ -1322,12 +1346,10 @@ hinky
 hippo
 hippy
 hired
-hiree
 hirer
 hissy
 hitch
 hived
-hoagy
 hoard
 hoary
 hobby
@@ -1336,6 +1358,7 @@ hoist
 hokey
 hokum
 holed
+holey
 holly
 homed
 homer
@@ -1362,6 +1385,7 @@ hover
 howdy
 hubby
 huffy
+huggy
 hulky
 human
 humid
@@ -1427,19 +1451,17 @@ itchy
 ivied
 ivory
 jaded
+jammy
 janky
-japed
 jaunt
 jawed
 jazzy
 jelly
 jerky
-jerry
 jetty
 jewel
 jibed
 jiffy
-jihad
 jimmy
 joint
 joist
@@ -1470,6 +1492,7 @@ karma
 kayak
 kazoo
 kebab
+kefir
 kempt
 keyed
 khaki
@@ -1557,6 +1580,7 @@ level
 lever
 lexis
 libel
+licit
 liege
 lifer
 light
@@ -1564,7 +1588,6 @@ liked
 liken
 lilac
 limbo
-limey
 limit
 lined
 linen
@@ -1599,10 +1622,12 @@ loopy
 loose
 loped
 lordy
+loris
 lorry
 loser
 lotto
 lotus
+loupe
 louse
 lousy
 loved
@@ -1640,6 +1665,7 @@ magma
 maize
 major
 maker
+malic
 malty
 mamba
 mambo
@@ -1680,7 +1706,8 @@ media
 medic
 melee
 melon
-mensa
+melty
+merch
 mercy
 merge
 merit
@@ -1694,7 +1721,6 @@ metre
 metro
 mewed
 mezzo
-miasm
 micro
 midge
 midst
@@ -1712,10 +1738,12 @@ minor
 minty
 minus
 mired
+mirin
 mirth
 miser
 missy
 misty
+miter
 mixed
 mixer
 mixup
@@ -1737,12 +1765,14 @@ month
 mooch
 moody
 mooed
+moony
 moose
 moped
 moper
 mopey
 moral
 moray
+morel
 moron
 morph
 mosey
@@ -1778,7 +1808,6 @@ mused
 mushy
 music
 musky
-mussy
 musty
 muted
 myrrh
@@ -1794,6 +1823,7 @@ nappy
 nasal
 nasty
 natal
+natty
 naval
 navel
 needy
@@ -1811,7 +1841,6 @@ niche
 niece
 nifty
 night
-nimby
 ninja
 ninny
 ninth
@@ -1820,6 +1849,7 @@ nitro
 nixed
 noble
 nobly
+nodal
 noise
 noisy
 nomad
@@ -1843,12 +1873,12 @@ oasis
 obese
 occur
 ocean
+ocher
 ochre
 octal
 octet
 odder
 oddly
-odeum
 offal
 offed
 offer
@@ -1914,6 +1944,8 @@ palsy
 panda
 panel
 panic
+panko
+pansy
 panty
 papal
 paper
@@ -1941,6 +1973,7 @@ payer
 peace
 peach
 pearl
+peaty
 pecan
 pedal
 peeve
@@ -1960,6 +1993,7 @@ peter
 petit
 petri
 petty
+phage
 phase
 phish
 phone
@@ -2003,6 +2037,7 @@ plank
 plant
 plasm
 plate
+playa
 plaza
 plead
 pleat
@@ -2036,6 +2071,7 @@ poppy
 popup
 porch
 pored
+porgy
 porky
 posed
 poser
@@ -2062,8 +2098,8 @@ primp
 print
 prion
 prior
+prise
 prism
-priss
 privy
 prize
 probe
@@ -2073,7 +2109,6 @@ prone
 prong
 proof
 prose
-proto
 proud
 prove
 prowl
@@ -2081,11 +2116,8 @@ proxy
 prude
 prune
 psalm
-pshaw
 psych
-psyop
 pubic
-pubis
 pudge
 pudgy
 puffy
@@ -2104,7 +2136,6 @@ purge
 purse
 pushy
 putty
-pwned
 pygmy
 pylon
 quack
@@ -2198,6 +2229,7 @@ reiki
 relax
 relay
 relic
+relit
 remap
 remit
 remix
@@ -2206,12 +2238,12 @@ renew
 repay
 repel
 reply
+repot
 reran
 rerun
 resaw
 reset
 resin
-resod
 retag
 retch
 retie
@@ -2220,8 +2252,6 @@ retry
 reuse
 revel
 revue
-rewax
-rewon
 rheum
 rhino
 rhyme
@@ -2307,6 +2337,7 @@ sandy
 saner
 sappy
 sassy
+satay
 sated
 satin
 satyr
@@ -2329,10 +2360,10 @@ scant
 scape
 scare
 scarf
+scarp
 scary
 scene
 scent
-schmo
 schwa
 scion
 scoff
@@ -2350,6 +2381,7 @@ scram
 scrap
 scree
 screw
+scrim
 scrip
 scrod
 scrub
@@ -2410,8 +2442,6 @@ shire
 shirk
 shirt
 shiva
-shlep
-shlub
 shoal
 shock
 shoed
@@ -2432,6 +2462,7 @@ shrug
 shuck
 shunt
 shush
+shyer
 shyly
 sided
 sidle
@@ -2593,6 +2624,7 @@ spook
 spool
 spoon
 spore
+spork
 sport
 spout
 spray
@@ -2636,11 +2668,13 @@ steel
 steep
 steer
 stein
+stele
 steno
 stent
 stern
 stick
 stiff
+stile
 still
 stilt
 sting
@@ -2650,6 +2684,7 @@ stock
 stoic
 stoke
 stole
+stoma
 stomp
 stone
 stony
@@ -2724,6 +2759,7 @@ sworn
 swung
 synch
 synod
+synth
 syrup
 tabby
 table
@@ -2840,6 +2876,7 @@ topic
 torah
 torch
 torso
+torta
 torte
 torus
 total
@@ -2875,6 +2912,7 @@ tribe
 trice
 trick
 tried
+trier
 trike
 trill
 tripe
@@ -2929,10 +2967,10 @@ udder
 ulcer
 ulnar
 ultra
+umami
 umber
 umbra
 unarm
-unbag
 unbox
 uncap
 uncle
@@ -2992,6 +3030,7 @@ veiny
 veldt
 venal
 venom
+venti
 venue
 verge
 verse
@@ -3021,6 +3060,7 @@ vodka
 vogue
 voice
 voila
+voile
 vomit
 voted
 voter
@@ -3064,6 +3104,7 @@ whale
 wharf
 wheat
 wheel
+whelk
 whelp
 where
 which
@@ -3072,7 +3113,9 @@ while
 whine
 whiny
 whirl
+whirr
 whisk
+whist
 white
 whizz
 whole
@@ -3093,6 +3136,7 @@ wince
 winch
 windy
 wined
+winey
 wiped
 wiper
 wired
@@ -3134,13 +3178,11 @@ wrung
 wryly
 wurst
 xenon
-xerox
 yacht
 yahoo
 yappy
 yearn
 yeast
-yeesh
 yield
 yodel
 yoked
@@ -3156,4 +3198,3 @@ zilch
 zippy
 zonal
 zoned
-zowie

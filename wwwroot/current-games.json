@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1707,
-      "word": "STANK",
-      "date": "2/20/2026",
-      "hints": {
-        "synonym": "reeked",
-        "haiku": "The smell was not good / Something wrong with the air here / Nose knows to retreat"
-      }
-    },
-    {
       "gameNumber": 1708,
       "word": "AWAKE",
       "date": "2/21/2026",
       "hints": {
         "synonym": "Alert",
         "haiku": "Eyes open at dawn / The world sharpens into view / Sleep fades like old dreams"
+      }
+    },
+    {
+      "gameNumber": 1709,
+      "word": "GUAVA",
+      "date": "2/22/2026",
+      "hints": {
+        "synonym": "fruit",
+        "haiku": "Tropical pink flesh / Sweetness from warmer places / Paradise in bite"
       }
     }
   ],
@@ -37,6 +37,7 @@
     "MOGUL",
     "HOIST",
     "STANK",
-    "AWAKE"
+    "AWAKE",
+    "GUAVA"
   ]
 }

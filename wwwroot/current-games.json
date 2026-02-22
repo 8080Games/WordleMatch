@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1708,
-      "word": "AWAKE",
-      "date": "2/21/2026",
-      "hints": {
-        "synonym": "Alert",
-        "haiku": "Eyes open at dawn / The world sharpens into view / Sleep fades like old dreams"
-      }
-    },
-    {
       "gameNumber": 1709,
       "word": "GUAVA",
       "date": "2/22/2026",
       "hints": {
         "synonym": "fruit",
         "haiku": "Tropical pink flesh / Sweetness from warmer places / Paradise in bite"
+      }
+    },
+    {
+      "gameNumber": 1710,
+      "word": "ATTIC",
+      "date": "2/23/2026",
+      "hints": {
+        "synonym": "loft",
+        "haiku": "Dust motes dance in beams / Old boxes hold yesterday / Memories sleep here"
       }
     }
   ],
@@ -38,6 +38,7 @@
     "HOIST",
     "STANK",
     "AWAKE",
-    "GUAVA"
+    "GUAVA",
+    "ATTIC"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1709,
-      "word": "GUAVA",
-      "date": "2/22/2026",
-      "hints": {
-        "synonym": "fruit",
-        "haiku": "Tropical pink flesh / Sweetness from warmer places / Paradise in bite"
-      }
-    },
-    {
       "gameNumber": 1710,
       "word": "ATTIC",
       "date": "2/23/2026",
       "hints": {
         "synonym": "loft",
         "haiku": "Dust motes dance in beams / Old boxes hold yesterday / Memories sleep here"
+      }
+    },
+    {
+      "gameNumber": 1711,
+      "word": "BUYER",
+      "date": "2/24/2026",
+      "hints": {
+        "synonym": "purchaser",
+        "haiku": "Money changes hands / Someone's need meets someone's want / Commerce makes its match"
       }
     }
   ],
@@ -39,6 +39,7 @@
     "STANK",
     "AWAKE",
     "GUAVA",
-    "ATTIC"
+    "ATTIC",
+    "BUYER"
   ]
 }

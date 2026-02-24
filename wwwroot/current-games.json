@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1710,
-      "word": "ATTIC",
-      "date": "2/23/2026",
-      "hints": {
-        "synonym": "loft",
-        "haiku": "Dust motes dance in beams / Old boxes hold yesterday / Memories sleep here"
-      }
-    },
-    {
       "gameNumber": 1711,
       "word": "BUYER",
       "date": "2/24/2026",
       "hints": {
         "synonym": "purchaser",
         "haiku": "Money changes hands / Someone's need meets someone's want / Commerce makes its match"
+      }
+    },
+    {
+      "gameNumber": 1712,
+      "word": "SHRED",
+      "date": "2/25/2026",
+      "hints": {
+        "synonym": "Strip",
+        "haiku": "Torn into pieces / Guitar solo ripped / Evidence destroyed"
       }
     }
   ],
@@ -40,6 +40,7 @@
     "AWAKE",
     "GUAVA",
     "ATTIC",
-    "BUYER"
+    "BUYER",
+    "SHRED"
   ]
 }

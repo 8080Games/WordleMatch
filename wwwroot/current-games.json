@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1711,
-      "word": "BUYER",
-      "date": "2/24/2026",
-      "hints": {
-        "synonym": "purchaser",
-        "haiku": "Money changes hands / Someone's need meets someone's want / Commerce makes its match"
-      }
-    },
-    {
       "gameNumber": 1712,
       "word": "SHRED",
       "date": "2/25/2026",
       "hints": {
         "synonym": "Strip",
         "haiku": "Torn into pieces / Guitar solo ripped / Evidence destroyed"
+      }
+    },
+    {
+      "gameNumber": 1713,
+      "word": "LANCE",
+      "date": "2/26/2026",
+      "hints": {
+        "synonym": "spear",
+        "haiku": "The knight lowers point / Across the field they will meet / Steel decides the day"
       }
     }
   ],
@@ -41,6 +41,7 @@
     "GUAVA",
     "ATTIC",
     "BUYER",
-    "SHRED"
+    "SHRED",
+    "LANCE"
   ]
 }

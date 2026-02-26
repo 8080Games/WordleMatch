@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1712,
-      "word": "SHRED",
-      "date": "2/25/2026",
-      "hints": {
-        "synonym": "Strip",
-        "haiku": "Torn into pieces / Guitar solo ripped / Evidence destroyed"
-      }
-    },
-    {
       "gameNumber": 1713,
       "word": "LANCE",
       "date": "2/26/2026",
       "hints": {
         "synonym": "spear",
         "haiku": "The knight lowers point / Across the field they will meet / Steel decides the day"
+      }
+    },
+    {
+      "gameNumber": 1714,
+      "word": "DIZZY",
+      "date": "2/27/2026",
+      "hints": {
+        "synonym": "lightheaded",
+        "haiku": "The room starts to spin / Ground uncertain beneath feet / Balance abandons"
       }
     }
   ],
@@ -42,6 +42,7 @@
     "ATTIC",
     "BUYER",
     "SHRED",
-    "LANCE"
+    "LANCE",
+    "DIZZY"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1713,
-      "word": "LANCE",
-      "date": "2/26/2026",
-      "hints": {
-        "synonym": "spear",
-        "haiku": "The knight lowers point / Across the field they will meet / Steel decides the day"
-      }
-    },
-    {
       "gameNumber": 1714,
       "word": "DIZZY",
       "date": "2/27/2026",
       "hints": {
         "synonym": "lightheaded",
         "haiku": "The room starts to spin / Ground uncertain beneath feet / Balance abandons"
+      }
+    },
+    {
+      "gameNumber": 1715,
+      "word": "HYDRA",
+      "date": "2/28/2026",
+      "hints": {
+        "synonym": "Monster",
+        "haiku": "Many heads regrow / Mythological beast lives / Cut one two appear"
       }
     }
   ],
@@ -43,6 +43,7 @@
     "BUYER",
     "SHRED",
     "LANCE",
-    "DIZZY"
+    "DIZZY",
+    "HYDRA"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1714,
-      "word": "DIZZY",
-      "date": "2/27/2026",
-      "hints": {
-        "synonym": "lightheaded",
-        "haiku": "The room starts to spin / Ground uncertain beneath feet / Balance abandons"
-      }
-    },
-    {
       "gameNumber": 1715,
       "word": "HYDRA",
       "date": "2/28/2026",
       "hints": {
         "synonym": "Monster",
         "haiku": "Many heads regrow / Mythological beast lives / Cut one two appear"
+      }
+    },
+    {
+      "gameNumber": 1717,
+      "word": "SLIME",
+      "date": "3/2/2026",
+      "hints": {
+        "synonym": "goo",
+        "haiku": "Viscous and unpleasant / The thick ooze coats everything / Clean will take some work"
       }
     }
   ],
@@ -44,6 +44,7 @@
     "SHRED",
     "LANCE",
     "DIZZY",
-    "HYDRA"
+    "HYDRA",
+    "SLIME"
   ]
 }

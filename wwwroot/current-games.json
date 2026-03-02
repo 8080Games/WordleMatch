@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1716,
-      "word": "FLUKE",
-      "date": "3/1/2026",
-      "hints": {
-        "synonym": "chance",
-        "haiku": "Luck more than skill won / Sometimes fortune finds the fool / Don't expect it twice"
-      }
-    },
-    {
       "gameNumber": 1717,
       "word": "SLIME",
       "date": "3/2/2026",
       "hints": {
         "synonym": "goo",
         "haiku": "Viscous and unpleasant / The thick ooze coats everything / Clean will take some work"
+      }
+    },
+    {
+      "gameNumber": 1718,
+      "word": "LINEN",
+      "date": "3/3/2026",
+      "hints": {
+        "synonym": "Fabric",
+        "haiku": "Cool cloth on warm skin / Crisp white sheets invite sweet rest / Comfort woven fine"
       }
     }
   ],
@@ -46,6 +46,7 @@
     "DIZZY",
     "HYDRA",
     "SLIME",
-    "FLUKE"
+    "FLUKE",
+    "LINEN"
   ]
 }

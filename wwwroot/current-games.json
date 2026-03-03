@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1717,
-      "word": "SLIME",
-      "date": "3/2/2026",
-      "hints": {
-        "synonym": "goo",
-        "haiku": "Viscous and unpleasant / The thick ooze coats everything / Clean will take some work"
-      }
-    },
-    {
       "gameNumber": 1718,
       "word": "LINEN",
       "date": "3/3/2026",
       "hints": {
         "synonym": "Fabric",
         "haiku": "Cool cloth on warm skin / Crisp white sheets invite sweet rest / Comfort woven fine"
+      }
+    },
+    {
+      "gameNumber": 1719,
+      "word": "THEFT",
+      "date": "3/4/2026",
+      "hints": {
+        "synonym": "stealing",
+        "haiku": "Taking what's not yours / The owner returns to loss / Crime simple and old"
       }
     }
   ],
@@ -47,6 +47,7 @@
     "HYDRA",
     "SLIME",
     "FLUKE",
-    "LINEN"
+    "LINEN",
+    "THEFT"
   ]
 }

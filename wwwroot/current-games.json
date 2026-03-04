@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1718,
-      "word": "LINEN",
-      "date": "3/3/2026",
-      "hints": {
-        "synonym": "Fabric",
-        "haiku": "Cool cloth on warm skin / Crisp white sheets invite sweet rest / Comfort woven fine"
-      }
-    },
-    {
       "gameNumber": 1719,
       "word": "THEFT",
       "date": "3/4/2026",
       "hints": {
         "synonym": "stealing",
         "haiku": "Taking what's not yours / The owner returns to loss / Crime simple and old"
+      }
+    },
+    {
+      "gameNumber": 1720,
+      "word": "SHEEP",
+      "date": "3/5/2026",
+      "hints": {
+        "synonym": "lamb",
+        "haiku": "Wool clouds in the field / Following where the leader goes / Soft and vulnerable"
       }
     }
   ],
@@ -48,6 +48,7 @@
     "SLIME",
     "FLUKE",
     "LINEN",
-    "THEFT"
+    "THEFT",
+    "SHEEP"
   ]
 }

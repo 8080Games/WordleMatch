@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1720,
-      "word": "SHEEP",
-      "date": "3/5/2026",
-      "hints": {
-        "synonym": "lamb",
-        "haiku": "Wool clouds in the field / Following where the leader goes / Soft and vulnerable"
-      }
-    },
-    {
       "gameNumber": 1721,
       "word": "GUNKY",
       "date": "3/6/2026",
       "hints": {
         "synonym": "Grimy",
         "haiku": "Sticky dirty mess / Residue built up thick / Crud accumulated"
+      }
+    },
+    {
+      "gameNumber": 1722,
+      "word": "VOGUE",
+      "date": "3/7/2026",
+      "hints": {
+        "synonym": "fashion",
+        "haiku": "What is in right now / The moment's style declares itself / Next year will be different"
       }
     }
   ],
@@ -50,6 +50,7 @@
     "LINEN",
     "THEFT",
     "SHEEP",
-    "GUNKY"
+    "GUNKY",
+    "VOGUE"
   ]
 }

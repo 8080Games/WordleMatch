@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1722,
-      "word": "VOGUE",
-      "date": "3/7/2026",
-      "hints": {
-        "synonym": "fashion",
-        "haiku": "What is in right now / The moment's style declares itself / Next year will be different"
-      }
-    },
-    {
       "gameNumber": 1723,
       "word": "LOBBY",
       "date": "3/8/2026",
       "hints": {
         "synonym": "hall",
         "haiku": "Waiting in between / Not quite in not yet leaving / Space before the space"
+      }
+    },
+    {
+      "gameNumber": 1724,
+      "word": "HASTY",
+      "date": "3/9/2026",
+      "hints": {
+        "synonym": "rushed",
+        "haiku": "Too fast out the door / Forgot what shouldn't be missed / Slow down just a bit"
       }
     }
   ],
@@ -52,6 +52,7 @@
     "SHEEP",
     "GUNKY",
     "VOGUE",
-    "LOBBY"
+    "LOBBY",
+    "HASTY"
   ]
 }

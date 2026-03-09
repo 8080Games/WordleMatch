@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1723,
-      "word": "LOBBY",
-      "date": "3/8/2026",
-      "hints": {
-        "synonym": "hall",
-        "haiku": "Waiting in between / Not quite in not yet leaving / Space before the space"
-      }
-    },
-    {
       "gameNumber": 1724,
       "word": "HASTY",
       "date": "3/9/2026",
       "hints": {
         "synonym": "rushed",
         "haiku": "Too fast out the door / Forgot what shouldn't be missed / Slow down just a bit"
+      }
+    },
+    {
+      "gameNumber": 1725,
+      "word": "SHOAL",
+      "date": "3/10/2026",
+      "hints": {
+        "synonym": "shallow",
+        "haiku": "Water thins out here / Boats must take care in these parts / Depth has its limits"
       }
     }
   ],
@@ -53,6 +53,7 @@
     "GUNKY",
     "VOGUE",
     "LOBBY",
-    "HASTY"
+    "HASTY",
+    "SHOAL"
   ]
 }

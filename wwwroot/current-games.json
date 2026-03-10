@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1724,
-      "word": "HASTY",
-      "date": "3/9/2026",
-      "hints": {
-        "synonym": "rushed",
-        "haiku": "Too fast out the door / Forgot what shouldn't be missed / Slow down just a bit"
-      }
-    },
-    {
       "gameNumber": 1725,
       "word": "SHOAL",
       "date": "3/10/2026",
       "hints": {
         "synonym": "shallow",
         "haiku": "Water thins out here / Boats must take care in these parts / Depth has its limits"
+      }
+    },
+    {
+      "gameNumber": 1726,
+      "word": "TEDDY",
+      "date": "3/11/2026",
+      "hints": {
+        "synonym": "bear",
+        "haiku": "Stuffed arms hold no child / But comfort lives in the fur / Love in button eyes"
       }
     }
   ],
@@ -54,6 +54,7 @@
     "VOGUE",
     "LOBBY",
     "HASTY",
-    "SHOAL"
+    "SHOAL",
+    "TEDDY"
   ]
 }

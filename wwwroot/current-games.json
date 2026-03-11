@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1725,
-      "word": "SHOAL",
-      "date": "3/10/2026",
-      "hints": {
-        "synonym": "shallow",
-        "haiku": "Water thins out here / Boats must take care in these parts / Depth has its limits"
-      }
-    },
-    {
       "gameNumber": 1726,
       "word": "TEDDY",
       "date": "3/11/2026",
       "hints": {
         "synonym": "bear",
         "haiku": "Stuffed arms hold no child / But comfort lives in the fur / Love in button eyes"
+      }
+    },
+    {
+      "gameNumber": 1727,
+      "word": "SMELL",
+      "date": "3/12/2026",
+      "hints": {
+        "synonym": "odor",
+        "haiku": "The nose knows something / Information through the air / Scent tells its story"
       }
     }
   ],
@@ -55,6 +55,7 @@
     "LOBBY",
     "HASTY",
     "SHOAL",
-    "TEDDY"
+    "TEDDY",
+    "SMELL"
   ]
 }

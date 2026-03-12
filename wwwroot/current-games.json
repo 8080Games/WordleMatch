@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1726,
-      "word": "TEDDY",
-      "date": "3/11/2026",
-      "hints": {
-        "synonym": "bear",
-        "haiku": "Stuffed arms hold no child / But comfort lives in the fur / Love in button eyes"
-      }
-    },
-    {
       "gameNumber": 1727,
       "word": "SMELL",
       "date": "3/12/2026",
       "hints": {
         "synonym": "odor",
         "haiku": "The nose knows something / Information through the air / Scent tells its story"
+      }
+    },
+    {
+      "gameNumber": 1728,
+      "word": "EATEN",
+      "date": "3/13/2026",
+      "hints": {
+        "synonym": "consumed",
+        "haiku": "Nothing left on plate / What was whole has disappeared / Appetite fulfilled"
       }
     }
   ],
@@ -56,6 +56,7 @@
     "HASTY",
     "SHOAL",
     "TEDDY",
-    "SMELL"
+    "SMELL",
+    "EATEN"
   ]
 }

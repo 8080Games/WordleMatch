@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1728,
-      "word": "EATEN",
-      "date": "3/13/2026",
-      "hints": {
-        "synonym": "consumed",
-        "haiku": "Nothing left on plate / What was whole has disappeared / Appetite fulfilled"
-      }
-    },
-    {
       "gameNumber": 1729,
       "word": "ANKLE",
       "date": "3/14/2026",
       "hints": {
         "synonym": "joint",
         "haiku": "The pivot point bends / Carrying weight with each step / Small bones bear so much"
+      }
+    },
+    {
+      "gameNumber": 1730,
+      "word": "GRADE",
+      "date": "3/15/2026",
+      "hints": {
+        "synonym": "Rank",
+        "haiku": "Measured on a scale / Numbers tell a partial tale / Worth is more than marks"
       }
     }
   ],
@@ -58,6 +58,7 @@
     "TEDDY",
     "SMELL",
     "EATEN",
-    "ANKLE"
+    "ANKLE",
+    "GRADE"
   ]
 }

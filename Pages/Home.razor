@@ -26,14 +26,15 @@
         var (guessLetters, guessStates) = previousGuesses[guessIndex];
         <div class="previous-guess-row">
             <div class="elimination-count-container">
-                @{
-                    var (before, after) = GetWordCounts(currentGuessIndex);
+                @if (currentGuessIndex < previousGuessWordCounts.Count)
+                {
+                    var (before, after) = previousGuessWordCounts[currentGuessIndex];
+                    <div class="elimination-count">
+                        <div class="count-before">@before</div>
+                        <div class="count-arrow">↓</div>
+                        <div class="count-after">@after</div>
+                    </div>
                 }
-                <div class="elimination-count">
-                    <div class="count-before">@before</div>
-                    <div class="count-arrow">↓</div>
-                    <div class="count-after">@after</div>
-                </div>
             </div>
             <div class="guess-content-container">
                 <div class="letter-boxes previous-guess">
@@ -58,23 +59,15 @@
     <div class="entry-row">
         <div class="elimination-count-container">
             @{
-                bool hasActiveLetters = false;
-                for (int i = 0; i < 5; i++)
-                {
-                    if (letters[i] != ' ' && !lockedPositions[i]) { hasActiveLetters = true; break; }
-                }
+                var activeAfter = GetFilteredWords().Count();
             }
-            @if (hasActiveLetters)
+            @if (activeRowWordsBefore > 0 && activeRowWordsBefore != activeAfter)
             {
-                var (before, after) = GetActiveRowWordCounts();
-                @if (before != after)
-                {
-                    <div class="elimination-count">
-                        <div class="count-before">@before</div>
-                        <div class="count-arrow">↓</div>
-                        <div class="count-after">@after</div>
-                    </div>
-                }
+                <div class="elimination-count">
+                    <div class="count-before">@activeRowWordsBefore</div>
+                    <div class="count-arrow">↓</div>
+                    <div class="count-after">@activeAfter</div>
+                </div>
             }
         </div>
         <div class="guess-content-container">
@@ -269,6 +262,7 @@
     private DotNetObjectReference<Home>? dotNetRef;
     private WordFilter wordFilter = WordFilter.Both;
     private List<(char[] letters, LetterState[] states)> previousGuesses = new List<(char[], LetterState[])>();
+    private List<(int before, int after)> previousGuessWordCounts = new List<(int, int)>();
     private List<WordleStrategyService.Recommendation>? recommendations = null;
     private StrategyMode strategyMode = StrategyMode.Off;
     private GameplayMode gameplayMode = GameplayMode.Normal;
@@ -276,8 +270,10 @@
     private bool CanAutoColor => autoColorEnabled && !string.IsNullOrEmpty(currentWordleWord);
     private bool isLoadingRecommendations = false;
     private bool isRefiningRecommendations = false;
+    private int _recommendationRequestId = 0;
     private bool isDarkMode = false;
     private bool showCalendarModal = false;
+    private int activeRowWordsBefore = 0;
 
     // Wordle game info based on user's local date
     private DateTime userLocalDate = DateTime.Today; // Uses browser's local timezone
@@ -334,11 +330,12 @@
             // Get top 3 by score (might include strategic guess-only words)
             var top3 = recommendations.Take(3).ToList();
 
-            // Combine top 3 with all possible answers, remove duplicates, maintain score order
+            // Combine top 3 with all possible answers, remove duplicates, maintain score order, cap at 3
             var combined = top3.Concat(possibleAnswers)
                 .GroupBy(r => r.Word)
                 .Select(g => g.First())
                 .OrderByDescending(r => r.Score)
+                .Take(3)
                 .ToList();
 
             return combined;
@@ -454,6 +451,9 @@
 
             // Look up hints for today's word now that hints are loaded
             LookupCurrentWordHints();
+
+            // Set initial active row word count now that all data is loaded
+            activeRowWordsBefore = GetFilteredWords().Count();
 
             // Final refresh after all data is loaded
             StateHasChanged();
@@ -620,28 +620,9 @@
         try
         {
             // Look up the word for the target game number
-            if (targetGameNumber <= 1687)
+            // First check current-games.json (sliding 2-day window)
+            try
             {
-                // Search historical-words.csv for the target game
-                var historicalCsv = await Http.GetStringAsync("historical-words.csv");
-                foreach (var line in historicalCsv.Split('\n', StringSplitOptions.RemoveEmptyEntries))
-                {
-                    var parts = line.Split(',');
-                    if (parts.Length >= 3 && int.TryParse(parts[1].Trim(), out int gameNumber))
-                    {
-                        if (gameNumber == targetGameNumber)
-                        {
-                            currentWordleWord = parts[0].Trim().ToLower();
-                            currentWordVowelCount = CountVowels(currentWordleWord);
-                            Console.WriteLine($"Set current word for game {targetGameNumber}: {currentWordleWord}");
-                            return;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                // Search current-games.json for the target game
                 var currentGamesJson = await Http.GetStringAsync("current-games.json");
                 var currentGamesDocument = System.Text.Json.JsonDocument.Parse(currentGamesJson);
                 var gamesArray = currentGamesDocument.RootElement.GetProperty("games");
@@ -652,6 +633,24 @@
                     if (gameNumber == targetGameNumber)
                     {
                         currentWordleWord = gameElement.GetProperty("word").GetString()?.ToLower() ?? "";
+                        currentWordVowelCount = CountVowels(currentWordleWord);
+                        Console.WriteLine($"Set current word for game {targetGameNumber}: {currentWordleWord}");
+                        return;
+                    }
+                }
+            }
+            catch { /* fall through to historical lookup */ }
+
+            // Then search historical-words.csv (covers all archived games)
+            var historicalCsv = await Http.GetStringAsync("historical-words.csv");
+            foreach (var line in historicalCsv.Split('\n', StringSplitOptions.RemoveEmptyEntries))
+            {
+                var parts = line.Split(',');
+                if (parts.Length >= 3 && int.TryParse(parts[1].Trim(), out int gameNumber))
+                {
+                    if (gameNumber == targetGameNumber)
+                    {
+                        currentWordleWord = parts[0].Trim().ToLower();
                         currentWordVowelCount = CountVowels(currentWordleWord);
                         Console.WriteLine($"Set current word for game {targetGameNumber}: {currentWordleWord}");
                         return;
@@ -1285,55 +1284,56 @@
         };
     }
 
-    private (int before, int after) GetActiveRowWordCounts()
+    private void RecalculateAllWordCounts()
     {
         try
         {
-            // "Before" = words matching only previous guesses (no current entry)
-            var guessesBefore = new List<WordleFilterService.Guess>();
-            foreach (var (guessLetters, guessStates) in previousGuesses)
-            {
-                guessesBefore.Add(new WordleFilterService.Guess(guessLetters, guessStates));
-            }
-            var wordsBefore = FilterService.FilterWords(allWords, guessesBefore).Count();
+            previousGuessWordCounts.Clear();
 
-            // "After" = matchingWords already includes current entry
-            return (wordsBefore, matchingWords.Count);
+            for (int i = 0; i < previousGuesses.Count; i++)
+            {
+                var guessesBefore = new List<WordleFilterService.Guess>();
+                for (int j = 0; j < i; j++)
+                {
+                    guessesBefore.Add(new WordleFilterService.Guess(previousGuesses[j].letters, previousGuesses[j].states));
+                }
+                var before = ApplyWordFilter(FilterService.FilterWords(allWords, guessesBefore).ToList()).Count();
+
+                var guessesIncluding = new List<WordleFilterService.Guess>(guessesBefore);
+                guessesIncluding.Add(new WordleFilterService.Guess(previousGuesses[i].letters, previousGuesses[i].states));
+                var after = ApplyWordFilter(FilterService.FilterWords(allWords, guessesIncluding).ToList()).Count();
+
+                previousGuessWordCounts.Add((before, after));
+            }
+
+            // Set active row "before" from last guess's "after", or all filtered words if no guesses
+            if (previousGuessWordCounts.Count > 0)
+            {
+                activeRowWordsBefore = previousGuessWordCounts[previousGuessWordCounts.Count - 1].after;
+            }
+            else
+            {
+                activeRowWordsBefore = ApplyWordFilter(allWords).Count();
+            }
         }
         catch
         {
-            return (0, 0);
+            activeRowWordsBefore = 0;
         }
     }
 
-    private (int before, int after) GetWordCounts(int guessIndex)
+    private IEnumerable<string> ApplyWordFilter(List<string> words)
     {
-        try
+        return wordFilter switch
         {
-            // Calculate words before this guess (up to but not including this guess)
-            var guessesBefore = new List<WordleFilterService.Guess>();
-            for (int i = 0; i < guessIndex; i++)
-            {
-                var (guessLetters, guessStates) = previousGuesses[i];
-                guessesBefore.Add(new WordleFilterService.Guess(guessLetters, guessStates));
-            }
-            var wordsBefore = FilterService.FilterWords(allWords, guessesBefore).Count();
-
-            // Calculate words after this guess (including this guess)
-            var guessesAfter = new List<WordleFilterService.Guess>();
-            for (int i = 0; i <= guessIndex; i++)
-            {
-                var (guessLetters, guessStates) = previousGuesses[i];
-                guessesAfter.Add(new WordleFilterService.Guess(guessLetters, guessStates));
-            }
-            var wordsAfter = FilterService.FilterWords(allWords, guessesAfter).Count();
-
-            return (wordsBefore, wordsAfter);
-        }
-        catch
-        {
-            return (0, 0);
-        }
+            WordFilter.Unused => words.Where(w =>
+                !usedWords.ContainsKey(w) ||
+                usedWords[w].gameNumber >= currentWordleGameNumber),
+            WordFilter.Used => words.Where(w =>
+                usedWords.ContainsKey(w) &&
+                usedWords[w].gameNumber < currentWordleGameNumber),
+            _ => words
+        };
     }
 
     private async void AddGuess()
@@ -1341,6 +1341,14 @@
         // Only add if at least one letter is entered
         if (letters.Any(l => l != ' '))
         {
+            // Store this guess's word counts: "before" is the active row's current before,
+            // "after" is the current filtered count
+            var guessAfterCount = GetFilteredWords().Count();
+            previousGuessWordCounts.Add((activeRowWordsBefore, guessAfterCount));
+
+            // The current filtered count becomes the next row's "before" count
+            activeRowWordsBefore = guessAfterCount;
+
             // Clone the current letters and states
             var guessLetters = (char[])letters.Clone();
             var guessStates = (LetterState[])states.Clone();
@@ -1387,6 +1395,7 @@
             bool removingLastGuess = index == previousGuesses.Count - 1;
 
             previousGuesses.RemoveAt(index);
+            previousGuessWordCounts.RemoveAt(index);
 
             // If we removed the last guess, recalculate locked positions
             if (removingLastGuess)
@@ -1394,6 +1403,8 @@
                 RecalculateLockedPositions();
             }
 
+            // Recalculate all stored word counts since indices shifted
+            RecalculateAllWordCounts();
             CheckAndFilterWords();
             StateHasChanged();
 
@@ -1495,6 +1506,7 @@
             Console.WriteLine($"Error saving word filter: {ex.Message}");
         }
 
+        RecalculateAllWordCounts();
         StateHasChanged();
     }
 
@@ -1517,18 +1529,7 @@
 
     private IEnumerable<string> GetFilteredWords()
     {
-        return wordFilter switch
-        {
-            // Unused: words not in usedWords OR words with game number >= current game
-            WordFilter.Unused => matchingWords.Where(w =>
-                !usedWords.ContainsKey(w) ||
-                usedWords[w].gameNumber >= currentWordleGameNumber),
-            // Used: words in usedWords AND with game number < current game
-            WordFilter.Used => matchingWords.Where(w =>
-                usedWords.ContainsKey(w) &&
-                usedWords[w].gameNumber < currentWordleGameNumber),
-            _ => matchingWords
-        };
+        return ApplyWordFilter(matchingWords);
     }
 
     private async Task SetStrategyMode(StrategyMode mode)
@@ -1715,6 +1716,7 @@
             }
 
             bool isHardMode = gameplayMode == GameplayMode.Hard;
+            var sw = System.Diagnostics.Stopwatch.StartNew();
 
             if (isNormalMode)
             {
@@ -1723,37 +1725,49 @@
                 isLoadingRecommendations = false;
                 isRefiningRecommendations = false;
                 StateHasChanged();
-                Console.WriteLine($"Normal mode minimax: Generated {recommendations?.Count ?? 0} recommendations");
+                Console.WriteLine($"[TIMING] Normal minimax: {sw.ElapsedMilliseconds}ms, {recommendations?.Count ?? 0} recs");
             }
             else
             {
                 // Hard mode: Use existing two-phase approach (quick then full)
                 // Phase 1: Quick evaluation for instant feedback
                 recommendations = StrategyService.GetRecommendations(guesses, isHardMode, topN: 5);
+                var phase1Ms = sw.ElapsedMilliseconds;
                 isLoadingRecommendations = false;
                 isRefiningRecommendations = true;  // Show refining indicator
                 StateHasChanged();
 
-                Console.WriteLine($"Quick: Generated {recommendations?.Count ?? 0} recommendations");
+                Console.WriteLine($"[TIMING] Phase 1 (quick): {phase1Ms}ms, {recommendations?.Count ?? 0} recs");
 
                 // Phase 2: Full evaluation in background (only if not already cached)
                 // Skip refinement if we got cached results (which are already optimal)
                 bool isCachedResult = (guesses.Count == 0) ||
                                       (guesses.Count == 1 && !isHardMode);
 
-                if (!isCachedResult)
+                // Skip expensive minimax refinement when too many words remain
+                int remainingWords = GetFilteredWords().Count();
+                bool tooManyWords = remainingWords > 350;
+
+                if (!isCachedResult && !tooManyWords)
                 {
                     await Task.Delay(1); // Allow UI to update with quick results
 
+                    sw.Restart();
                     var fullRecommendations = StrategyService.GetRecommendations(guesses, isHardMode, topN: 5, useMinimax: true);
+                    var phase2Ms = sw.ElapsedMilliseconds;
+                    Console.WriteLine($"[TIMING] Phase 2 (minimax): {phase2Ms}ms, {fullRecommendations?.Count ?? 0} recs");
 
                     // Update only if full recommendations are different/better
                     if (AreBetterRecommendations(fullRecommendations, recommendations))
                     {
                         recommendations = fullRecommendations;
                         StateHasChanged();
-                        Console.WriteLine($"Full: Updated with {recommendations?.Count ?? 0} refined recommendations");
+                        Console.WriteLine($"[TIMING] Phase 2 updated UI with refined recommendations");
                     }
+                }
+                else
+                {
+                    Console.WriteLine($"[TIMING] Phase 2 skipped (cached={isCachedResult}, tooMany={tooManyWords}, remaining={remainingWords})");
                 }
             }
         }
@@ -1830,6 +1844,9 @@
             {
                 wordFilter = parsedWordFilter;
             }
+
+            // Initialize active row word count now that filter and used words are loaded
+            activeRowWordsBefore = GetFilteredWords().Count();
 
             StateHasChanged();
 

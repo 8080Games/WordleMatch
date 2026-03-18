@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1731,
-      "word": "DRAMA",
-      "date": "3/16/2026",
-      "hints": {
-        "synonym": "theatre",
-        "haiku": "All the world's a stage / We speak lines we didn't write / Curtain falls on all"
-      }
-    },
-    {
       "gameNumber": 1732,
       "word": "CLASP",
       "date": "3/17/2026",
       "hints": {
         "synonym": "grip",
         "haiku": "Fingers interlock / What joins us holds through the storm / Don't let go just yet"
+      }
+    },
+    {
+      "gameNumber": 1734,
+      "word": "REHAB",
+      "date": "3/19/2026",
+      "hints": {
+        "synonym": "recovery",
+        "haiku": "The long road back starts / One day clean then another / Healing takes such time"
       }
     }
   ],
@@ -61,6 +61,7 @@
     "ANKLE",
     "GRADE",
     "DRAMA",
-    "CLASP"
+    "CLASP",
+    "REHAB"
   ]
 }

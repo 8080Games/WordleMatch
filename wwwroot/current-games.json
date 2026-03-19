@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1732,
-      "word": "CLASP",
-      "date": "3/17/2026",
-      "hints": {
-        "synonym": "grip",
-        "haiku": "Fingers interlock / What joins us holds through the storm / Don't let go just yet"
-      }
-    },
-    {
       "gameNumber": 1734,
       "word": "REHAB",
       "date": "3/19/2026",
       "hints": {
         "synonym": "recovery",
         "haiku": "The long road back starts / One day clean then another / Healing takes such time"
+      }
+    },
+    {
+      "gameNumber": 1735,
+      "word": "OASIS",
+      "date": "3/20/2026",
+      "hints": {
+        "synonym": "Refuge",
+        "haiku": "Desert water found / Relief amid the harsh / Green spot in dry land"
       }
     }
   ],
@@ -62,6 +62,7 @@
     "GRADE",
     "DRAMA",
     "CLASP",
-    "REHAB"
+    "REHAB",
+    "OASIS"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1734,
-      "word": "REHAB",
-      "date": "3/19/2026",
-      "hints": {
-        "synonym": "recovery",
-        "haiku": "The long road back starts / One day clean then another / Healing takes such time"
-      }
-    },
-    {
       "gameNumber": 1735,
       "word": "OASIS",
       "date": "3/20/2026",
       "hints": {
         "synonym": "Refuge",
         "haiku": "Desert water found / Relief amid the harsh / Green spot in dry land"
+      }
+    },
+    {
+      "gameNumber": 1736,
+      "word": "SLICK",
+      "date": "3/21/2026",
+      "hints": {
+        "synonym": "oily",
+        "haiku": "Surface too smooth now / No grip where there should be some / Careful where you step"
       }
     }
   ],
@@ -63,6 +63,7 @@
     "DRAMA",
     "CLASP",
     "REHAB",
-    "OASIS"
+    "OASIS",
+    "SLICK"
   ]
 }

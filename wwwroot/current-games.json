@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1736,
-      "word": "SLICK",
-      "date": "3/21/2026",
-      "hints": {
-        "synonym": "oily",
-        "haiku": "Surface too smooth now / No grip where there should be some / Careful where you step"
-      }
-    },
-    {
       "gameNumber": 1737,
       "word": "BASIL",
       "date": "3/22/2026",
       "hints": {
         "synonym": "herb",
         "haiku": "Green leaves crushed release / Summer captured in a scent / The kitchen comes alive"
+      }
+    },
+    {
+      "gameNumber": 1738,
+      "word": "SERIF",
+      "date": "3/23/2026",
+      "hints": {
+        "synonym": "font",
+        "haiku": "Small feet on the letters / Traditional type stands just so / Design in details"
       }
     }
   ],
@@ -65,6 +65,7 @@
     "REHAB",
     "OASIS",
     "SLICK",
-    "BASIL"
+    "BASIL",
+    "SERIF"
   ]
 }

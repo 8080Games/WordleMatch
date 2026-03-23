@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1737,
-      "word": "BASIL",
-      "date": "3/22/2026",
-      "hints": {
-        "synonym": "herb",
-        "haiku": "Green leaves crushed release / Summer captured in a scent / The kitchen comes alive"
-      }
-    },
-    {
       "gameNumber": 1738,
       "word": "SERIF",
       "date": "3/23/2026",
       "hints": {
         "synonym": "font",
         "haiku": "Small feet on the letters / Traditional type stands just so / Design in details"
+      }
+    },
+    {
+      "gameNumber": 1739,
+      "word": "BROOD",
+      "date": "3/24/2026",
+      "hints": {
+        "synonym": "dwell",
+        "haiku": "Dark thoughts circle round / The mind returns to its wound / Let it go or drown"
       }
     }
   ],
@@ -66,6 +66,7 @@
     "OASIS",
     "SLICK",
     "BASIL",
-    "SERIF"
+    "SERIF",
+    "BROOD"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1738,
-      "word": "SERIF",
-      "date": "3/23/2026",
-      "hints": {
-        "synonym": "font",
-        "haiku": "Small feet on the letters / Traditional type stands just so / Design in details"
-      }
-    },
-    {
       "gameNumber": 1739,
       "word": "BROOD",
       "date": "3/24/2026",
       "hints": {
         "synonym": "dwell",
         "haiku": "Dark thoughts circle round / The mind returns to its wound / Let it go or drown"
+      }
+    },
+    {
+      "gameNumber": 1740,
+      "word": "WISER",
+      "date": "3/25/2026",
+      "hints": {
+        "synonym": "smarter",
+        "haiku": "More knowledge than before / Experience teaches all / Learning never stops"
       }
     }
   ],
@@ -67,6 +67,7 @@
     "SLICK",
     "BASIL",
     "SERIF",
-    "BROOD"
+    "BROOD",
+    "WISER"
   ]
 }

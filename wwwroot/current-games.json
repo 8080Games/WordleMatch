@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1739,
-      "word": "BROOD",
-      "date": "3/24/2026",
-      "hints": {
-        "synonym": "dwell",
-        "haiku": "Dark thoughts circle round / The mind returns to its wound / Let it go or drown"
-      }
-    },
-    {
       "gameNumber": 1740,
       "word": "WISER",
       "date": "3/25/2026",
       "hints": {
         "synonym": "smarter",
         "haiku": "More knowledge than before / Experience teaches all / Learning never stops"
+      }
+    },
+    {
+      "gameNumber": 1741,
+      "word": "BEFIT",
+      "date": "3/26/2026",
+      "hints": {
+        "synonym": "suit",
+        "haiku": "The crown fits her well / Some are born to wear their role / Destiny aligns"
       }
     }
   ],
@@ -68,6 +68,7 @@
     "BASIL",
     "SERIF",
     "BROOD",
-    "WISER"
+    "WISER",
+    "BEFIT"
   ]
 }

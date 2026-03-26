@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1740,
-      "word": "WISER",
-      "date": "3/25/2026",
-      "hints": {
-        "synonym": "smarter",
-        "haiku": "More knowledge than before / Experience teaches all / Learning never stops"
-      }
-    },
-    {
       "gameNumber": 1741,
       "word": "BEFIT",
       "date": "3/26/2026",
       "hints": {
         "synonym": "suit",
         "haiku": "The crown fits her well / Some are born to wear their role / Destiny aligns"
+      }
+    },
+    {
+      "gameNumber": 1742,
+      "word": "IVORY",
+      "date": "3/27/2026",
+      "hints": {
+        "synonym": "White",
+        "haiku": "Pale as winter moon / Elephants mourn what was lost / Beauty's heavy cost"
       }
     }
   ],
@@ -69,6 +69,7 @@
     "SERIF",
     "BROOD",
     "WISER",
-    "BEFIT"
+    "BEFIT",
+    "IVORY"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1741,
-      "word": "BEFIT",
-      "date": "3/26/2026",
-      "hints": {
-        "synonym": "suit",
-        "haiku": "The crown fits her well / Some are born to wear their role / Destiny aligns"
-      }
-    },
-    {
       "gameNumber": 1742,
       "word": "IVORY",
       "date": "3/27/2026",
       "hints": {
         "synonym": "White",
         "haiku": "Pale as winter moon / Elephants mourn what was lost / Beauty's heavy cost"
+      }
+    },
+    {
+      "gameNumber": 1743,
+      "word": "AFOOT",
+      "date": "3/28/2026",
+      "hints": {
+        "synonym": "walking",
+        "haiku": "No wheels carry me / Just these two feet on the path / The slow way is best"
       }
     }
   ],
@@ -70,6 +70,7 @@
     "BROOD",
     "WISER",
     "BEFIT",
-    "IVORY"
+    "IVORY",
+    "AFOOT"
   ]
 }

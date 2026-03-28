@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1742,
-      "word": "IVORY",
-      "date": "3/27/2026",
-      "hints": {
-        "synonym": "White",
-        "haiku": "Pale as winter moon / Elephants mourn what was lost / Beauty's heavy cost"
-      }
-    },
-    {
       "gameNumber": 1743,
       "word": "AFOOT",
       "date": "3/28/2026",
       "hints": {
         "synonym": "walking",
         "haiku": "No wheels carry me / Just these two feet on the path / The slow way is best"
+      }
+    },
+    {
+      "gameNumber": 1744,
+      "word": "CHUMP",
+      "date": "3/29/2026",
+      "hints": {
+        "synonym": "fool",
+        "haiku": "He trusted too quick / The con saw him coming far / Wisdom costs tuition"
       }
     }
   ],
@@ -71,6 +71,7 @@
     "WISER",
     "BEFIT",
     "IVORY",
-    "AFOOT"
+    "AFOOT",
+    "CHUMP"
   ]
 }

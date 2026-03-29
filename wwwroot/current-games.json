@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1743,
-      "word": "AFOOT",
-      "date": "3/28/2026",
-      "hints": {
-        "synonym": "walking",
-        "haiku": "No wheels carry me / Just these two feet on the path / The slow way is best"
-      }
-    },
-    {
       "gameNumber": 1744,
       "word": "CHUMP",
       "date": "3/29/2026",
       "hints": {
         "synonym": "fool",
         "haiku": "He trusted too quick / The con saw him coming far / Wisdom costs tuition"
+      }
+    },
+    {
+      "gameNumber": 1745,
+      "word": "COMET",
+      "date": "3/30/2026",
+      "hints": {
+        "synonym": "Meteor",
+        "haiku": "Ice tail blazes bright / Visitor from the deep dark / Sky gets a surprise"
       }
     }
   ],
@@ -72,6 +72,7 @@
     "BEFIT",
     "IVORY",
     "AFOOT",
-    "CHUMP"
+    "CHUMP",
+    "COMET"
   ]
 }

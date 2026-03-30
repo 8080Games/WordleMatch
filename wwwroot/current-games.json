@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1744,
-      "word": "CHUMP",
-      "date": "3/29/2026",
-      "hints": {
-        "synonym": "fool",
-        "haiku": "He trusted too quick / The con saw him coming far / Wisdom costs tuition"
-      }
-    },
-    {
       "gameNumber": 1745,
       "word": "COMET",
       "date": "3/30/2026",
       "hints": {
         "synonym": "Meteor",
         "haiku": "Ice tail blazes bright / Visitor from the deep dark / Sky gets a surprise"
+      }
+    },
+    {
+      "gameNumber": 1746,
+      "word": "SWAMP",
+      "date": "3/31/2026",
+      "hints": {
+        "synonym": "marsh",
+        "haiku": "Wet earth swallows steps / The solid ground an illusion / Watch where you walk here"
       }
     }
   ],
@@ -73,6 +73,7 @@
     "IVORY",
     "AFOOT",
     "CHUMP",
-    "COMET"
+    "COMET",
+    "SWAMP"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1745,
-      "word": "COMET",
-      "date": "3/30/2026",
-      "hints": {
-        "synonym": "Meteor",
-        "haiku": "Ice tail blazes bright / Visitor from the deep dark / Sky gets a surprise"
-      }
-    },
-    {
       "gameNumber": 1746,
       "word": "SWAMP",
       "date": "3/31/2026",
       "hints": {
         "synonym": "marsh",
         "haiku": "Wet earth swallows steps / The solid ground an illusion / Watch where you walk here"
+      }
+    },
+    {
+      "gameNumber": 1747,
+      "word": "FIZZY",
+      "date": "4/1/2026",
+      "hints": {
+        "synonym": "bubbly",
+        "haiku": "Bubbles race to top / The glass sparkles with their flight / Effervescence sings"
       }
     }
   ],
@@ -74,6 +74,7 @@
     "AFOOT",
     "CHUMP",
     "COMET",
-    "SWAMP"
+    "SWAMP",
+    "FIZZY"
   ]
 }

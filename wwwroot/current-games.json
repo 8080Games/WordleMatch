@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1746,
-      "word": "SWAMP",
-      "date": "3/31/2026",
-      "hints": {
-        "synonym": "marsh",
-        "haiku": "Wet earth swallows steps / The solid ground an illusion / Watch where you walk here"
-      }
-    },
-    {
       "gameNumber": 1747,
       "word": "FIZZY",
       "date": "4/1/2026",
       "hints": {
         "synonym": "bubbly",
         "haiku": "Bubbles race to top / The glass sparkles with their flight / Effervescence sings"
+      }
+    },
+    {
+      "gameNumber": 1748,
+      "word": "SOBER",
+      "date": "4/2/2026",
+      "hints": {
+        "synonym": "clearheaded",
+        "haiku": "No buzz clouds the mind / Sharp edges on everything / Reality unfiltered"
       }
     }
   ],
@@ -75,6 +75,7 @@
     "CHUMP",
     "COMET",
     "SWAMP",
-    "FIZZY"
+    "FIZZY",
+    "SOBER"
   ]
 }

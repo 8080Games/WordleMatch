@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1748,
-      "word": "SOBER",
-      "date": "4/2/2026",
-      "hints": {
-        "synonym": "clearheaded",
-        "haiku": "No buzz clouds the mind / Sharp edges on everything / Reality unfiltered"
-      }
-    },
-    {
       "gameNumber": 1749,
       "word": "SINGE",
       "date": "4/3/2026",
       "hints": {
         "synonym": "burn",
         "haiku": "Just barely touched flame / The edges curl from the heat / Close call with the fire"
+      }
+    },
+    {
+      "gameNumber": 1750,
+      "word": "SANDY",
+      "date": "4/4/2026",
+      "hints": {
+        "synonym": "Gritty",
+        "haiku": "Beach texture present / Covered in the tiny grains / Coarse with sediment"
       }
     }
   ],
@@ -77,6 +77,7 @@
     "SWAMP",
     "FIZZY",
     "SOBER",
-    "SINGE"
+    "SINGE",
+    "SANDY"
   ]
 }

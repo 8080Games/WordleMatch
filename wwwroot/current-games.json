@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1750,
-      "word": "SANDY",
-      "date": "4/4/2026",
-      "hints": {
-        "synonym": "Gritty",
-        "haiku": "Beach texture present / Covered in the tiny grains / Coarse with sediment"
-      }
-    },
-    {
       "gameNumber": 1752,
       "word": "SWORN",
       "date": "4/6/2026",
       "hints": {
         "synonym": "pledged",
         "haiku": "Committed and locked / No backing out from this now / The oath taken holds"
+      }
+    },
+    {
+      "gameNumber": 1753,
+      "word": "DENSE",
+      "date": "4/7/2026",
+      "hints": {
+        "synonym": "thick",
+        "haiku": "Fog fills every space / Nothing moves through such fullness / Wait for it to clear"
       }
     }
   ],
@@ -79,6 +79,7 @@
     "SOBER",
     "SINGE",
     "SANDY",
-    "SWORN"
+    "SWORN",
+    "DENSE"
   ]
 }

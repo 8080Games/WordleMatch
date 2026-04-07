@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1752,
-      "word": "SWORN",
-      "date": "4/6/2026",
-      "hints": {
-        "synonym": "pledged",
-        "haiku": "Committed and locked / No backing out from this now / The oath taken holds"
-      }
-    },
-    {
       "gameNumber": 1753,
       "word": "DENSE",
       "date": "4/7/2026",
       "hints": {
         "synonym": "thick",
         "haiku": "Fog fills every space / Nothing moves through such fullness / Wait for it to clear"
+      }
+    },
+    {
+      "gameNumber": 1754,
+      "word": "INLET",
+      "date": "4/8/2026",
+      "hints": {
+        "synonym": "cove",
+        "haiku": "Water cuts through land / The ocean finds its finger hold / Sheltered from the waves"
       }
     }
   ],
@@ -80,6 +80,7 @@
     "SINGE",
     "SANDY",
     "SWORN",
-    "DENSE"
+    "DENSE",
+    "INLET"
   ]
 }

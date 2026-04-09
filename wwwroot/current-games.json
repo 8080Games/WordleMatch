@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1753,
-      "word": "DENSE",
-      "date": "4/7/2026",
-      "hints": {
-        "synonym": "thick",
-        "haiku": "Fog fills every space / Nothing moves through such fullness / Wait for it to clear"
-      }
-    },
-    {
       "gameNumber": 1754,
       "word": "INLET",
       "date": "4/8/2026",
       "hints": {
         "synonym": "cove",
         "haiku": "Water cuts through land / The ocean finds its finger hold / Sheltered from the waves"
+      }
+    },
+    {
+      "gameNumber": 1756,
+      "word": "CAROM",
+      "date": "4/10/2026",
+      "hints": {
+        "synonym": "Bounce",
+        "haiku": "Ricochet angle / Billiard ball rebounds off / Indirect contact"
       }
     }
   ],
@@ -81,6 +81,7 @@
     "SANDY",
     "SWORN",
     "DENSE",
-    "INLET"
+    "INLET",
+    "CAROM"
   ]
 }

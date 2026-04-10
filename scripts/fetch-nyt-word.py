@@ -10,6 +10,25 @@ import subprocess
 from datetime import datetime, timedelta
 from playwright.async_api import async_playwright
 
+
+def toast(title, message):
+    """Show a Windows toast notification via PowerShell."""
+    ps_script = f"""
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
+[Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
+$xml = [Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent([Windows.UI.Notifications.ToastTemplateType]::ToastText02)
+$elements = $xml.GetElementsByTagName('text')
+$elements[0].AppendChild($xml.CreateTextNode({repr(title)})) | Out-Null
+$elements[1].AppendChild($xml.CreateTextNode({repr(message)})) | Out-Null
+$notifier = [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier('Wordle Updater')
+$notifier.Show([Windows.UI.Notifications.ToastNotification]::new($xml))
+"""
+    try:
+        subprocess.run(['powershell', '-NoProfile', '-Command', ps_script],
+                       capture_output=True, timeout=10)
+    except Exception:
+        pass  # Don't let notification failure break the script
+
 async def fetch_nyt_wordle():
     """Fetch tomorrow's Wordle word from NYT review article."""
 
@@ -59,6 +78,8 @@ async def fetch_nyt_wordle():
             print("    Run: start-chrome-debug.bat")
             print()
             print("=" * 70)
+            toast("Wordle Fetch Failed",
+                  f"Could not connect to browser. Add game #{game_number} manually.")
             return None
 
         # Get the default context (your existing Chrome profile)
@@ -143,6 +164,8 @@ async def fetch_nyt_wordle():
                 print()
                 print("[ERROR] Could not find the Wordle answer on the page.")
                 print("The page might have a different format than expected.")
+                toast("Wordle Fetch Failed",
+                      f"Could not extract word from NYT page. Add game #{game_number} manually.")
 
                 # Save page for debugging
                 try:

@@ -32,4 +32,3 @@ echo You can now run: fetch-nyt-word.bat
 echo.
 echo Note: This uses a separate Edge profile. You may need to log into NYT.
 echo.
-pause

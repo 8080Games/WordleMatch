@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1756,
-      "word": "CAROM",
-      "date": "4/10/2026",
-      "hints": {
-        "synonym": "Bounce",
-        "haiku": "Ricochet angle / Billiard ball rebounds off / Indirect contact"
-      }
-    },
-    {
       "gameNumber": 1757,
       "word": "PRUDE",
       "date": "4/11/2026",
       "hints": {
         "synonym": "puritan",
         "haiku": "She gasps at too much / Propriety guards each word / Looseness is the fear"
+      }
+    },
+    {
+      "gameNumber": 1758,
+      "word": "ALLEY",
+      "date": "4/12/2026",
+      "hints": {
+        "synonym": "lane",
+        "haiku": "Narrow passage waits / Between tall buildings it hides / Shortcuts for the bold"
       }
     }
   ],
@@ -84,6 +84,7 @@
     "INLET",
     "CAROM",
     "PRUDE",
-    "LADEN"
+    "LADEN",
+    "ALLEY"
   ]
 }

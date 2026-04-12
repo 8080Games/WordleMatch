@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1757,
-      "word": "PRUDE",
-      "date": "4/11/2026",
-      "hints": {
-        "synonym": "puritan",
-        "haiku": "She gasps at too much / Propriety guards each word / Looseness is the fear"
-      }
-    },
-    {
       "gameNumber": 1758,
       "word": "ALLEY",
       "date": "4/12/2026",
       "hints": {
         "synonym": "lane",
         "haiku": "Narrow passage waits / Between tall buildings it hides / Shortcuts for the bold"
+      }
+    },
+    {
+      "gameNumber": 1759,
+      "word": "ELFIN",
+      "date": "4/13/2026",
+      "hints": {
+        "synonym": "fairylike",
+        "haiku": "Small and strange and bright / She moves like she's not quite here / Magic in her step"
       }
     }
   ],
@@ -85,6 +85,7 @@
     "CAROM",
     "PRUDE",
     "LADEN",
-    "ALLEY"
+    "ALLEY",
+    "ELFIN"
   ]
 }

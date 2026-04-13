@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1758,
-      "word": "ALLEY",
-      "date": "4/12/2026",
-      "hints": {
-        "synonym": "lane",
-        "haiku": "Narrow passage waits / Between tall buildings it hides / Shortcuts for the bold"
-      }
-    },
-    {
       "gameNumber": 1759,
       "word": "ELFIN",
       "date": "4/13/2026",
       "hints": {
         "synonym": "fairylike",
         "haiku": "Small and strange and bright / She moves like she's not quite here / Magic in her step"
+      }
+    },
+    {
+      "gameNumber": 1760,
+      "word": "CYCLE",
+      "date": "4/14/2026",
+      "hints": {
+        "synonym": "loop",
+        "haiku": "Round and round again / What goes comes back in its time / The wheel never stops"
       }
     }
   ],
@@ -86,6 +86,7 @@
     "PRUDE",
     "LADEN",
     "ALLEY",
-    "ELFIN"
+    "ELFIN",
+    "CYCLE"
   ]
 }

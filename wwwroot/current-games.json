@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1759,
-      "word": "ELFIN",
-      "date": "4/13/2026",
-      "hints": {
-        "synonym": "fairylike",
-        "haiku": "Small and strange and bright / She moves like she's not quite here / Magic in her step"
-      }
-    },
-    {
       "gameNumber": 1760,
       "word": "CYCLE",
       "date": "4/14/2026",
       "hints": {
         "synonym": "loop",
         "haiku": "Round and round again / What goes comes back in its time / The wheel never stops"
+      }
+    },
+    {
+      "gameNumber": 1761,
+      "word": "BEGUN",
+      "date": "4/15/2026",
+      "hints": {
+        "synonym": "commenced",
+        "haiku": "No turning back now / The wheel has started to turn / See it through the end"
       }
     }
   ],
@@ -87,6 +87,7 @@
     "LADEN",
     "ALLEY",
     "ELFIN",
-    "CYCLE"
+    "CYCLE",
+    "BEGUN"
   ]
 }

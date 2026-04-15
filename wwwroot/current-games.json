@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1760,
-      "word": "CYCLE",
-      "date": "4/14/2026",
-      "hints": {
-        "synonym": "loop",
-        "haiku": "Round and round again / What goes comes back in its time / The wheel never stops"
-      }
-    },
-    {
       "gameNumber": 1761,
       "word": "BEGUN",
       "date": "4/15/2026",
       "hints": {
         "synonym": "commenced",
         "haiku": "No turning back now / The wheel has started to turn / See it through the end"
+      }
+    },
+    {
+      "gameNumber": 1762,
+      "word": "CUBIT",
+      "date": "4/16/2026",
+      "hints": {
+        "synonym": "Measure",
+        "haiku": "Ancient length from elbow / Forearm measurement used / Biblical standard"
       }
     }
   ],
@@ -88,6 +88,7 @@
     "ALLEY",
     "ELFIN",
     "CYCLE",
-    "BEGUN"
+    "BEGUN",
+    "CUBIT"
   ]
 }

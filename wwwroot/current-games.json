@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1761,
-      "word": "BEGUN",
-      "date": "4/15/2026",
-      "hints": {
-        "synonym": "commenced",
-        "haiku": "No turning back now / The wheel has started to turn / See it through the end"
-      }
-    },
-    {
       "gameNumber": 1762,
       "word": "CUBIT",
       "date": "4/16/2026",
       "hints": {
         "synonym": "Measure",
         "haiku": "Ancient length from elbow / Forearm measurement used / Biblical standard"
+      }
+    },
+    {
+      "gameNumber": 1763,
+      "word": "BELLE",
+      "date": "4/17/2026",
+      "hints": {
+        "synonym": "beauty",
+        "haiku": "She enters the room / All eyes turn like sunflowers / Grace needs no effort"
       }
     }
   ],
@@ -89,6 +89,7 @@
     "ELFIN",
     "CYCLE",
     "BEGUN",
-    "CUBIT"
+    "CUBIT",
+    "BELLE"
   ]
 }

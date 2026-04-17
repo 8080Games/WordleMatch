@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1762,
-      "word": "CUBIT",
-      "date": "4/16/2026",
-      "hints": {
-        "synonym": "Measure",
-        "haiku": "Ancient length from elbow / Forearm measurement used / Biblical standard"
-      }
-    },
-    {
       "gameNumber": 1763,
       "word": "BELLE",
       "date": "4/17/2026",
       "hints": {
         "synonym": "beauty",
         "haiku": "She enters the room / All eyes turn like sunflowers / Grace needs no effort"
+      }
+    },
+    {
+      "gameNumber": 1764,
+      "word": "TOADY",
+      "date": "4/18/2026",
+      "hints": {
+        "synonym": "Sycophant",
+        "haiku": "Flattering for gain / Servile follower / Boot licker personified"
       }
     }
   ],
@@ -90,6 +90,7 @@
     "CYCLE",
     "BEGUN",
     "CUBIT",
-    "BELLE"
+    "BELLE",
+    "TOADY"
   ]
 }

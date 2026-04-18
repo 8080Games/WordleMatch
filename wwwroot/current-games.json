@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1763,
-      "word": "BELLE",
-      "date": "4/17/2026",
-      "hints": {
-        "synonym": "beauty",
-        "haiku": "She enters the room / All eyes turn like sunflowers / Grace needs no effort"
-      }
-    },
-    {
       "gameNumber": 1764,
       "word": "TOADY",
       "date": "4/18/2026",
       "hints": {
         "synonym": "Sycophant",
         "haiku": "Flattering for gain / Servile follower / Boot licker personified"
+      }
+    },
+    {
+      "gameNumber": 1765,
+      "word": "STAND",
+      "date": "4/19/2026",
+      "hints": {
+        "synonym": "Rise",
+        "haiku": "Feet planted firm / Refusing to be moved down / Vertical and strong"
       }
     }
   ],
@@ -91,6 +91,7 @@
     "BEGUN",
     "CUBIT",
     "BELLE",
-    "TOADY"
+    "TOADY",
+    "STAND"
   ]
 }

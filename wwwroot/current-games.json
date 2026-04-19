@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1764,
-      "word": "TOADY",
-      "date": "4/18/2026",
-      "hints": {
-        "synonym": "Sycophant",
-        "haiku": "Flattering for gain / Servile follower / Boot licker personified"
-      }
-    },
-    {
       "gameNumber": 1765,
       "word": "STAND",
       "date": "4/19/2026",
       "hints": {
         "synonym": "Rise",
         "haiku": "Feet planted firm / Refusing to be moved down / Vertical and strong"
+      }
+    },
+    {
+      "gameNumber": 1766,
+      "word": "WEAVE",
+      "date": "4/20/2026",
+      "hints": {
+        "synonym": "interlace",
+        "haiku": "Over under through / The pattern emerges slow / Fabric from the threads"
       }
     }
   ],
@@ -92,6 +92,7 @@
     "CUBIT",
     "BELLE",
     "TOADY",
-    "STAND"
+    "STAND",
+    "WEAVE"
   ]
 }

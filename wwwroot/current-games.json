@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1765,
-      "word": "STAND",
-      "date": "4/19/2026",
-      "hints": {
-        "synonym": "Rise",
-        "haiku": "Feet planted firm / Refusing to be moved down / Vertical and strong"
-      }
-    },
-    {
       "gameNumber": 1766,
       "word": "WEAVE",
       "date": "4/20/2026",
       "hints": {
         "synonym": "interlace",
         "haiku": "Over under through / The pattern emerges slow / Fabric from the threads"
+      }
+    },
+    {
+      "gameNumber": 1767,
+      "word": "CLUMP",
+      "date": "4/21/2026",
+      "hints": {
+        "synonym": "cluster",
+        "haiku": "Together they grow / Strength found in the gathering / None stands quite alone"
       }
     }
   ],
@@ -93,6 +93,7 @@
     "BELLE",
     "TOADY",
     "STAND",
-    "WEAVE"
+    "WEAVE",
+    "CLUMP"
   ]
 }

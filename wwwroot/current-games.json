@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1766,
-      "word": "WEAVE",
-      "date": "4/20/2026",
-      "hints": {
-        "synonym": "interlace",
-        "haiku": "Over under through / The pattern emerges slow / Fabric from the threads"
-      }
-    },
-    {
       "gameNumber": 1767,
       "word": "CLUMP",
       "date": "4/21/2026",
       "hints": {
         "synonym": "cluster",
         "haiku": "Together they grow / Strength found in the gathering / None stands quite alone"
+      }
+    },
+    {
+      "gameNumber": 1768,
+      "word": "SNORE",
+      "date": "4/22/2026",
+      "hints": {
+        "synonym": "rasp",
+        "haiku": "The sleeper's song plays / Sawing wood through the long night / Earplugs might help some"
       }
     }
   ],
@@ -94,6 +94,7 @@
     "TOADY",
     "STAND",
     "WEAVE",
-    "CLUMP"
+    "CLUMP",
+    "SNORE"
   ]
 }

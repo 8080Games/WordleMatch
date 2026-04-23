@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1767,
-      "word": "CLUMP",
-      "date": "4/21/2026",
-      "hints": {
-        "synonym": "cluster",
-        "haiku": "Together they grow / Strength found in the gathering / None stands quite alone"
-      }
-    },
-    {
       "gameNumber": 1768,
       "word": "SNORE",
       "date": "4/22/2026",
       "hints": {
         "synonym": "rasp",
         "haiku": "The sleeper's song plays / Sawing wood through the long night / Earplugs might help some"
+      }
+    },
+    {
+      "gameNumber": 1770,
+      "word": "DRUNK",
+      "date": "4/24/2026",
+      "hints": {
+        "synonym": "intoxicated",
+        "haiku": "The room tilts and sways / Words slur into one another / Morning will exact"
       }
     }
   ],
@@ -95,6 +95,7 @@
     "STAND",
     "WEAVE",
     "CLUMP",
-    "SNORE"
+    "SNORE",
+    "DRUNK"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1768,
-      "word": "SNORE",
-      "date": "4/22/2026",
-      "hints": {
-        "synonym": "rasp",
-        "haiku": "The sleeper's song plays / Sawing wood through the long night / Earplugs might help some"
-      }
-    },
-    {
       "gameNumber": 1770,
       "word": "DRUNK",
       "date": "4/24/2026",
       "hints": {
         "synonym": "intoxicated",
         "haiku": "The room tilts and sways / Words slur into one another / Morning will exact"
+      }
+    },
+    {
+      "gameNumber": 1771,
+      "word": "WOMEN",
+      "date": "4/25/2026",
+      "hints": {
+        "synonym": "females",
+        "haiku": "Half of all the world / Strength in forms that differ / Power in the female"
       }
     }
   ],
@@ -96,6 +96,7 @@
     "WEAVE",
     "CLUMP",
     "SNORE",
-    "DRUNK"
+    "DRUNK",
+    "WOMEN"
   ]
 }

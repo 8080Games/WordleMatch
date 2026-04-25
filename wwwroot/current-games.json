@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1770,
-      "word": "DRUNK",
-      "date": "4/24/2026",
-      "hints": {
-        "synonym": "intoxicated",
-        "haiku": "The room tilts and sways / Words slur into one another / Morning will exact"
-      }
-    },
-    {
       "gameNumber": 1771,
       "word": "WOMEN",
       "date": "4/25/2026",
       "hints": {
         "synonym": "females",
         "haiku": "Half of all the world / Strength in forms that differ / Power in the female"
+      }
+    },
+    {
+      "gameNumber": 1772,
+      "word": "GLOSS",
+      "date": "4/26/2026",
+      "hints": {
+        "synonym": "shine",
+        "haiku": "Surface smooth and bright / Reflection shows back my face / Polish hides the rough"
       }
     }
   ],
@@ -97,6 +97,7 @@
     "CLUMP",
     "SNORE",
     "DRUNK",
-    "WOMEN"
+    "WOMEN",
+    "GLOSS"
   ]
 }

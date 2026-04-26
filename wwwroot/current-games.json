@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1771,
-      "word": "WOMEN",
-      "date": "4/25/2026",
-      "hints": {
-        "synonym": "females",
-        "haiku": "Half of all the world / Strength in forms that differ / Power in the female"
-      }
-    },
-    {
       "gameNumber": 1772,
       "word": "GLOSS",
       "date": "4/26/2026",
       "hints": {
         "synonym": "shine",
         "haiku": "Surface smooth and bright / Reflection shows back my face / Polish hides the rough"
+      }
+    },
+    {
+      "gameNumber": 1773,
+      "word": "EERIE",
+      "date": "4/27/2026",
+      "hints": {
+        "synonym": "spooky",
+        "haiku": "Something's watching here / The hairs rise on my neck slow / Trust that ancient fear"
       }
     }
   ],
@@ -98,6 +98,7 @@
     "SNORE",
     "DRUNK",
     "WOMEN",
-    "GLOSS"
+    "GLOSS",
+    "EERIE"
   ]
 }

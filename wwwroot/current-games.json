@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1772,
-      "word": "GLOSS",
-      "date": "4/26/2026",
-      "hints": {
-        "synonym": "shine",
-        "haiku": "Surface smooth and bright / Reflection shows back my face / Polish hides the rough"
-      }
-    },
-    {
       "gameNumber": 1773,
       "word": "EERIE",
       "date": "4/27/2026",
       "hints": {
         "synonym": "spooky",
         "haiku": "Something's watching here / The hairs rise on my neck slow / Trust that ancient fear"
+      }
+    },
+    {
+      "gameNumber": 1774,
+      "word": "QUACK",
+      "date": "4/28/2026",
+      "hints": {
+        "synonym": "charlatan",
+        "haiku": "The cure is no cure / False hope sold for real money / Trust misplaced and lost"
       }
     }
   ],
@@ -99,6 +99,7 @@
     "DRUNK",
     "WOMEN",
     "GLOSS",
-    "EERIE"
+    "EERIE",
+    "QUACK"
   ]
 }

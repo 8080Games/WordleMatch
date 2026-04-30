@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1774,
-      "word": "QUACK",
-      "date": "4/28/2026",
-      "hints": {
-        "synonym": "charlatan",
-        "haiku": "The cure is no cure / False hope sold for real money / Trust misplaced and lost"
-      }
-    },
-    {
       "gameNumber": 1775,
       "word": "RURAL",
       "date": "4/29/2026",
       "hints": {
         "synonym": "country",
         "haiku": "Far from city noise / The pace slows to seasons' speed / Land shapes different lives"
+      }
+    },
+    {
+      "gameNumber": 1777,
+      "word": "PLUME",
+      "date": "5/1/2026",
+      "hints": {
+        "synonym": "feather",
+        "haiku": "Rising from the crown / Color announces the bird / Pride on display floats"
       }
     }
   ],
@@ -101,6 +101,7 @@
     "GLOSS",
     "EERIE",
     "QUACK",
-    "RURAL"
+    "RURAL",
+    "PLUME"
   ]
 }

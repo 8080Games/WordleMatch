@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1775,
-      "word": "RURAL",
-      "date": "4/29/2026",
-      "hints": {
-        "synonym": "country",
-        "haiku": "Far from city noise / The pace slows to seasons' speed / Land shapes different lives"
-      }
-    },
-    {
       "gameNumber": 1777,
       "word": "PLUME",
       "date": "5/1/2026",
       "hints": {
         "synonym": "feather",
         "haiku": "Rising from the crown / Color announces the bird / Pride on display floats"
+      }
+    },
+    {
+      "gameNumber": 1778,
+      "word": "BRING",
+      "date": "5/2/2026",
+      "hints": {
+        "synonym": "Carry",
+        "haiku": "Transport to this place / Hands deliver what was asked / Arrival completes"
       }
     }
   ],
@@ -102,6 +102,7 @@
     "EERIE",
     "QUACK",
     "RURAL",
-    "PLUME"
+    "PLUME",
+    "BRING"
   ]
 }

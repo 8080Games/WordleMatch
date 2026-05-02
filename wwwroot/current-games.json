@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1777,
-      "word": "PLUME",
-      "date": "5/1/2026",
-      "hints": {
-        "synonym": "feather",
-        "haiku": "Rising from the crown / Color announces the bird / Pride on display floats"
-      }
-    },
-    {
       "gameNumber": 1778,
       "word": "BRING",
       "date": "5/2/2026",
       "hints": {
         "synonym": "Carry",
         "haiku": "Transport to this place / Hands deliver what was asked / Arrival completes"
+      }
+    },
+    {
+      "gameNumber": 1779,
+      "word": "PUFFY",
+      "date": "5/3/2026",
+      "hints": {
+        "synonym": "swollen",
+        "haiku": "More than it should be / Air or water fills the space / Bloat needs to release"
       }
     }
   ],
@@ -103,6 +103,7 @@
     "QUACK",
     "RURAL",
     "PLUME",
-    "BRING"
+    "BRING",
+    "PUFFY"
   ]
 }

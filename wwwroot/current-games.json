@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1780,
-      "word": "RISER",
-      "date": "5/4/2026",
-      "hints": {
-        "synonym": "climber",
-        "haiku": "Up the steps she goes / Higher with each effort made / The top comes closer"
-      }
-    },
-    {
       "gameNumber": 1781,
       "word": "LATCH",
       "date": "5/5/2026",
       "hints": {
         "synonym": "lock",
         "haiku": "Click and it holds fast / Security in small things / Keep what's yours inside"
+      }
+    },
+    {
+      "gameNumber": 1782,
+      "word": "LIKEN",
+      "date": "5/6/2026",
+      "hints": {
+        "synonym": "compare",
+        "haiku": "This reminds of that / Connections help us understand / Similarity teaches"
       }
     }
   ],
@@ -106,6 +106,7 @@
     "BRING",
     "PUFFY",
     "RISER",
-    "LATCH"
+    "LATCH",
+    "LIKEN"
   ]
 }

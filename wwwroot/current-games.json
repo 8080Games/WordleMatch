@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1781,
-      "word": "LATCH",
-      "date": "5/5/2026",
-      "hints": {
-        "synonym": "lock",
-        "haiku": "Click and it holds fast / Security in small things / Keep what's yours inside"
-      }
-    },
-    {
       "gameNumber": 1782,
       "word": "LIKEN",
       "date": "5/6/2026",
       "hints": {
         "synonym": "compare",
         "haiku": "This reminds of that / Connections help us understand / Similarity teaches"
+      }
+    },
+    {
+      "gameNumber": 1783,
+      "word": "BUDGE",
+      "date": "5/7/2026",
+      "hints": {
+        "synonym": "move",
+        "haiku": "Stubborn as the rock / Yet even mountains shift slow / Nothing stays unmoved"
       }
     }
   ],
@@ -107,6 +107,7 @@
     "PUFFY",
     "RISER",
     "LATCH",
-    "LIKEN"
+    "LIKEN",
+    "BUDGE"
   ]
 }

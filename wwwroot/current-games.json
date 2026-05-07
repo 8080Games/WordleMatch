@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1782,
-      "word": "LIKEN",
-      "date": "5/6/2026",
-      "hints": {
-        "synonym": "compare",
-        "haiku": "This reminds of that / Connections help us understand / Similarity teaches"
-      }
-    },
-    {
       "gameNumber": 1783,
       "word": "BUDGE",
       "date": "5/7/2026",
       "hints": {
         "synonym": "move",
         "haiku": "Stubborn as the rock / Yet even mountains shift slow / Nothing stays unmoved"
+      }
+    },
+    {
+      "gameNumber": 1784,
+      "word": "UMBRA",
+      "date": "5/8/2026",
+      "hints": {
+        "synonym": "shadow",
+        "haiku": "Dark core of darkness / Where light cannot penetrate / The deepest shade waits"
       }
     }
   ],
@@ -108,6 +108,7 @@
     "RISER",
     "LATCH",
     "LIKEN",
-    "BUDGE"
+    "BUDGE",
+    "UMBRA"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1786,
-      "word": "PARKA",
-      "date": "5/10/2026",
-      "hints": {
-        "synonym": "coat",
-        "haiku": "Hood against the wind / Warmth wrapped around shivering bones / Winter armor worn"
-      }
-    },
-    {
       "gameNumber": 1787,
       "word": "NEWLY",
       "date": "5/11/2026",
       "hints": {
         "synonym": "recently",
         "haiku": "Just happened it seems / The paint still wet on this one / Fresh from the beginning"
+      }
+    },
+    {
+      "gameNumber": 1788,
+      "word": "CLOCK",
+      "date": "5/12/2026",
+      "hints": {
+        "synonym": "Timer",
+        "haiku": "Hands sweep round the face / Seconds tick away the day / Time made visible"
       }
     }
   ],
@@ -112,6 +112,7 @@
     "UMBRA",
     "SATIN",
     "PARKA",
-    "NEWLY"
+    "NEWLY",
+    "CLOCK"
   ]
 }

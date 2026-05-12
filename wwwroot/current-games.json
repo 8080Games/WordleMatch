@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1787,
-      "word": "NEWLY",
-      "date": "5/11/2026",
-      "hints": {
-        "synonym": "recently",
-        "haiku": "Just happened it seems / The paint still wet on this one / Fresh from the beginning"
-      }
-    },
-    {
       "gameNumber": 1788,
       "word": "CLOCK",
       "date": "5/12/2026",
       "hints": {
         "synonym": "Timer",
         "haiku": "Hands sweep round the face / Seconds tick away the day / Time made visible"
+      }
+    },
+    {
+      "gameNumber": 1789,
+      "word": "DOWDY",
+      "date": "5/13/2026",
+      "hints": {
+        "synonym": "frumpy",
+        "haiku": "Fashion passed her by / But comfort wraps her just right / Style is what you make"
       }
     }
   ],
@@ -113,6 +113,7 @@
     "SATIN",
     "PARKA",
     "NEWLY",
-    "CLOCK"
+    "CLOCK",
+    "DOWDY"
   ]
 }

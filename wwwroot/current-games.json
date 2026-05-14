@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1788,
-      "word": "CLOCK",
-      "date": "5/12/2026",
-      "hints": {
-        "synonym": "Timer",
-        "haiku": "Hands sweep round the face / Seconds tick away the day / Time made visible"
-      }
-    },
-    {
       "gameNumber": 1789,
       "word": "DOWDY",
       "date": "5/13/2026",
       "hints": {
         "synonym": "frumpy",
         "haiku": "Fashion passed her by / But comfort wraps her just right / Style is what you make"
+      }
+    },
+    {
+      "gameNumber": 1791,
+      "word": "CREED",
+      "date": "5/15/2026",
+      "hints": {
+        "synonym": "belief",
+        "haiku": "Words I live my life by / Written on the heart not page / Faith distilled to bone"
       }
     }
   ],
@@ -114,6 +114,7 @@
     "PARKA",
     "NEWLY",
     "CLOCK",
-    "DOWDY"
+    "DOWDY",
+    "CREED"
   ]
 }

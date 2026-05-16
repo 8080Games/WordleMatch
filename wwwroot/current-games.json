@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1789,
-      "word": "DOWDY",
-      "date": "5/13/2026",
-      "hints": {
-        "synonym": "frumpy",
-        "haiku": "Fashion passed her by / But comfort wraps her just right / Style is what you make"
-      }
-    },
-    {
       "gameNumber": 1791,
       "word": "CREED",
       "date": "5/15/2026",
       "hints": {
         "synonym": "belief",
         "haiku": "Words I live my life by / Written on the heart not page / Faith distilled to bone"
+      }
+    },
+    {
+      "gameNumber": 1793,
+      "word": "BYLAW",
+      "date": "5/17/2026",
+      "hints": {
+        "synonym": "rule",
+        "haiku": "Written in the books / The small print governs the whole / Details hold the power"
       }
     }
   ],
@@ -115,6 +115,7 @@
     "NEWLY",
     "CLOCK",
     "DOWDY",
-    "CREED"
+    "CREED",
+    "BYLAW"
   ]
 }

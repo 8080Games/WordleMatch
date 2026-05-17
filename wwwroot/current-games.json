@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1791,
-      "word": "CREED",
-      "date": "5/15/2026",
-      "hints": {
-        "synonym": "belief",
-        "haiku": "Words I live my life by / Written on the heart not page / Faith distilled to bone"
-      }
-    },
-    {
       "gameNumber": 1793,
       "word": "BYLAW",
       "date": "5/17/2026",
       "hints": {
         "synonym": "rule",
         "haiku": "Written in the books / The small print governs the whole / Details hold the power"
+      }
+    },
+    {
+      "gameNumber": 1794,
+      "word": "LOATH",
+      "date": "5/18/2026",
+      "hints": {
+        "synonym": "reluctant",
+        "haiku": "I'd rather not / Resistance pulls against push / Unwilling but bending"
       }
     }
   ],
@@ -116,6 +116,7 @@
     "CLOCK",
     "DOWDY",
     "CREED",
-    "BYLAW"
+    "BYLAW",
+    "LOATH"
   ]
 }

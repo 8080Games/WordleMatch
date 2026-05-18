@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1793,
-      "word": "BYLAW",
-      "date": "5/17/2026",
-      "hints": {
-        "synonym": "rule",
-        "haiku": "Written in the books / The small print governs the whole / Details hold the power"
-      }
-    },
-    {
       "gameNumber": 1794,
       "word": "LOATH",
       "date": "5/18/2026",
       "hints": {
         "synonym": "reluctant",
         "haiku": "I'd rather not / Resistance pulls against push / Unwilling but bending"
+      }
+    },
+    {
+      "gameNumber": 1795,
+      "word": "DUSTY",
+      "date": "5/19/2026",
+      "hints": {
+        "synonym": "grimy",
+        "haiku": "Years settle in gray / What once shone now hides beneath / Neglect has its coat"
       }
     }
   ],
@@ -117,6 +117,7 @@
     "DOWDY",
     "CREED",
     "BYLAW",
-    "LOATH"
+    "LOATH",
+    "DUSTY"
   ]
 }

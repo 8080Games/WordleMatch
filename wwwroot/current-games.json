@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1795,
-      "word": "DUSTY",
-      "date": "5/19/2026",
-      "hints": {
-        "synonym": "grimy",
-        "haiku": "Years settle in gray / What once shone now hides beneath / Neglect has its coat"
-      }
-    },
-    {
       "gameNumber": 1796,
       "word": "WRECK",
       "date": "5/20/2026",
       "hints": {
         "synonym": "ruin",
         "haiku": "Destruction complete / What stood now lies broken down / Disaster finished"
+      }
+    },
+    {
+      "gameNumber": 1797,
+      "word": "AGREE",
+      "date": "5/21/2026",
+      "hints": {
+        "synonym": "Concur",
+        "haiku": "Minds meet in the middle / Nodding heads in unison / Harmony achieved"
       }
     }
   ],
@@ -119,6 +119,7 @@
     "BYLAW",
     "LOATH",
     "DUSTY",
-    "WRECK"
+    "WRECK",
+    "AGREE"
   ]
 }

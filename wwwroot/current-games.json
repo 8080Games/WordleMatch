@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1797,
-      "word": "AGREE",
-      "date": "5/21/2026",
-      "hints": {
-        "synonym": "Concur",
-        "haiku": "Minds meet in the middle / Nodding heads in unison / Harmony achieved"
-      }
-    },
-    {
       "gameNumber": 1798,
       "word": "VOCAL",
       "date": "5/22/2026",
       "hints": {
         "synonym": "voiced",
         "haiku": "The sound from the throat / Making thoughts into something heard / Speech is the tool"
+      }
+    },
+    {
+      "gameNumber": 1799,
+      "word": "CHUCK",
+      "date": "5/23/2026",
+      "hints": {
+        "synonym": "toss",
+        "haiku": "Out it goes with force / No need for what we discard / Lighter without it"
       }
     }
   ],
@@ -121,6 +121,7 @@
     "DUSTY",
     "WRECK",
     "AGREE",
-    "VOCAL"
+    "VOCAL",
+    "CHUCK"
   ]
 }

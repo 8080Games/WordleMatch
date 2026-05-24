@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1799,
-      "word": "CHUCK",
-      "date": "5/23/2026",
-      "hints": {
-        "synonym": "toss",
-        "haiku": "Out it goes with force / No need for what we discard / Lighter without it"
-      }
-    },
-    {
       "gameNumber": 1800,
       "word": "NIECE",
       "date": "5/24/2026",
       "hints": {
         "synonym": "relative",
         "haiku": "Brother's little girl / Family extends through her / The line continues"
+      }
+    },
+    {
+      "gameNumber": 1801,
+      "word": "VISIT",
+      "date": "5/25/2026",
+      "hints": {
+        "synonym": "call",
+        "haiku": "The door opens wide / Company expected now / Connection renewed"
       }
     }
   ],
@@ -123,6 +123,7 @@
     "AGREE",
     "VOCAL",
     "CHUCK",
-    "NIECE"
+    "NIECE",
+    "VISIT"
   ]
 }

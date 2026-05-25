@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1800,
-      "word": "NIECE",
-      "date": "5/24/2026",
-      "hints": {
-        "synonym": "relative",
-        "haiku": "Brother's little girl / Family extends through her / The line continues"
-      }
-    },
-    {
       "gameNumber": 1801,
       "word": "VISIT",
       "date": "5/25/2026",
       "hints": {
         "synonym": "call",
         "haiku": "The door opens wide / Company expected now / Connection renewed"
+      }
+    },
+    {
+      "gameNumber": 1802,
+      "word": "COUCH",
+      "date": "5/26/2026",
+      "hints": {
+        "synonym": "sofa",
+        "haiku": "Cushions welcome weight / The day's exhaustion lands here / Rest in soft embrace"
       }
     }
   ],
@@ -124,6 +124,7 @@
     "VOCAL",
     "CHUCK",
     "NIECE",
-    "VISIT"
+    "VISIT",
+    "COUCH"
   ]
 }

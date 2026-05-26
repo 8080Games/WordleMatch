@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1801,
-      "word": "VISIT",
-      "date": "5/25/2026",
-      "hints": {
-        "synonym": "call",
-        "haiku": "The door opens wide / Company expected now / Connection renewed"
-      }
-    },
-    {
       "gameNumber": 1802,
       "word": "COUCH",
       "date": "5/26/2026",
       "hints": {
         "synonym": "sofa",
         "haiku": "Cushions welcome weight / The day's exhaustion lands here / Rest in soft embrace"
+      }
+    },
+    {
+      "gameNumber": 1803,
+      "word": "STUFF",
+      "date": "5/27/2026",
+      "hints": {
+        "synonym": "things",
+        "haiku": "All the various things / Possessions pile in corners / Life accumulates"
       }
     }
   ],
@@ -125,6 +125,7 @@
     "CHUCK",
     "NIECE",
     "VISIT",
-    "COUCH"
+    "COUCH",
+    "STUFF"
   ]
 }

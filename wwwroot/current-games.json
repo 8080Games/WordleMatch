@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1803,
-      "word": "STUFF",
-      "date": "5/27/2026",
-      "hints": {
-        "synonym": "things",
-        "haiku": "All the various things / Possessions pile in corners / Life accumulates"
-      }
-    },
-    {
       "gameNumber": 1804,
       "word": "DIVOT",
       "date": "5/28/2026",
       "hints": {
         "synonym": "Hole",
         "haiku": "Turf chunk displaced / Golfer's swing left this mark / Ground needs repair now"
+      }
+    },
+    {
+      "gameNumber": 1805,
+      "word": "CLANG",
+      "date": "5/29/2026",
+      "hints": {
+        "synonym": "ring",
+        "haiku": "Metal strikes metal / The bell tower wakes the town / Sound shakes through my bones"
       }
     }
   ],
@@ -127,6 +127,7 @@
     "VISIT",
     "COUCH",
     "STUFF",
-    "DIVOT"
+    "DIVOT",
+    "CLANG"
   ]
 }

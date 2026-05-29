@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1804,
-      "word": "DIVOT",
-      "date": "5/28/2026",
-      "hints": {
-        "synonym": "Hole",
-        "haiku": "Turf chunk displaced / Golfer's swing left this mark / Ground needs repair now"
-      }
-    },
-    {
       "gameNumber": 1805,
       "word": "CLANG",
       "date": "5/29/2026",
       "hints": {
         "synonym": "ring",
         "haiku": "Metal strikes metal / The bell tower wakes the town / Sound shakes through my bones"
+      }
+    },
+    {
+      "gameNumber": 1806,
+      "word": "SMILE",
+      "date": "5/30/2026",
+      "hints": {
+        "synonym": "Grin",
+        "haiku": "Lips curve with delight / Face shows happiness inside / Expression of joy"
       }
     }
   ],
@@ -128,6 +128,7 @@
     "COUCH",
     "STUFF",
     "DIVOT",
-    "CLANG"
+    "CLANG",
+    "SMILE"
   ]
 }

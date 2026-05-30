@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1805,
-      "word": "CLANG",
-      "date": "5/29/2026",
-      "hints": {
-        "synonym": "ring",
-        "haiku": "Metal strikes metal / The bell tower wakes the town / Sound shakes through my bones"
-      }
-    },
-    {
       "gameNumber": 1806,
       "word": "SMILE",
       "date": "5/30/2026",
       "hints": {
         "synonym": "Grin",
         "haiku": "Lips curve with delight / Face shows happiness inside / Expression of joy"
+      }
+    },
+    {
+      "gameNumber": 1807,
+      "word": "ETUDE",
+      "date": "5/31/2026",
+      "hints": {
+        "synonym": "study",
+        "haiku": "Fingers drill the scales / Repetition builds the skill / Practice makes the art"
       }
     }
   ],
@@ -129,6 +129,7 @@
     "STUFF",
     "DIVOT",
     "CLANG",
-    "SMILE"
+    "SMILE",
+    "ETUDE"
   ]
 }

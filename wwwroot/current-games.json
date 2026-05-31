@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1806,
-      "word": "SMILE",
-      "date": "5/30/2026",
-      "hints": {
-        "synonym": "Grin",
-        "haiku": "Lips curve with delight / Face shows happiness inside / Expression of joy"
-      }
-    },
-    {
       "gameNumber": 1807,
       "word": "ETUDE",
       "date": "5/31/2026",
       "hints": {
         "synonym": "study",
         "haiku": "Fingers drill the scales / Repetition builds the skill / Practice makes the art"
+      }
+    },
+    {
+      "gameNumber": 1808,
+      "word": "CHILI",
+      "date": "6/1/2026",
+      "hints": {
+        "synonym": "pepper",
+        "haiku": "Fire in a pod / The tongue burns then craves for more / Heat becomes the taste"
       }
     }
   ],
@@ -130,6 +130,7 @@
     "DIVOT",
     "CLANG",
     "SMILE",
-    "ETUDE"
+    "ETUDE",
+    "CHILI"
   ]
 }

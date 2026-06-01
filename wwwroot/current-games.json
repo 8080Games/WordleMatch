@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1807,
-      "word": "ETUDE",
-      "date": "5/31/2026",
-      "hints": {
-        "synonym": "study",
-        "haiku": "Fingers drill the scales / Repetition builds the skill / Practice makes the art"
-      }
-    },
-    {
       "gameNumber": 1808,
       "word": "CHILI",
       "date": "6/1/2026",
       "hints": {
         "synonym": "pepper",
         "haiku": "Fire in a pod / The tongue burns then craves for more / Heat becomes the taste"
+      }
+    },
+    {
+      "gameNumber": 1809,
+      "word": "BASIS",
+      "date": "6/2/2026",
+      "hints": {
+        "synonym": "foundation",
+        "haiku": "Build on solid ground / Everything rests on something / Find your starting point"
       }
     }
   ],
@@ -131,6 +131,7 @@
     "CLANG",
     "SMILE",
     "ETUDE",
-    "CHILI"
+    "CHILI",
+    "BASIS"
   ]
 }

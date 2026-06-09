@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1809,
-      "word": "BASIS",
-      "date": "6/2/2026",
-      "hints": {
-        "synonym": "foundation",
-        "haiku": "Build on solid ground / Everything rests on something / Find your starting point"
-      }
-    },
-    {
       "gameNumber": 1810,
       "word": "NOTCH",
       "date": "6/3/2026",
       "hints": {
         "synonym": "groove",
         "haiku": "Cut into the wood / Each mark counts what came before / History in scratches"
+      }
+    },
+    {
+      "gameNumber": 1817,
+      "word": "ALIGN",
+      "date": "6/10/2026",
+      "hints": {
+        "synonym": "arrange",
+        "haiku": "Stars form a straight line / Order emerges from chaos / Purpose finds its way"
       }
     }
   ],
@@ -133,6 +133,7 @@
     "ETUDE",
     "CHILI",
     "BASIS",
-    "NOTCH"
+    "NOTCH",
+    "ALIGN"
   ]
 }

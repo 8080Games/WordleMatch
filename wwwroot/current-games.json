@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1810,
-      "word": "NOTCH",
-      "date": "6/3/2026",
-      "hints": {
-        "synonym": "groove",
-        "haiku": "Cut into the wood / Each mark counts what came before / History in scratches"
-      }
-    },
-    {
       "gameNumber": 1817,
       "word": "ALIGN",
       "date": "6/10/2026",
       "hints": {
         "synonym": "arrange",
         "haiku": "Stars form a straight line / Order emerges from chaos / Purpose finds its way"
+      }
+    },
+    {
+      "gameNumber": 1818,
+      "word": "TESTY",
+      "date": "6/11/2026",
+      "hints": {
+        "synonym": "irritable",
+        "haiku": "Short fuse burns today / Every small thing starts a fire / Best leave him alone"
       }
     }
   ],
@@ -134,6 +134,7 @@
     "CHILI",
     "BASIS",
     "NOTCH",
-    "ALIGN"
+    "ALIGN",
+    "TESTY"
   ]
 }

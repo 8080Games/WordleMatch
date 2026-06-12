@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1818,
-      "word": "TESTY",
-      "date": "6/11/2026",
-      "hints": {
-        "synonym": "irritable",
-        "haiku": "Short fuse burns today / Every small thing starts a fire / Best leave him alone"
-      }
-    },
-    {
       "gameNumber": 1819,
       "word": "BREAK",
       "date": "6/12/2026",
       "hints": {
         "synonym": "Shatter",
         "haiku": "Whole becomes the parts / Fracture lines spread through the solid / Damage done complete"
+      }
+    },
+    {
+      "gameNumber": 1820,
+      "word": "QUELL",
+      "date": "6/13/2026",
+      "hints": {
+        "synonym": "suppress",
+        "haiku": "Calm the rising tide / What threatens must be contained / Peace requires force"
       }
     }
   ],
@@ -136,6 +136,7 @@
     "NOTCH",
     "ALIGN",
     "TESTY",
-    "BREAK"
+    "BREAK",
+    "QUELL"
   ]
 }

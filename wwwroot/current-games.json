@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1819,
-      "word": "BREAK",
-      "date": "6/12/2026",
-      "hints": {
-        "synonym": "Shatter",
-        "haiku": "Whole becomes the parts / Fracture lines spread through the solid / Damage done complete"
-      }
-    },
-    {
       "gameNumber": 1820,
       "word": "QUELL",
       "date": "6/13/2026",
       "hints": {
         "synonym": "suppress",
         "haiku": "Calm the rising tide / What threatens must be contained / Peace requires force"
+      }
+    },
+    {
+      "gameNumber": 1821,
+      "word": "SEPIA",
+      "date": "6/14/2026",
+      "hints": {
+        "synonym": "brown",
+        "haiku": "Old photographs fade / Time colors everything warm / Memory in amber"
       }
     }
   ],
@@ -137,6 +137,7 @@
     "ALIGN",
     "TESTY",
     "BREAK",
-    "QUELL"
+    "QUELL",
+    "SEPIA"
   ]
 }

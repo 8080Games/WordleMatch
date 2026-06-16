@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1822,
-      "word": "BROIL",
-      "date": "6/15/2026",
-      "hints": {
-        "synonym": "grill",
-        "haiku": "Heat rises intense / The flame kisses tender flesh / Char marks tell the time"
-      }
-    },
-    {
       "gameNumber": 1823,
       "word": "AMAZE",
       "date": "6/16/2026",
       "hints": {
         "synonym": "astonish",
         "haiku": "Eyes wide as the moon / Wonder strikes without warning / Magic still exists"
+      }
+    },
+    {
+      "gameNumber": 1824,
+      "word": "TOKEN",
+      "date": "6/17/2026",
+      "hints": {
+        "synonym": "symbol",
+        "haiku": "Small thing stands for more / Representation in miniature / Meaning compressed here"
       }
     }
   ],
@@ -140,6 +140,7 @@
     "QUELL",
     "SEPIA",
     "BROIL",
-    "AMAZE"
+    "AMAZE",
+    "TOKEN"
   ]
 }

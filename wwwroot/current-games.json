@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1823,
-      "word": "AMAZE",
-      "date": "6/16/2026",
-      "hints": {
-        "synonym": "astonish",
-        "haiku": "Eyes wide as the moon / Wonder strikes without warning / Magic still exists"
-      }
-    },
-    {
       "gameNumber": 1824,
       "word": "TOKEN",
       "date": "6/17/2026",
       "hints": {
         "synonym": "symbol",
         "haiku": "Small thing stands for more / Representation in miniature / Meaning compressed here"
+      }
+    },
+    {
+      "gameNumber": 1825,
+      "word": "ENTRY",
+      "date": "6/18/2026",
+      "hints": {
+        "synonym": "access",
+        "haiku": "The door opens wide / What was closed now invites in / Crossing the threshold"
       }
     }
   ],
@@ -141,6 +141,7 @@
     "SEPIA",
     "BROIL",
     "AMAZE",
-    "TOKEN"
+    "TOKEN",
+    "ENTRY"
   ]
 }

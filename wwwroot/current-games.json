@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1824,
-      "word": "TOKEN",
-      "date": "6/17/2026",
-      "hints": {
-        "synonym": "symbol",
-        "haiku": "Small thing stands for more / Representation in miniature / Meaning compressed here"
-      }
-    },
-    {
       "gameNumber": 1825,
       "word": "ENTRY",
       "date": "6/18/2026",
       "hints": {
         "synonym": "access",
         "haiku": "The door opens wide / What was closed now invites in / Crossing the threshold"
+      }
+    },
+    {
+      "gameNumber": 1826,
+      "word": "ALIGN",
+      "date": "6/19/2026",
+      "hints": {
+        "synonym": "arrange",
+        "haiku": "Stars form a straight line / Order emerges from chaos / Purpose finds its way"
       }
     }
   ],

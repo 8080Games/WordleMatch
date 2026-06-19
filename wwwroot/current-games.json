@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1825,
-      "word": "ENTRY",
-      "date": "6/18/2026",
-      "hints": {
-        "synonym": "access",
-        "haiku": "The door opens wide / What was closed now invites in / Crossing the threshold"
-      }
-    },
-    {
       "gameNumber": 1826,
       "word": "ALIGN",
       "date": "6/19/2026",
       "hints": {
         "synonym": "arrange",
         "haiku": "Stars form a straight line / Order emerges from chaos / Purpose finds its way"
+      }
+    },
+    {
+      "gameNumber": 1827,
+      "word": "DRAKE",
+      "date": "6/20/2026",
+      "hints": {
+        "synonym": "duck",
+        "haiku": "He leads across ponds / Green head gleams in morning light / Proud among his flock"
       }
     }
   ],
@@ -142,6 +142,7 @@
     "BROIL",
     "AMAZE",
     "TOKEN",
-    "ENTRY"
+    "ENTRY",
+    "DRAKE"
   ]
 }

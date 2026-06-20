@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1826,
-      "word": "ALIGN",
-      "date": "6/19/2026",
-      "hints": {
-        "synonym": "arrange",
-        "haiku": "Stars form a straight line / Order emerges from chaos / Purpose finds its way"
-      }
-    },
-    {
       "gameNumber": 1827,
       "word": "DRAKE",
       "date": "6/20/2026",
       "hints": {
         "synonym": "duck",
         "haiku": "He leads across ponds / Green head gleams in morning light / Proud among his flock"
+      }
+    },
+    {
+      "gameNumber": 1828,
+      "word": "ALIBI",
+      "date": "6/21/2026",
+      "hints": {
+        "synonym": "excuse",
+        "haiku": "Where were you that night? / The clock becomes a witness / Truth hides in details"
       }
     }
   ],
@@ -143,6 +143,7 @@
     "AMAZE",
     "TOKEN",
     "ENTRY",
-    "DRAKE"
+    "DRAKE",
+    "ALIBI"
   ]
 }

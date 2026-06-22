@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1828,
-      "word": "ALIBI",
-      "date": "6/21/2026",
-      "hints": {
-        "synonym": "excuse",
-        "haiku": "Where were you that night? / The clock becomes a witness / Truth hides in details"
-      }
-    },
-    {
       "gameNumber": 1829,
       "word": "OVATE",
       "date": "6/22/2026",
       "hints": {
         "synonym": "egg-shaped",
         "haiku": "Rounded at both ends / Nature's favorite design / Efficient and whole"
+      }
+    },
+    {
+      "gameNumber": 1830,
+      "word": "CURRY",
+      "date": "6/23/2026",
+      "hints": {
+        "synonym": "spice",
+        "haiku": "Gold in every bite / Heat blooms on the grateful tongue / Flavor tells its tale"
       }
     }
   ],
@@ -145,6 +145,7 @@
     "ENTRY",
     "DRAKE",
     "ALIBI",
-    "OVATE"
+    "OVATE",
+    "CURRY"
   ]
 }

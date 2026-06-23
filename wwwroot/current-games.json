@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1829,
-      "word": "OVATE",
-      "date": "6/22/2026",
-      "hints": {
-        "synonym": "egg-shaped",
-        "haiku": "Rounded at both ends / Nature's favorite design / Efficient and whole"
-      }
-    },
-    {
       "gameNumber": 1830,
       "word": "CURRY",
       "date": "6/23/2026",
       "hints": {
         "synonym": "spice",
         "haiku": "Gold in every bite / Heat blooms on the grateful tongue / Flavor tells its tale"
+      }
+    },
+    {
+      "gameNumber": 1831,
+      "word": "QUEER",
+      "date": "6/24/2026",
+      "hints": {
+        "synonym": "different",
+        "haiku": "The word reclaimed proud / What was insult becomes badge / Identity owned"
       }
     }
   ],
@@ -146,6 +146,7 @@
     "DRAKE",
     "ALIBI",
     "OVATE",
-    "CURRY"
+    "CURRY",
+    "QUEER"
   ]
 }

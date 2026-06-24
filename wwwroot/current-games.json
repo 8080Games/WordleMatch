@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1830,
-      "word": "CURRY",
-      "date": "6/23/2026",
-      "hints": {
-        "synonym": "spice",
-        "haiku": "Gold in every bite / Heat blooms on the grateful tongue / Flavor tells its tale"
-      }
-    },
-    {
       "gameNumber": 1831,
       "word": "QUEER",
       "date": "6/24/2026",
       "hints": {
         "synonym": "different",
         "haiku": "The word reclaimed proud / What was insult becomes badge / Identity owned"
+      }
+    },
+    {
+      "gameNumber": 1832,
+      "word": "UNITY",
+      "date": "6/25/2026",
+      "hints": {
+        "synonym": "oneness",
+        "haiku": "The many as one / Differences dissolve in purpose / Together stronger"
       }
     }
   ],
@@ -147,6 +147,7 @@
     "ALIBI",
     "OVATE",
     "CURRY",
-    "QUEER"
+    "QUEER",
+    "UNITY"
   ]
 }

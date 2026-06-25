@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1831,
-      "word": "QUEER",
-      "date": "6/24/2026",
-      "hints": {
-        "synonym": "different",
-        "haiku": "The word reclaimed proud / What was insult becomes badge / Identity owned"
-      }
-    },
-    {
       "gameNumber": 1832,
       "word": "UNITY",
       "date": "6/25/2026",
       "hints": {
         "synonym": "oneness",
         "haiku": "The many as one / Differences dissolve in purpose / Together stronger"
+      }
+    },
+    {
+      "gameNumber": 1833,
+      "word": "ACUTE",
+      "date": "6/26/2026",
+      "hints": {
+        "synonym": "Sharp",
+        "haiku": "Angle narrow cut / Perception keen as a blade / Intense and precise"
       }
     }
   ],
@@ -148,6 +148,7 @@
     "OVATE",
     "CURRY",
     "QUEER",
-    "UNITY"
+    "UNITY",
+    "ACUTE"
   ]
 }

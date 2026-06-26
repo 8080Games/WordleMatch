@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1832,
-      "word": "UNITY",
-      "date": "6/25/2026",
-      "hints": {
-        "synonym": "oneness",
-        "haiku": "The many as one / Differences dissolve in purpose / Together stronger"
-      }
-    },
-    {
       "gameNumber": 1833,
       "word": "ACUTE",
       "date": "6/26/2026",
       "hints": {
         "synonym": "Sharp",
         "haiku": "Angle narrow cut / Perception keen as a blade / Intense and precise"
+      }
+    },
+    {
+      "gameNumber": 1834,
+      "word": "SCOOP",
+      "date": "6/27/2026",
+      "hints": {
+        "synonym": "spoon",
+        "haiku": "Dig deep for the story / The journalist lives for this / First with the news wins"
       }
     }
   ],
@@ -149,6 +149,7 @@
     "CURRY",
     "QUEER",
     "UNITY",
-    "ACUTE"
+    "ACUTE",
+    "SCOOP"
   ]
 }

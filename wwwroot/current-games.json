@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1834,
-      "word": "SCOOP",
-      "date": "6/27/2026",
-      "hints": {
-        "synonym": "spoon",
-        "haiku": "Dig deep for the story / The journalist lives for this / First with the news wins"
-      }
-    },
-    {
       "gameNumber": 1835,
       "word": "EMCEE",
       "date": "6/28/2026",
       "hints": {
         "synonym": "host",
         "haiku": "He works the whole room / Between acts he fills the space / The show flows through him"
+      }
+    },
+    {
+      "gameNumber": 1836,
+      "word": "CRUDE",
+      "date": "6/29/2026",
+      "hints": {
+        "synonym": "raw",
+        "haiku": "Unrefined but real / Polish hides but doesn't change / The rough holds the true"
       }
     }
   ],
@@ -152,6 +152,7 @@
     "UNITY",
     "ACUTE",
     "SCOOP",
-    "EMCEE"
+    "EMCEE",
+    "CRUDE"
   ]
 }

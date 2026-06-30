@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1835,
-      "word": "EMCEE",
-      "date": "6/28/2026",
-      "hints": {
-        "synonym": "host",
-        "haiku": "He works the whole room / Between acts he fills the space / The show flows through him"
-      }
-    },
-    {
       "gameNumber": 1836,
       "word": "CRUDE",
       "date": "6/29/2026",
       "hints": {
         "synonym": "raw",
         "haiku": "Unrefined but real / Polish hides but doesn't change / The rough holds the true"
+      }
+    },
+    {
+      "gameNumber": 1837,
+      "word": "PUPPY",
+      "date": "6/30/2026",
+      "hints": {
+        "synonym": "dog",
+        "haiku": "All paws and no sense / The world is exciting and new / Boundless energy"
       }
     }
   ],
@@ -153,6 +153,7 @@
     "ACUTE",
     "SCOOP",
     "EMCEE",
-    "CRUDE"
+    "CRUDE",
+    "PUPPY"
   ]
 }

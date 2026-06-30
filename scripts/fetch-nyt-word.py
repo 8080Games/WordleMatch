@@ -7,8 +7,18 @@ Runs locally with a visible browser window.
 import asyncio
 import re
 import subprocess
+import sys
 from datetime import datetime, timedelta
 from playwright.async_api import async_playwright
+
+# add-word.mjs prints emoji (e.g. 📝). Under Windows Task Scheduler the console
+# defaults to cp1252, so printing that captured output raised UnicodeEncodeError
+# and falsely reported "no changes made". Force UTF-8 on our streams.
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding='utf-8', errors='replace')
+    except (AttributeError, ValueError):
+        pass
 
 
 def toast(title, message):

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1836,
-      "word": "CRUDE",
-      "date": "6/29/2026",
-      "hints": {
-        "synonym": "raw",
-        "haiku": "Unrefined but real / Polish hides but doesn't change / The rough holds the true"
-      }
-    },
-    {
       "gameNumber": 1837,
       "word": "PUPPY",
       "date": "6/30/2026",
       "hints": {
         "synonym": "dog",
         "haiku": "All paws and no sense / The world is exciting and new / Boundless energy"
+      }
+    },
+    {
+      "gameNumber": 1838,
+      "word": "DEMUR",
+      "date": "7/1/2026",
+      "hints": {
+        "synonym": "object",
+        "haiku": "She paused before yes / Hesitation spoke volumes / Not quite ready yet"
       }
     }
   ],
@@ -154,6 +154,7 @@
     "SCOOP",
     "EMCEE",
     "CRUDE",
-    "PUPPY"
+    "PUPPY",
+    "DEMUR"
   ]
 }

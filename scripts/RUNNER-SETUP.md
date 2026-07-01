@@ -15,30 +15,20 @@ via a real, logged-in Edge browser, then commits + pushes via `add-word.mjs`.
 - **Git** push credentials configured for `github.com/8080Games/WordleMatch`.
 - **Microsoft Edge** installed.
 
+> **No NYT login required.** The Wordle Review page is public — verified in a
+> logged-out private window (the "Click to reveal" answer shows without signing
+> in). Any fresh Edge profile works; the `%TEMP%` debug profile is fine.
+
 ## One-time setup
 
-### 1. Stable debug profile + NYT login
-`%TEMP%` can be wiped (dropping the login), so use a permanent folder. Launch:
-```cmd
-"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --remote-debugging-port=9222 --user-data-dir="C:\Users\chris\edge-debug-profile"
-```
-In that window: log into **nytimes.com**, confirm a Wordle Review article opens,
-then close it. The login persists in that profile.
-
-### 2. Point `start-edge-debug.bat` at the stable profile
-Change the launch line's profile path:
-```
---user-data-dir="%TEMP%\edge-debug-profile"   ->   --user-data-dir="C:\Users\chris\edge-debug-profile"
-```
-
-### 3. Add a pull to `run-daily-fetch.bat`
+### 1. Add a pull to `run-daily-fetch.bat`
 Right after `cd /d "%~dp0"` near the top, insert:
 ```bat
 git pull --ff-only >> "%LOGFILE%" 2>&1
 ```
 Prevents the "fetch first" push rejection if the remote moved.
 
-### 4. Create the scheduled task (example: 6:05 AM daily, only when logged on)
+### 2. Create the scheduled task (example: 6:05 AM daily, only when logged on)
 ```cmd
 schtasks /Create /TN "Wordle Daily Fetch" /TR "C:\AI\claude\Wordle\scripts\run-daily-fetch.bat" /SC DAILY /ST 06:05 /F
 ```
@@ -47,7 +37,7 @@ needs this). Then in Task Scheduler → this task → **Settings**, enable
 **"Run task as soon as possible after a scheduled start is missed"** so a late boot
 still triggers the day's run (and optionally **"Wake the computer to run this task"**).
 
-### 5. Test
+### 3. Test
 ```cmd
 schtasks /Run /TN "Wordle Daily Fetch"
 ```
@@ -57,8 +47,9 @@ Check the newest file in `scripts\logs\` — expect `[OK] Found word:` and the r
 ## Operating notes
 - The machine must be **on and logged in** at the scheduled time (or rely on the
   missed-start / wake settings).
-- **NYT logins expire** periodically. If a run logs "Could not find reveal button,"
-  redo step 1 to refresh the login.
+- No NYT login is needed; if a run ever logs "Could not find reveal button," NYT
+  likely changed the review page layout — check the selectors/patterns in
+  `fetch-nyt-word.py`.
 - The daily job fetches **one** word/day (tomorrow's). After downtime, run
   **`python scripts\backfill-words.py`** once to fill the gap — it loops the missing
   game-number range, validates against a known answer (#1824 = TOKEN) before writing,

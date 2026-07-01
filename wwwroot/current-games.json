@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1837,
-      "word": "PUPPY",
-      "date": "6/30/2026",
-      "hints": {
-        "synonym": "dog",
-        "haiku": "All paws and no sense / The world is exciting and new / Boundless energy"
-      }
-    },
-    {
       "gameNumber": 1838,
       "word": "DEMUR",
       "date": "7/1/2026",
       "hints": {
         "synonym": "object",
         "haiku": "She paused before yes / Hesitation spoke volumes / Not quite ready yet"
+      }
+    },
+    {
+      "gameNumber": 1839,
+      "word": "MAVEN",
+      "date": "7/2/2026",
+      "hints": {
+        "synonym": "Expert",
+        "haiku": "Knowledge runs deep / Authority in the field / Go-to person here"
       }
     }
   ],
@@ -155,6 +155,7 @@
     "EMCEE",
     "CRUDE",
     "PUPPY",
-    "DEMUR"
+    "DEMUR",
+    "MAVEN"
   ]
 }

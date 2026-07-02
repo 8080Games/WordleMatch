@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1838,
-      "word": "DEMUR",
-      "date": "7/1/2026",
-      "hints": {
-        "synonym": "object",
-        "haiku": "She paused before yes / Hesitation spoke volumes / Not quite ready yet"
-      }
-    },
-    {
       "gameNumber": 1839,
       "word": "MAVEN",
       "date": "7/2/2026",
       "hints": {
         "synonym": "Expert",
         "haiku": "Knowledge runs deep / Authority in the field / Go-to person here"
+      }
+    },
+    {
+      "gameNumber": 1840,
+      "word": "BATON",
+      "date": "7/3/2026",
+      "hints": {
+        "synonym": "Stick",
+        "haiku": "Passed from hand to hand / Relay racers share the load / Command in a rod"
       }
     }
   ],
@@ -156,6 +156,7 @@
     "CRUDE",
     "PUPPY",
     "DEMUR",
-    "MAVEN"
+    "MAVEN",
+    "BATON"
   ]
 }

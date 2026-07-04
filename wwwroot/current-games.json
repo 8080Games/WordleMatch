@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1840,
-      "word": "BATON",
-      "date": "7/3/2026",
-      "hints": {
-        "synonym": "Stick",
-        "haiku": "Passed from hand to hand / Relay racers share the load / Command in a rod"
-      }
-    },
-    {
       "gameNumber": 1841,
       "word": "PIZZA",
       "date": "7/4/2026",
       "hints": {
         "synonym": "pie",
         "haiku": "Cheese stretches in strings / The triangle of perfection / Everyone's happy"
+      }
+    },
+    {
+      "gameNumber": 1842,
+      "word": "SWAMI",
+      "date": "7/5/2026",
+      "hints": {
+        "synonym": "guru",
+        "haiku": "Eastern wisdom speaks / The teacher guides the seeking / Enlightenment waits"
       }
     }
   ],
@@ -158,6 +158,7 @@
     "DEMUR",
     "MAVEN",
     "BATON",
-    "PIZZA"
+    "PIZZA",
+    "SWAMI"
   ]
 }

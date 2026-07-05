@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1841,
-      "word": "PIZZA",
-      "date": "7/4/2026",
-      "hints": {
-        "synonym": "pie",
-        "haiku": "Cheese stretches in strings / The triangle of perfection / Everyone's happy"
-      }
-    },
-    {
       "gameNumber": 1842,
       "word": "SWAMI",
       "date": "7/5/2026",
       "hints": {
         "synonym": "guru",
         "haiku": "Eastern wisdom speaks / The teacher guides the seeking / Enlightenment waits"
+      }
+    },
+    {
+      "gameNumber": 1843,
+      "word": "TODDY",
+      "date": "7/6/2026",
+      "hints": {
+        "synonym": "drink",
+        "haiku": "Warm cup holds the night / Spirits mixed with comfort sweet / Winter remedy"
       }
     }
   ],
@@ -159,6 +159,7 @@
     "MAVEN",
     "BATON",
     "PIZZA",
-    "SWAMI"
+    "SWAMI",
+    "TODDY"
   ]
 }

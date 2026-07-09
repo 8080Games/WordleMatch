@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1845,
-      "word": "DEMON",
-      "date": "7/8/2026",
-      "hints": {
-        "synonym": "devil",
-        "haiku": "Darkness takes a form / Temptation wears many masks / Fight what haunts within"
-      }
-    },
-    {
       "gameNumber": 1846,
       "word": "AMEND",
       "date": "7/9/2026",
       "hints": {
         "synonym": "revise",
         "haiku": "The old words won't do / Cross them out and start again / Better lies beneath"
+      }
+    },
+    {
+      "gameNumber": 1847,
+      "word": "CANAL",
+      "date": "7/10/2026",
+      "hints": {
+        "synonym": "waterway",
+        "haiku": "Still water connects / Cities drink from distant lakes / Commerce floats on through"
       }
     }
   ],
@@ -163,6 +163,7 @@
     "TODDY",
     "SLING",
     "DEMON",
-    "AMEND"
+    "AMEND",
+    "CANAL"
   ]
 }

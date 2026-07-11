@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1847,
-      "word": "CANAL",
-      "date": "7/10/2026",
-      "hints": {
-        "synonym": "waterway",
-        "haiku": "Still water connects / Cities drink from distant lakes / Commerce floats on through"
-      }
-    },
-    {
       "gameNumber": 1848,
       "word": "AVIAN",
       "date": "7/11/2026",
       "hints": {
         "synonym": "birdlike",
         "haiku": "Hollow bones take flight / The sky belongs to their kind / We watch from below"
+      }
+    },
+    {
+      "gameNumber": 1849,
+      "word": "CLACK",
+      "date": "7/12/2026",
+      "hints": {
+        "synonym": "click",
+        "haiku": "Heels on marble floors / The sharp sound announces her / Rhythm of arrival"
       }
     }
   ],
@@ -165,6 +165,7 @@
     "DEMON",
     "AMEND",
     "CANAL",
-    "AVIAN"
+    "AVIAN",
+    "CLACK"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1848,
-      "word": "AVIAN",
-      "date": "7/11/2026",
-      "hints": {
-        "synonym": "birdlike",
-        "haiku": "Hollow bones take flight / The sky belongs to their kind / We watch from below"
-      }
-    },
-    {
       "gameNumber": 1849,
       "word": "CLACK",
       "date": "7/12/2026",
       "hints": {
         "synonym": "click",
         "haiku": "Heels on marble floors / The sharp sound announces her / Rhythm of arrival"
+      }
+    },
+    {
+      "gameNumber": 1850,
+      "word": "STOUT",
+      "date": "7/13/2026",
+      "hints": {
+        "synonym": "Thick",
+        "haiku": "Solid through and through / Built to last against all storms / Sturdy to the core"
       }
     }
   ],
@@ -166,6 +166,7 @@
     "AMEND",
     "CANAL",
     "AVIAN",
-    "CLACK"
+    "CLACK",
+    "STOUT"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1850,
-      "word": "STOUT",
-      "date": "7/13/2026",
-      "hints": {
-        "synonym": "Thick",
-        "haiku": "Solid through and through / Built to last against all storms / Sturdy to the core"
-      }
-    },
-    {
       "gameNumber": 1851,
       "word": "STEAK",
       "date": "7/14/2026",
       "hints": {
         "synonym": "beef",
         "haiku": "Red meat sizzles hot / Blood and fire make the meal / Primal hunger fed"
+      }
+    },
+    {
+      "gameNumber": 1852,
+      "word": "PSHAW",
+      "date": "7/15/2026",
+      "hints": {
+        "synonym": "Dismissal",
+        "haiku": "Expression of contempt / Disbelief vocalized / Scorn made audible"
       }
     }
   ],
@@ -168,6 +168,7 @@
     "AVIAN",
     "CLACK",
     "STOUT",
-    "STEAK"
+    "STEAK",
+    "PSHAW"
   ]
 }

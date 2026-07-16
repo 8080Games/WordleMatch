@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1851,
-      "word": "STEAK",
-      "date": "7/14/2026",
-      "hints": {
-        "synonym": "beef",
-        "haiku": "Red meat sizzles hot / Blood and fire make the meal / Primal hunger fed"
-      }
-    },
-    {
       "gameNumber": 1852,
       "word": "PSHAW",
       "date": "7/15/2026",
       "hints": {
         "synonym": "Dismissal",
         "haiku": "Expression of contempt / Disbelief vocalized / Scorn made audible"
+      }
+    },
+    {
+      "gameNumber": 1854,
+      "word": "LEGAL",
+      "date": "7/17/2026",
+      "hints": {
+        "synonym": "lawful",
+        "haiku": "The papers are signed / What is permitted proceeds / Rules define the game"
       }
     }
   ],
@@ -169,6 +169,7 @@
     "CLACK",
     "STOUT",
     "STEAK",
-    "PSHAW"
+    "PSHAW",
+    "LEGAL"
   ]
 }

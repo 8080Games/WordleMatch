@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1852,
-      "word": "PSHAW",
-      "date": "7/15/2026",
-      "hints": {
-        "synonym": "Dismissal",
-        "haiku": "Expression of contempt / Disbelief vocalized / Scorn made audible"
-      }
-    },
-    {
       "gameNumber": 1854,
       "word": "LEGAL",
       "date": "7/17/2026",
       "hints": {
         "synonym": "lawful",
         "haiku": "The papers are signed / What is permitted proceeds / Rules define the game"
+      }
+    },
+    {
+      "gameNumber": 1855,
+      "word": "BOOTH",
+      "date": "7/18/2026",
+      "hints": {
+        "synonym": "stall",
+        "haiku": "Small space just for two / The curtain hides our secrets / Voices soft inside"
       }
     }
   ],
@@ -170,6 +170,7 @@
     "STOUT",
     "STEAK",
     "PSHAW",
-    "LEGAL"
+    "LEGAL",
+    "BOOTH"
   ]
 }

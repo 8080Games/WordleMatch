@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1854,
-      "word": "LEGAL",
-      "date": "7/17/2026",
-      "hints": {
-        "synonym": "lawful",
-        "haiku": "The papers are signed / What is permitted proceeds / Rules define the game"
-      }
-    },
-    {
       "gameNumber": 1855,
       "word": "BOOTH",
       "date": "7/18/2026",
       "hints": {
         "synonym": "stall",
         "haiku": "Small space just for two / The curtain hides our secrets / Voices soft inside"
+      }
+    },
+    {
+      "gameNumber": 1856,
+      "word": "CHURN",
+      "date": "7/19/2026",
+      "hints": {
+        "synonym": "agitate",
+        "haiku": "Round and round it turns / Cream becomes something thicker / Change through repetition"
       }
     }
   ],
@@ -171,6 +171,7 @@
     "STEAK",
     "PSHAW",
     "LEGAL",
-    "BOOTH"
+    "BOOTH",
+    "CHURN"
   ]
 }

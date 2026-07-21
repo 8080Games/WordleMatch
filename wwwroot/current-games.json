@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1857,
-      "word": "DIVER",
-      "date": "7/20/2026",
-      "hints": {
-        "synonym": "swimmer",
-        "haiku": "She breaks the surface / Down into the blue unknown / Lungs hold precious air"
-      }
-    },
-    {
       "gameNumber": 1858,
       "word": "SHILL",
       "date": "7/21/2026",
       "hints": {
         "synonym": "Promoter",
         "haiku": "Secret accomplice / Fake customer planted / Deceptive endorser"
+      }
+    },
+    {
+      "gameNumber": 1859,
+      "word": "LORRY",
+      "date": "7/22/2026",
+      "hints": {
+        "synonym": "truck",
+        "haiku": "Big wheels roll on through / Cargo headed somewhere else / Commerce never stops"
       }
     }
   ],
@@ -174,6 +174,7 @@
     "BOOTH",
     "CHURN",
     "DIVER",
-    "SHILL"
+    "SHILL",
+    "LORRY"
   ]
 }

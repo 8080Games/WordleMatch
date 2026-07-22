@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1858,
-      "word": "SHILL",
-      "date": "7/21/2026",
-      "hints": {
-        "synonym": "Promoter",
-        "haiku": "Secret accomplice / Fake customer planted / Deceptive endorser"
-      }
-    },
-    {
       "gameNumber": 1859,
       "word": "LORRY",
       "date": "7/22/2026",
       "hints": {
         "synonym": "truck",
         "haiku": "Big wheels roll on through / Cargo headed somewhere else / Commerce never stops"
+      }
+    },
+    {
+      "gameNumber": 1860,
+      "word": "ORBIT",
+      "date": "7/23/2026",
+      "hints": {
+        "synonym": "circuit",
+        "haiku": "Round and round again / Captured by the greater pull / Paths written in curves"
       }
     }
   ],
@@ -175,6 +175,7 @@
     "CHURN",
     "DIVER",
     "SHILL",
-    "LORRY"
+    "LORRY",
+    "ORBIT"
   ]
 }

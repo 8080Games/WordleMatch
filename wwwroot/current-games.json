@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1860,
-      "word": "ORBIT",
-      "date": "7/23/2026",
-      "hints": {
-        "synonym": "circuit",
-        "haiku": "Round and round again / Captured by the greater pull / Paths written in curves"
-      }
-    },
-    {
       "gameNumber": 1861,
       "word": "PUTTY",
       "date": "7/24/2026",
       "hints": {
         "synonym": "filler",
         "haiku": "Soft until it sets / Filling gaps and smoothing rough / The in-between stuff"
+      }
+    },
+    {
+      "gameNumber": 1862,
+      "word": "ALOHA",
+      "date": "7/25/2026",
+      "hints": {
+        "synonym": "Greeting",
+        "haiku": "Hawaiian warmth / Hello goodbye and love / Spirit of the isles"
       }
     }
   ],
@@ -177,6 +177,7 @@
     "SHILL",
     "LORRY",
     "ORBIT",
-    "PUTTY"
+    "PUTTY",
+    "ALOHA"
   ]
 }

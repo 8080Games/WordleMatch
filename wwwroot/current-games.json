@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1863,
-      "word": "GRAPE",
-      "date": "7/26/2026",
-      "hints": {
-        "synonym": "berry",
-        "haiku": "Clusters hang in sun / Wine waits inside purple skin / Sweetness on the vine"
-      }
-    },
-    {
       "gameNumber": 1864,
       "word": "POSER",
       "date": "7/27/2026",
       "hints": {
         "synonym": "pretender",
         "haiku": "The costume fits wrong / Trying hard to be what's not / Authenticity missing"
+      }
+    },
+    {
+      "gameNumber": 1865,
+      "word": "SONAR",
+      "date": "7/28/2026",
+      "hints": {
+        "synonym": "detection",
+        "haiku": "Sound into the deep / Echoes map what eyes can't see / The submarine hears"
       }
     }
   ],
@@ -180,6 +180,7 @@
     "PUTTY",
     "ALOHA",
     "GRAPE",
-    "POSER"
+    "POSER",
+    "SONAR"
   ]
 }

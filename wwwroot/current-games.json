@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1865,
-      "word": "SONAR",
-      "date": "7/28/2026",
-      "hints": {
-        "synonym": "detection",
-        "haiku": "Sound into the deep / Echoes map what eyes can't see / The submarine hears"
-      }
-    },
-    {
       "gameNumber": 1866,
       "word": "VALVE",
       "date": "7/29/2026",
       "hints": {
         "synonym": "gate",
         "haiku": "Open or closed now / The flow controlled by this piece / Direction decided"
+      }
+    },
+    {
+      "gameNumber": 1867,
+      "word": "FLUME",
+      "date": "7/30/2026",
+      "hints": {
+        "synonym": "Channel",
+        "haiku": "Water finds its path / Carved passage guides the flow down / Mountains yield to force"
       }
     }
   ],
@@ -182,6 +182,7 @@
     "GRAPE",
     "POSER",
     "SONAR",
-    "VALVE"
+    "VALVE",
+    "FLUME"
   ]
 }

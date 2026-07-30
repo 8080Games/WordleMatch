@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1866,
-      "word": "VALVE",
-      "date": "7/29/2026",
-      "hints": {
-        "synonym": "gate",
-        "haiku": "Open or closed now / The flow controlled by this piece / Direction decided"
-      }
-    },
-    {
       "gameNumber": 1867,
       "word": "FLUME",
       "date": "7/30/2026",
       "hints": {
         "synonym": "Channel",
         "haiku": "Water finds its path / Carved passage guides the flow down / Mountains yield to force"
+      }
+    },
+    {
+      "gameNumber": 1868,
+      "word": "PURSE",
+      "date": "7/31/2026",
+      "hints": {
+        "synonym": "bag",
+        "haiku": "She guards it like gold / Everything she needs rides here / Life in leather carried"
       }
     }
   ],
@@ -183,6 +183,7 @@
     "POSER",
     "SONAR",
     "VALVE",
-    "FLUME"
+    "FLUME",
+    "PURSE"
   ]
 }

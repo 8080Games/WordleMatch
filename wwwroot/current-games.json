@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1867,
-      "word": "FLUME",
-      "date": "7/30/2026",
-      "hints": {
-        "synonym": "Channel",
-        "haiku": "Water finds its path / Carved passage guides the flow down / Mountains yield to force"
-      }
-    },
-    {
       "gameNumber": 1868,
       "word": "PURSE",
       "date": "7/31/2026",
       "hints": {
         "synonym": "bag",
         "haiku": "She guards it like gold / Everything she needs rides here / Life in leather carried"
+      }
+    },
+    {
+      "gameNumber": 1869,
+      "word": "SLUSH",
+      "date": "8/1/2026",
+      "hints": {
+        "synonym": "mush",
+        "haiku": "Half melted snow waits / Not quite ice not quite water / Gray mess underfoot"
       }
     }
   ],
@@ -184,6 +184,7 @@
     "SONAR",
     "VALVE",
     "FLUME",
-    "PURSE"
+    "PURSE",
+    "SLUSH"
   ]
 }

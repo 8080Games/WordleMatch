@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1868,
-      "word": "PURSE",
-      "date": "7/31/2026",
-      "hints": {
-        "synonym": "bag",
-        "haiku": "She guards it like gold / Everything she needs rides here / Life in leather carried"
-      }
-    },
-    {
       "gameNumber": 1869,
       "word": "SLUSH",
       "date": "8/1/2026",
       "hints": {
         "synonym": "mush",
         "haiku": "Half melted snow waits / Not quite ice not quite water / Gray mess underfoot"
+      }
+    },
+    {
+      "gameNumber": 1870,
+      "word": "PENAL",
+      "date": "8/2/2026",
+      "hints": {
+        "synonym": "punitive",
+        "haiku": "The system extracts / Payment for what was broken / Justice weighs its scales"
       }
     }
   ],
@@ -185,6 +185,7 @@
     "VALVE",
     "FLUME",
     "PURSE",
-    "SLUSH"
+    "SLUSH",
+    "PENAL"
   ]
 }

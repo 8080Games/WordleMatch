@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1869,
-      "word": "SLUSH",
-      "date": "8/1/2026",
-      "hints": {
-        "synonym": "mush",
-        "haiku": "Half melted snow waits / Not quite ice not quite water / Gray mess underfoot"
-      }
-    },
-    {
       "gameNumber": 1870,
       "word": "PENAL",
       "date": "8/2/2026",
       "hints": {
         "synonym": "punitive",
         "haiku": "The system extracts / Payment for what was broken / Justice weighs its scales"
+      }
+    },
+    {
+      "gameNumber": 1871,
+      "word": "REPLY",
+      "date": "8/3/2026",
+      "hints": {
+        "synonym": "answer",
+        "haiku": "Words return to words / The conversation continues / Response completes the thought"
       }
     }
   ],
@@ -186,6 +186,7 @@
     "FLUME",
     "PURSE",
     "SLUSH",
-    "PENAL"
+    "PENAL",
+    "REPLY"
   ]
 }

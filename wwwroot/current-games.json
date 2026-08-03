@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1870,
-      "word": "PENAL",
-      "date": "8/2/2026",
-      "hints": {
-        "synonym": "punitive",
-        "haiku": "The system extracts / Payment for what was broken / Justice weighs its scales"
-      }
-    },
-    {
       "gameNumber": 1871,
       "word": "REPLY",
       "date": "8/3/2026",
       "hints": {
         "synonym": "answer",
         "haiku": "Words return to words / The conversation continues / Response completes the thought"
+      }
+    },
+    {
+      "gameNumber": 1872,
+      "word": "MOTIF",
+      "date": "8/4/2026",
+      "hints": {
+        "synonym": "pattern",
+        "haiku": "The theme repeats here / Recognition builds meaning / Echoes form the whole"
       }
     }
   ],
@@ -187,6 +187,7 @@
     "PURSE",
     "SLUSH",
     "PENAL",
-    "REPLY"
+    "REPLY",
+    "MOTIF"
   ]
 }

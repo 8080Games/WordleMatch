@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1871,
-      "word": "REPLY",
-      "date": "8/3/2026",
-      "hints": {
-        "synonym": "answer",
-        "haiku": "Words return to words / The conversation continues / Response completes the thought"
-      }
-    },
-    {
       "gameNumber": 1872,
       "word": "MOTIF",
       "date": "8/4/2026",
       "hints": {
         "synonym": "pattern",
         "haiku": "The theme repeats here / Recognition builds meaning / Echoes form the whole"
+      }
+    },
+    {
+      "gameNumber": 1873,
+      "word": "POSIT",
+      "date": "8/5/2026",
+      "hints": {
+        "synonym": "propose",
+        "haiku": "Let us say that this / Assumption starts the logic / Theory begins here"
       }
     }
   ],
@@ -188,6 +188,7 @@
     "SLUSH",
     "PENAL",
     "REPLY",
-    "MOTIF"
+    "MOTIF",
+    "POSIT"
   ]
 }

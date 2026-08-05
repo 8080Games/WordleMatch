@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1872,
-      "word": "MOTIF",
-      "date": "8/4/2026",
-      "hints": {
-        "synonym": "pattern",
-        "haiku": "The theme repeats here / Recognition builds meaning / Echoes form the whole"
-      }
-    },
-    {
       "gameNumber": 1873,
       "word": "POSIT",
       "date": "8/5/2026",
       "hints": {
         "synonym": "propose",
         "haiku": "Let us say that this / Assumption starts the logic / Theory begins here"
+      }
+    },
+    {
+      "gameNumber": 1874,
+      "word": "GRIPE",
+      "date": "8/6/2026",
+      "hints": {
+        "synonym": "Complain",
+        "haiku": "Grievances pour out / Dissatisfaction finds voice / Nothing pleases here"
       }
     }
   ],
@@ -189,6 +189,7 @@
     "PENAL",
     "REPLY",
     "MOTIF",
-    "POSIT"
+    "POSIT",
+    "GRIPE"
   ]
 }

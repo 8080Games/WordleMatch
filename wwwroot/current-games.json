@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1874,
-      "word": "GRIPE",
-      "date": "8/6/2026",
-      "hints": {
-        "synonym": "Complain",
-        "haiku": "Grievances pour out / Dissatisfaction finds voice / Nothing pleases here"
-      }
-    },
-    {
       "gameNumber": 1875,
       "word": "FEIGN",
       "date": "8/7/2026",
       "hints": {
         "synonym": "Pretend",
         "haiku": "A mask made of smiles / Truth hides beneath the surface / Acting becomes life"
+      }
+    },
+    {
+      "gameNumber": 1876,
+      "word": "PRIVY",
+      "date": "8/8/2026",
+      "hints": {
+        "synonym": "aware",
+        "haiku": "She knows what we don't / The secret shared with just her / Trust placed carefully"
       }
     }
   ],
@@ -191,6 +191,7 @@
     "MOTIF",
     "POSIT",
     "GRIPE",
-    "FEIGN"
+    "FEIGN",
+    "PRIVY"
   ]
 }

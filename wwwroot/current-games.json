@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1877,
-      "word": "CLUNK",
-      "date": "8/9/2026",
-      "hints": {
-        "synonym": "Thud",
-        "haiku": "Heavy dull sound made / Object dropped without grace / Impact resonates"
-      }
-    },
-    {
       "gameNumber": 1878,
       "word": "SNIPE",
       "date": "8/10/2026",
       "hints": {
         "synonym": "sharpshoot",
         "haiku": "Hidden and patient / The shot comes from far away / Distance kills the target"
+      }
+    },
+    {
+      "gameNumber": 1879,
+      "word": "FENCE",
+      "date": "8/11/2026",
+      "hints": {
+        "synonym": "barrier",
+        "haiku": "Wood slats mark the line / Here is mine and there is yours / Boundaries make neighbors"
       }
     }
   ],
@@ -194,6 +194,7 @@
     "FEIGN",
     "PRIVY",
     "CLUNK",
-    "SNIPE"
+    "SNIPE",
+    "FENCE"
   ]
 }

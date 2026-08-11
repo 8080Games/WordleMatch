@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1878,
-      "word": "SNIPE",
-      "date": "8/10/2026",
-      "hints": {
-        "synonym": "sharpshoot",
-        "haiku": "Hidden and patient / The shot comes from far away / Distance kills the target"
-      }
-    },
-    {
       "gameNumber": 1879,
       "word": "FENCE",
       "date": "8/11/2026",
       "hints": {
         "synonym": "barrier",
         "haiku": "Wood slats mark the line / Here is mine and there is yours / Boundaries make neighbors"
+      }
+    },
+    {
+      "gameNumber": 1880,
+      "word": "WIMPY",
+      "date": "8/12/2026",
+      "hints": {
+        "synonym": "weak",
+        "haiku": "Strength is not his gift / The heavy things stay on shelves / Help required here"
       }
     }
   ],
@@ -195,6 +195,7 @@
     "PRIVY",
     "CLUNK",
     "SNIPE",
-    "FENCE"
+    "FENCE",
+    "WIMPY"
   ]
 }

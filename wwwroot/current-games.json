@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1879,
-      "word": "FENCE",
-      "date": "8/11/2026",
-      "hints": {
-        "synonym": "barrier",
-        "haiku": "Wood slats mark the line / Here is mine and there is yours / Boundaries make neighbors"
-      }
-    },
-    {
       "gameNumber": 1880,
       "word": "WIMPY",
       "date": "8/12/2026",
       "hints": {
         "synonym": "weak",
         "haiku": "Strength is not his gift / The heavy things stay on shelves / Help required here"
+      }
+    },
+    {
+      "gameNumber": 1881,
+      "word": "CRASH",
+      "date": "8/13/2026",
+      "hints": {
+        "synonym": "collision",
+        "haiku": "Metal meets metal / Time stops in the moment of impact / Glass falls like rain"
       }
     }
   ],
@@ -196,6 +196,7 @@
     "CLUNK",
     "SNIPE",
     "FENCE",
-    "WIMPY"
+    "WIMPY",
+    "CRASH"
   ]
 }

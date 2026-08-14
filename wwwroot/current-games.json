@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1881,
-      "word": "CRASH",
-      "date": "8/13/2026",
-      "hints": {
-        "synonym": "collision",
-        "haiku": "Metal meets metal / Time stops in the moment of impact / Glass falls like rain"
-      }
-    },
-    {
       "gameNumber": 1882,
       "word": "GEODE",
       "date": "8/14/2026",
       "hints": {
         "synonym": "Rock",
         "haiku": "Crystal cave inside / Plain exterior hides gems / Nature's surprise gift"
+      }
+    },
+    {
+      "gameNumber": 1883,
+      "word": "LOOSE",
+      "date": "8/15/2026",
+      "hints": {
+        "synonym": "slack",
+        "haiku": "Not tight enough now / Room where there should be tension / Things slip through these gaps"
       }
     }
   ],
@@ -198,6 +198,7 @@
     "FENCE",
     "WIMPY",
     "CRASH",
-    "GEODE"
+    "GEODE",
+    "LOOSE"
   ]
 }

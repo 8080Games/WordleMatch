@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1882,
-      "word": "GEODE",
-      "date": "8/14/2026",
-      "hints": {
-        "synonym": "Rock",
-        "haiku": "Crystal cave inside / Plain exterior hides gems / Nature's surprise gift"
-      }
-    },
-    {
       "gameNumber": 1883,
       "word": "LOOSE",
       "date": "8/15/2026",
       "hints": {
         "synonym": "slack",
         "haiku": "Not tight enough now / Room where there should be tension / Things slip through these gaps"
+      }
+    },
+    {
+      "gameNumber": 1884,
+      "word": "ASPIC",
+      "date": "8/16/2026",
+      "hints": {
+        "synonym": "Gelatin",
+        "haiku": "Savory jelly molds / Retro cuisine preserved here / Meat suspended clear"
       }
     }
   ],
@@ -199,6 +199,7 @@
     "WIMPY",
     "CRASH",
     "GEODE",
-    "LOOSE"
+    "LOOSE",
+    "ASPIC"
   ]
 }

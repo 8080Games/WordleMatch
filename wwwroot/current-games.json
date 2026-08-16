@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1883,
-      "word": "LOOSE",
-      "date": "8/15/2026",
-      "hints": {
-        "synonym": "slack",
-        "haiku": "Not tight enough now / Room where there should be tension / Things slip through these gaps"
-      }
-    },
-    {
       "gameNumber": 1884,
       "word": "ASPIC",
       "date": "8/16/2026",
       "hints": {
         "synonym": "Gelatin",
         "haiku": "Savory jelly molds / Retro cuisine preserved here / Meat suspended clear"
+      }
+    },
+    {
+      "gameNumber": 1885,
+      "word": "TRIBE",
+      "date": "8/17/2026",
+      "hints": {
+        "synonym": "clan",
+        "haiku": "Blood holds these together / The group identity first / We before the me"
       }
     }
   ],
@@ -200,6 +200,7 @@
     "CRASH",
     "GEODE",
     "LOOSE",
-    "ASPIC"
+    "ASPIC",
+    "TRIBE"
   ]
 }

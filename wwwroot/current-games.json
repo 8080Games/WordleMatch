@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1884,
-      "word": "ASPIC",
-      "date": "8/16/2026",
-      "hints": {
-        "synonym": "Gelatin",
-        "haiku": "Savory jelly molds / Retro cuisine preserved here / Meat suspended clear"
-      }
-    },
-    {
       "gameNumber": 1885,
       "word": "TRIBE",
       "date": "8/17/2026",
       "hints": {
         "synonym": "clan",
         "haiku": "Blood holds these together / The group identity first / We before the me"
+      }
+    },
+    {
+      "gameNumber": 1886,
+      "word": "STRIP",
+      "date": "8/18/2026",
+      "hints": {
+        "synonym": "remove",
+        "haiku": "Layer by layer / What covered now lies exposed / Bare where cloth once was"
       }
     }
   ],
@@ -201,6 +201,7 @@
     "GEODE",
     "LOOSE",
     "ASPIC",
-    "TRIBE"
+    "TRIBE",
+    "STRIP"
   ]
 }

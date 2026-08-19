@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1886,
-      "word": "STRIP",
-      "date": "8/18/2026",
-      "hints": {
-        "synonym": "remove",
-        "haiku": "Layer by layer / What covered now lies exposed / Bare where cloth once was"
-      }
-    },
-    {
       "gameNumber": 1887,
       "word": "GRILL",
       "date": "8/19/2026",
       "hints": {
         "synonym": "barbecue",
         "haiku": "Flames lick at the meat / Summer smoke fills the backyard / Gathering around"
+      }
+    },
+    {
+      "gameNumber": 1888,
+      "word": "MURKY",
+      "date": "8/20/2026",
+      "hints": {
+        "synonym": "dark",
+        "haiku": "Can't see what lurks below / Unknown depths breed unknown fears / Light would help so much"
       }
     }
   ],
@@ -203,6 +203,7 @@
     "ASPIC",
     "TRIBE",
     "STRIP",
-    "GRILL"
+    "GRILL",
+    "MURKY"
   ]
 }

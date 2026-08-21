@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1888,
-      "word": "MURKY",
-      "date": "8/20/2026",
-      "hints": {
-        "synonym": "dark",
-        "haiku": "Can't see what lurks below / Unknown depths breed unknown fears / Light would help so much"
-      }
-    },
-    {
       "gameNumber": 1889,
       "word": "TRACE",
       "date": "8/21/2026",
       "hints": {
         "synonym": "Track",
         "haiku": "Faint lines left behind / Following the subtle path / Evidence remains"
+      }
+    },
+    {
+      "gameNumber": 1890,
+      "word": "PRAWN",
+      "date": "8/22/2026",
+      "hints": {
+        "synonym": "shrimp",
+        "haiku": "Pink curves on the plate / The ocean's gift to dinner / Sweet flesh from the shell"
       }
     }
   ],
@@ -205,6 +205,7 @@
     "STRIP",
     "GRILL",
     "MURKY",
-    "TRACE"
+    "TRACE",
+    "PRAWN"
   ]
 }

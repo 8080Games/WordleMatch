@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1891,
-      "word": "OLDEN",
-      "date": "8/23/2026",
-      "hints": {
-        "synonym": "ancient",
-        "haiku": "Days before these days / When things were done differently / The past holds its ways"
-      }
-    },
-    {
       "gameNumber": 1892,
       "word": "RUNNY",
       "date": "8/24/2026",
       "hints": {
         "synonym": "Liquid",
         "haiku": "More liquid than wanted / Nose drips constantly / Consistency too thin"
+      }
+    },
+    {
+      "gameNumber": 1893,
+      "word": "CLICK",
+      "date": "8/25/2026",
+      "hints": {
+        "synonym": "Snap",
+        "haiku": "Small sound big result / Button pressed and things begin / Instant connection"
       }
     }
   ],
@@ -208,6 +208,7 @@
     "TRACE",
     "PRAWN",
     "OLDEN",
-    "RUNNY"
+    "RUNNY",
+    "CLICK"
   ]
 }

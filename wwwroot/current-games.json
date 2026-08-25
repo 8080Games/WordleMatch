@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1892,
-      "word": "RUNNY",
-      "date": "8/24/2026",
-      "hints": {
-        "synonym": "Liquid",
-        "haiku": "More liquid than wanted / Nose drips constantly / Consistency too thin"
-      }
-    },
-    {
       "gameNumber": 1893,
       "word": "CLICK",
       "date": "8/25/2026",
       "hints": {
         "synonym": "Snap",
         "haiku": "Small sound big result / Button pressed and things begin / Instant connection"
+      }
+    },
+    {
+      "gameNumber": 1894,
+      "word": "CAPON",
+      "date": "8/26/2026",
+      "hints": {
+        "synonym": "",
+        "haiku": ""
       }
     }
   ],
@@ -209,6 +209,7 @@
     "PRAWN",
     "OLDEN",
     "RUNNY",
-    "CLICK"
+    "CLICK",
+    "CAPON"
   ]
 }

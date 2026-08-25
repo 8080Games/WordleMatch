@@ -1511,7 +1511,6 @@ capex
 caphs
 capiz
 caple
-capon
 capos
 capot
 capul

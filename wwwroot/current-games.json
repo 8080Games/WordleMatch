@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1893,
-      "word": "CLICK",
-      "date": "8/25/2026",
-      "hints": {
-        "synonym": "Snap",
-        "haiku": "Small sound big result / Button pressed and things begin / Instant connection"
-      }
-    },
-    {
       "gameNumber": 1894,
       "word": "CAPON",
       "date": "8/26/2026",
       "hints": {
         "synonym": "",
         "haiku": ""
+      }
+    },
+    {
+      "gameNumber": 1895,
+      "word": "UNCUT",
+      "date": "8/27/2026",
+      "hints": {
+        "synonym": "whole",
+        "haiku": "The blade hasn't touched / Raw and complete as it came / Unedited truth"
       }
     }
   ],
@@ -210,6 +210,7 @@
     "OLDEN",
     "RUNNY",
     "CLICK",
-    "CAPON"
+    "CAPON",
+    "UNCUT"
   ]
 }

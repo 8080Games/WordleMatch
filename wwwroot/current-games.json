@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1894,
-      "word": "CAPON",
-      "date": "8/26/2026",
-      "hints": {
-        "synonym": "",
-        "haiku": ""
-      }
-    },
-    {
       "gameNumber": 1895,
       "word": "UNCUT",
       "date": "8/27/2026",
       "hints": {
         "synonym": "whole",
         "haiku": "The blade hasn't touched / Raw and complete as it came / Unedited truth"
+      }
+    },
+    {
+      "gameNumber": 1896,
+      "word": "TWEEN",
+      "date": "8/28/2026",
+      "hints": {
+        "synonym": "Youth",
+        "haiku": "Between child and teen / Pre-adolescent / Marketing demographic"
       }
     }
   ],
@@ -211,6 +211,7 @@
     "RUNNY",
     "CLICK",
     "CAPON",
-    "UNCUT"
+    "UNCUT",
+    "TWEEN"
   ]
 }

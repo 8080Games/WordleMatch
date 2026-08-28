@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1895,
-      "word": "UNCUT",
-      "date": "8/27/2026",
-      "hints": {
-        "synonym": "whole",
-        "haiku": "The blade hasn't touched / Raw and complete as it came / Unedited truth"
-      }
-    },
-    {
       "gameNumber": 1896,
       "word": "TWEEN",
       "date": "8/28/2026",
       "hints": {
         "synonym": "Youth",
         "haiku": "Between child and teen / Pre-adolescent / Marketing demographic"
+      }
+    },
+    {
+      "gameNumber": 1897,
+      "word": "BLOOD",
+      "date": "8/29/2026",
+      "hints": {
+        "synonym": "plasma",
+        "haiku": "Red river of life / Through every vein it journeys / Carrying our breath"
       }
     }
   ],
@@ -212,6 +212,7 @@
     "CLICK",
     "CAPON",
     "UNCUT",
-    "TWEEN"
+    "TWEEN",
+    "BLOOD"
   ]
 }

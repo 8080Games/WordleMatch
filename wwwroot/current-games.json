@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1897,
-      "word": "BLOOD",
-      "date": "8/29/2026",
-      "hints": {
-        "synonym": "plasma",
-        "haiku": "Red river of life / Through every vein it journeys / Carrying our breath"
-      }
-    },
-    {
       "gameNumber": 1898,
       "word": "INTEL",
       "date": "8/30/2026",
       "hints": {
         "synonym": "Information",
         "haiku": "Intelligence gathered / Data for decision made / Knowledge collected"
+      }
+    },
+    {
+      "gameNumber": 1899,
+      "word": "MOUND",
+      "date": "8/31/2026",
+      "hints": {
+        "synonym": "hill",
+        "haiku": "Earth piled for purpose / Small rise on the otherwise flat / Pitchers know this spot"
       }
     }
   ],
@@ -214,6 +214,7 @@
     "UNCUT",
     "TWEEN",
     "BLOOD",
-    "INTEL"
+    "INTEL",
+    "MOUND"
   ]
 }

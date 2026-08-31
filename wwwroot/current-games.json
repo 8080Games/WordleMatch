@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1898,
-      "word": "INTEL",
-      "date": "8/30/2026",
-      "hints": {
-        "synonym": "Information",
-        "haiku": "Intelligence gathered / Data for decision made / Knowledge collected"
-      }
-    },
-    {
       "gameNumber": 1899,
       "word": "MOUND",
       "date": "8/31/2026",
       "hints": {
         "synonym": "hill",
         "haiku": "Earth piled for purpose / Small rise on the otherwise flat / Pitchers know this spot"
+      }
+    },
+    {
+      "gameNumber": 1900,
+      "word": "REMIX",
+      "date": "9/1/2026",
+      "hints": {
+        "synonym": "Remake",
+        "haiku": "Song altered fresh / Different version created / Music transformed"
       }
     }
   ],
@@ -215,6 +215,7 @@
     "TWEEN",
     "BLOOD",
     "INTEL",
-    "MOUND"
+    "MOUND",
+    "REMIX"
   ]
 }

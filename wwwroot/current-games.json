@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1899,
-      "word": "MOUND",
-      "date": "8/31/2026",
-      "hints": {
-        "synonym": "hill",
-        "haiku": "Earth piled for purpose / Small rise on the otherwise flat / Pitchers know this spot"
-      }
-    },
-    {
       "gameNumber": 1900,
       "word": "REMIX",
       "date": "9/1/2026",
       "hints": {
         "synonym": "Remake",
         "haiku": "Song altered fresh / Different version created / Music transformed"
+      }
+    },
+    {
+      "gameNumber": 1901,
+      "word": "RULER",
+      "date": "9/2/2026",
+      "hints": {
+        "synonym": "leader",
+        "haiku": "She measures and guides / Both the tool and the person / Straight lines and direction"
       }
     }
   ],
@@ -216,6 +216,7 @@
     "BLOOD",
     "INTEL",
     "MOUND",
-    "REMIX"
+    "REMIX",
+    "RULER"
   ]
 }

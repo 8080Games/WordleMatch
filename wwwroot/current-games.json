@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1900,
-      "word": "REMIX",
-      "date": "9/1/2026",
-      "hints": {
-        "synonym": "Remake",
-        "haiku": "Song altered fresh / Different version created / Music transformed"
-      }
-    },
-    {
       "gameNumber": 1901,
       "word": "RULER",
       "date": "9/2/2026",
       "hints": {
         "synonym": "leader",
         "haiku": "She measures and guides / Both the tool and the person / Straight lines and direction"
+      }
+    },
+    {
+      "gameNumber": 1902,
+      "word": "JOIST",
+      "date": "9/3/2026",
+      "hints": {
+        "synonym": "beam",
+        "haiku": "Hidden but holding / The ceiling rests on these backs / Strength built into bones"
       }
     }
   ],
@@ -217,6 +217,7 @@
     "INTEL",
     "MOUND",
     "REMIX",
-    "RULER"
+    "RULER",
+    "JOIST"
   ]
 }

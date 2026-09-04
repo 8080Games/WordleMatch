@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1902,
-      "word": "JOIST",
-      "date": "9/3/2026",
-      "hints": {
-        "synonym": "beam",
-        "haiku": "Hidden but holding / The ceiling rests on these backs / Strength built into bones"
-      }
-    },
-    {
       "gameNumber": 1903,
       "word": "WAGER",
       "date": "9/4/2026",
       "hints": {
         "synonym": "bet",
         "haiku": "Money on the line / Prediction puts risk at stake / Win or lose finds out"
+      }
+    },
+    {
+      "gameNumber": 1904,
+      "word": "SOUPY",
+      "date": "9/5/2026",
+      "hints": {
+        "synonym": "Thick",
+        "haiku": "Consistency of soup / Foggy atmosphere / Dense and murky"
       }
     }
   ],
@@ -219,6 +219,7 @@
     "REMIX",
     "RULER",
     "JOIST",
-    "WAGER"
+    "WAGER",
+    "SOUPY"
   ]
 }

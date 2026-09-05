@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1903,
-      "word": "WAGER",
-      "date": "9/4/2026",
-      "hints": {
-        "synonym": "bet",
-        "haiku": "Money on the line / Prediction puts risk at stake / Win or lose finds out"
-      }
-    },
-    {
       "gameNumber": 1904,
       "word": "SOUPY",
       "date": "9/5/2026",
       "hints": {
         "synonym": "Thick",
         "haiku": "Consistency of soup / Foggy atmosphere / Dense and murky"
+      }
+    },
+    {
+      "gameNumber": 1905,
+      "word": "BEIGE",
+      "date": "9/6/2026",
+      "hints": {
+        "synonym": "Tan",
+        "haiku": "Neutral tone persists / Neither white nor brown quite yet / Safe color choice made"
       }
     }
   ],
@@ -220,6 +220,7 @@
     "RULER",
     "JOIST",
     "WAGER",
-    "SOUPY"
+    "SOUPY",
+    "BEIGE"
   ]
 }

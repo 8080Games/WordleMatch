@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1904,
-      "word": "SOUPY",
-      "date": "9/5/2026",
-      "hints": {
-        "synonym": "Thick",
-        "haiku": "Consistency of soup / Foggy atmosphere / Dense and murky"
-      }
-    },
-    {
       "gameNumber": 1905,
       "word": "BEIGE",
       "date": "9/6/2026",
       "hints": {
         "synonym": "Tan",
         "haiku": "Neutral tone persists / Neither white nor brown quite yet / Safe color choice made"
+      }
+    },
+    {
+      "gameNumber": 1906,
+      "word": "BLIND",
+      "date": "9/7/2026",
+      "hints": {
+        "synonym": "sightless",
+        "haiku": "Darkness has its gifts / Other senses sharpen keen / Touch reads what eyes miss"
       }
     }
   ],
@@ -221,6 +221,7 @@
     "JOIST",
     "WAGER",
     "SOUPY",
-    "BEIGE"
+    "BEIGE",
+    "BLIND"
   ]
 }

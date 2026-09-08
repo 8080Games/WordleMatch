@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1906,
-      "word": "BLIND",
-      "date": "9/7/2026",
-      "hints": {
-        "synonym": "sightless",
-        "haiku": "Darkness has its gifts / Other senses sharpen keen / Touch reads what eyes miss"
-      }
-    },
-    {
       "gameNumber": 1907,
       "word": "LIVEN",
       "date": "9/8/2026",
       "hints": {
         "synonym": "Enliven",
         "haiku": "Make more exciting / Energy injection given / Bring life to the thing"
+      }
+    },
+    {
+      "gameNumber": 1908,
+      "word": "BURST",
+      "date": "9/9/2026",
+      "hints": {
+        "synonym": "explode",
+        "haiku": "Pressure finds release / What held so tight now breaks free / Scatter to the wind"
       }
     }
   ],
@@ -223,6 +223,7 @@
     "SOUPY",
     "BEIGE",
     "BLIND",
-    "LIVEN"
+    "LIVEN",
+    "BURST"
   ]
 }

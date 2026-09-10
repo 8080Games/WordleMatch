@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1908,
-      "word": "BURST",
-      "date": "9/9/2026",
-      "hints": {
-        "synonym": "explode",
-        "haiku": "Pressure finds release / What held so tight now breaks free / Scatter to the wind"
-      }
-    },
-    {
       "gameNumber": 1909,
       "word": "DRYLY",
       "date": "9/10/2026",
       "hints": {
         "synonym": "sarcastically",
         "haiku": "Not a smile in sight / Yet humor cuts through his words / Wit needs no fanfare"
+      }
+    },
+    {
+      "gameNumber": 1910,
+      "word": "ASTER",
+      "date": "9/11/2026",
+      "hints": {
+        "synonym": "Flower",
+        "haiku": "Star-shaped petals spread / Autumn garden's late bright bloom / Purple beauty waits"
       }
     }
   ],
@@ -225,6 +225,7 @@
     "BLIND",
     "LIVEN",
     "BURST",
-    "DRYLY"
+    "DRYLY",
+    "ASTER"
   ]
 }

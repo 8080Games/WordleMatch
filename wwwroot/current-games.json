@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1910,
-      "word": "ASTER",
-      "date": "9/11/2026",
-      "hints": {
-        "synonym": "Flower",
-        "haiku": "Star-shaped petals spread / Autumn garden's late bright bloom / Purple beauty waits"
-      }
-    },
-    {
       "gameNumber": 1911,
       "word": "NIFTY",
       "date": "9/12/2026",
       "hints": {
         "synonym": "Clever",
         "haiku": "Neat and effective / Stylishly impressive / Handy and useful"
+      }
+    },
+    {
+      "gameNumber": 1912,
+      "word": "FOCUS",
+      "date": "9/13/2026",
+      "hints": {
+        "synonym": "Concentrate",
+        "haiku": "Attention narrows / Everything else fades away / Clarity achieved"
       }
     }
   ],
@@ -227,6 +227,7 @@
     "BURST",
     "DRYLY",
     "ASTER",
-    "NIFTY"
+    "NIFTY",
+    "FOCUS"
   ]
 }

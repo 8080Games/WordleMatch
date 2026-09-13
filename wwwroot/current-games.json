@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1911,
-      "word": "NIFTY",
-      "date": "9/12/2026",
-      "hints": {
-        "synonym": "Clever",
-        "haiku": "Neat and effective / Stylishly impressive / Handy and useful"
-      }
-    },
-    {
       "gameNumber": 1912,
       "word": "FOCUS",
       "date": "9/13/2026",
       "hints": {
         "synonym": "Concentrate",
         "haiku": "Attention narrows / Everything else fades away / Clarity achieved"
+      }
+    },
+    {
+      "gameNumber": 1913,
+      "word": "RINSE",
+      "date": "9/14/2026",
+      "hints": {
+        "synonym": "wash",
+        "haiku": "Water carries away / What soap lifted from the surface / Clean comes in stages"
       }
     }
   ],
@@ -228,6 +228,7 @@
     "DRYLY",
     "ASTER",
     "NIFTY",
-    "FOCUS"
+    "FOCUS",
+    "RINSE"
   ]
 }

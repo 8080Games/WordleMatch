@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1913,
-      "word": "RINSE",
-      "date": "9/14/2026",
-      "hints": {
-        "synonym": "wash",
-        "haiku": "Water carries away / What soap lifted from the surface / Clean comes in stages"
-      }
-    },
-    {
       "gameNumber": 1914,
       "word": "DEALT",
       "date": "9/15/2026",
       "hints": {
         "synonym": "distributed",
         "haiku": "Cards face down they wait / Fate handed out one by one / Play what you receive"
+      }
+    },
+    {
+      "gameNumber": 1915,
+      "word": "WISPY",
+      "date": "9/16/2026",
+      "hints": {
+        "synonym": "thin",
+        "haiku": "Almost not there at all / Barely visible traces / Delicate as breath"
       }
     }
   ],
@@ -230,6 +230,7 @@
     "NIFTY",
     "FOCUS",
     "RINSE",
-    "DEALT"
+    "DEALT",
+    "WISPY"
   ]
 }

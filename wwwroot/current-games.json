@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1914,
-      "word": "DEALT",
-      "date": "9/15/2026",
-      "hints": {
-        "synonym": "distributed",
-        "haiku": "Cards face down they wait / Fate handed out one by one / Play what you receive"
-      }
-    },
-    {
       "gameNumber": 1915,
       "word": "WISPY",
       "date": "9/16/2026",
       "hints": {
         "synonym": "thin",
         "haiku": "Almost not there at all / Barely visible traces / Delicate as breath"
+      }
+    },
+    {
+      "gameNumber": 1916,
+      "word": "THETA",
+      "date": "9/17/2026",
+      "hints": {
+        "synonym": "letter",
+        "haiku": "Greek curve draws its shape / Mathematics claims another / Angles need their names"
       }
     }
   ],
@@ -231,6 +231,7 @@
     "FOCUS",
     "RINSE",
     "DEALT",
-    "WISPY"
+    "WISPY",
+    "THETA"
   ]
 }

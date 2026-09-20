@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1916,
-      "word": "THETA",
-      "date": "9/17/2026",
-      "hints": {
-        "synonym": "letter",
-        "haiku": "Greek curve draws its shape / Mathematics claims another / Angles need their names"
-      }
-    },
-    {
       "gameNumber": 1917,
       "word": "SNOWY",
       "date": "9/18/2026",
       "hints": {
         "synonym": "white",
         "haiku": "Blanket covers all / The world made fresh and clean again / Footprints first to mark"
+      }
+    },
+    {
+      "gameNumber": 1920,
+      "word": "PAGER",
+      "date": "9/21/2026",
+      "hints": {
+        "synonym": "Device",
+        "haiku": "Old communication / Beeping when message came / Pre-cell technology"
       }
     }
   ],
@@ -233,6 +233,7 @@
     "DEALT",
     "WISPY",
     "THETA",
-    "SNOWY"
+    "SNOWY",
+    "PAGER"
   ]
 }

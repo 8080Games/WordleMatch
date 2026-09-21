@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1917,
-      "word": "SNOWY",
-      "date": "9/18/2026",
-      "hints": {
-        "synonym": "white",
-        "haiku": "Blanket covers all / The world made fresh and clean again / Footprints first to mark"
-      }
-    },
-    {
       "gameNumber": 1920,
       "word": "PAGER",
       "date": "9/21/2026",
       "hints": {
         "synonym": "Device",
         "haiku": "Old communication / Beeping when message came / Pre-cell technology"
+      }
+    },
+    {
+      "gameNumber": 1921,
+      "word": "STOKE",
+      "date": "9/22/2026",
+      "hints": {
+        "synonym": "fuel",
+        "haiku": "Add more to the flame / The fire wants to grow strong / Feed what burns within"
       }
     }
   ],
@@ -234,6 +234,7 @@
     "WISPY",
     "THETA",
     "SNOWY",
-    "PAGER"
+    "PAGER",
+    "STOKE"
   ]
 }

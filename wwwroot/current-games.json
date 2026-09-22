@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1920,
-      "word": "PAGER",
-      "date": "9/21/2026",
-      "hints": {
-        "synonym": "Device",
-        "haiku": "Old communication / Beeping when message came / Pre-cell technology"
-      }
-    },
-    {
       "gameNumber": 1921,
       "word": "STOKE",
       "date": "9/22/2026",
       "hints": {
         "synonym": "fuel",
         "haiku": "Add more to the flame / The fire wants to grow strong / Feed what burns within"
+      }
+    },
+    {
+      "gameNumber": 1922,
+      "word": "FORTH",
+      "date": "9/23/2026",
+      "hints": {
+        "synonym": "Forward",
+        "haiku": "Onward into light / No looking back at the past / Progress marches on"
       }
     }
   ],
@@ -235,6 +235,7 @@
     "THETA",
     "SNOWY",
     "PAGER",
-    "STOKE"
+    "STOKE",
+    "FORTH"
   ]
 }

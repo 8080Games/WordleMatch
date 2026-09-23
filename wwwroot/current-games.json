@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1921,
-      "word": "STOKE",
-      "date": "9/22/2026",
-      "hints": {
-        "synonym": "fuel",
-        "haiku": "Add more to the flame / The fire wants to grow strong / Feed what burns within"
-      }
-    },
-    {
       "gameNumber": 1922,
       "word": "FORTH",
       "date": "9/23/2026",
       "hints": {
         "synonym": "Forward",
         "haiku": "Onward into light / No looking back at the past / Progress marches on"
+      }
+    },
+    {
+      "gameNumber": 1923,
+      "word": "MESSY",
+      "date": "9/24/2026",
+      "hints": {
+        "synonym": "Untidy",
+        "haiku": "Disorder prevails / Cleanliness absent here / Chaos visible"
       }
     }
   ],
@@ -236,6 +236,7 @@
     "SNOWY",
     "PAGER",
     "STOKE",
-    "FORTH"
+    "FORTH",
+    "MESSY"
   ]
 }

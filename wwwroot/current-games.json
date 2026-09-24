@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1922,
-      "word": "FORTH",
-      "date": "9/23/2026",
-      "hints": {
-        "synonym": "Forward",
-        "haiku": "Onward into light / No looking back at the past / Progress marches on"
-      }
-    },
-    {
       "gameNumber": 1923,
       "word": "MESSY",
       "date": "9/24/2026",
       "hints": {
         "synonym": "Untidy",
         "haiku": "Disorder prevails / Cleanliness absent here / Chaos visible"
+      }
+    },
+    {
+      "gameNumber": 1924,
+      "word": "COPSE",
+      "date": "9/25/2026",
+      "hints": {
+        "synonym": "grove",
+        "haiku": "Small stand of trees waits / Not quite a forest but close / Shade enough for rest"
       }
     }
   ],
@@ -237,6 +237,7 @@
     "PAGER",
     "STOKE",
     "FORTH",
-    "MESSY"
+    "MESSY",
+    "COPSE"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1923,
-      "word": "MESSY",
-      "date": "9/24/2026",
-      "hints": {
-        "synonym": "Untidy",
-        "haiku": "Disorder prevails / Cleanliness absent here / Chaos visible"
-      }
-    },
-    {
       "gameNumber": 1924,
       "word": "COPSE",
       "date": "9/25/2026",
       "hints": {
         "synonym": "grove",
         "haiku": "Small stand of trees waits / Not quite a forest but close / Shade enough for rest"
+      }
+    },
+    {
+      "gameNumber": 1925,
+      "word": "ELEGY",
+      "date": "9/26/2026",
+      "hints": {
+        "synonym": "lament",
+        "haiku": "Words for the departed / Grief shaped into something shared / Memory preserved"
       }
     }
   ],
@@ -238,6 +238,7 @@
     "STOKE",
     "FORTH",
     "MESSY",
-    "COPSE"
+    "COPSE",
+    "ELEGY"
   ]
 }

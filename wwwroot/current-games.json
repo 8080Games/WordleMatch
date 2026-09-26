@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1924,
-      "word": "COPSE",
-      "date": "9/25/2026",
-      "hints": {
-        "synonym": "grove",
-        "haiku": "Small stand of trees waits / Not quite a forest but close / Shade enough for rest"
-      }
-    },
-    {
       "gameNumber": 1925,
       "word": "ELEGY",
       "date": "9/26/2026",
       "hints": {
         "synonym": "lament",
         "haiku": "Words for the departed / Grief shaped into something shared / Memory preserved"
+      }
+    },
+    {
+      "gameNumber": 1926,
+      "word": "SLOOP",
+      "date": "9/27/2026",
+      "hints": {
+        "synonym": "boat",
+        "haiku": "One mast catches wind / The small craft tacks and jibes true / Ocean for a few"
       }
     }
   ],
@@ -239,6 +239,7 @@
     "FORTH",
     "MESSY",
     "COPSE",
-    "ELEGY"
+    "ELEGY",
+    "SLOOP"
   ]
 }

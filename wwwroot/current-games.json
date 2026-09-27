@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1925,
-      "word": "ELEGY",
-      "date": "9/26/2026",
-      "hints": {
-        "synonym": "lament",
-        "haiku": "Words for the departed / Grief shaped into something shared / Memory preserved"
-      }
-    },
-    {
       "gameNumber": 1926,
       "word": "SLOOP",
       "date": "9/27/2026",
       "hints": {
         "synonym": "boat",
         "haiku": "One mast catches wind / The small craft tacks and jibes true / Ocean for a few"
+      }
+    },
+    {
+      "gameNumber": 1927,
+      "word": "TRUNK",
+      "date": "9/28/2026",
+      "hints": {
+        "synonym": "chest",
+        "haiku": "Storage for the journey / All we need packed in one box / Life made portable"
       }
     }
   ],
@@ -240,6 +240,7 @@
     "MESSY",
     "COPSE",
     "ELEGY",
-    "SLOOP"
+    "SLOOP",
+    "TRUNK"
   ]
 }

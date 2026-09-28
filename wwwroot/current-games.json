@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1926,
-      "word": "SLOOP",
-      "date": "9/27/2026",
-      "hints": {
-        "synonym": "boat",
-        "haiku": "One mast catches wind / The small craft tacks and jibes true / Ocean for a few"
-      }
-    },
-    {
       "gameNumber": 1927,
       "word": "TRUNK",
       "date": "9/28/2026",
       "hints": {
         "synonym": "chest",
         "haiku": "Storage for the journey / All we need packed in one box / Life made portable"
+      }
+    },
+    {
+      "gameNumber": 1928,
+      "word": "SCUBA",
+      "date": "9/29/2026",
+      "hints": {
+        "synonym": "diving",
+        "haiku": "Breath from the tank flows / The underwater world opens / Weightless in the blue"
       }
     }
   ],
@@ -241,6 +241,7 @@
     "COPSE",
     "ELEGY",
     "SLOOP",
-    "TRUNK"
+    "TRUNK",
+    "SCUBA"
   ]
 }

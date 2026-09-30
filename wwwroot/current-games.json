@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1928,
-      "word": "SCUBA",
-      "date": "9/29/2026",
-      "hints": {
-        "synonym": "diving",
-        "haiku": "Breath from the tank flows / The underwater world opens / Weightless in the blue"
-      }
-    },
-    {
       "gameNumber": 1929,
       "word": "RIVER",
       "date": "9/30/2026",
       "hints": {
         "synonym": "stream",
         "haiku": "Water seeks the sea / Through any obstacle flowing / Persistence carves canyons"
+      }
+    },
+    {
+      "gameNumber": 1930,
+      "word": "RITZY",
+      "date": "10/1/2026",
+      "hints": {
+        "synonym": "Fancy",
+        "haiku": "Elegant and posh / High-class atmosphere / Luxurious style"
       }
     }
   ],
@@ -243,6 +243,7 @@
     "SLOOP",
     "TRUNK",
     "SCUBA",
-    "RIVER"
+    "RIVER",
+    "RITZY"
   ]
 }

@@ -1,65 +1,83 @@
 # Daily Wordle Runner — Setup
 
-How to make a Windows machine the daily Wordle word fetcher. The job pulls
-**tomorrow's** answer from the NYT "Wordle Review" page (the source of truth)
-via a real, logged-in Edge browser, then commits + pushes via `add-word.mjs`.
+How to make a Windows machine the daily Wordle word updater. The job looks up
+answers from the NYT puzzle API (`nytimes.com/svc/wordle/v2/YYYY-MM-DD.json`),
+adds them via `add-word.mjs`, and makes one commit + push (which triggers the
+Azure Static Web Apps deploy). No browser is involved.
 
-> NYT blocks remote/CI automation, so this **must** run locally on a real machine
-> with a logged-in browser. Do not use GitHub Actions for the daily fetch.
+> NYT reportedly blocks remote/CI automation, so this runs locally rather than in
+> GitHub Actions.
+
+## How it works (`run-daily-fetch.bat` → `daily-update.py`)
+1. `git pull --ff-only`
+2. Finds every reuse-era game (#1689 through **tomorrow**) missing from
+   `used-words.csv` + `current-games.json`.
+3. Looks each one up in the NYT API (3 attempts each).
+4. Adds them oldest-first with `node add-word.mjs WORD YYYY-MM-DD --no-git`.
+5. Re-reads the data files to confirm every game landed, commits **only** the
+   wwwroot data files, and pushes (rebasing and retrying once if rejected; also
+   pushes any earlier commit that failed to push).
+
+It is **self-healing**: a normal day adds just tomorrow's word, and after any
+downtime the first run back-fills every missed day in one commit. Re-running is
+safe — if nothing is missing it does nothing.
+
+Failures show a Windows toast and make the task's Last Result non-zero. Logs go to
+`scripts\logs\fetch-*.log`.
+
+Useful flags: `--dry-run` (look up and print, change nothing), `--no-push`,
+`--max-missing N` (default 60; the job refuses to add more than this at once).
+
+## Daily production check (`run-prod-check.bat` → `check-production.py`)
+Runs at 4:50 AM against the live site and toasts on failure. It checks that today's
+and tomorrow's games are deployed with hints, the game history has no gaps, the
+words match the NYT API, and that the app in headless Edge shows the right puzzle
+number, reveals the right word, and shows the right used/unused counts. If
+tomorrow's game isn't live yet it waits up to 20 minutes for the update + deploy.
+Logs go to `scripts\logs\prod-check-*.log`.
 
 ## Prerequisites
-- **Python** with the Playwright package: `python -m pip install playwright`
-  (no browser download needed — it attaches to a running Edge over CDP).
-  Verify `where python` in cmd resolves to that interpreter.
+- **Python** on PATH (`where python` in cmd). The daily update uses only the
+  standard library; the production check also needs `python -m pip install playwright`
+  (it drives the installed Microsoft Edge, no browser download needed).
 - **Node.js** on PATH (runs `add-word.mjs`).
-- **Git** push credentials configured for `github.com/8080Games/WordleMatch`.
-- **Microsoft Edge** installed.
+- **Git** push credentials for `github.com/8080Games/WordleMatch`.
+- `wwwroot/3158_wordle_hints.csv` (hint source for `add-word.mjs`; currently untracked).
 
-> **No NYT login required.** The Wordle Review page is public — verified in a
-> logged-out private window (the "Click to reveal" answer shows without signing
-> in). Any fresh Edge profile works; the `%TEMP%` debug profile is fine.
+## Scheduled tasks
+The fetch runs at 4:30 AM ET so tomorrow's word is live before midnight in the
+earliest timezone (Kiribati's Line Islands, UTC+14 — midnight there is 5:00 AM EST /
+6:00 AM EDT). The NYT API publishes tomorrow's answer well before then.
 
-## One-time setup
+Both run as the current user, only when logged on, with **"Run task as soon as
+possible after a scheduled start is missed"** and **"Wake the computer to run this
+task"** enabled.
 
-### 1. Add a pull to `run-daily-fetch.bat`
-Right after `cd /d "%~dp0"` near the top, insert:
-```bat
-git pull --ff-only >> "%LOGFILE%" 2>&1
-```
-Prevents the "fetch first" push rejection if the remote moved.
+| Task | Script | Triggers |
+|---|---|---|
+| Wordle Daily Fetch | `scripts\run-daily-fetch.bat` | 4:30 AM and 12:05 PM (second run is a retry; no-op if up to date) |
+| WordleMatch Prod Check | `scripts\run-prod-check.bat` | 4:50 AM |
 
-### 2. Create the scheduled task (example: 6:05 AM daily, only when logged on)
 ```cmd
-schtasks /Create /TN "Wordle Daily Fetch" /TR "C:\AI\claude\Wordle\scripts\run-daily-fetch.bat" /SC DAILY /ST 06:05 /F
+schtasks /Create /TN "Wordle Daily Fetch" /TR "C:\AI\claude\Wordle\scripts\run-daily-fetch.bat" /SC DAILY /ST 04:30 /F
+schtasks /Create /TN "WordleMatch Prod Check" /TR "C:\AI\claude\Wordle\scripts\run-prod-check.bat" /SC DAILY /ST 04:50 /F
 ```
-No `/RU` → runs as the current user, **only when logged on** (a browser-driven task
-needs this). Then in Task Scheduler → this task → **Settings**, enable
-**"Run task as soon as possible after a scheduled start is missed"** so a late boot
-still triggers the day's run (and optionally **"Wake the computer to run this task"**).
-
-### 3. Test
-```cmd
-schtasks /Run /TN "Wordle Daily Fetch"
-```
-Check the newest file in `scripts\logs\` — expect `[OK] Found word:` and the real
-`add-word.mjs` summary (the cp1252 `charmap` crash is fixed in `fetch-nyt-word.py`).
+Then in Task Scheduler enable the two settings above on each task, and add the
+12:05 PM trigger to the fetch task. Test with `schtasks /Run /TN "<task name>"` and
+check the newest log in `scripts\logs\`.
 
 ## Operating notes
-- The machine must be **on and logged in** at the scheduled time (or rely on the
-  missed-start / wake settings).
-- No NYT login is needed; if a run ever logs "Could not find reveal button," NYT
-  likely changed the review page layout — check the selectors/patterns in
-  `fetch-nyt-word.py`.
-- The daily job fetches **one** word/day (tomorrow's). After downtime, run
-  **`python scripts\backfill-words.py`** once to fill the gap — it loops the missing
-  game-number range, validates against a known answer (#1824 = TOKEN) before writing,
-  and aborts if any fetch fails.
-- Always cross-check a fetched word against an independent source if anything looks
-  off — the automation once recorded a wrong answer (#1826 ALIGN vs the real EMOJI).
+- The machine must be on (or asleep) and logged in for the tasks to run; a shut-down
+  PC catches up at the next logon.
+- If the update toasts "N games missing (cap 60)", check the data, then run
+  `python scripts\daily-update.py --max-missing <N>` once.
+- If a toast says hints are missing for a word, add its synonym/haiku to
+  `wwwroot/3158_wordle_hints.csv` and re-run `add-word.mjs` for that game.
+- The old browser scrapers (`fetch-nyt-word.py`, `backfill-words.py`) are kept for
+  manual use if the NYT API ever stops working.
 
-## Data model (handled by `add-word.mjs WORD M/D/YYYY`)
+## Data model (handled by `add-word.mjs WORD YYYY-MM-DD`)
 - `wwwroot/current-games.json` — 2 most-recent games (sliding window) + `recentUsedWords`.
 - Archived games → `wwwroot/historical-words.csv` + `wwwroot/used-words.csv`.
 - Hints → `wwwroot/historical_hints.csv` (master lookup `wwwroot/3158_wordle_hints.csv`).
-- Game number = days since 2021-06-19. The review article on date D reveals game D+1,
-  so for game G the URL date is (G's date − 1): `nytimes.com/{Y}/{MM}/{DD}/crosswords/wordle-review-{G}.html`.
+- Game number = days since 2021-06-19.

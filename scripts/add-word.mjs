@@ -168,7 +168,7 @@ function ensureWordInHints(word, hints) {
     return { addedToUnifiedHints, hintsAreMissing };
 }
 
-async function addWord(word, dateStr = null) {
+async function addWord(word, dateStr = null, { git = true } = {}) {
     // Validate word
     word = word.trim().toUpperCase();
     if (word.length !== 5) {
@@ -317,7 +317,8 @@ async function addWord(word, dateStr = null) {
             // Remove from current games array
             games = games.slice(1);
         } catch (error) {
-            console.log(`⚠️  Could not update word archives: ${error.message}`);
+            // Fail loudly: slicing to 2 games below would otherwise drop this game entirely
+            throw new Error(`Could not update word archives for game #${oldestGame.gameNumber}: ${error.message}`);
         }
     }
 
@@ -359,7 +360,11 @@ async function addWord(word, dateStr = null) {
     console.log(`Games File:  ${games.length} games (timezone coverage)`);
     console.log(`${'='.repeat(60)}\\n`);
 
-    // Always commit
+    if (!git) {
+        console.log(`Skipping git commit/push (--no-git)\n`);
+        return true;
+    }
+
     try {
         console.log(`Committing changes...`);
 
@@ -399,19 +404,22 @@ async function addWord(word, dateStr = null) {
 
 // Main execution
 async function main() {
-    const args = process.argv.slice(2);
+    const allArgs = process.argv.slice(2);
+    const flags = allArgs.filter(a => a.startsWith('-'));
+    const args = allArgs.filter(a => !a.startsWith('-'));
 
-    if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
+    if (args.length === 0 || flags.includes('--help') || flags.includes('-h')) {
         console.log(`
 Wordle Word Adder - Generate current-games.json for the new word reuse system
 
 Usage:
-  node add-word.mjs <word> [date]
+  node add-word.mjs <word> [date] [--no-git]
 
 Arguments:
   word         5-letter word to add (required)
   date         Date in YYYY-MM-DD or MM/DD/YYYY format (optional)
                If omitted, automatically uses next sequential game number
+  --no-git     Update the data files only; skip commit and push
 
 Examples:
   node add-word.mjs TRUCK
@@ -443,7 +451,7 @@ Note: Changes are automatically committed and pushed to git.
     }
 
     try {
-        await addWord(word, date);
+        await addWord(word, date, { git: !flags.includes('--no-git') });
         process.exit(0);
     } catch (error) {
         console.error(`\\n❌ Error: ${error.message}\\n`);

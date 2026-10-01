@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1929,
-      "word": "RIVER",
-      "date": "9/30/2026",
-      "hints": {
-        "synonym": "stream",
-        "haiku": "Water seeks the sea / Through any obstacle flowing / Persistence carves canyons"
-      }
-    },
-    {
       "gameNumber": 1930,
       "word": "RITZY",
       "date": "10/1/2026",
       "hints": {
         "synonym": "Fancy",
         "haiku": "Elegant and posh / High-class atmosphere / Luxurious style"
+      }
+    },
+    {
+      "gameNumber": 1931,
+      "word": "USURY",
+      "date": "10/2/2026",
+      "hints": {
+        "synonym": "Lending",
+        "haiku": "Interest excessive / Exploitative rates / Predatory practice"
       }
     }
   ],
@@ -244,6 +244,22 @@
     "TRUNK",
     "SCUBA",
     "RIVER",
-    "RITZY"
+    "RITZY",
+    "AMPLY",
+    "ENVOY",
+    "TWEET",
+    "CROCK",
+    "WAVER",
+    "MOVER",
+    "ALLOY",
+    "NOBLY",
+    "MORPH",
+    "THUMB",
+    "MAFIA",
+    "WHARF",
+    "BUTTE",
+    "WAKEN",
+    "SHONE",
+    "USURY"
   ]
 }

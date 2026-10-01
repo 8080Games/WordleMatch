@@ -37,6 +37,9 @@ REUSE_ERA_START = 1689                 # first game of the word-reuse era
 # The daily fetch runs at 4:30 AM ET (before midnight in UTC+14 Kiribati); after this time tomorrow's game must be live.
 FETCH_DEADLINE = dtime(4, 45)
 DEPLOY_WAIT_SECONDS = 20 * 60
+# Sample guesses for the guess test; the first one that isn't today's answer is used.
+# All have 5 distinct letters, so "consistent with the colors" is unambiguous.
+SAMPLE_GUESSES = ['CRANE', 'SLOTH', 'PUDGY']
 
 
 class Checker:
@@ -71,6 +74,19 @@ def fetch(url):
                                           'Cache-Control': 'no-cache'})
     with urllib.request.urlopen(req, timeout=30) as resp:
         return resp.read().decode('utf-8-sig')
+
+
+def wordle_feedback(guess, answer):
+    """Standard Wordle coloring: 'green' / 'yellow' / 'white' for each letter of guess."""
+    result = ['white'] * 5
+    unmatched = [a for g, a in zip(guess, answer) if g != a]
+    for i, (g, a) in enumerate(zip(guess, answer)):
+        if g == a:
+            result[i] = 'green'
+        elif g in unmatched:
+            result[i] = 'yellow'
+            unmatched.remove(g)
+    return result
 
 
 def game_date(game_number):
@@ -168,7 +184,19 @@ def check_data(c, today_game, expect_tomorrow):
     expected_used = len(used_today & words)
     print(f"  Expected word list: {len(words)} total, {expected_used} used, {len(words) - expected_used} unused")
 
-    return {'games': all_games, 'words': words, 'expected_used': expected_used}
+    # The app shows hints from new_words_synonyms_haikus.csv, falling back to the
+    # hints stored with the game in current-games.json.
+    expected_hints = None
+    if today:
+        hint_rows = csv.reader(io.StringIO(fetch(SITE + "new_words_synonyms_haikus.csv")))
+        master = {r[0].strip().upper(): (r[1].strip(), r[2].strip()) for r in hint_rows if len(r) >= 3}
+        stored = (today.get('hints', {}).get('synonym', '').strip(), today.get('hints', {}).get('haiku', '').strip())
+        expected_hints = master.get(today['word'].upper(), stored)
+        if today['word'].upper() in master and master[today['word'].upper()] != stored:
+            c.warn(f"Hints for {today['word']} differ between new_words_synonyms_haikus.csv {master[today['word'].upper()]} "
+                   f"and current-games.json {stored}; the app shows the CSV version")
+
+    return {'games': all_games, 'words': words, 'expected_used': expected_used, 'hints': expected_hints}
 
 
 def check_nyt(c, today_game, data):
@@ -186,6 +214,76 @@ def check_nyt(c, today_game, data):
         c.check(ours == theirs and nyt.get('days_since_launch') == n,
                 f"#{n} {ours} matches NYT",
                 f"#{n} is {ours} on the site but NYT says {theirs} (game {nyt.get('days_since_launch')})")
+
+
+def check_hints(c, page, today_word, expected_hints):
+    """Click each hint button and check what it shows."""
+    def show(button):
+        page.click(f'.hints-section .mode-btn:text-is("{button}")')
+        # The button turns active in the same render that updates the hint text
+        page.wait_for_selector(f'.hints-section .mode-btn.active:text-is("{button}")', timeout=5000)
+        page.wait_for_selector('.hint-display', timeout=5000)
+        return page.inner_text('.hint-display').strip()
+
+    vowels = sum(ch in 'AEIOU' for ch in today_word)
+    expected = f"Contains {vowels} vowel{'' if vowels == 1 else 's'}"
+    shown = show('Vowels')
+    c.check(shown == expected, f"Vowels hint: '{shown}'", f"Vowels hint shows '{shown}', expected '{expected}'")
+
+    synonym, haiku = expected_hints or ('', '')
+    shown = show('Synonym')
+    if c.check(shown, f"Synonym hint: '{shown}'", "Synonym hint is EMPTY -- hints did not load for today's word"):
+        c.check(shown == synonym, "Synonym hint matches the data files",
+                f"Synonym hint shows '{shown}', expected '{synonym}'")
+
+    shown = show('Haiku')
+    lines = [line.strip() for line in shown.split('\n') if line.strip()]
+    if c.check(lines, f"Haiku hint shows {len(lines)} lines", "Haiku hint is EMPTY -- hints did not load for today's word"):
+        c.check(' / '.join(lines) == haiku, "Haiku hint matches the data files",
+                f"Haiku hint shows '{' / '.join(lines)}', expected '{haiku}'")
+        if len(lines) != 3:
+            c.warn(f"Haiku has {len(lines)} lines, not 3: {lines}")
+
+    show('Reveal')
+    page.click('.reveal-confirm-btn')
+    shown = page.inner_text('.reveal-word').strip().upper()
+    c.check(shown == today_word, f"Reveal shows today's word {shown}",
+            f"Reveal shows {shown}, expected {today_word}")
+
+
+def check_sample_guess(c, page, today_word, words, wait_for_count):
+    """Type a guess with auto-color on and check the colors and the narrowed word list."""
+    guess = next(g for g in SAMPLE_GUESSES if g != today_word)
+    colors = wordle_feedback(guess, today_word)
+    expected = sum(wordle_feedback(guess, w.upper()) == colors for w in words)
+    print(f"  Sample guess {guess}: expect {colors}, {len(words)} -> {expected} words")
+
+    page.click('.filter-btn.both-btn')
+    wait_for_count(page, len(words))
+    page.click('.gameplay-mode-section .mode-btn:text-is("On")')
+    page.keyboard.type(guess.lower(), delay=100)
+
+    got = wait_for_count(page, expected)
+    boxes = page.locator('.entry-row .letter-box')
+    shown = []
+    for i in range(5):
+        cls = boxes.nth(i).get_attribute('class') or ''
+        shown.append(next((col for col in ('green', 'yellow', 'white') if col in cls.split()), 'none'))
+    c.check(shown == colors, f"Guess {guess} is auto-colored {shown}",
+            f"Guess {guess} is colored {shown}, expected {colors}")
+    c.check(got == expected, f"Guess {guess} narrows the list to {got} words",
+            f"Guess {guess} narrows the list to {got} words, expected {expected}")
+
+    page.click('#add-guess-btn')
+    try:
+        page.wait_for_selector('.previous-guess-row .count-after', timeout=5000)
+        before = page.inner_text('.previous-guess-row .count-before').strip()
+        after = page.inner_text('.previous-guess-row .count-after').strip()
+        c.check(before == str(len(words)) and after == str(expected),
+                f"Adding the guess shows {before} -> {after}",
+                f"Adding the guess shows {before} -> {after}, expected {len(words)} -> {expected}")
+    except Exception:
+        c.fail("Clicking + did not add the guess to the board")
 
 
 def check_browser(c, today_game, data):
@@ -233,11 +331,7 @@ def check_browser(c, today_game, data):
                     f"Shows '{puzzle}', expected 'Puzzle #{today_game}'")
 
             if reveal.is_enabled():
-                reveal.click()
-                page.click('.reveal-confirm-btn')
-                shown = page.inner_text('.reveal-word').strip().upper()
-                c.check(shown == today_word, f"Reveal shows today's word {shown}",
-                        f"Reveal shows {shown}, expected {today_word}")
+                check_hints(c, page, today_word, data['hints'])
 
             page.click('.filter-btn.used-btn')
             got = wait_for_count(page, expected_used)
@@ -254,6 +348,9 @@ def check_browser(c, today_game, data):
             got = wait_for_count(page, total - expected_used)
             c.check(got == total - expected_used, f"'unused' list has {got} words",
                     f"'unused' list has {got} words, expected {total - expected_used}")
+
+            if reveal.is_enabled():
+                check_sample_guess(c, page, today_word, data['words'], wait_for_count)
 
             if errors:
                 c.warn(f"Page raised JavaScript errors: {errors[:3]}")

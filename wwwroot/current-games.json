@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1930,
-      "word": "RITZY",
-      "date": "10/1/2026",
-      "hints": {
-        "synonym": "Fancy",
-        "haiku": "Elegant and posh / High-class atmosphere / Luxurious style"
-      }
-    },
-    {
       "gameNumber": 1931,
       "word": "USURY",
       "date": "10/2/2026",
       "hints": {
         "synonym": "Lending",
         "haiku": "Interest excessive / Exploitative rates / Predatory practice"
+      }
+    },
+    {
+      "gameNumber": 1932,
+      "word": "PEEVE",
+      "date": "10/3/2026",
+      "hints": {
+        "synonym": "Annoyance",
+        "haiku": "Pet irritation / Small thing that bothers much / Particular bother"
       }
     }
   ],
@@ -260,6 +260,7 @@
     "BUTTE",
     "WAKEN",
     "SHONE",
-    "USURY"
+    "USURY",
+    "PEEVE"
   ]
 }

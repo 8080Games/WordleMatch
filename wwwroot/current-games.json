@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1931,
-      "word": "USURY",
-      "date": "10/2/2026",
-      "hints": {
-        "synonym": "Lending",
-        "haiku": "Interest excessive / Exploitative rates / Predatory practice"
-      }
-    },
-    {
       "gameNumber": 1932,
       "word": "PEEVE",
       "date": "10/3/2026",
       "hints": {
         "synonym": "Annoyance",
         "haiku": "Pet irritation / Small thing that bothers much / Particular bother"
+      }
+    },
+    {
+      "gameNumber": 1933,
+      "word": "SHACK",
+      "date": "10/4/2026",
+      "hints": {
+        "synonym": "hut",
+        "haiku": "Four walls barely stand / Shelter from the rain at least / Home made from nothing"
       }
     }
   ],
@@ -261,6 +261,7 @@
     "WAKEN",
     "SHONE",
     "USURY",
-    "PEEVE"
+    "PEEVE",
+    "SHACK"
   ]
 }

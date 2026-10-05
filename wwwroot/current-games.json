@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1933,
-      "word": "SHACK",
-      "date": "10/4/2026",
-      "hints": {
-        "synonym": "hut",
-        "haiku": "Four walls barely stand / Shelter from the rain at least / Home made from nothing"
-      }
-    },
-    {
       "gameNumber": 1934,
       "word": "MOCHA",
       "date": "10/5/2026",
       "hints": {
         "synonym": "coffee",
         "haiku": "Dark and sweet combined / Chocolate meets the bitter bean / Morning indulgence"
+      }
+    },
+    {
+      "gameNumber": 1935,
+      "word": "DIMLY",
+      "date": "10/6/2026",
+      "hints": {
+        "synonym": "faintly",
+        "haiku": "Light struggles to reach / Shadows claim most of the room / Just enough to see"
       }
     }
   ],
@@ -263,6 +263,7 @@
     "USURY",
     "PEEVE",
     "SHACK",
-    "MOCHA"
+    "MOCHA",
+    "DIMLY"
   ]
 }

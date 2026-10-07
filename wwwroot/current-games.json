@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1935,
-      "word": "DIMLY",
-      "date": "10/6/2026",
-      "hints": {
-        "synonym": "faintly",
-        "haiku": "Light struggles to reach / Shadows claim most of the room / Just enough to see"
-      }
-    },
-    {
       "gameNumber": 1936,
       "word": "PROVE",
       "date": "10/7/2026",
       "hints": {
         "synonym": "Verify",
         "haiku": "Evidence speaks truth / Demonstration removes doubt / Facts confirm the claim"
+      }
+    },
+    {
+      "gameNumber": 1937,
+      "word": "STREW",
+      "date": "10/8/2026",
+      "hints": {
+        "synonym": "Scatter",
+        "haiku": "Spreading about random / Objects thrown carelessly / Distribution messy"
       }
     }
   ],
@@ -265,6 +265,7 @@
     "SHACK",
     "MOCHA",
     "DIMLY",
-    "PROVE"
+    "PROVE",
+    "STREW"
   ]
 }

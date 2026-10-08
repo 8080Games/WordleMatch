@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1936,
-      "word": "PROVE",
-      "date": "10/7/2026",
-      "hints": {
-        "synonym": "Verify",
-        "haiku": "Evidence speaks truth / Demonstration removes doubt / Facts confirm the claim"
-      }
-    },
-    {
       "gameNumber": 1937,
       "word": "STREW",
       "date": "10/8/2026",
       "hints": {
         "synonym": "Scatter",
         "haiku": "Spreading about random / Objects thrown carelessly / Distribution messy"
+      }
+    },
+    {
+      "gameNumber": 1938,
+      "word": "MAJOR",
+      "date": "10/9/2026",
+      "hints": {
+        "synonym": "Chief",
+        "haiku": "The greater portion / Significance demands note / Weight tips the balance"
       }
     }
   ],
@@ -266,6 +266,7 @@
     "MOCHA",
     "DIMLY",
     "PROVE",
-    "STREW"
+    "STREW",
+    "MAJOR"
   ]
 }

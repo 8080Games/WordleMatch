@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1937,
-      "word": "STREW",
-      "date": "10/8/2026",
-      "hints": {
-        "synonym": "Scatter",
-        "haiku": "Spreading about random / Objects thrown carelessly / Distribution messy"
-      }
-    },
-    {
       "gameNumber": 1938,
       "word": "MAJOR",
       "date": "10/9/2026",
       "hints": {
         "synonym": "Chief",
         "haiku": "The greater portion / Significance demands note / Weight tips the balance"
+      }
+    },
+    {
+      "gameNumber": 1939,
+      "word": "BUMPY",
+      "date": "10/10/2026",
+      "hints": {
+        "synonym": "Rough",
+        "haiku": "Surface has no smooth / Turbulence in the journey / Jolting ride ahead"
       }
     }
   ],
@@ -267,6 +267,7 @@
     "DIMLY",
     "PROVE",
     "STREW",
-    "MAJOR"
+    "MAJOR",
+    "BUMPY"
   ]
 }

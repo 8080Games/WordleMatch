@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1939,
-      "word": "BUMPY",
-      "date": "10/10/2026",
-      "hints": {
-        "synonym": "Rough",
-        "haiku": "Surface has no smooth / Turbulence in the journey / Jolting ride ahead"
-      }
-    },
-    {
       "gameNumber": 1940,
       "word": "UNCAP",
       "date": "10/11/2026",
       "hints": {
         "synonym": "Open",
         "haiku": "Lid removed from top / Restriction lifted / Bottle opened"
+      }
+    },
+    {
+      "gameNumber": 1941,
+      "word": "YODEL",
+      "date": "10/12/2026",
+      "hints": {
+        "synonym": "Sing",
+        "haiku": "Alpine voice technique / Rapid pitch changes / Mountain music style"
       }
     }
   ],
@@ -269,6 +269,7 @@
     "STREW",
     "MAJOR",
     "BUMPY",
-    "UNCAP"
+    "UNCAP",
+    "YODEL"
   ]
 }

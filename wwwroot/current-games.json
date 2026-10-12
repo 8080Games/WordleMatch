@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1940,
-      "word": "UNCAP",
-      "date": "10/11/2026",
-      "hints": {
-        "synonym": "Open",
-        "haiku": "Lid removed from top / Restriction lifted / Bottle opened"
-      }
-    },
-    {
       "gameNumber": 1941,
       "word": "YODEL",
       "date": "10/12/2026",
       "hints": {
         "synonym": "Sing",
         "haiku": "Alpine voice technique / Rapid pitch changes / Mountain music style"
+      }
+    },
+    {
+      "gameNumber": 1942,
+      "word": "WIDER",
+      "date": "10/13/2026",
+      "hints": {
+        "synonym": "broader",
+        "haiku": "More room than before / The expansion continues on / Space opening up"
       }
     }
   ],
@@ -270,6 +270,7 @@
     "MAJOR",
     "BUMPY",
     "UNCAP",
-    "YODEL"
+    "YODEL",
+    "WIDER"
   ]
 }

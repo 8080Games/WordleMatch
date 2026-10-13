@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1941,
-      "word": "YODEL",
-      "date": "10/12/2026",
-      "hints": {
-        "synonym": "Sing",
-        "haiku": "Alpine voice technique / Rapid pitch changes / Mountain music style"
-      }
-    },
-    {
       "gameNumber": 1942,
       "word": "WIDER",
       "date": "10/13/2026",
       "hints": {
         "synonym": "broader",
         "haiku": "More room than before / The expansion continues on / Space opening up"
+      }
+    },
+    {
+      "gameNumber": 1943,
+      "word": "PSYCH",
+      "date": "10/14/2026",
+      "hints": {
+        "synonym": "Mind",
+        "haiku": "Mental discipline / Tricked and fooled / Soul in Greek origin"
       }
     }
   ],
@@ -271,6 +271,7 @@
     "BUMPY",
     "UNCAP",
     "YODEL",
-    "WIDER"
+    "WIDER",
+    "PSYCH"
   ]
 }

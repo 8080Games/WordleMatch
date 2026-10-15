@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1943,
-      "word": "PSYCH",
-      "date": "10/14/2026",
-      "hints": {
-        "synonym": "Mind",
-        "haiku": "Mental discipline / Tricked and fooled / Soul in Greek origin"
-      }
-    },
-    {
       "gameNumber": 1944,
       "word": "DUNCE",
       "date": "10/15/2026",
       "hints": {
         "synonym": "fool",
         "haiku": "Cap upon his head / The corner knows him too well / Learning takes more forms"
+      }
+    },
+    {
+      "gameNumber": 1945,
+      "word": "SHADY",
+      "date": "10/16/2026",
+      "hints": {
+        "synonym": "sketchy",
+        "haiku": "Something's off with this / The deal doesn't add up right / Trust your gut here"
       }
     }
   ],
@@ -273,6 +273,7 @@
     "YODEL",
     "WIDER",
     "PSYCH",
-    "DUNCE"
+    "DUNCE",
+    "SHADY"
   ]
 }

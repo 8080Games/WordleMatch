@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1944,
-      "word": "DUNCE",
-      "date": "10/15/2026",
-      "hints": {
-        "synonym": "fool",
-        "haiku": "Cap upon his head / The corner knows him too well / Learning takes more forms"
-      }
-    },
-    {
       "gameNumber": 1945,
       "word": "SHADY",
       "date": "10/16/2026",
       "hints": {
         "synonym": "sketchy",
         "haiku": "Something's off with this / The deal doesn't add up right / Trust your gut here"
+      }
+    },
+    {
+      "gameNumber": 1946,
+      "word": "GAFFE",
+      "date": "10/17/2026",
+      "hints": {
+        "synonym": "blunder",
+        "haiku": "The wrong word escaped / No taking back what was said / Damage done by tongue"
       }
     }
   ],
@@ -274,6 +274,7 @@
     "WIDER",
     "PSYCH",
     "DUNCE",
-    "SHADY"
+    "SHADY",
+    "GAFFE"
   ]
 }

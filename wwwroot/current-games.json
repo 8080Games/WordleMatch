@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1945,
-      "word": "SHADY",
-      "date": "10/16/2026",
-      "hints": {
-        "synonym": "sketchy",
-        "haiku": "Something's off with this / The deal doesn't add up right / Trust your gut here"
-      }
-    },
-    {
       "gameNumber": 1946,
       "word": "GAFFE",
       "date": "10/17/2026",
       "hints": {
         "synonym": "blunder",
         "haiku": "The wrong word escaped / No taking back what was said / Damage done by tongue"
+      }
+    },
+    {
+      "gameNumber": 1947,
+      "word": "ADORN",
+      "date": "10/18/2026",
+      "hints": {
+        "synonym": "decorate",
+        "haiku": "Ribbons catch the light / She drapes beauty on the plain / Art in simple things"
       }
     }
   ],
@@ -275,6 +275,7 @@
     "PSYCH",
     "DUNCE",
     "SHADY",
-    "GAFFE"
+    "GAFFE",
+    "ADORN"
   ]
 }

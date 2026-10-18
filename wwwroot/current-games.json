@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1946,
-      "word": "GAFFE",
-      "date": "10/17/2026",
-      "hints": {
-        "synonym": "blunder",
-        "haiku": "The wrong word escaped / No taking back what was said / Damage done by tongue"
-      }
-    },
-    {
       "gameNumber": 1947,
       "word": "ADORN",
       "date": "10/18/2026",
       "hints": {
         "synonym": "decorate",
         "haiku": "Ribbons catch the light / She drapes beauty on the plain / Art in simple things"
+      }
+    },
+    {
+      "gameNumber": 1948,
+      "word": "STINK",
+      "date": "10/19/2026",
+      "hints": {
+        "synonym": "Reek",
+        "haiku": "Foul air fills the room / Noses wrinkle in protest / Windows open wide"
       }
     }
   ],
@@ -276,6 +276,7 @@
     "DUNCE",
     "SHADY",
     "GAFFE",
-    "ADORN"
+    "ADORN",
+    "STINK"
   ]
 }

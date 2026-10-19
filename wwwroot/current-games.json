@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1947,
-      "word": "ADORN",
-      "date": "10/18/2026",
-      "hints": {
-        "synonym": "decorate",
-        "haiku": "Ribbons catch the light / She drapes beauty on the plain / Art in simple things"
-      }
-    },
-    {
       "gameNumber": 1948,
       "word": "STINK",
       "date": "10/19/2026",
       "hints": {
         "synonym": "Reek",
         "haiku": "Foul air fills the room / Noses wrinkle in protest / Windows open wide"
+      }
+    },
+    {
+      "gameNumber": 1949,
+      "word": "WREST",
+      "date": "10/20/2026",
+      "hints": {
+        "synonym": "seize",
+        "haiku": "Take by force from grip / What was held now changes hands / Struggle for control"
       }
     }
   ],
@@ -277,6 +277,7 @@
     "SHADY",
     "GAFFE",
     "ADORN",
-    "STINK"
+    "STINK",
+    "WREST"
   ]
 }

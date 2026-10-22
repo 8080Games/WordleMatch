@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1950,
-      "word": "PENNY",
-      "date": "10/21/2026",
-      "hints": {
-        "synonym": "cent",
-        "haiku": "Almost worthless now / Yet she saves each one she finds / Luck in the copper"
-      }
-    },
-    {
       "gameNumber": 1951,
       "word": "RESET",
       "date": "10/22/2026",
       "hints": {
         "synonym": "restart",
         "haiku": "Back to the beginning / What didn't work gets new chance / Try again from zero"
+      }
+    },
+    {
+      "gameNumber": 1952,
+      "word": "TRILL",
+      "date": "10/23/2026",
+      "hints": {
+        "synonym": "Warble",
+        "haiku": "Rapid alternation / Bird song vibration / Musical ornament"
       }
     }
   ],
@@ -280,6 +280,7 @@
     "STINK",
     "WREST",
     "PENNY",
-    "RESET"
+    "RESET",
+    "TRILL"
   ]
 }

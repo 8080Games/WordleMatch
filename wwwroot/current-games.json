@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1951,
-      "word": "RESET",
-      "date": "10/22/2026",
-      "hints": {
-        "synonym": "restart",
-        "haiku": "Back to the beginning / What didn't work gets new chance / Try again from zero"
-      }
-    },
-    {
       "gameNumber": 1952,
       "word": "TRILL",
       "date": "10/23/2026",
       "hints": {
         "synonym": "Warble",
         "haiku": "Rapid alternation / Bird song vibration / Musical ornament"
+      }
+    },
+    {
+      "gameNumber": 1953,
+      "word": "HOLEY",
+      "date": "10/24/2026",
+      "hints": {
+        "synonym": "",
+        "haiku": ""
       }
     }
   ],
@@ -281,6 +281,7 @@
     "WREST",
     "PENNY",
     "RESET",
-    "TRILL"
+    "TRILL",
+    "HOLEY"
   ]
 }

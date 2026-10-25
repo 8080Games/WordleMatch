@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1953,
-      "word": "HOLEY",
-      "date": "10/24/2026",
-      "hints": {
-        "synonym": "Perforated",
-        "haiku": "Light peeks through each gap / The old sweater tells its years / Threadbare but still loved"
-      }
-    },
-    {
       "gameNumber": 1954,
       "word": "DRESS",
       "date": "10/25/2026",
       "hints": {
         "synonym": "gown",
         "haiku": "Fabric falls just right / She becomes another self / Clothes make the moment"
+      }
+    },
+    {
+      "gameNumber": 1955,
+      "word": "GEEKY",
+      "date": "10/26/2026",
+      "hints": {
+        "synonym": "nerdy",
+        "haiku": "Passion without shame / Deep dives into what he loves / Cool is what you make"
       }
     }
   ],
@@ -283,6 +283,7 @@
     "RESET",
     "TRILL",
     "HOLEY",
-    "DRESS"
+    "DRESS",
+    "GEEKY"
   ]
 }

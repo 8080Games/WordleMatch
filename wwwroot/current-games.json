@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1954,
-      "word": "DRESS",
-      "date": "10/25/2026",
-      "hints": {
-        "synonym": "gown",
-        "haiku": "Fabric falls just right / She becomes another self / Clothes make the moment"
-      }
-    },
-    {
       "gameNumber": 1955,
       "word": "GEEKY",
       "date": "10/26/2026",
       "hints": {
         "synonym": "nerdy",
         "haiku": "Passion without shame / Deep dives into what he loves / Cool is what you make"
+      }
+    },
+    {
+      "gameNumber": 1956,
+      "word": "BINGO",
+      "date": "10/27/2026",
+      "hints": {
+        "synonym": "game",
+        "haiku": "Numbers fill the card / One voice calls out victory / Luck finds its moment"
       }
     }
   ],
@@ -284,6 +284,7 @@
     "TRILL",
     "HOLEY",
     "DRESS",
-    "GEEKY"
+    "GEEKY",
+    "BINGO"
   ]
 }

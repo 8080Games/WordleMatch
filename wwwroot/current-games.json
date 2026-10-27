@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1955,
-      "word": "GEEKY",
-      "date": "10/26/2026",
-      "hints": {
-        "synonym": "nerdy",
-        "haiku": "Passion without shame / Deep dives into what he loves / Cool is what you make"
-      }
-    },
-    {
       "gameNumber": 1956,
       "word": "BINGO",
       "date": "10/27/2026",
       "hints": {
         "synonym": "game",
         "haiku": "Numbers fill the card / One voice calls out victory / Luck finds its moment"
+      }
+    },
+    {
+      "gameNumber": 1957,
+      "word": "GRIST",
+      "date": "10/28/2026",
+      "hints": {
+        "synonym": "Material",
+        "haiku": "Mill's grinding content / Useful matter for the work / Fodder for the task"
       }
     }
   ],
@@ -285,6 +285,7 @@
     "HOLEY",
     "DRESS",
     "GEEKY",
-    "BINGO"
+    "BINGO",
+    "GRIST"
   ]
 }

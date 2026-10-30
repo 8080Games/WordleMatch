@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1958,
-      "word": "MOTOR",
-      "date": "10/29/2026",
-      "hints": {
-        "synonym": "Engine",
-        "haiku": "Pistons pump and fire / Energy converts to force / Machines come alive"
-      }
-    },
-    {
       "gameNumber": 1959,
       "word": "SLIDE",
       "date": "10/30/2026",
       "hints": {
         "synonym": "glide",
         "haiku": "Down the smooth path goes / Gravity pulls the willing / Friction gives no fight"
+      }
+    },
+    {
+      "gameNumber": 1960,
+      "word": "YAHOO",
+      "date": "10/31/2026",
+      "hints": {
+        "synonym": "Exclamation",
+        "haiku": "Joy shouted out / Internet company / Uncouth person"
       }
     }
   ],
@@ -288,6 +288,7 @@
     "BINGO",
     "GRIST",
     "MOTOR",
-    "SLIDE"
+    "SLIDE",
+    "YAHOO"
   ]
 }

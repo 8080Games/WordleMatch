@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1959,
-      "word": "SLIDE",
-      "date": "10/30/2026",
-      "hints": {
-        "synonym": "glide",
-        "haiku": "Down the smooth path goes / Gravity pulls the willing / Friction gives no fight"
-      }
-    },
-    {
       "gameNumber": 1960,
       "word": "YAHOO",
       "date": "10/31/2026",
       "hints": {
         "synonym": "Exclamation",
         "haiku": "Joy shouted out / Internet company / Uncouth person"
+      }
+    },
+    {
+      "gameNumber": 1961,
+      "word": "VIPER",
+      "date": "11/1/2026",
+      "hints": {
+        "synonym": "snake",
+        "haiku": "Poison in the fangs / Beauty patterns warn the wise / Death coiled in the grass"
       }
     }
   ],
@@ -289,6 +289,7 @@
     "GRIST",
     "MOTOR",
     "SLIDE",
-    "YAHOO"
+    "YAHOO",
+    "VIPER"
   ]
 }

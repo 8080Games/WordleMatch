@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1961,
-      "word": "VIPER",
-      "date": "11/1/2026",
-      "hints": {
-        "synonym": "snake",
-        "haiku": "Poison in the fangs / Beauty patterns warn the wise / Death coiled in the grass"
-      }
-    },
-    {
       "gameNumber": 1962,
       "word": "SCOOT",
       "date": "11/2/2026",
       "hints": {
         "synonym": "Move",
         "haiku": "Quick departure made / Slide over for space / Hurry along now"
+      }
+    },
+    {
+      "gameNumber": 1963,
+      "word": "POUCH",
+      "date": "11/3/2026",
+      "hints": {
+        "synonym": "bag",
+        "haiku": "Small space holds small things / Tucked away but still at hand / Pockets have their use"
       }
     }
   ],
@@ -291,6 +291,7 @@
     "SLIDE",
     "YAHOO",
     "VIPER",
-    "SCOOT"
+    "SCOOT",
+    "POUCH"
   ]
 }

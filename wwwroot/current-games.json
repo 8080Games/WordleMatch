@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1962,
-      "word": "SCOOT",
-      "date": "11/2/2026",
-      "hints": {
-        "synonym": "Move",
-        "haiku": "Quick departure made / Slide over for space / Hurry along now"
-      }
-    },
-    {
       "gameNumber": 1963,
       "word": "POUCH",
       "date": "11/3/2026",
       "hints": {
         "synonym": "bag",
         "haiku": "Small space holds small things / Tucked away but still at hand / Pockets have their use"
+      }
+    },
+    {
+      "gameNumber": 1964,
+      "word": "NUTTY",
+      "date": "11/4/2026",
+      "hints": {
+        "synonym": "crazy",
+        "haiku": "Sensible has left / What remains makes its own rules / Logic takes a break"
       }
     }
   ],
@@ -292,6 +292,7 @@
     "YAHOO",
     "VIPER",
     "SCOOT",
-    "POUCH"
+    "POUCH",
+    "NUTTY"
   ]
 }

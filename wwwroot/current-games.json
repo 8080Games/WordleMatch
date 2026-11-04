@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1963,
-      "word": "POUCH",
-      "date": "11/3/2026",
-      "hints": {
-        "synonym": "bag",
-        "haiku": "Small space holds small things / Tucked away but still at hand / Pockets have their use"
-      }
-    },
-    {
       "gameNumber": 1964,
       "word": "NUTTY",
       "date": "11/4/2026",
       "hints": {
         "synonym": "crazy",
         "haiku": "Sensible has left / What remains makes its own rules / Logic takes a break"
+      }
+    },
+    {
+      "gameNumber": 1965,
+      "word": "PARCH",
+      "date": "11/5/2026",
+      "hints": {
+        "synonym": "Dry",
+        "haiku": "Moisture removed all / Thirst became severe / Heat withered plants"
       }
     }
   ],
@@ -293,6 +293,7 @@
     "VIPER",
     "SCOOT",
     "POUCH",
-    "NUTTY"
+    "NUTTY",
+    "PARCH"
   ]
 }

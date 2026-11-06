@@ -2083,6 +2083,7 @@ pound
 pouty
 power
 prank
+prate
 prawn
 preen
 press

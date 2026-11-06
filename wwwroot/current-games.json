@@ -1,18 +1,18 @@
 {
   "games": [
     {
-      "gameNumber": 1965,
-      "word": "PARCH",
-      "date": "11/5/2026",
-      "hints": {
-        "synonym": "Dry",
-        "haiku": "Moisture removed all / Thirst became severe / Heat withered plants"
-      }
-    },
-    {
       "gameNumber": 1966,
       "word": "DRECK",
       "date": "11/6/2026",
+      "hints": {
+        "synonym": "",
+        "haiku": ""
+      }
+    },
+    {
+      "gameNumber": 1967,
+      "word": "PRATE",
+      "date": "11/7/2026",
       "hints": {
         "synonym": "",
         "haiku": ""
@@ -295,6 +295,7 @@
     "POUCH",
     "NUTTY",
     "PARCH",
-    "DRECK"
+    "DRECK",
+    "PRATE"
   ]
 }

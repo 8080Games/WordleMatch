@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1966,
-      "word": "DRECK",
-      "date": "11/6/2026",
-      "hints": {
-        "synonym": "",
-        "haiku": ""
-      }
-    },
-    {
       "gameNumber": 1967,
       "word": "PRATE",
       "date": "11/7/2026",
       "hints": {
         "synonym": "",
         "haiku": ""
+      }
+    },
+    {
+      "gameNumber": 1968,
+      "word": "FIRST",
+      "date": "11/8/2026",
+      "hints": {
+        "synonym": "Initial",
+        "haiku": "Before all others / The starting point of the race / Priority claimed"
       }
     }
   ],
@@ -296,6 +296,7 @@
     "NUTTY",
     "PARCH",
     "DRECK",
-    "PRATE"
+    "PRATE",
+    "FIRST"
   ]
 }

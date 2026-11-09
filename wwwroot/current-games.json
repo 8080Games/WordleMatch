@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1968,
-      "word": "FIRST",
-      "date": "11/8/2026",
-      "hints": {
-        "synonym": "Initial",
-        "haiku": "Before all others / The starting point of the race / Priority claimed"
-      }
-    },
-    {
       "gameNumber": 1969,
       "word": "LOAMY",
       "date": "11/9/2026",
       "hints": {
         "synonym": "earthy",
         "haiku": "Rich soil crumbles dark / Everything grows better here / Gardens bless this ground"
+      }
+    },
+    {
+      "gameNumber": 1970,
+      "word": "TRUCE",
+      "date": "11/10/2026",
+      "hints": {
+        "synonym": "ceasefire",
+        "haiku": "The guns go quiet / For now the fighting pauses / Peace needs its practice"
       }
     }
   ],
@@ -298,6 +298,7 @@
     "DRECK",
     "PRATE",
     "FIRST",
-    "LOAMY"
+    "LOAMY",
+    "TRUCE"
   ]
 }

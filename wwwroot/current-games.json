@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1969,
-      "word": "LOAMY",
-      "date": "11/9/2026",
-      "hints": {
-        "synonym": "earthy",
-        "haiku": "Rich soil crumbles dark / Everything grows better here / Gardens bless this ground"
-      }
-    },
-    {
       "gameNumber": 1970,
       "word": "TRUCE",
       "date": "11/10/2026",
       "hints": {
         "synonym": "ceasefire",
         "haiku": "The guns go quiet / For now the fighting pauses / Peace needs its practice"
+      }
+    },
+    {
+      "gameNumber": 1971,
+      "word": "BLESS",
+      "date": "11/11/2026",
+      "hints": {
+        "synonym": "sanctify",
+        "haiku": "Hands raised to the sky / Words carry the weight of grace / Sacred made from breath"
       }
     }
   ],
@@ -299,6 +299,7 @@
     "PRATE",
     "FIRST",
     "LOAMY",
-    "TRUCE"
+    "TRUCE",
+    "BLESS"
   ]
 }

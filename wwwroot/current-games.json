@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1970,
-      "word": "TRUCE",
-      "date": "11/10/2026",
-      "hints": {
-        "synonym": "ceasefire",
-        "haiku": "The guns go quiet / For now the fighting pauses / Peace needs its practice"
-      }
-    },
-    {
       "gameNumber": 1971,
       "word": "BLESS",
       "date": "11/11/2026",
       "hints": {
         "synonym": "sanctify",
         "haiku": "Hands raised to the sky / Words carry the weight of grace / Sacred made from breath"
+      }
+    },
+    {
+      "gameNumber": 1972,
+      "word": "KARAT",
+      "date": "11/12/2026",
+      "hints": {
+        "synonym": "Purity",
+        "haiku": "Gold measured by this / Twenty-four means pure metal / Quality standard"
       }
     }
   ],
@@ -300,6 +300,7 @@
     "FIRST",
     "LOAMY",
     "TRUCE",
-    "BLESS"
+    "BLESS",
+    "KARAT"
   ]
 }

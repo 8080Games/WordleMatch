@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1971,
-      "word": "BLESS",
-      "date": "11/11/2026",
-      "hints": {
-        "synonym": "sanctify",
-        "haiku": "Hands raised to the sky / Words carry the weight of grace / Sacred made from breath"
-      }
-    },
-    {
       "gameNumber": 1972,
       "word": "KARAT",
       "date": "11/12/2026",
       "hints": {
         "synonym": "Purity",
         "haiku": "Gold measured by this / Twenty-four means pure metal / Quality standard"
+      }
+    },
+    {
+      "gameNumber": 1973,
+      "word": "MOXIE",
+      "date": "11/13/2026",
+      "hints": {
+        "synonym": "Courage",
+        "haiku": "Spirit and nerve shown / Bold determination / Fearless attitude"
       }
     }
   ],
@@ -301,6 +301,7 @@
     "LOAMY",
     "TRUCE",
     "BLESS",
-    "KARAT"
+    "KARAT",
+    "MOXIE"
   ]
 }

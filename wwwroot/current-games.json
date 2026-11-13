@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1972,
-      "word": "KARAT",
-      "date": "11/12/2026",
-      "hints": {
-        "synonym": "Purity",
-        "haiku": "Gold measured by this / Twenty-four means pure metal / Quality standard"
-      }
-    },
-    {
       "gameNumber": 1973,
       "word": "MOXIE",
       "date": "11/13/2026",
       "hints": {
         "synonym": "Courage",
         "haiku": "Spirit and nerve shown / Bold determination / Fearless attitude"
+      }
+    },
+    {
+      "gameNumber": 1974,
+      "word": "RANDY",
+      "date": "11/14/2026",
+      "hints": {
+        "synonym": "lustful",
+        "haiku": "The heat rises quick / Bodies speak their own language / Desire has its hour"
       }
     }
   ],
@@ -302,6 +302,7 @@
     "TRUCE",
     "BLESS",
     "KARAT",
-    "MOXIE"
+    "MOXIE",
+    "RANDY"
   ]
 }

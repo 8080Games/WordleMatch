@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1973,
-      "word": "MOXIE",
-      "date": "11/13/2026",
-      "hints": {
-        "synonym": "Courage",
-        "haiku": "Spirit and nerve shown / Bold determination / Fearless attitude"
-      }
-    },
-    {
       "gameNumber": 1974,
       "word": "RANDY",
       "date": "11/14/2026",
       "hints": {
         "synonym": "lustful",
         "haiku": "The heat rises quick / Bodies speak their own language / Desire has its hour"
+      }
+    },
+    {
+      "gameNumber": 1975,
+      "word": "SNARK",
+      "date": "11/15/2026",
+      "hints": {
+        "synonym": "Sarcasm",
+        "haiku": "Snide commentary / Cutting wit displayed / Attitude shown"
       }
     }
   ],
@@ -303,6 +303,7 @@
     "BLESS",
     "KARAT",
     "MOXIE",
-    "RANDY"
+    "RANDY",
+    "SNARK"
   ]
 }

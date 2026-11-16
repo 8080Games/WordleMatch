@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1975,
-      "word": "SNARK",
-      "date": "11/15/2026",
-      "hints": {
-        "synonym": "Sarcasm",
-        "haiku": "Snide commentary / Cutting wit displayed / Attitude shown"
-      }
-    },
-    {
       "gameNumber": 1976,
       "word": "DRAWL",
       "date": "11/16/2026",
       "hints": {
         "synonym": "accent",
         "haiku": "Words stretched long and slow / The south lives in how she speaks / Time moves differently"
+      }
+    },
+    {
+      "gameNumber": 1977,
+      "word": "ROAST",
+      "date": "11/17/2026",
+      "hints": {
+        "synonym": "cook",
+        "haiku": "Heat transforms the raw / Brown crust forms on tender flesh / Sunday dinner calls"
       }
     }
   ],
@@ -305,6 +305,7 @@
     "MOXIE",
     "RANDY",
     "SNARK",
-    "DRAWL"
+    "DRAWL",
+    "ROAST"
   ]
 }

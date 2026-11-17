@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1976,
-      "word": "DRAWL",
-      "date": "11/16/2026",
-      "hints": {
-        "synonym": "accent",
-        "haiku": "Words stretched long and slow / The south lives in how she speaks / Time moves differently"
-      }
-    },
-    {
       "gameNumber": 1977,
       "word": "ROAST",
       "date": "11/17/2026",
       "hints": {
         "synonym": "cook",
         "haiku": "Heat transforms the raw / Brown crust forms on tender flesh / Sunday dinner calls"
+      }
+    },
+    {
+      "gameNumber": 1978,
+      "word": "BLURT",
+      "date": "11/18/2026",
+      "hints": {
+        "synonym": "Exclaim",
+        "haiku": "Words escape too fast / No filter stops the tumble / Said before you think"
       }
     }
   ],
@@ -306,6 +306,7 @@
     "RANDY",
     "SNARK",
     "DRAWL",
-    "ROAST"
+    "ROAST",
+    "BLURT"
   ]
 }

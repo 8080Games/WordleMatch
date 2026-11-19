@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1978,
-      "word": "BLURT",
-      "date": "11/18/2026",
-      "hints": {
-        "synonym": "Exclaim",
-        "haiku": "Words escape too fast / No filter stops the tumble / Said before you think"
-      }
-    },
-    {
       "gameNumber": 1979,
       "word": "CLOUT",
       "date": "11/19/2026",
       "hints": {
         "synonym": "influence",
         "haiku": "He moves without moving / A word shifts the whole room's weight / Power wears no crown"
+      }
+    },
+    {
+      "gameNumber": 1980,
+      "word": "AROSE",
+      "date": "11/20/2026",
+      "hints": {
+        "synonym": "awakened",
+        "haiku": "From slumber she stirred / Dawn light painted her eyelids / A new day begins"
       }
     }
   ],
@@ -308,6 +308,7 @@
     "DRAWL",
     "ROAST",
     "BLURT",
-    "CLOUT"
+    "CLOUT",
+    "AROSE"
   ]
 }

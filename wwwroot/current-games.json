@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1980,
-      "word": "AROSE",
-      "date": "11/20/2026",
-      "hints": {
-        "synonym": "awakened",
-        "haiku": "From slumber she stirred / Dawn light painted her eyelids / A new day begins"
-      }
-    },
-    {
       "gameNumber": 1981,
       "word": "STENT",
       "date": "11/21/2026",
       "hints": {
         "synonym": "Device",
         "haiku": "Artery kept open / Medical tube inserted / Support structure"
+      }
+    },
+    {
+      "gameNumber": 1982,
+      "word": "UPEND",
+      "date": "11/22/2026",
+      "hints": {
+        "synonym": "Overturn",
+        "haiku": "Flip over completely / Standing on head / Turn upside down"
       }
     }
   ],
@@ -310,6 +310,7 @@
     "BLURT",
     "CLOUT",
     "AROSE",
-    "STENT"
+    "STENT",
+    "UPEND"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1981,
-      "word": "STENT",
-      "date": "11/21/2026",
-      "hints": {
-        "synonym": "Device",
-        "haiku": "Artery kept open / Medical tube inserted / Support structure"
-      }
-    },
-    {
       "gameNumber": 1982,
       "word": "UPEND",
       "date": "11/22/2026",
       "hints": {
         "synonym": "Overturn",
         "haiku": "Flip over completely / Standing on head / Turn upside down"
+      }
+    },
+    {
+      "gameNumber": 1983,
+      "word": "FILTH",
+      "date": "11/23/2026",
+      "hints": {
+        "synonym": "grime",
+        "haiku": "Layer upon layer / What was clean now buried deep / Dirt claims everything"
       }
     }
   ],
@@ -311,6 +311,7 @@
     "CLOUT",
     "AROSE",
     "STENT",
-    "UPEND"
+    "UPEND",
+    "FILTH"
   ]
 }

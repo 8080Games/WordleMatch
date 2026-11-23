@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1982,
-      "word": "UPEND",
-      "date": "11/22/2026",
-      "hints": {
-        "synonym": "Overturn",
-        "haiku": "Flip over completely / Standing on head / Turn upside down"
-      }
-    },
-    {
       "gameNumber": 1983,
       "word": "FILTH",
       "date": "11/23/2026",
       "hints": {
         "synonym": "grime",
         "haiku": "Layer upon layer / What was clean now buried deep / Dirt claims everything"
+      }
+    },
+    {
+      "gameNumber": 1984,
+      "word": "SNEER",
+      "date": "11/24/2026",
+      "hints": {
+        "synonym": "scoff",
+        "haiku": "The lip curls just so / Contempt written on the face / Looking down at you"
       }
     }
   ],
@@ -312,6 +312,7 @@
     "AROSE",
     "STENT",
     "UPEND",
-    "FILTH"
+    "FILTH",
+    "SNEER"
   ]
 }

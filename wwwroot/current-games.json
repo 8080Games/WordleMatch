@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1984,
-      "word": "SNEER",
-      "date": "11/24/2026",
-      "hints": {
-        "synonym": "scoff",
-        "haiku": "The lip curls just so / Contempt written on the face / Looking down at you"
-      }
-    },
-    {
       "gameNumber": 1985,
       "word": "SPICY",
       "date": "11/25/2026",
       "hints": {
         "synonym": "Hot",
         "haiku": "Tongue wakes with fire / Flavor dances past the burn / Heat brings food to life"
+      }
+    },
+    {
+      "gameNumber": 1986,
+      "word": "TENSE",
+      "date": "11/26/2026",
+      "hints": {
+        "synonym": "anxious",
+        "haiku": "Muscles won't relax / The waiting stretches the nerves / When will release come"
       }
     }
   ],
@@ -314,6 +314,7 @@
     "UPEND",
     "FILTH",
     "SNEER",
-    "SPICY"
+    "SPICY",
+    "TENSE"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1985,
-      "word": "SPICY",
-      "date": "11/25/2026",
-      "hints": {
-        "synonym": "Hot",
-        "haiku": "Tongue wakes with fire / Flavor dances past the burn / Heat brings food to life"
-      }
-    },
-    {
       "gameNumber": 1986,
       "word": "TENSE",
       "date": "11/26/2026",
       "hints": {
         "synonym": "anxious",
         "haiku": "Muscles won't relax / The waiting stretches the nerves / When will release come"
+      }
+    },
+    {
+      "gameNumber": 1987,
+      "word": "SHEAF",
+      "date": "11/27/2026",
+      "hints": {
+        "synonym": "Bundle",
+        "haiku": "Papers bound together / Wheat stalks gathered / Collection tied"
       }
     }
   ],
@@ -315,6 +315,7 @@
     "FILTH",
     "SNEER",
     "SPICY",
-    "TENSE"
+    "TENSE",
+    "SHEAF"
   ]
 }

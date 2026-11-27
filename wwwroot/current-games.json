@@ -1,21 +1,21 @@
 {
   "games": [
     {
-      "gameNumber": 1986,
-      "word": "TENSE",
-      "date": "11/26/2026",
-      "hints": {
-        "synonym": "anxious",
-        "haiku": "Muscles won't relax / The waiting stretches the nerves / When will release come"
-      }
-    },
-    {
       "gameNumber": 1987,
       "word": "SHEAF",
       "date": "11/27/2026",
       "hints": {
         "synonym": "Bundle",
         "haiku": "Papers bound together / Wheat stalks gathered / Collection tied"
+      }
+    },
+    {
+      "gameNumber": 1988,
+      "word": "WOOZY",
+      "date": "11/28/2026",
+      "hints": {
+        "synonym": "dizzy",
+        "haiku": "The room starts to spin / Equilibrium lost now / Something isn't right"
       }
     }
   ],
@@ -316,6 +316,7 @@
     "SNEER",
     "SPICY",
     "TENSE",
-    "SHEAF"
+    "SHEAF",
+    "WOOZY"
   ]
 }
